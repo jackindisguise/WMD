@@ -1,0 +1,48 @@
+{
+	"tags": {
+		"allowUnknownTags" : true
+	},
+	"source":{
+		"include": [
+			"src/core",
+			"src/io",
+			"src/map/",
+			"src/util/"
+		]
+	},
+	"plugins": ["plugins/markdown"],
+	"templates": {
+		"cleverLinks": true,
+		"monospaceLinks": true,
+		"default": {
+			"outputSourceFiles" : true
+		},
+		"applicationName": "webMUD",
+		"disqus": "",
+		"googleAnalytics": "",
+		"openGraph": {
+			"title": "",
+			"type": "website",
+			"image": "",
+			"site_name": "",
+			"url": ""
+		},
+		"meta": {
+			"title": "",
+			"description": "",
+			"keyword": ""
+		},
+		"linenums": false
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true,
+		"tags": ["examples"]
+	},
+	"opts": {
+        "destination": "./docs/html",
+        "encoding": "utf8",
+		"tutorials": "./docs/tutorials",
+		"template": "./node_modules/ink-docstrap/template"
+	}
+}

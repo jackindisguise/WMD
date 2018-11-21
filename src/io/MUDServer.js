@@ -72,6 +72,7 @@ class MUDServer extends EventEmitter {
 		var pos = this.clients.indexOf(mudclient);
 		this.clients.splice(pos, 1);
 		/**
+		 * Propagates client disconnect event.
 		 * @event MUDServer#disconnect
 		 * @param {MUDclient} mudclient
 		 */

@@ -82,7 +82,7 @@ class MUD extends EventEmitter{
 	/**
 	 * Disconnect a player.
 	 */
-	static disconnect(player){
+	disconnect(player){
 		var pos = _players.indexOf(player);
 		if(pos == -1) return;
 

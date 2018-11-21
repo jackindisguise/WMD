@@ -60,6 +60,10 @@ class MUDClient extends EventEmitter {
 	 */
 	disconnect(){
 		Logger.verbose(_("disconnected client"));
+		/**
+		 * Propagates socket disconnect event.
+		 * @event MUDClient#disconnect
+		 */
 		this.emit("disconnect");
 		this._socket = null;
 	}
