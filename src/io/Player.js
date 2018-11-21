@@ -71,7 +71,7 @@ class Player extends EventEmitter {
 		Logger.verbose(_("disconnected player"));
 		this.logout();
 	}
-};
+}
 
 module.exports = Player;
 

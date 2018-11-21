@@ -1,0 +1,15 @@
+{
+"node":true,
+"nocomma": true,
+"unused": true,
+"undef": true,
+"onevar": true,
+"eqnull": false,
+"esversion": 6,
+"eqeqeq": true,
+"asi": false,
+"devel": false,
+"boss": false,
+"mocha": true,
+"multistr":true
+}

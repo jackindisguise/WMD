@@ -67,6 +67,6 @@ class MUDClient extends EventEmitter {
 		this.emit("disconnect");
 		this._socket = null;
 	}
-};
+}
 
 module.exports = MUDClient;

@@ -2,8 +2,8 @@
 var EventEmitter = require("events");
 
 // local includes
-var _ = require("../../i18n");
-var Logger = require("../util/Logger");
+//var _ = require("../../i18n");
+//var Logger = require("../util/Logger");
 var MUDServer = require("../io/MUDServer");
 var Player = require("../io/Player");
 var json = require("../../package.json");
@@ -44,7 +44,7 @@ class MUD extends EventEmitter{
 	 */
 	start(port){
 		var mud = this;
-		MUDServer.open(80, function(){
+		MUDServer.open(port, function(){
 			// start listening for new client connections
 			MUDServer.on("connect", function(client){
 				mud.connect(client);
@@ -83,8 +83,8 @@ class MUD extends EventEmitter{
 	 * Disconnect a player.
 	 */
 	disconnect(player){
-		var pos = _players.indexOf(player);
-		if(pos == -1) return;
+		var pos = this._players.indexOf(player);
+		if(pos === -1) return;
 
 		/**
 		 * @event MUD#disconnect
@@ -92,6 +92,6 @@ class MUD extends EventEmitter{
 		 */
 		this.emit("disconnect", player);
 	}
-};
+}
 
 module.exports = new MUD();

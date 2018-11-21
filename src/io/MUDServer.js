@@ -78,6 +78,6 @@ class MUDServer extends EventEmitter {
 		 */
 		this.emit("disconnect", mudclient);
 	}
-};
+}
 
 module.exports = new MUDServer();
