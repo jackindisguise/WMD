@@ -1,0 +1,22 @@
+doctype html
+html
+	head
+		title="Node Page"
+		link(rel="stylesheet", type="text/css", href="/css/main.css")
+		link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+		link(rel="icon" href="/favicon.ico" type="image/x-icon")
+		link(href="https://fonts.googleapis.com/css?family=Fira+Mono|Source+Code+Pro" rel="stylesheet")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		script.
+			var mud_meta = {name:"#{_package.name}", version:"#{_package.version}"};
+
+		script(src="/socket.io/socket.io.js")
+		script(src="/src/js/socket.js")
+		script(src="/src/js/output.js")
+		script(src="/src/js/input.js")
+		script(src="/src/js/main.js")
+
+	body
+		include ../widget/header.pug
+		include ../widget/MUD.pug
+		include ../widget/status.pug
