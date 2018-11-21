@@ -6,9 +6,9 @@ var options = {
 
 var socket;
 $(document).ready(function(){
-	addMessage("Connecting to "+mud_meta.name+" v"+mud_meta.version+"...", "debug");
+	addMessage("Connecting...", "debug");
 	socket = io.connect({
-		reconnectionAttempts:5
+		reconnectionAttempts:0
 	});
 	configureSocket(socket);
 
@@ -18,6 +18,7 @@ $(document).ready(function(){
 	// start listening for enter keys
 	$("#command").keydown(function(event) {
 		if (event.keyCode === 13) {
+			if(socket.disconnected) socket.connect();
 			var line = $("#command").val();
 
 			// keepCommand

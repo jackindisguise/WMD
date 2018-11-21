@@ -8,6 +8,9 @@ var MUDServer = require("../io/MUDServer");
 var Player = require("../io/Player");
 var json = require("../../package.json");
 
+/**
+ * MUD handler.
+ */
 class MUD extends EventEmitter{
 	constructor(){
 		super();
@@ -42,6 +45,7 @@ class MUD extends EventEmitter{
 	start(port){
 		var mud = this;
 		MUDServer.open(80, function(){
+			// start listening for new client connections
 			MUDServer.on("connect", function(client){
 				mud.connect(client);
 			});
@@ -62,6 +66,7 @@ class MUD extends EventEmitter{
 		var player = new Player(client);
 		this._players.push(player);
 
+		// start listening for disconnect event
 		var mud = this;
 		player.once("disconnect", function(){
 			mud.disconnect(player);

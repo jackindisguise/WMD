@@ -48,12 +48,15 @@ class Player extends EventEmitter {
 	 */
 	connect(client){
 		Logger.verbose(_("connected player"));
+
+		// start listening for commands
 		var player = this;
 		this._client = client;
 		client.on("command", function(input){
 			player.command(input);
 		});
 
+		// start listening for disconnection
 		client.once("disconnect", function(){
 			player.disconnect();
 		});

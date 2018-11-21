@@ -29,6 +29,8 @@ class MUDServer extends EventEmitter {
 		// start server
 		web.server.listen(port, function(){
 			if(callback) callback(web, _server);
+
+			// start listening for new sockets
 			web.io.on("connection", function(socket){
 				_server.connect(socket);
 			});

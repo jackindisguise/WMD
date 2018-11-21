@@ -42,11 +42,14 @@ class MUDClient extends EventEmitter {
 	connect(socket){
 		Logger.verbose(_("connected client"));
 		this._socket = socket;
+
+		// start listening for commands
 		var client = this;
 		socket.on("command", function(input){
 			client.process(input);
 		});
-		
+
+		// start listening for disconnects
 		socket.once("disconnect", function(){
 			client.disconnect();
 		});

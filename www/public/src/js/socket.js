@@ -13,7 +13,7 @@ function configureSocket(socket){
 	});
 
 	socket.on("disconnect", function(){
-		addMessage("Disconnected from webMUD!", "debug");
+		addMessage("Disconnected!", "debug");
 	});
 
 	socket.on('message', function (message, timestamp) {
