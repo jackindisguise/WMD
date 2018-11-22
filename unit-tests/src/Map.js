@@ -5,14 +5,38 @@ var expect = require("chai").expect;
 var Map = require("../../src/map/Map");
 var MapTile = require("../../src/map/MapTile");
 var MapObject = require("../../src/map/MapObject");
+var Movable = require("../../src/map/MapMovable");
+var Mob = require("../../src/map/MapMob");
 
-describe("Creating Map", function(){
-	it("Creating 100x100x1 map", function(done){
-		var map = new Map(100,100,1);
-		expect(map.width).to.equal(100);
-		expect(map.height).to.equal(100);
-		expect(map.levels).to.equal(1);
-		expect(map.getSize()).to.equal({width:100,height:100,levels:1});
+// testing
+var map;
+describe("Map", function(){
+	it("Creating an invalid map", function(done){
+		map = new Map({width:50, height:50});
+		expect(map.size.width).to.equal(0);
+		expect(map.size.height).to.equal(0);
+		expect(map.size.levels).to.equal(0);
+		done();
+	});
+
+	it("Creating 100x100x10 map", function(done){
+		map = new Map({width:100, height:100, levels:10});
+		expect(map.size.width).to.equal(100);
+		expect(map.size.height).to.equal(100);
+		expect(map.size.levels).to.equal(10);
+
+		for(var z=0;z<map.size.levels;z++){
+			for(var y=0;y<map.size.height;y++){
+				for(var x=0;x<map.size.width;x++){
+					var tile = map.getTileByXYZ(x,y,z);
+					expect(tile instanceof MapTile);
+//					expect(tile.x).to.equal(x);
+//					expect(tile.y).to.equal(y);
+//					expect(tile.z).to.equal(z);
+				}
+			}
+		}
+
 		done();
 	});
 });

@@ -3,6 +3,7 @@ var EventEmitter = require("events");
 
 // local includes
 var MUD;
+var MapMob;
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
 
@@ -10,22 +11,56 @@ class Player extends EventEmitter {
 	constructor(options){
 		super();
 		this._client = null;
+		this._mob = null;
 
 		if(options){
 			if(options.client) this.connect(options.client);
 		}
 	}
 
-	/**
-	 * Runs when a client is connected to this Player.
-	 */
-	login(){
+	get mob(){
+		return this._mob;
+	}
+
+	set mob(mob){
+		if(this._mob == mob) return;
+
+		var omob;
+		if(this._mob) {
+			omob = this._mob;
+			this._mob = null;
+		}
+
+		if(omob) omob.player = null;
+
+		if(mob && mob instanceof MapMob){
+			this._mob = mob;
+			mob.player = this;
+		}
 	}
 
 	/**
-	 * Runs when a client is disconnect from this Player.
+	 * Runs when a mob is connected to this Player.
 	 */
-	logout(){
+	join(){
+	}
+
+	/**
+	 * Runs when a mob is disconnected from this Player.
+	 */
+	leave(){
+	}
+
+	/**
+	 * Runs when a client is connected to this Player.
+	 */
+	join(){
+	}
+
+	/**
+	 * Runs when a client is disconnected from this Player.
+	 */
+	leave(){
 	}
 
 	/**
@@ -64,7 +99,7 @@ class Player extends EventEmitter {
 			player.disconnect();
 		});
 
-		this.login();
+		this.join();
 	}
 
 	/**
@@ -72,7 +107,7 @@ class Player extends EventEmitter {
 	 */
 	disconnect(){
 		Logger.verbose(_("disconnected player"));
-		this.logout();
+		this.leave();
 	}
 }
 
@@ -80,3 +115,4 @@ module.exports = Player;
 
 // cyclical includes
 MUD = require("../core/MUD");
+MapMob = require("../map/MapMob");
