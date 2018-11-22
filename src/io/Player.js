@@ -7,10 +7,13 @@ var _ = require("../../i18n");
 var Logger = require("../util/Logger");
 
 class Player extends EventEmitter {
-	constructor(client){
+	constructor(options){
 		super();
 		this._client = null;
-		if(client) this.connect(client);
+
+		if(options){
+			if(options.client) this.connect(options.client);
+		}
 	}
 
 	/**

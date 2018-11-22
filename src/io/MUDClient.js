@@ -9,10 +9,13 @@ var Logger = require("../util/Logger");
  * Handles low level MUD client.
  */
 class MUDClient extends EventEmitter {
-	constructor(socket){
+	constructor(options){
 		super();
 		this._socket = null;
-		if(socket) this.connect(socket);
+
+		if(options){
+			if(options.socket) this.connect(options.socket);
+		}
 	}
 
 	/**

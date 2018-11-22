@@ -49,7 +49,7 @@ class MUDServer extends EventEmitter {
 	 * @param {Object} socket A socket stream.
 	 */
 	connect(socket){
-		var mudclient = new MUDClient(socket);
+		var mudclient = new MUDClient({socket:socket});
 		this._clients.push(mudclient);
 		/**
 		 * @event MUDServer#connect

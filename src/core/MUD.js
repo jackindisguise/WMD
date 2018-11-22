@@ -63,7 +63,7 @@ class MUD extends EventEmitter{
 	 * Connect a new MUDClient.
 	 */
 	connect(client){
-		var player = new Player(client);
+		var player = new Player({client:client});
 		this._players.push(player);
 
 		// start listening for disconnect event
