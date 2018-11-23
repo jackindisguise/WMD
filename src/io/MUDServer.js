@@ -3,7 +3,7 @@ var EventEmitter = require("events");
 
 // local includes
 var web = require("./web");
-var MUDClient = require("./MUDClient").default;
+var MUDClient = require("./MUDClient");
 
 /**
  * Handles low level MUD server.
