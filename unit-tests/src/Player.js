@@ -9,7 +9,7 @@ var Player = require("../../src/io/Player");
 var mob = new Mob();
 var player = new Player();
 describe("Player", function(){
-	it("Player <-> MapMob cross reference", function(done){
+	it("Player <-> Mob cross reference", function(done){
 		mob.player = player;
 		expect(mob.player).is.equal(player);
 		expect(player.mob).is.equal(mob);

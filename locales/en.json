@@ -4,5 +4,7 @@
 	"You said: '%s'": "You said: '%s'",
 	"disconnected client": "disconnected client",
 	"disconnected player": "disconnected player",
-	"Player command: '%s'": "Player command: '%s'"
+	"Player command: '%s'": "Player command: '%s'",
+	"Client and player fully synchronized.": "Client and player fully synchronized.",
+	"Client and player fully desynchronized.": "Client and player fully desynchronized."
 }

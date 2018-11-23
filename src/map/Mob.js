@@ -2,6 +2,9 @@
 var Player;
 var Movable = require("./Movable");
 
+/**
+ * Represents creatures.
+ */
 class Mob extends Movable{
 	constructor(options){
 		super(options);
@@ -21,12 +24,30 @@ class Mob extends Movable{
 			this._player = null;
 		}
 
-		if(oplayer) oplayer.mob = null;
+		if(oplayer) {
+			oplayer.mob = null;
+			this.logout(oplayer);
+		}
 
 		if(player && player instanceof Player){
 			this._player = player;
 			player.mob = this;
+			this.login(player);
 		}
+	}
+
+	/**
+	 * Runs when a Player is connected to this Mob.
+	 * @param {Player} player Player connected to.
+	 */
+	login(player){
+	}
+
+	/**
+	 * Runs when a Player is disconnected from this Mob.
+	 * @param {Player} player Player disconnected from.
+	 */
+	logout(player){
 	}
 }
 

@@ -15,6 +15,7 @@ class Player extends EventEmitter {
 
 		if(options){
 			if(options.client) this.connect(options.client);
+			if(options.mob) this.mob = options.mob;
 		}
 	}
 
@@ -31,36 +32,47 @@ class Player extends EventEmitter {
 			this._mob = null;
 		}
 
-		if(omob) omob.player = null;
+		if(omob) {
+			omob.player = null;
+			this.logout();
+		}
 
 		if(mob && mob instanceof Mob){
 			this._mob = mob;
 			mob.player = this;
+			this.login();
 		}
 	}
 
 	/**
 	 * Runs when a mob is connected to this Player.
+	 * @param {Mob} mob Mob connected to.
 	 */
-	join(){
+	login(mob){
 	}
 
 	/**
 	 * Runs when a mob is disconnected from this Player.
+	 * @param {Mob} mob Mob disconnected from.
 	 */
-	leave(){
+	logout(mob){
 	}
 
 	/**
 	 * Runs when a client is connected to this Player.
+	 * @param {Client} client Client connected to.
 	 */
-	join(){
+	join(client){
+		Logger.silly(_("Client and player fully synchronized."));
+		this.sendLine(_("Client and player fully synchronized."))
 	}
 
 	/**
 	 * Runs when a client is disconnected from this Player.
+	 * @param {Client} client Client disconnected from.
 	 */
-	leave(){
+	leave(client){
+		Logger.silly(_("Client and player fully desynchronized."));
 	}
 
 	/**
@@ -88,18 +100,17 @@ class Player extends EventEmitter {
 		Logger.verbose(_("connected player"));
 
 		// start listening for commands
-		var player = this;
 		this._client = client;
 		client.on("command", function(input){
-			player.command(input);
-		});
+			this.command(input);
+		}.bind(this));
 
 		// start listening for disconnection
 		client.once("disconnect", function(){
-			player.disconnect();
-		});
+			this.disconnect();
+		}.bind(this));
 
-		this.join();
+		this.join(client);
 	}
 
 	/**
@@ -107,7 +118,13 @@ class Player extends EventEmitter {
 	 */
 	disconnect(){
 		Logger.verbose(_("disconnected player"));
-		this.leave();
+
+		var oclient = this._client;
+		this._client = null;
+		// stop listening for commands?
+		// stop listening for disconnection?
+
+		this.leave(oclient);
 	}
 }
 

@@ -24,17 +24,15 @@ class MUDServer extends EventEmitter {
 	 * @param {Function} callback
 	 */
 	open(port, callback){
-		var _server = this;
-
 		// start server
 		web.server.listen(port, function(){
-			if(callback) callback(web, _server);
+			if(callback) callback(web, this);
 
 			// start listening for new sockets
 			web.io.on("connection", function(socket){
-				_server.connect(socket);
-			});
-		});
+				this.connect(socket);
+			}.bind(this));
+		}.bind(this));
 	}
 
 	/**
@@ -58,10 +56,9 @@ class MUDServer extends EventEmitter {
 		this.emit("connect", mudclient);
 
 		// wait for disconnect event from mudclient
-		var _server = this;
 		mudclient.once("disconnect", function(){
-			_server.disconnect(mudclient);
-		});
+			this.disconnect(mudclient);
+		}.bind(this));
 	}
 
 	/**
