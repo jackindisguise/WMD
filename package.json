@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "generate-docs": "rm -rf docs/html && jsdoc --configure .jsdoc.json --verbose --readme README.md",
-	"nodemon": "nodemon ./index.js",
-	"test": "mocha --recursive ./unit-tests"
+    "nodemon": "nodemon ./index.js",
+    "test": "mocha --recursive ./unit-tests"
   },
   "author": "jackindisguise",
   "license": "MIT",
