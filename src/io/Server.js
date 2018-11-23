@@ -2,7 +2,7 @@
 var EventEmitter = require("events");
 
 // local includes
-var web = require("./web");
+var Web = require("./Web");
 var MUDClient = require("./Client");
 
 /**
