@@ -8,7 +8,12 @@ var Logger = require("../util/Logger");
 /**
  * Handles low level MUD client.
  */
-class MUDClient extends EventEmitter {
+class Client extends EventEmitter {
+	/**
+	 * Construct a client.
+	 * @param {Object} options Constructor options.
+	 * @param {socket} options.socket A socket stream.
+	 */
 	constructor(options){
 		super();
 		this._socket = null;
@@ -20,11 +25,11 @@ class MUDClient extends EventEmitter {
 
 	/**
 	 * Process command input and then fire appropriately.
-	 * @param {string} input
+	 * @param {string} input Input from the socket.
 	 */
 	process(input){
 		/**
-		 * @event MUDClient#command
+		 * @event Client#command
 		 * @param {String} command
 		 */
 		this.emit("command", input);
@@ -32,7 +37,7 @@ class MUDClient extends EventEmitter {
 
 	/**
 	 * Send a line of text to the client.
-	 * @param {string} line
+	 * @param {string} line The line of text to send.
 	 */
 	sendLine(line){
 		this._socket.emit("message", line, Date.now());
@@ -64,11 +69,11 @@ class MUDClient extends EventEmitter {
 		Logger.verbose(_("disconnected client"));
 		/**
 		 * Propagates socket disconnect event.
-		 * @event MUDClient#disconnect
+		 * @event Client#disconnect
 		 */
 		this.emit("disconnect");
 		this._socket = null;
 	}
 }
 
-module.exports = MUDClient;
+module.exports = Client;

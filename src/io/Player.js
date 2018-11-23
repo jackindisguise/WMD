@@ -7,7 +7,16 @@ var Mob;
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
 
+/**
+ * Higher level abstraction between the client and the game.
+ */
 class Player extends EventEmitter {
+	/**
+	 * Construct a player.
+	 * @param {Object} options Constructor options.
+	 * @param {Client} options.client The client to manage.
+	 * @param {Mob} options.mob The mob to manage.
+	 */
 	constructor(options){
 		super();
 		this._client = null;
@@ -94,7 +103,7 @@ class Player extends EventEmitter {
 
 	/**
 	 * Start managing a client.
-	 * @param {MUDClient} client
+	 * @param {Client} client
 	 */
 	connect(client){
 		Logger.verbose(_("connected player"));

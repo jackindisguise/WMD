@@ -3,7 +3,8 @@ var Player;
 var Movable = require("./Movable");
 
 /**
- * Represents creatures.
+ * Represents an animate creature on the map.
+ * @extends Movable
  */
 class Mob extends Movable{
 	constructor(options){

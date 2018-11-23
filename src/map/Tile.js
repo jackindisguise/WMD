@@ -1,9 +1,21 @@
 // local includes
 var MapObject = require("./MapObject");
 
+/**
+ * Represents an inhabitable location on a map.
+ * @extends MapObject
+ */
 class Tile extends MapObject{
+	/**
+	 * Construct a tile.
+	 * @param {Object} options Constructor options.
+	 * @param {Map} options.map The map we're a part of.
+	 * @param {number} options.x The x location we inhabit. Can only be set at creation.
+	 * @param {number} options.y The y location we inhabit. Can only be set at creation.
+	 * @param {number} options.z The z location we inhabit. Can only be set at creation.
+	 */
 	constructor(options){
-		super(options);
+		super();
 		if(options){
 			if(options.map){
 				this._map = options.map;
@@ -18,14 +30,8 @@ class Tile extends MapObject{
 		}
 	}
 
-	add(mapobject){
-		super.add(mapobject);
-		if(mapobject.loc == this) this._map.add(mapobject);
-	}
-
-	remove(mapobject){
-		super.remove(mapobject);
-		if(mapobject.loc != this) this._map.remove(mapobject);
+	get map(){
+		return this._map;
 	}
 
 	get x(){
@@ -38,6 +44,26 @@ class Tile extends MapObject{
 
 	get z(){
 		return this._z;
+	}
+
+	/**
+	 * Add an object to our contents.
+	 * Also adds the object to the map we live on.
+	 * @param {MapObject} mapobject Object to add.
+	 */
+	add(mapobject){
+		super.add(mapobject);
+		if(mapobject.loc == this) this._map.add(mapobject);
+	}
+
+	/**
+	 * Remove an object from our contents.
+	 * Also removes the object from the map we live on.
+	 * @param {MapObject} mapobject Object to remove.
+	 */
+	remove(mapobject){
+		super.remove(mapobject);
+		if(mapobject.loc != this) this._map.remove(mapobject);
 	}
 }
 

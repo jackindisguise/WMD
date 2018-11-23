@@ -1,4 +1,12 @@
+/**
+ * The base object that can legally inhabit a {@link Map}.
+ */
 class MapObject{
+	/**
+	 * Construct a MapObject.
+	 * @param {Object} options Constructor options.
+	 * @param {MapObject} options.loc Location to move to.
+	 */
 	constructor(options){
 		this._loc = null;
 		this._contents = [];
@@ -39,29 +47,44 @@ class MapObject{
 		}
 	}
 
-	// check if an object can enter us
+	/**
+	 * Check if an object can enter our contents.
+	 * @param {MapObject} enterer Object entering our contents.
+	 * @return {boolean}
+	 */
 	canEnter(enterer){
 		return true;
 	}
 
-	// check if an object can exit us
+	/**
+	 * Check if an object can leave our contents.
+	 * @param {MapObject} exiter Object leaving our contents.
+	 * @return {boolean}
+	 */
 	canExit(exiter){
 		return true;
 	}
 
-	// check if we can move to a new location
+	/**
+	 * Check if we can move to a new location.
+	 * Base objects (see {@link MapObject}) cannot move, and as such this will always return false for them.
+	 */
 	canMove(loc){
-		if(this.loc && !this.loc.canExit(this)) return;
-		if(!loc.canEnter(this)) return;
-		return true;
+		return false;
 	}
 
-	// empty move function for later :)
+	/**
+	 * Formal move that respects {@link MapObject#canMove}.
+	 * @param {MapObject} loc Location to move to.
+	 */
 	move(loc){
+		if(!this.canMove(loc)) return;
+		this.loc = loc;
 	}
 
 	/**
 	 * Add an object to our contents.
+	 * @param {MapObject} mapobject Object to add.
 	 */
 	add(mapobject){
 		if(this._contents.indexOf(mapobject) >= 0) return; // already in contents
@@ -71,6 +94,7 @@ class MapObject{
 
 	/**
 	 * Remove an object from our contents.
+	 * @param {MapObject} mapobject Object to remove.
 	 */
 	remove(mapobject){
 		var pos = this._contents.indexOf(mapobject);

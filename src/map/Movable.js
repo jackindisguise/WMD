@@ -1,6 +1,10 @@
 var MapObject = require("./MapObject");
 var Tile;
 
+/**
+ * Base object that can move around the map.
+ * @extends MapObject
+ */
 class Movable extends MapObject{
 	get x(){
 		if(this.loc instanceof Tile)
@@ -17,9 +21,14 @@ class Movable extends MapObject{
 			return this.loc.z;
 	}
 
-	move(loc){
-		if(!this.canMove(loc)) return;
-		this.loc = loc;
+	/**
+	 * Check if we can move to a new location.
+	 * @param {MapObject} loc 
+	 */
+	canMove(loc){
+		if(this.loc && !this.loc.canExit(this)) return;
+		if(!loc.canEnter(this)) return;
+		return true;
 	}
 }
 

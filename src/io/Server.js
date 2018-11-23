@@ -8,7 +8,7 @@ var MUDClient = require("./Client");
 /**
  * Handles low level MUD server.
  */
-class MUDServer extends EventEmitter {
+class Server extends EventEmitter {
 	constructor(){
 		super();
 		this._clients = [];
@@ -16,8 +16,8 @@ class MUDServer extends EventEmitter {
 
 	/**
 	 * Open a port and begin listening for clients.
-	 * @param {int} port
-	 * @param {Function} callback
+	 * @param {number} port
+	 * @param {function} callback
 	 */
 	open(port, callback){
 		// start server
@@ -46,8 +46,8 @@ class MUDServer extends EventEmitter {
 		var mudclient = new MUDClient({socket:socket});
 		this._clients.push(mudclient);
 		/**
-		 * @event MUDServer#connect
-		 * @param {MUDclient} mudclient
+		 * @event Server#connect
+		 * @param {Client} mudclient
 		 */
 		this.emit("connect", mudclient);
 
@@ -59,18 +59,18 @@ class MUDServer extends EventEmitter {
 
 	/**
 	 * Stop managing a client.
-	 * @param {MUDClient} mudclient
+	 * @param {Client} mudclient
 	 */
 	disconnect(mudclient){
 		var pos = this._clients.indexOf(mudclient);
 		this._clients.splice(pos, 1);
 		/**
 		 * Propagates client disconnect event.
-		 * @event MUDServer#disconnect
-		 * @param {MUDclient} mudclient
+		 * @event Server#disconnect
+		 * @param {Client} mudclient
 		 */
 		this.emit("disconnect", mudclient);
 	}
 }
 
-module.exports = new MUDServer();
+module.exports = new Server();
