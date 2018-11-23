@@ -41,13 +41,26 @@ var io = require("socket.io")(server,{
 });*/
 
 /**
- * @static
- * @field server {http} HTTP Server configured for use with express app and socket.io.
- * @field app {express} Express app instance.
- * @field io {socket.io} Socket.IO front end.
+ * @namespace
  */
-var Web = module.exports = {
+var Web = {
+	/**
+	 * HTTP Server configured for use with express app and socket.io.
+	 * @type {server}
+	 */
 	server:server,
+
+	/**
+	 * Express app instance.
+	 * @type {app}
+	 */
 	app:app,
+
+	/**
+	 * Socket.IO front end.
+	 * @type {SocketIO}
+	 */
 	io:io
 };
+
+module.exports = Web;
