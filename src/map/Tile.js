@@ -1,7 +1,7 @@
 // local includes
 var MapObject = require("./MapObject");
 
-class MapTile extends MapObject{
+class Tile extends MapObject{
 	constructor(options){
 		super(options);
 		if(options){
@@ -41,4 +41,4 @@ class MapTile extends MapObject{
 	}
 }
 
-module.exports = MapTile;
+module.exports = Tile;

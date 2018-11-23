@@ -18,7 +18,6 @@ $(document).ready(function(){
 	// start listening for enter keys
 	$("#command").keydown(function(event) {
 		if (event.keyCode === 13) {
-			if(socket.disconnected) socket.connect();
 			var line = $("#command").val();
 
 			// keepCommand

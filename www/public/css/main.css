@@ -113,6 +113,7 @@ background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
 #output .message.debug{
 	color:#F0F !important;
 	background-color:rgba(255,0,255,0.2);
+	line-height:30px;
 }
 
 #input{

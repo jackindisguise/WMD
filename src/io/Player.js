@@ -3,7 +3,7 @@ var EventEmitter = require("events");
 
 // local includes
 var MUD;
-var MapMob;
+var Mob;
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
 
@@ -33,7 +33,7 @@ class Player extends EventEmitter {
 
 		if(omob) omob.player = null;
 
-		if(mob && mob instanceof MapMob){
+		if(mob && mob instanceof Mob){
 			this._mob = mob;
 			mob.player = this;
 		}
@@ -115,4 +115,4 @@ module.exports = Player;
 
 // cyclical includes
 MUD = require("../core/MUD");
-MapMob = require("../map/MapMob");
+Mob = require("../map/Mob");

@@ -1,6 +1,6 @@
 // local includes
 var MapObject = require("./MapObject");
-var MapTile = require("./MapTile");
+var Tile = require("./Tile");
 
 class Map{
 	constructor(options){
@@ -77,7 +77,7 @@ class Map{
 			for(var y=0;y<this._height;y++){
 				this._grid[z][y] = [];
 				for(var x=0;x<this._width;x++){
-					this._grid[z][y][x] = new MapTile({map:this,x:x,y:y,z:z});
+					this._grid[z][y][x] = new Tile({map:this,x:x,y:y,z:z});
 					this._tiles.push(this._grid[z][y][x]);
 				}
 			}

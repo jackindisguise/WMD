@@ -1,8 +1,8 @@
 // local includes
 var Player;
-var MapMovable = require("./MapMovable");
+var Movable = require("./Movable");
 
-class MapMob extends MapMovable{
+class Mob extends Movable{
 	constructor(options){
 		super(options);
 		this._player = null;
@@ -30,9 +30,7 @@ class MapMob extends MapMovable{
 	}
 }
 
-module.exports = MapMob;
-
-MapTile = require("./MapTile");
+module.exports = Mob;
 
 // cyclical includes
 Player = require("../io/Player");

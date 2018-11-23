@@ -3,10 +3,10 @@ var expect = require("chai").expect;
 
 // local includes
 var Map = require("../../src/map/Map");
-var MapTile = require("../../src/map/MapTile");
+var Tile = require("../../src/map/Tile");
 var MapObject = require("../../src/map/MapObject");
-var Movable = require("../../src/map/MapMovable");
-var Mob = require("../../src/map/MapMob");
+var Movable = require("../../src/map/Movable");
+var Mob = require("../../src/map/Mob");
 
 // testing
 var map;
@@ -25,14 +25,15 @@ describe("Map", function(){
 		expect(map.size.height).to.equal(100);
 		expect(map.size.levels).to.equal(10);
 
+		this.timeout(0);
 		for(var z=0;z<map.size.levels;z++){
 			for(var y=0;y<map.size.height;y++){
 				for(var x=0;x<map.size.width;x++){
 					var tile = map.getTileByXYZ(x,y,z);
-					expect(tile instanceof MapTile);
-//					expect(tile.x).to.equal(x);
-//					expect(tile.y).to.equal(y);
-//					expect(tile.z).to.equal(z);
+					expect(tile instanceof Tile);
+					expect(tile.x).to.equal(x);
+					expect(tile.y).to.equal(y);
+					expect(tile.z).to.equal(z);
 				}
 			}
 		}

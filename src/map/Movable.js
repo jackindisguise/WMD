@@ -1,19 +1,19 @@
 var MapObject = require("./MapObject");
-var MapTile;
+var Tile;
 
-class MapMovable extends MapObject{
+class Movable extends MapObject{
 	get x(){
-		if(this.loc instanceof MapTile)
+		if(this.loc instanceof Tile)
 			return this.loc.x;
 	}
 
 	get y(){
-		if(this.loc instanceof MapTile)
+		if(this.loc instanceof Tile)
 			return this.loc.y;
 	}
 
 	get z(){
-		if(this.loc instanceof MapTile)
+		if(this.loc instanceof Tile)
 			return this.loc.z;
 	}
 
@@ -23,6 +23,6 @@ class MapMovable extends MapObject{
 	}
 }
 
-module.exports = MapMovable;
+module.exports = Movable;
 
-MapTile = require("./MapTile");
+Tile = require("./Tile");
