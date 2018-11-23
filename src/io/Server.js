@@ -14,10 +14,6 @@ class MUDServer extends EventEmitter {
 		this._clients = [];
 	}
 
-	get clients(){
-		return this._clients;
-	}
-
 	/**
 	 * Open a port and begin listening for clients.
 	 * @param {int} port
@@ -66,8 +62,8 @@ class MUDServer extends EventEmitter {
 	 * @param {MUDClient} mudclient
 	 */
 	disconnect(mudclient){
-		var pos = this.clients.indexOf(mudclient);
-		this.clients.splice(pos, 1);
+		var pos = this._clients.indexOf(mudclient);
+		this._clients.splice(pos, 1);
 		/**
 		 * Propagates client disconnect event.
 		 * @event MUDServer#disconnect

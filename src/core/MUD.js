@@ -67,7 +67,7 @@ class MUD extends EventEmitter{
 
 		// start listening for disconnect event
 		player.once("disconnect", function(){
-			mud.disconnect(player);
+			this.disconnect(player);
 		}.bind(this));
 
 		/**

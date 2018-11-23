@@ -24,7 +24,7 @@ class Player extends EventEmitter {
 	}
 
 	set mob(mob){
-		if(this._mob == mob) return;
+		if(this._mob === mob) return;
 
 		var omob;
 		if(this._mob) {

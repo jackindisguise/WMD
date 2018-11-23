@@ -3,6 +3,13 @@ var MapObject = require("./MapObject");
 var Tile = require("./Tile");
 
 class Map{
+	/**
+	 * 
+	 * @param {Object} options
+	 * @param {number} options.width
+	 * @param {number} options.height
+	 * @param {number} options.levels
+	 */
 	constructor(options){
 		// proportions
 		this._width = 0;
@@ -24,21 +31,6 @@ class Map{
 		}
 	}
 
-	/**
-	 * Takes an option table with width/height/levels.
-	 * Must use this feature to generate a map that's empty.
-	 * @param {int} width
-	 * @param {int} height
-	 * @param {int} levels
-	 */
-	setSize(width, height, levels){
-		if(this._grid) return;
-		this._levels = levels;
-		this._height = height;
-		this._width = width;
-		this.generate();
-	}
-
 	get size(){
 		return {width:this._width, height:this._height, levels:this._levels};
 	}
@@ -53,6 +45,21 @@ class Map{
 
 	get levels(){
 		return this._levels;
+	}
+
+	/**
+	 * Takes an option table with width/height/levels.
+	 * Must use this feature to generate a map that's empty.
+	 * @param {number} width
+	 * @param {number} height
+	 * @param {number} levels
+	 */
+	setSize(width, height, levels){
+		if(this._grid) return;
+		this._levels = levels;
+		this._height = height;
+		this._width = width;
+		this.generate();
 	}
 
 	getTileByXYZ(x,y,z){
