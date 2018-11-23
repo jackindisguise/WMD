@@ -2,11 +2,11 @@
 var expect = require("chai").expect;
 
 // local includes
-var Map = require("../../src/map/Map");
-var Tile = require("../../src/map/Tile");
-var MapObject = require("../../src/map/MapObject");
-var Movable = require("../../src/map/Movable");
-var Mob = require("../../src/map/Mob");
+var Map = require("../../../src/map/Map");
+var Tile = require("../../../src/map/Tile");
+var MapObject = require("../../../src/map/MapObject");
+var Movable = require("../../../src/map/Movable");
+var Mob = require("../../../src/map/Mob");
 
 // testing
 var map;

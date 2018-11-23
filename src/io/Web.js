@@ -28,6 +28,10 @@ app.get("/", function(req, res) {
 	res.render('index', {_package:_package, session:req.session});
 });
 
+app.get("*", function(req,res){
+	res.redirect("/");
+});
+
 // configure HTTP server to go through express app and socket.io
 var server = require("http").Server(app);
 var io = require("socket.io")(server,{

@@ -3,7 +3,7 @@ var EventEmitter = require("events");
 
 // local includes
 var Web = require("./Web");
-var MUDClient = require("./Client");
+var Client = require("./Client");
 
 /**
  * Handles low level MUD server.
@@ -21,11 +21,11 @@ class Server extends EventEmitter {
 	 */
 	open(port, callback){
 		// start server
-		web.server.listen(port, function(){
-			if(callback) callback(web, this);
+		Web.server.listen(port, function(){
+			if(callback) callback(Web, this);
 
 			// start listening for new sockets
-			web.io.on("connection", function(socket){
+			Web.io.on("connection", function(socket){
 				this.connect(socket);
 			}.bind(this));
 		}.bind(this));
@@ -35,7 +35,7 @@ class Server extends EventEmitter {
 	 * Close the server.
 	 */
 	close(){
-		web.server.close();
+		Web.server.close();
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Server extends EventEmitter {
 	 * @param {Object} socket A socket stream.
 	 */
 	connect(socket){
-		var mudclient = new MUDClient({socket:socket});
+		var mudclient = new Client({socket:socket});
 		this._clients.push(mudclient);
 		/**
 		 * @event Server#connect

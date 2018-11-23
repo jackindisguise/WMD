@@ -4,7 +4,7 @@ var EventEmitter = require("events");
 // local includes
 //var _ = require("../../i18n");
 //var Logger = require("../util/Logger");
-var MUDServer = require("../io/Server");
+var Server = require("../io/Server");
 var Player = require("../io/Player");
 var json = require("../../package.json");
 
@@ -43,9 +43,9 @@ class MUD extends EventEmitter{
 	 * @param {int} port
 	 */
 	start(port){
-		MUDServer.open(port, function(){
+		Server.open(port, function(){
 			// start listening for new client connections
-			MUDServer.on("connect", function(client){
+			Server.on("connect", function(client){
 				this.connect(client);
 			}.bind(this));
 		}.bind(this));
@@ -55,7 +55,7 @@ class MUD extends EventEmitter{
 	 * Stop the MUD processes.
 	 */
 	stop(){
-		MUDServer.close();
+		Server.close();
 	}
 
 	/**
