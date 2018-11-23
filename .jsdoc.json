@@ -6,8 +6,8 @@
 		"include": [
 			"src/core",
 			"src/io",
-			"src/map/",
-			"src/util/"
+			"src/map",
+			"src/util"
 		]
 	},
 	"plugins": ["plugins/markdown"],
@@ -17,7 +17,7 @@
 		"default": {
 			"outputSourceFiles" : true
 		},
-		"applicationName": "webMUD",
+		"applicationName": "WMD",
 		"disqus": "",
 		"googleAnalytics": "",
 		"openGraph": {

@@ -8,8 +8,41 @@ class MapObject{
 	 * @param {MapObject} options.loc Location to move to.
 	 */
 	constructor(options){
+		/**
+		 * The object we currently inhabit.
+		 * If your loc is an object, that means you are inside that object's contents list.
+		 * @alias MapObject#loc
+		 * @type {?MapObject}
+		 */
 		this._loc = null;
+
+		/**
+		 * A list of all the objects inhabiting us.
+		 * @alias MapObject#contents
+		 * @type {!MapObject[]}
+		 */
 		this._contents = [];
+
+		/**
+		 * Keywords for referring to this object.
+		 * @type {?string}
+		 * @default "map object mapobject"
+		 */
+		this.keywords = "map object mapobject";
+
+		/**
+		 * The display string for this object.
+		 * @type {!string}
+		 * @default "MapObject"
+		 */
+		this.display = "MapObject";
+
+		/**
+		 * A description for this object.
+		 * @type {?string}
+		 * @default null
+		 */
+		this.description = null;
 
 		if(options){
 			if(options.loc != null) this.loc = options.loc;

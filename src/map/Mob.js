@@ -9,7 +9,19 @@ var Movable = require("./Movable");
 class Mob extends Movable{
 	constructor(options){
 		super(options);
+
+		/**
+		 * The player currently managing us.
+		 * @alias Mob#player
+		 * @type {?Player}
+		 */
 		this._player = null;
+
+		/** @default "mob" */
+		this.keywords = "mob";
+
+		/** @default "Mob" */
+		this.display = "Mob";
 	}
 
 	get player(){

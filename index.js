@@ -1,2 +1,3 @@
+var config = require("./config.json");
 var MUD = require("./src/core/MUD");
-MUD.start(80);
+MUD.start(config.defaultPort ? config.defaultPort : 80);

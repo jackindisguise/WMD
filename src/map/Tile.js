@@ -16,6 +16,13 @@ class Tile extends MapObject{
 	 */
 	constructor(options){
 		super();
+
+		/** @default "tile" */
+		this.keywords = "tile";
+
+		/** @default "Tile" */
+		this.display = "Tile";
+
 		if(options){
 			if(options.map){
 				this._map = options.map;
