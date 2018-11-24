@@ -1,4 +1,13 @@
-![Version](https://img.shields.io/badge/version-v0.0.0-orange.svg) [![Build Status](https://travis-ci.org/jackindisguise/WMD.svg?branch=development)](https://travis-ci.org/jackindisguise/WMD) [![Documentation](https://img.shields.io/badge/page-jsdoc-blue.svg)](https://jackindisguise.github.io/WMD/index.html) [![Github](https://img.shields.io/badge/page-github-orange.svg)](https://github.com/jackindisguise/WMD) [![Coverage](https://img.shields.io/badge/page-coverage-green.svg)](https://jackindisguise.github.io/WMD/coverage/index.html)
+<p align='center'>
+    <b>W</b><sub>eb</sub><b>M</b><sub>u</sub><b>D</b>
+</p>
+<p align='center'>
+<img src='https://img.shields.io/badge/version-v0.0.0-orange.svg'><br/>
+<a href='https://travis-ci.org/jackindisguise/WMD'><img src='https://travis-ci.org/jackindisguise/WMD.svg?branch=development'></a>
+<a href='https://jackindisguise.github.io/WMD/index.html'><img src='https://img.shields.io/badge/page-jsdoc-blue.svg'></a>
+<a href='https://github.com/jackindisguise/WMD'><img src='https://img.shields.io/badge/page-github-orange.svg'></a>
+<a href='https://jackindisguise.github.io/WMD/coverage/index.html'><img src='https://img.shields.io/badge/page-coverage-green.svg'></a>
+</p>
 
-# WMD
-Web-based MUD engine.
+## What is WMD?
+A web-based MUD engine.
