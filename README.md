@@ -1,5 +1,5 @@
 <p align='center'>
-    <b>W</b><sub>eb</sub><b>M</b><sub>u</sub><b>D</b>
+    <b>WMD</b>
 </p>
 <p align='center'>
 <img src='https://img.shields.io/badge/version-v0.0.0-orange.svg'><br/>
