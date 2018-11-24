@@ -5,7 +5,7 @@ var EventEmitter = require("events");
 //var _ = require("../../i18n");
 //var Logger = require("../util/Logger");
 var Server = require("../io/Server");
-var Player = require("../io/Player");
+var Player = require("./Player");
 var json = require("../../package.json");
 
 /**

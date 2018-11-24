@@ -8,12 +8,14 @@ var MUD = require("../../src/core/MUD");
 var _ = require("../../i18n");
 
 describe("Net", function(){
-    describe("MUD Server / Express Server", function(){
+    describe("Start", function(){
         it("Express HTTP server start", function(done){
             MUD.start(8000);
             done();
-        });
+		});
+	});
 
+	describe("PUG", function(){
         it("PUG frontend received properly", function(done){
             // create a connection
             http.get("http://localhost:8000", function(res){
@@ -44,17 +46,17 @@ describe("Net", function(){
                     done();
                 });
             });
-        });
+		});
+	});
 
+	describe("Player", function(){
 		var player;
 		it("Connect player", function(done){
-			var c=0;
 			function sequence(message){
 				expect(message).to.equal(_("Client and player fully synchronized."));
 				done();
 			}
 	
-			this.timeout(3000);
 			player = io.connect("http://localhost:8000");
 			player.on("message", sequence);
 		});
@@ -63,11 +65,13 @@ describe("Net", function(){
 			player.close();
 			expect(player.disconnected).to.equal(true);
 			done();
-		})
+		});
+	});
 
-        it("Express HTTP server stop", function(done){
-            MUD.stop();
-            done();
-        })
-    });
+	describe("Stop", function(){
+		it("Express HTTP server stop", function(done){
+			MUD.stop();
+			done();
+		});
+	});
 });

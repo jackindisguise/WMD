@@ -3,7 +3,7 @@ var expect = require("chai").expect;
 
 // local includes
 var Mob = require("../../../src/map/Mob");
-var Player = require("../../../src/io/Player");
+var Player = require("../../../src/core/Player");
 
 // testing
 describe("Player", function(){

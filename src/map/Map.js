@@ -1,5 +1,4 @@
 // local includes
-var MapObject = require("./MapObject");
 var Tile = require("./Tile");
 
 class Map{

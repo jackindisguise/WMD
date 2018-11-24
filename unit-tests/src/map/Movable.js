@@ -2,9 +2,8 @@
 var expect = require("chai").expect;
 
 // local includes
+require("../../../src/lib/Object");
 var Map = require("../../../src/map/Map");
-var Tile = require("../../../src/map/Tile");
-var MapObject = require("../../../src/map/MapObject");
 var Movable = require("../../../src/map/Movable");
 
 // testing
@@ -14,10 +13,11 @@ var tile = map.getTileByXYZ(0,0,0);
 var tile2 = map.getTileByXYZ(1,0,0);
 var tile3 = map.getTileByXYZ(2,0,0);
 var noenter = map.getTileByXYZ(3,0,0);
-noenter.canEnter = function(mapobject){ return false; }
+noenter.canEnter = function(){ return false; };
 describe("Movable", function(){
 	it("Create a new movable", function(done){
 		movable = new Movable();
+		console.log(movable.__toJSON());
 		done();
 	});
 

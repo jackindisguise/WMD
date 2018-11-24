@@ -23,27 +23,6 @@ class MapObject{
 		 */
 		this._contents = [];
 
-		/**
-		 * Keywords for referring to this object.
-		 * @type {?string}
-		 * @default "map object mapobject"
-		 */
-		this.keywords = "map object mapobject";
-
-		/**
-		 * The display string for this object.
-		 * @type {!string}
-		 * @default "MapObject"
-		 */
-		this.display = "MapObject";
-
-		/**
-		 * A description for this object.
-		 * @type {?string}
-		 * @default null
-		 */
-		this.description = null;
-
 		if(options){
 			if(options.loc != null) this.loc = options.loc;
 		}
@@ -80,12 +59,18 @@ class MapObject{
 		}
 	}
 
+	__JSONWrite(key, value){
+		if(key == "_loc") return undefined;
+		if(key == "_contents") return undefined;
+		return Object.__JSONWrite.call(this, key, value);
+	}
+
 	/**
 	 * Check if an object can enter our contents.
 	 * @param {MapObject} enterer Object entering our contents.
 	 * @return {boolean}
 	 */
-	canEnter(enterer){
+	canEnter(){
 		return true;
 	}
 
@@ -94,15 +79,16 @@ class MapObject{
 	 * @param {MapObject} exiter Object leaving our contents.
 	 * @return {boolean}
 	 */
-	canExit(exiter){
+	canExit(){
 		return true;
 	}
 
 	/**
 	 * Check if we can move to a new location.
 	 * Base objects (see {@link MapObject}) cannot move, and as such this will always return false for them.
+	 * @param {MapObject} loc 
 	 */
-	canMove(loc){
+	canMove(){
 		return false;
 	}
 
@@ -136,5 +122,26 @@ class MapObject{
 		if(mapobject.loc == this) mapobject.loc = null; // cyclical dereference
 	}
 }
+
+/**
+ * Keywords for referring to this object.
+ * @type {?string}
+ * @default "map object mapobject"
+ */
+MapObject.prototype.keywords = "map object mapobject";
+
+/**
+ * The display string for this object.
+ * @type {!string}
+ * @default "MapObject"
+ */
+MapObject.prototype.display = "MapObject";
+
+/**
+ * A description for this object.
+ * @type {?string}
+ * @default null
+ */
+MapObject.prototype.description = null;
 
 module.exports = MapObject;

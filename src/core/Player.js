@@ -57,30 +57,30 @@ class Player extends EventEmitter {
 	 * Runs when a mob is connected to this Player.
 	 * @param {Mob} mob Mob connected to.
 	 */
-	login(mob){
+	login(){
 	}
 
 	/**
 	 * Runs when a mob is disconnected from this Player.
 	 * @param {Mob} mob Mob disconnected from.
 	 */
-	logout(mob){
+	logout(){
 	}
 
 	/**
 	 * Runs when a client is connected to this Player.
 	 * @param {Client} client Client connected to.
 	 */
-	join(client){
+	join(){
 		Logger.silly(_("Client and player fully synchronized."));
-		this.sendLine(_("Client and player fully synchronized."))
+		this.sendLine(_("Client and player fully synchronized."));
 	}
 
 	/**
 	 * Runs when a client is disconnected from this Player.
 	 * @param {Client} client Client disconnected from.
 	 */
-	leave(client){
+	leave(){
 		Logger.silly(_("Client and player fully desynchronized."));
 	}
 
@@ -140,5 +140,5 @@ class Player extends EventEmitter {
 module.exports = Player;
 
 // cyclical includes
-MUD = require("../core/MUD");
+MUD = require("./MUD");
 Mob = require("../map/Mob");

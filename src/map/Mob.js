@@ -16,12 +16,13 @@ class Mob extends Movable{
 		 * @type {?Player}
 		 */
 		this._player = null;
+	}
 
-		/** @default "mob" */
-		this.keywords = "mob";
-
-		/** @default "Mob" */
-		this.display = "Mob";
+	/**
+	 * Will be described later via race and class.
+	 */
+	get tnl(){
+		return -1;
 	}
 
 	get player(){
@@ -29,7 +30,7 @@ class Mob extends Movable{
 	}
 
 	set player(player){
-		if(this._player == player) return;
+		if(this._player === player) return;
 
 		var oplayer;
 		if(this._player) {
@@ -53,18 +54,36 @@ class Mob extends Movable{
 	 * Runs when a Player is connected to this Mob.
 	 * @param {Player} player Player connected to.
 	 */
-	login(player){
+	login(){
 	}
 
 	/**
 	 * Runs when a Player is disconnected from this Mob.
 	 * @param {Player} player Player disconnected from.
 	 */
-	logout(player){
+	logout(){
 	}
 }
+
+/**
+ * This mob's experience level.
+ * @type {!number}
+ */
+Mob.prototype.level = 0;
+
+/**
+ * This mob's experience points.
+ * @type {!number}
+ */
+Mob.prototype.experience = 0;
+
+/** @default "mob" */
+Mob.prototype.keywords = "mob";
+
+/** @default "Mob" */
+Mob.prototype.display = "Mob";
 
 module.exports = Mob;
 
 // cyclical includes
-Player = require("../io/Player");
+Player = require("../core/Player");

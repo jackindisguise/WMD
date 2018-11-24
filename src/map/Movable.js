@@ -6,16 +6,6 @@ var Tile;
  * @extends MapObject
  */
 class Movable extends MapObject{
-	constructor(options){
-		super(options);
-
-		/** @default "movable" */
-		this.keywords = "movable";
-
-		/** @default "Movable" */
-		this.display = "Movable";
-	}
-
 	get x(){
 		if(this.loc instanceof Tile)
 			return this.loc.x;
@@ -41,6 +31,12 @@ class Movable extends MapObject{
 		return true;
 	}
 }
+
+/** @default "movable" */
+Movable.prototype.keywords = "movable";
+
+/** @default "Movable" */
+Movable.prototype.display = "Movable";
 
 module.exports = Movable;
 
