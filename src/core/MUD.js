@@ -1,12 +1,15 @@
 // node includes
 var EventEmitter = require("events");
+var fs = require("fs");
 
 // local includes
-//var _ = require("../../i18n");
-//var Logger = require("../util/Logger");
+var _ = require("../../i18n");
+var Logger = require("../util/Logger");
+var Database = require("./Database");
 var Server = require("../io/Server");
 var Player = require("./Player");
-var json = require("../../package.json");
+var _package = require("../../package.json");
+
 
 /**
  * MUD handler.
@@ -21,14 +24,14 @@ class MUD extends EventEmitter{
 	 * Shortcut for package.json's "name" value.
 	 */
 	get name(){
-		return json.name;
+		return _package.name;
 	}
 
 	/**
 	 * Shortcut for package.json's "version" value.
 	 */
 	get version(){
-		return json.version;
+		return _package.version;
 	}
 
 	/**
@@ -43,10 +46,13 @@ class MUD extends EventEmitter{
 	 * @param {int} port
 	 */
 	start(port){
-		Server.open(port, function(){
-			// start listening for new client connections
-			Server.on("connect", function(client){
-				this.connect(client);
+		Database.load(function(){
+			Server.open(port, function(){
+				Logger.verbose(_("Server started on port %s", port));
+				// start listening for new client connections
+				Server.on("connect", function(client){
+					this.connect(client);
+				}.bind(this));
 			}.bind(this));
 		}.bind(this));
 	}
