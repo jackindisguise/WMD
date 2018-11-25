@@ -8,7 +8,7 @@ var MapObject = require("../../../src/map/MapObject");
 
 // testing
 describe("MapObject", function(){
-    it("MapObject constructor options", function(done){
+    it("constructor options", function(done){
         var object = new MapObject(); // no options
         expect(object.loc).to.equal(null);
         var object2 = new MapObject({}); // empty options
@@ -20,7 +20,7 @@ describe("MapObject", function(){
         done();
     });
 
-    it("MapObject loc relationship", function(done){
+    it("loc relationship", function(done){
         var object = new MapObject();
         var object2 = new MapObject();
 
@@ -59,11 +59,19 @@ describe("MapObject", function(){
         done();
     });
 
-    it("MapObject move", function(done){
+    it("move", function(done){
         var object = new MapObject();
         var object2 = new MapObject();
         object.move(object2);
         expect(object.loc).to.equal(null);
         done();
-    })
+    });
+
+    it("JSON test", function(done){
+        var object = new MapObject();
+        object.display = "THE JEWS DID 9/11";
+        var json = object.__toJSON();
+        expect(JSON.stringify(json)).to.equal('{"display":"THE JEWS DID 9/11"}');
+        done();
+    });
 })

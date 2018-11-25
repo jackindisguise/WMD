@@ -8,7 +8,22 @@ var Tile = require("../../../src/map/Tile");
 // testing
 var map;
 describe("Map", function(){
-	it("Creating an invalid map", function(done){
+	it("invalid constructor options", function(done){
+		map = new Map();
+		expect(map.size.width).to.equal(0);
+		expect(map.size.height).to.equal(0);
+		expect(map.size.levels).to.equal(0);
+
+		map = new Map({});
+		expect(map.size.width).to.equal(0);
+		expect(map.size.height).to.equal(0);
+		expect(map.size.levels).to.equal(0);
+
+		map = new Map({"width":50});
+		expect(map.size.width).to.equal(0);
+		expect(map.size.height).to.equal(0);
+		expect(map.size.levels).to.equal(0);
+
 		map = new Map({width:50, height:50});
 		expect(map.size.width).to.equal(0);
 		expect(map.size.height).to.equal(0);
@@ -16,7 +31,7 @@ describe("Map", function(){
 		done();
 	});
 
-	it("Creating 100x100x10 map", function(done){
+	it("valid constructor options (100x100x10 map)", function(done){
 		map = new Map({width:100, height:100, levels:10});
 		expect(map.size.width).to.equal(100);
 		expect(map.size.height).to.equal(100);

@@ -7,7 +7,7 @@ var Player = require("../../../src/core/Player");
 
 // testing
 describe("Player", function(){
-	it("Player constructor options", function(done){
+	it("constructor options", function(done){
 		var mob = new Mob();
 		var p = new Player({mob:mob});
 		expect(p.mob).is.equal(mob);

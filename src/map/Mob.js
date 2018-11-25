@@ -126,11 +126,15 @@ class Mob extends Movable{
 		return mana;
 	}
 
-	get toNextLvel(){
+	get toNextLevel(){
 		var tnl = 0;
 		tnl += this.race.getToNextLevelByLevel(this.level);
 		tnl += this.class.getToNextLevelByLevel(this.level);
 		return tnl;
+	}
+
+	get tnl(){
+		return this.toNextLevel;
 	}
 
 	get player(){

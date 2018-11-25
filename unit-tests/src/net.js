@@ -8,8 +8,8 @@ var MUD = require("../../src/core/MUD");
 var _ = require("../../i18n");
 
 describe("Net", function(){
-    describe("Start", function(){
-        it("Express HTTP server start", function(done){
+    describe("start", function(){
+        it("start Express HTTP server", function(done){
             MUD.start(8000, done);
 		});
 	});
@@ -50,7 +50,7 @@ describe("Net", function(){
 
 	describe("Player", function(){
 		var player;
-		it("Connect player", function(done){
+		it("connect player", function(done){
 			function sequence(message){
 				expect(message).to.equal(_("Client and player fully synchronized."));
 				done();
@@ -60,15 +60,15 @@ describe("Net", function(){
 			player.on("message", sequence);
 		});
 
-		it("Disconnect player", function(done){
+		it("disconnect player", function(done){
 			player.close();
 			expect(player.disconnected).to.equal(true);
 			done();
 		});
 	});
 
-	describe("Stop", function(){
-		it("Express HTTP server stop", function(done){
+	describe("stop", function(){
+		it("stopping Express HTTP server", function(done){
 			MUD.stop();
 			done();
 		});

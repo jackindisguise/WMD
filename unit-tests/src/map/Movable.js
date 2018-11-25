@@ -15,12 +15,12 @@ var tile3 = map.getTileByXYZ(2,0,0);
 var noenter = map.getTileByXYZ(3,0,0);
 noenter.canEnter = function(){ return false; };
 describe("Movable", function(){
-	it("Create a new movable", function(done){
+	it("constructor options", function(done){
 		movable = new Movable();
 		done();
 	});
 
-	it("Informal move to tile", function(done){
+	it("informal move to tile", function(done){
 		movable.loc = tile;
 		expect(movable.loc).to.equal(tile);
 		expect(tile.contents[0]).to.equal(movable);
@@ -30,7 +30,7 @@ describe("Movable", function(){
 		done();
 	});
 
-	it("Move by adding to other tile's contents", function(done){
+	it("move by adding to other tile's contents", function(done){
 		tile2.add(movable);
 		expect(movable.loc).to.equal(tile2);
 		expect(tile2.contents[0]).to.equal(movable);
@@ -38,7 +38,7 @@ describe("Movable", function(){
 		done();
 	});
 
-	it("Legal formal move", function(done){
+	it("legal formal move", function(done){
 		movable.move(tile3);
 		expect(movable.loc).to.equal(tile3);
 		expect(tile2.contents[0]).to.not.equal(movable);
@@ -46,7 +46,7 @@ describe("Movable", function(){
 		done();
 	});
 
-	it("Illegal formal move", function(done){
+	it("illegal formal move", function(done){
 		movable.move(noenter);
 		expect(movable.loc).to.not.equal(noenter);
 		expect(tile3.contents[0]).to.equal(movable);
@@ -54,7 +54,7 @@ describe("Movable", function(){
 		done();
 	});
 
-	it("Bypass formal move rules with informal move", function(done){
+	it("bypass formal move rules with informal move", function(done){
 		movable.loc = noenter;
 		expect(movable.loc).to.equal(noenter);
 		expect(tile3.contents[0]).to.not.equal(movable);
