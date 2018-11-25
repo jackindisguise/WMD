@@ -44,8 +44,9 @@ class MUD extends EventEmitter{
 	/**
 	 * Start any vital MUD processes, including the server.
 	 * @param {int} port
+	 * @param {function} callback
 	 */
-	start(port){
+	start(port, callback){
 		Database.load(function(){
 			Server.open(port, function(){
 				Logger.verbose(_("Server started on port %s", port));
@@ -53,6 +54,8 @@ class MUD extends EventEmitter{
 				Server.on("connect", function(client){
 					this.connect(client);
 				}.bind(this));
+
+				if(callback) callback();
 			}.bind(this));
 		}.bind(this));
 	}

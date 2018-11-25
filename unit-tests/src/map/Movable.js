@@ -17,7 +17,6 @@ noenter.canEnter = function(){ return false; };
 describe("Movable", function(){
 	it("Create a new movable", function(done){
 		movable = new Movable();
-		console.log(movable.__toJSON());
 		done();
 	});
 
