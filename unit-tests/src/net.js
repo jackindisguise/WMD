@@ -18,7 +18,7 @@ describe("Net", function(){
 	describe("PUG", function(){
         it("PUG frontend received properly", function(done){
             // create a connection
-            http.get("http://localhost:8000", function(res){
+            http.get("http://127.0.0.1:8000", function(res){
                 res.setEncoding("utf8");
                 var raw = "";
                 res.on("data", function(chunk){
@@ -34,7 +34,7 @@ describe("Net", function(){
 
         it("PUG frontend redirected properly", function(done){
             // create a connection
-            http.get("http://localhost:8000/naniwoshiterno?", function(res){
+            http.get("http://127.0.0.1:8000/naniwoshiterno?", function(res){
                 res.setEncoding("utf8");
                 var raw = "";
                 res.on("data", function(chunk){
@@ -57,7 +57,7 @@ describe("Net", function(){
 				done();
 			}
 	
-			player = io.connect("http://localhost:8000");
+			player = io.connect("http://127.0.0.1:8000");
 			player.on("message", sequence);
 		});
 
