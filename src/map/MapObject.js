@@ -59,10 +59,10 @@ class MapObject{
 		}
 	}
 
-	__JSONWrite(key, value){
-		if(key == "_loc") return undefined;
-		if(key == "_contents") return undefined;
-		return Object.__JSONWrite.call(this, key, value);
+	__JSONWrite(key, value, json){
+		if(key == "_loc") return; // ignore loc
+		else if(key == "_contents") return; // ignore contents
+		else Object.__JSONWrite.call(this, key, value, json);
 	}
 
 	/**

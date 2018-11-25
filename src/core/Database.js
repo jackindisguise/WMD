@@ -41,7 +41,11 @@ class Database{
         }
     }
 
-    // load races
+    /**
+     * Load all the races into the database.
+     * Calls callback at the end.
+     * @param {function} callback 
+     */
     static loadRaces(callback){
         Logger.verbose(_("Loading races..."));
         fs.readdir("./data/race", function(err, files){
@@ -79,7 +83,11 @@ class Database{
         }
     }
 
-    // load classes
+    /**
+     * Load all the classes into the database.
+     * Calls callback at the end.
+     * @param {function} callback 
+     */
     static loadClasses(callback){
         Logger.verbose(_("Loading classes..."));
         fs.readdir("./data/class", function(err, files){
@@ -97,22 +105,34 @@ class Database{
         });
     }
 
-    // load entire database
+    /**
+     * Load all data into database.
+     * Calls callback at the end.
+     * @param {function} callback 
+     */
     static load(callback){
-        var loaders = [Database.loadRaces, Database.loadClasses];
         Logger.verbose(_("Loading database..."));
+
+        // specify loaders in the order they should be run
+        var loaders = [Database.loadRaces, Database.loadClasses];
+
+        // create a "loader iterator"
         var i = 0;
-        function _load(){
+        function loadNext(){
+            // this is the simplest program flow that doesn't require a bunch of
+            // redundant code. allows us to keep the 1 line loader and we can just
+            // check for the final loader at the start of the next iteration.
             if(i==loaders.length) {
                 Logger.verbose(_("Database loaded."));
                 callback();
                 return;
             }
 
-            loaders[i++](_load);
+            loaders[i++](loadNext); // call each loader with the master loader
         }
 
-        _load();
+        // start iterator
+        loadNext();
     };
 }
 

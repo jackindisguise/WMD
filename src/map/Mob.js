@@ -3,6 +3,7 @@ var Player;
 var Movable = require("./Movable");
 var Race = require("../core/Race");
 var Class = require("../core/Class");
+var Database = require("../core/Database");
 
 /**
  * Represents an animate creature on the map.
@@ -157,10 +158,16 @@ class Mob extends Movable{
 		}
 	}
 
-	__JSONWrite(key, value){
-		if(key == "race") return this.race.id;
-		if(key == "class") return this.class.id;
-		return Movable.__JSONWrite.call(this, key, value);
+	__JSONWrite(key, value, json){
+		if(key == "race") json.race = value.display;
+		else if(key == "class") json.class = value.display;
+		else Movable.__JSONWrite.call(this, key, value, json);
+	}
+
+	__JSONRead(key, value){
+		if(key == "race") this.race = Database.getRaceByName(value);
+		else if(key == "class") this.class = Database.getClassByName(value);
+		else Movable.__JSONRead.call(this, key, value);
 	}
 
 	/**
