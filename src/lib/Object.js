@@ -1,14 +1,3 @@
-/*
-Object.prototype.__JSONGetKeyForVariable = function(key, value){
-    return key;
-};
-
-Object.prototype.__JSONGetValueForVariable = function(key, value){
-    if(this.constructor.prototype[key] == value) return undefined; // don't save default values
-    if(typeof value === "Function") return undefined;
-    return value;
-};*/
-
 Object.prototype.__JSONWrite = function(key, value, json){
     if(this.constructor.prototype[key] == value) return; // don't save default values
     if(typeof value === "function") return; // don't save functions
