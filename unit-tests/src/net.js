@@ -10,7 +10,7 @@ var _ = require("../../i18n");
 describe("Net", function(){
     describe("Start", function(){
         it("Express HTTP server start", function(done){
-            MUD.start(8000);
+            MUD.start(2000);
             done();
 		});
 	});
@@ -18,7 +18,7 @@ describe("Net", function(){
 	describe("PUG", function(){
         it("PUG frontend received properly", function(done){
             // create a connection
-            http.get("http://0.0.0.0:8000", function(res){
+            http.get("http://localhost:2000", function(res){
                 res.setEncoding("utf8");
                 var raw = "";
                 res.on("data", function(chunk){
@@ -34,7 +34,7 @@ describe("Net", function(){
 
         it("PUG frontend redirected properly", function(done){
             // create a connection
-            http.get("http://0.0.0.0:8000/naniwoshiterno?", function(res){
+            http.get("http://localhost:2000/naniwoshiterno?", function(res){
                 res.setEncoding("utf8");
                 var raw = "";
                 res.on("data", function(chunk){
@@ -57,7 +57,7 @@ describe("Net", function(){
 				done();
 			}
 	
-			player = io.connect("http://0.0.0.0:8000");
+			player = io.connect("http://localhost:2000");
 			player.on("message", sequence);
 		});
 
