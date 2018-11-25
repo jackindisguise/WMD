@@ -21,6 +21,26 @@ class Database{
         return _classes;
     }
 
+    /**
+     * Get race by ID;
+     * @param {number} id 
+     */
+    static getRaceByID(id){
+        for(var race of _races){
+            if(race.id === id) return race;
+        }
+    }
+
+    /**
+     * Get race by display name.
+     * @param {string} name 
+     */
+    static getRaceByName(name){
+        for(var race of _races){
+            if(race.display === name) return race;
+        }
+    }
+
     // load races
     static loadRaces(callback){
         Logger.verbose(_("Loading races..."));
@@ -37,6 +57,26 @@ class Database{
                 });
             }
         });
+    }
+
+    /**
+     * Get class by ID;
+     * @param {number} id 
+     */
+    static getClassByID(id){
+        for(var _class of _classes){
+            if(_class.id === id) return _class;
+        }
+    }
+
+    /**
+     * Get class by display name.
+     * @param {string} name 
+     */
+    static getClassByName(name){
+        for(var _class of _classes){
+            if(_class.display === name) return _class;
+        }
     }
 
     // load classes

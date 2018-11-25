@@ -16,28 +16,24 @@ describe("Net", function(){
 
 	describe("PUG", function(){
         it("PUG frontend received properly", function(done){
-            try{
-                // create a connection
-                http.get("http://127.0.0.1:8000/", function(res){
-                    res.setEncoding("utf8");
-                    var raw = "";
-                    res.on("data", function(chunk){
-                        raw += chunk;
-                    });
-
-                    res.on("end", function(){
-                        expect(raw).to.equal('<!DOCTYPE html>\n<html>\n  <head>\n    <title>Node Page</title>\n    <link rel="stylesheet" type="text/css" href="/css/main.css">\n    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">\n    <link rel="icon" href="/favicon.ico" type="image/x-icon">\n    <link href="https://fonts.googleapis.com/css?family=Fira+Mono|Source+Code+Pro" rel="stylesheet">\n    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>\n    <script src="/socket.io/socket.io.js"></script>\n    <script src="/src/js/socket.js"></script>\n    <script src="/src/js/output.js"></script>\n    <script src="/src/js/input.js"></script>\n    <script src="/src/js/main.js"></script>\n  </head>\n  <body>\n    <div id="header">mudengine\n      \n    </div>\n    <div id="MUD">\n      <div id="output"></div>\n      <div id="input">\n        <div class="wrapper">\n          <input id="command" placeholder="...">\n        </div>\n      </div>\n    </div>\n    <div id="status">mudengine v1.0.0</div>\n  </body>\n</html>');
-                        done();
-                    });
+            // create a connection
+            http.get("http://127.0.0.1:8000/", function(res){
+                res.setEncoding("utf8");
+                var raw = "";
+                res.on("data", function(chunk){
+                    raw += chunk;
                 });
-            } catch(e){
-                console.log(e);
-            }
+
+                res.on("end", function(){
+                    expect(raw).to.equal('<!DOCTYPE html>\n<html>\n  <head>\n    <title>Node Page</title>\n    <link rel="stylesheet" type="text/css" href="/css/main.css">\n    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">\n    <link rel="icon" href="/favicon.ico" type="image/x-icon">\n    <link href="https://fonts.googleapis.com/css?family=Fira+Mono|Source+Code+Pro" rel="stylesheet">\n    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>\n    <script src="/socket.io/socket.io.js"></script>\n    <script src="/src/js/socket.js"></script>\n    <script src="/src/js/output.js"></script>\n    <script src="/src/js/input.js"></script>\n    <script src="/src/js/main.js"></script>\n  </head>\n  <body>\n    <div id="header">mudengine\n      \n    </div>\n    <div id="MUD">\n      <div id="output"></div>\n      <div id="input">\n        <div class="wrapper">\n          <input id="command" placeholder="...">\n        </div>\n      </div>\n    </div>\n    <div id="status">mudengine v1.0.0</div>\n  </body>\n</html>');
+                    done();
+                });
+            });
         });
 
         it("PUG frontend redirected properly", function(done){
             // create a connection
-            http.get("http://localhost:8000/naniwoshiterno?", function(res){
+            http.get("http://127.0.0.1:8000/naniwoshiterno?", function(res){
                 res.setEncoding("utf8");
                 var raw = "";
                 res.on("data", function(chunk){
@@ -60,7 +56,7 @@ describe("Net", function(){
 				done();
 			}
 	
-			player = io.connect("http://localhost:8000");
+			player = io.connect("http://127.0.0.1:8000");
 			player.on("message", sequence);
 		});
 

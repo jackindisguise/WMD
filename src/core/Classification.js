@@ -10,6 +10,10 @@ class Classification{
         this.id = 0;
     }
 
+    getToNextLevelByLevel(level){
+        return this.toNextLevelBase + (this.toNextLevelPerLevel*Math.max(0,level-1));
+    }
+
     getStrengthByLevel(level){
         return this.strengthBase + (this.strengthPerLevel*Math.max(0,level-1));
     }
@@ -26,35 +30,35 @@ class Classification{
         return this.attackPowerBase + (this.attackPowerPerLevel*Math.max(0,level-1));
     }
 
-    getDefensePerLevel(level){
+    getDefenseByLevel(level){
         return this.defenseBase + (this.defensePerLevel*Math.max(0,level-1));
     }
 
-    getVitalityPerLevel(level){
+    getVitalityByLevel(level){
         return this.vitalityBase + (this.vitalityPerLevel*Math.max(0,level-1));
     }
 
-    getMagicPowerPerLevel(level){
+    getMagicPowerByLevel(level){
         return this.magicPowerBase + (this.magicPowerPerLevel*Math.max(0,level-1));
     }
 
-    getResiliencePerLevel(level){
+    getResilienceByLevel(level){
         return this.resilienceBase + (this.resiliencePerLevel*Math.max(0,level-1));
     }
 
-    getWisdomPerLevel(level){
+    getWisdomByLevel(level){
         return this.wisdomBase + (this.wisdomPerLevel*Math.max(0,level-1));
     }
 
-    getSpeedPerLevel(level){
+    getSpeedByLevel(level){
         return this.speedBase + (this.speedPerLevel*Math.max(0,level-1));
     }
 
-    getEvasionPerLevel(level){
+    getEvasionByLevel(level){
         return this.evasionBase + (this.evasionPerLevel*Math.max(0,level-1));
     }
 
-    getStaminaPerLevel(level){
+    getStaminaByLevel(level){
         return this.staminaBase + (this.staminaPerLevel*Math.max(0,level-1));
     }
 
@@ -84,13 +88,13 @@ Classification.prototype.keywords = "unknown";
 Classification.prototype.display = "Unknown";
 
 // progression stats
-Classification.prototype.toNextLevelBase = 100;
+Classification.prototype.toNextLevelBase = 0;
 Classification.prototype.toNextLevelPerLevel = 0;
 
 // base primary attributes
-Classification.prototype.strengthBase = 10;
-Classification.prototype.intelligenceBase = 10;
-Classification.prototype.agilityBase = 10;
+Classification.prototype.strengthBase = 0;
+Classification.prototype.intelligenceBase = 0;
+Classification.prototype.agilityBase = 0;
 
 // base secondary attributes
 Classification.prototype.attackPowerBase = 0;
@@ -109,9 +113,9 @@ Classification.prototype.manaBase = 0;
 Classification.prototype.energyBase = 0;
 
 // primary attributes per level
-Classification.prototype.strengthPerLevel = 1;
-Classification.prototype.intelligencePerLevel = 1;
-Classification.prototype.agilityPerLevel = 1;
+Classification.prototype.strengthPerLevel = 0;
+Classification.prototype.intelligencePerLevel = 0;
+Classification.prototype.agilityPerLevel = 0;
 
 // secondary attributes per level
 Classification.prototype.attackPowerPerLevel = 0;
