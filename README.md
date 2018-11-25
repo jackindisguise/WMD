@@ -1,6 +1,4 @@
-<p align='center'>
-    <b>WMD</b>
-</p>
+<p align='center'><b>WMD</b></p>
 <p align='center'>
 <img src='https://img.shields.io/badge/version-v0.0.0-orange.svg'><br/>
 <a href='https://travis-ci.org/jackindisguise/WMD'><img src='https://travis-ci.org/jackindisguise/WMD.svg?branch=development'></a>
