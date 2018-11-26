@@ -56,7 +56,7 @@ class Nanny{
     processRace(input){
         var race = Database.races.search(input);
         if(!race) {
-            this.player.sendLine("That isn't a valid race.");
+            this.player.sendLine(_("That isn't a valid race."));
             this.askForRace();
             return;
         }
@@ -73,7 +73,7 @@ class Nanny{
 
         msg += _("\r\n----------------");
         this.player.sendLine(msg);
-        this.player.ask("Enter a class:", function(input){
+        this.player.ask(_("Enter a class:"), function(input){
             this.processClass(input);
         }.bind(this));
     }
@@ -81,7 +81,7 @@ class Nanny{
     processClass(input){
         var _class = Database.classes.search(input);
         if(!_class) {
-            this.player.sendLine("That isn't a valid class.");
+            this.player.sendLine(_("That isn't a valid class."));
             this.askForClass();
             return;
         }
