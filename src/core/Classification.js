@@ -87,6 +87,12 @@ Classification.prototype.keywords = "unknown";
  */
 Classification.prototype.display = "Unknown";
 
+/**
+ * A simple description for this classification.
+ * @type {string}
+ */
+Classification.prototype.description = "Nobody knows what this is.";
+
 // progression stats
 Classification.prototype.toNextLevelBase = 0;
 Classification.prototype.toNextLevelPerLevel = 0;

@@ -2,8 +2,7 @@
 var EventEmitter = require("events");
 
 // local includes
-var MUD;
-var Mob;
+var MUD, Database, Mob, Nanny;
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
 
@@ -21,6 +20,7 @@ class Player extends EventEmitter {
 		super();
 		this._client = null;
 		this._mob = null;
+		this._callback = null;
 
 		if(options){
 			if(options.client) this.connect(options.client);
@@ -72,8 +72,8 @@ class Player extends EventEmitter {
 	 * @param {Client} client Client connected to.
 	 */
 	join(){
-		Logger.silly(_("Client and player fully synchronized."));
-		this.sendLine(_("Client and player fully synchronized."));
+		var nanny = new Nanny({player:this});
+		nanny.login();
 	}
 
 	/**
@@ -81,7 +81,6 @@ class Player extends EventEmitter {
 	 * @param {Client} client Client disconnected from.
 	 */
 	leave(){
-		Logger.silly(_("Client and player fully desynchronized."));
 	}
 
 	/**
@@ -89,8 +88,25 @@ class Player extends EventEmitter {
 	 * @param {string} input
 	 */
 	command(input){
+		if(this._callback) {
+			var callback = this._callback;
+			this._callback = null;
+			callback.call(this, input);
+		} else {
+			this.sendLine(_("You said: '%s'", input));
+		}
+
 		Logger.verbose(_("Player command: '%s'", input));
-		this.sendLine(_("You said: '%s'", input));
+	}
+
+	/**
+	 * Ask a question of the player and pipe next command to callback.
+	 * @param {string} question 
+	 * @param {function} callback 
+	 */
+	ask(question, callback){
+		if(question) this.sendLine(_(question));
+		this._callback = callback;
 	}
 
 	/**
@@ -141,4 +157,6 @@ module.exports = Player;
 
 // cyclical includes
 MUD = require("./MUD");
+Database = require("./Database");
 Mob = require("../map/Mob");
+Nanny = require("./Nanny");

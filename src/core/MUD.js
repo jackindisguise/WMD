@@ -50,12 +50,11 @@ class MUD extends EventEmitter{
 		Database.load(function(){
 			Server.open(port, function(){
 				Logger.verbose(_("Server started on port %s", port));
+				if(callback) callback();
 				// start listening for new client connections
 				Server.on("connect", function(client){
 					this.connect(client);
 				}.bind(this));
-
-				if(callback) callback();
 			}.bind(this));
 		}.bind(this));
 	}

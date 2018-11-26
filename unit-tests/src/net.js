@@ -5,10 +5,11 @@ var io = require("socket.io-client");
 
 // local includes
 var MUD = require("../../src/core/MUD");
+var Database = require("../../src/core/Database");
 var _ = require("../../i18n");
 
 describe("Net", function(){
-    describe("start", function(){
+    describe("Start", function(){
         it("start Express HTTP server", function(done){
             MUD.start(8000, done);
 		});
@@ -33,7 +34,7 @@ describe("Net", function(){
 
         it("PUG frontend redirected properly", function(done){
             // create a connection
-            http.get("http://127.0.0.1:8000/naniwoshiterno?", function(res){
+            http.get("http://127.0.0.1:8000/ldjkgjdhgkjdhfgkshg", function(res){
                 res.setEncoding("utf8");
                 var raw = "";
                 res.on("data", function(chunk){
@@ -51,9 +52,18 @@ describe("Net", function(){
 	describe("Player", function(){
 		var player;
 		it("connect player", function(done){
+            var c = 0;
 			function sequence(message){
-				expect(message).to.equal(_("Client and player fully synchronized."));
-				done();
+                switch(c++){
+                    case 0:
+                        expect(message).to.equal(Database.greeting);
+                        break;
+
+                    case 1:
+                        expect(message).to.equal(_("What's your name?"));
+                        done();
+                        break;
+                }
 			}
 	
 			player = io.connect("http://127.0.0.1:8000");
@@ -67,7 +77,7 @@ describe("Net", function(){
 		});
 	});
 
-	describe("stop", function(){
+	describe("Stop", function(){
 		it("stopping Express HTTP server", function(done){
 			MUD.stop();
 			done();

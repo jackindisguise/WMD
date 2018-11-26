@@ -7,26 +7,26 @@ var Class = require("../../../src/core/Class");
 var Mob = require("../../../src/map/Mob");
 
 // testing
-var Elf = new Race();
-Elf.healthBase = 25;
-Elf.manaBase = 200;
-Elf.energyBase = 75;
-Elf.toNextLevelBase = 25;
-Elf.toNextLevelPerLevel = 25;
-
-var Sorcerer = new Class();
-Sorcerer.strengthBase = 5;
-Sorcerer.intelligenceBase = 20;
-Sorcerer.agilityBase = 5;
-Sorcerer.strengthPerLevel = 1;
-Sorcerer.intelligencePerLevel = 4;
-Sorcerer.agilityPerLevel = 1;
-
-var mob = new Mob();
-mob.race = Elf;
-mob.class = Sorcerer;
-describe("race and class", function(){
-    describe("Elf + Sorcerer", function(){
+describe("Mob", function(){
+    describe("Attributes", function(){
+        var Elf = new Race();
+        Elf.healthBase = 25;
+        Elf.manaBase = 200;
+        Elf.energyBase = 75;
+        Elf.toNextLevelBase = 25;
+        Elf.toNextLevelPerLevel = 25;
+        
+        var Sorcerer = new Class();
+        Sorcerer.strengthBase = 5;
+        Sorcerer.intelligenceBase = 20;
+        Sorcerer.agilityBase = 5;
+        Sorcerer.strengthPerLevel = 1;
+        Sorcerer.intelligencePerLevel = 4;
+        Sorcerer.agilityPerLevel = 1;
+        
+        var mob = new Mob();
+        mob.race = Elf;
+        mob.class = Sorcerer;
         it("strength + secondary attributes", function(done){
             expect(mob.strength).is.equal(5);
             expect(mob.attackPower).is.equal(5);
@@ -34,7 +34,7 @@ describe("race and class", function(){
             expect(mob.vitality).is.equal(5);
             expect(mob.health).is.equal(75);
             done();
-        })
+        });
 
         it("intelligence + secondary attributes", function(done){
             expect(mob.intelligence).is.equal(20);
@@ -43,7 +43,7 @@ describe("race and class", function(){
             expect(mob.wisdom).is.equal(20);
             expect(mob.mana).is.equal(400);
             done();
-        })
+        });
 
         it("agility + secondary attributes", function(done){
             expect(mob.agility).is.equal(5);
@@ -60,6 +60,6 @@ describe("race and class", function(){
             mob.level = 10;
             expect(mob.tnl).is.equal(25 + 25*9);
             done();
-        })
+        });
     });
 });

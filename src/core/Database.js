@@ -3,16 +3,22 @@ var fs = require("fs");
 
 // local includes
 require("../lib/Object");
-var Classification = require("./Classification");
+var Race = require("./Race");
+var Class = require("./Class");
 var Logger = require("../util/Logger");
 var _ = require("../../i18n");
 
 // local
+var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
 var _races = [];
 var _classes = [];
 
 // generic namespace
 class Database{
+    static get greeting(){
+        return _greeting;
+    }
+
     static get races(){
         return _races;
     }
@@ -42,28 +48,6 @@ class Database{
     }
 
     /**
-     * Load all the races into the database.
-     * Calls callback at the end.
-     * @param {function} callback 
-     */
-    static loadRaces(callback){
-        Logger.verbose(_("Loading races..."));
-        fs.readdir("./data/race", function(err, files){
-            var size = files.length;
-            for(var file of files){
-                fs.readFile("./data/race/"+file, "utf8", function(err, data){
-                    var json = JSON.parse(data);
-                    var race = new Classification();
-                    race.__fromJSON(json);
-                    _races.push(race);
-                    Logger.verbose(_("Loaded race '%s'", race.display));
-                    if(!--size) callback();
-                });
-            }
-        });
-    }
-
-    /**
      * Get class by ID;
      * @param {number} id 
      */
@@ -84,6 +68,28 @@ class Database{
     }
 
     /**
+     * Load all the races into the database.
+     * Calls callback at the end.
+     * @param {function} callback 
+     */
+    static loadRaces(callback){
+        Logger.verbose(_("Loading races..."));
+        fs.readdir("./data/race", function(err, files){
+            var size = files.length;
+            for(var file of files){
+                fs.readFile("./data/race/"+file, "utf8", function(err, data){
+                    var json = JSON.parse(data);
+                    var race = new Race();
+                    race.__fromJSON(json);
+                    _races.push(race);
+                    Logger.verbose(_("Loaded race '%s'", race.display));
+                    if(!--size) callback();
+                });
+            }
+        });
+    }
+
+    /**
      * Load all the classes into the database.
      * Calls callback at the end.
      * @param {function} callback 
@@ -95,7 +101,7 @@ class Database{
             for(var file of files){
                 fs.readFile("./data/class/"+file, "utf8", function(err, data){
                     var json = JSON.parse(data);
-                    var _class = new Classification();
+                    var _class = new Class();
                     _class.__fromJSON(json);
                     _classes.push(_class);
                     Logger.verbose(_("Loaded class '%s'", _class.display));

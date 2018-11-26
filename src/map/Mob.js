@@ -155,11 +155,26 @@ class Mob extends Movable{
 			this.logout(oplayer);
 		}
 
-		if(player && player instanceof Player){
+		if(player && (player instanceof Player)){
 			this._player = player;
 			player.mob = this;
 			this.login(player);
 		}
+	}
+
+	/**
+	 * Shortcut for the display name.
+	 */
+	get name(){
+		return this.display;
+	}
+
+	/**
+	 * Shortcut for setting both display name and keywords.
+	 */
+	set name(name){
+		this.display = name;
+		this.keywords = name;
 	}
 
 	__JSONWrite(key, value, json){
@@ -221,5 +236,4 @@ Mob.prototype.display = "Mob";
 
 module.exports = Mob;
 
-// cyclical includes
 Player = require("../core/Player");
