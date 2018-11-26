@@ -2,21 +2,21 @@
 require("./String");
 
 /**
- * Search all objects in an array and compare their keyword values.
+ * Search all entries in an array and compare their keyword values.
  * @param {string} keywords
+ * @returns {Object|string|null}
  */
 Array.prototype.search = function(keywords){
     if(!keywords) return;
     for(var entry of this){
+        // if the array has plain strings, assume each string is a keyword
         if(typeof entry === "string") {
-            var result = entry.matchKeywords(keywords);
-            if(result) return result;
+            if(entry.matchKeywords(keywords)) return entry; // return full string on match
         }
 
         else if(typeof entry === "object"){
             if("keywords" in entry) {
-                var result = entry.keywords.matchKeywords(keywords);
-                if(result) return result;
+                if(entry.matchKeywords(keywords)) return entry; // return object on match
             }
         }
     }

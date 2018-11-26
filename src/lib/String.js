@@ -14,11 +14,12 @@ String.prototype.repeat = function(num){
 /**
  * Check for matches to this string's keywords.
  * @param {string} match
+ * @param {boolean} sensitive Case sensitivity option.
  */
-String.prototype.matchKeywords = function(match){
-	if(!match) return null;
-	var words = this.split(/\s+/);
-	var matchWords = match.split(/\s+/);
+String.prototype.matchKeywords = function(match, sensitive=false){
+	if(!match) return false;
+	var words = (sensitive ? this : this.toLowerCase()).split(/\s+/);
+	var matchWords = (sensitive ? match : match.toLowerCase()).split(/\s+/);
 	for(var matchWord of matchWords){
 		var found = false;
 		for(var word of words){
@@ -28,10 +29,10 @@ String.prototype.matchKeywords = function(match){
 			}
 		}
 
-		if(!found) return;
+		if(!found) return false;
 	}
 
-	return this;
+	return true;
 }
 
 /**

@@ -41,13 +41,13 @@ class Nanny{
     }
 
     askForRace(){
-        var msg = _("----- Race -----");
+        var msg = _("------------------");
         for(var race of Database.races){
-            msg += _("\r\n %s  %s", race.display.center(14), race.description);
+            msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
         }
 
-        msg += _("\r\n----------------");
-        this.player.sendLine(msg);
+        msg += _("%s------------------", "\r\n");
+        this.player.sendLine(_("%s%s", "\r\n", msg));
         this.player.ask("Enter a race:", function(input){
             this.processRace(input);
         }.bind(this));
@@ -66,12 +66,12 @@ class Nanny{
     }
 
     askForClass(){
-        var msg = _("---- Class -----");
+        var msg = _("------------------");
         for(var _class of Database.classes){
-            msg += _("\r\n %s  %s", _class.display.center(14), _class.description);
+            msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
         }
 
-        msg += _("\r\n----------------");
+        msg += _("%s------------------", "\r\n");
         this.player.sendLine(msg);
         this.player.ask(_("Enter a class:"), function(input){
             this.processClass(input);
@@ -97,6 +97,7 @@ class Nanny{
     }
 
     motd(){
+        this.player.sendLine(Database.motd);
         this.player.ask(_("Press enter to continue..."), this.finish.bind(this));
     }
 

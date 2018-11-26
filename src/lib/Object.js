@@ -1,3 +1,16 @@
+// local includes
+require("./String.js");
+
+/**
+ * Check for matches to this Object's keywords member.
+ * @function Object#matchKeywords
+ * @returns {boolean}
+ */
+Object.prototype.matchKeywords = function(keywords){
+    if(!("keywords" in this)) return false; // no keywords member, do nothing
+    if(this.keywords.matchKeywords(keywords)) return true; // keywords member matches, return true
+}
+
 /**
  * Write a value to a JSON object.
  */

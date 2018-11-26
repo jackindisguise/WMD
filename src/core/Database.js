@@ -10,6 +10,7 @@ var _ = require("../../i18n");
 
 // local
 var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
+var _motd = fs.readFileSync("./data/motd.txt", "utf8");
 var _races = [];
 var _classes = [];
 
@@ -17,6 +18,10 @@ var _classes = [];
 class Database{
     static get greeting(){
         return _greeting;
+    }
+
+    static get motd(){
+        return _motd;
     }
 
     static get races(){

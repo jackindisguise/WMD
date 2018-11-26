@@ -7,7 +7,8 @@
 			"src/core",
 			"src/io",
 			"src/map",
-			"src/util"
+			"src/util",
+			"src/lib"
 		]
 	},
 	"plugins": ["plugins/markdown"],
