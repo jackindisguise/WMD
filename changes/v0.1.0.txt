@@ -1,0 +1,60 @@
+commit 0d3b2ce7d2b40a7440a76c8f1fda735fc12d7ccc
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Nov 27 10:58:40 2018 -0600
+
+    Fixed some logger level stuff. (most things are debug instead of verbose)
+    
+    Classification
+    --------------
+    Added name shortcut;
+    Moved id to prototype.
+    
+    Client
+    ------
+    Moved instance values to prototype.
+    
+    Database
+    --------
+    Added Command loaders.
+    
+    Player
+    ------
+    Properly propagates disconnect event from client.
+    Moved instance values to prototype.
+    Added command processing. (needs work probably)
+    
+    Logger
+    ------
+    Added info level to logs.
+    
+    Map
+    ---
+    Moved instance values to prototype.
+    
+    MapObject
+    ---------
+    Moved instance values to prototype.
+    
+    Mob
+    ---
+    Moved instance values to prototype.
+    Race and class are not saved as race/class IDs instead of name.
+    
+    MUD
+    ---
+    Properly removes disconnected players from player list.
+    
+    Nanny
+    -----
+    Moved instance values to prototype.
+    Removed redundant i18n/gettext instances ("%s----" and "----" for adding linebreaks).
+    
+    Tile
+    ----
+    Moved instance values to prototype.
+
+commit 3745a2b354dacb38da765411f49999ede46623bd
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Nov 27 03:50:39 2018 -0600
+
+    Forgot to make this look fancier.
