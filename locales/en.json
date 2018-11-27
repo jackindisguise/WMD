@@ -17,5 +17,7 @@
 	"Enter a class:": "Enter a class:",
 	"Press enter to continue...": "Press enter to continue...",
 	"Welcome to the game, %s!": "Welcome to the game, %s!",
-	"You said: '%s'": "You said: '%s'"
+	"You said: '%s'": "You said: '%s'",
+	"disconnected client": "disconnected client",
+	"disconnected player": "disconnected player"
 }

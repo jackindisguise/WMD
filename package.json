@@ -1,13 +1,16 @@
 {
   "name": "mudengine",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A simple MUD engine.",
   "main": "index.js",
   "scripts": {
     "generate-docs": "rm -rf docs/html && jsdoc --configure .jsdoc.json --verbose --readme README.md",
     "nodemon": "nodemon ./index.js",
     "nyc": "nyc --reporter=text --reporter=html mocha --recursive ./unit-tests",
-    "test": "mocha --recursive ./unit-tests"
+    "test": "mocha --recursive ./unit-tests",
+    "preversion": "npm test",
+    "version": "git add -A .",
+    "postversion": "git push origin"
   },
   "author": "jackindisguise",
   "license": "MIT",
