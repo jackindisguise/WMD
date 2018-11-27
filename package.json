@@ -8,9 +8,10 @@
     "nodemon": "nodemon ./index.js",
     "nyc": "nyc --reporter=text --reporter=html mocha --recursive ./unit-tests",
     "test": "mocha --recursive ./unit-tests",
-    "preversion": "npm run test",
-    "version": "git add -A . && npm run generate-docs",
-    "postversion": "npm run nyc && git push"
+    "changes": "git log v%npm_package_version%..@ > changes/changes.txt",
+    "preversion": "npm run test && npm run changes",
+    "version": "mv changes/changes.txt changes/v%npm_package_version%.txt && git add -A .",
+    "postversion": "npm run generate-docs && npm run nyc && git push && git push --tags"
   },
   "author": "jackindisguise",
   "license": "MIT",
