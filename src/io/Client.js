@@ -43,7 +43,7 @@ class Client extends EventEmitter {
 	 * @param {string} line The line of text to send.
 	 */
 	sendLine(line){
-		this._socket.emit("message", line, Date.now());
+		if(this._socket) this._socket.emit("message", line, Date.now());
 	}
 
 	/**

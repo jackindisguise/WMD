@@ -83,6 +83,7 @@ class MUD extends EventEmitter{
 		 * @param {Player} player
 		 */
 		this.emit("connect", player);
+		return player;
 	}
 
 	/**

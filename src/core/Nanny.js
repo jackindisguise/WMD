@@ -45,7 +45,7 @@ class Nanny{
         msg += "\r\n";
         msg += _("------------------");
         this.player.sendLine(msg);
-        this.player.ask("Enter a race:", function(input){
+        this.player.ask(_("Enter a race:"), function(input){
             this.processRace(input);
         }.bind(this));
     }
@@ -65,7 +65,7 @@ class Nanny{
     askForClass(){
         var msg = _("------------------");
         for(var _class of Database.classes){
-            msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
+            msg += util.format(_("%s%s %s %s %s"), "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
         }
 
         msg += "\r\n";

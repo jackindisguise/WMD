@@ -116,7 +116,7 @@ class Player extends EventEmitter {
 	 * @param {string} line
 	 */
 	sendLine(line){
-		this._client.sendLine(line);
+		if(this._client) this._client.sendLine(line);
 	}
 
 	/**

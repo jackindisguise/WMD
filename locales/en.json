@@ -26,5 +26,7 @@
 	"Loading commands...": "Loading commands...",
 	"Loaded command '%s'": "Loaded command '%s'",
 	"Players Connected: %d": "Players Connected: %d",
-	"%s": "%s"
+	"%s": "%s",
+	"%s%s %s %s %s": "%s%s %s %s %s",
+	"%s OOC '%s'": "%s OOC '%s'"
 }
