@@ -28,5 +28,6 @@
 	"Players Connected: %d": "Players Connected: %d",
 	"%s": "%s",
 	"%s%s %s %s %s": "%s%s %s %s %s",
-	"%s OOC '%s'": "%s OOC '%s'"
+	"%s OOC '%s'": "%s OOC '%s'",
+	"Do what, now?": "Do what, now?"
 }

@@ -94,7 +94,10 @@ class Player extends EventEmitter {
 			this._callback = null;
 			callback.call(this, input);
 		} else if(this.mob) { // command processing
-			Database.processCommand(this.mob, input);
+			var result = Database.processCommand(this.mob, input);
+			if(!result) {
+				this.sendLine(_("Do what, now?"));
+			}
 		}
 
 		// log commands
