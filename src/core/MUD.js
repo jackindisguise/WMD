@@ -48,7 +48,7 @@ class MUD extends EventEmitter{
 	start(port, callback){
 		Database.load(function(){
 			Server.open(port, function(){
-				Logger.verbose(_("Server started on port %s", port));
+				Logger.info(_("Server started on port %s", port));
 				// start listening for new client connections
 				Server.on("connect", function(client){
 					this.connect(client);
@@ -91,6 +91,7 @@ class MUD extends EventEmitter{
 	disconnect(player){
 		var pos = this._players.indexOf(player);
 		if(pos === -1) return;
+		this._players.splice(pos, 1);
 
 		/**
 		 * @event MUD#disconnect

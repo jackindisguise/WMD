@@ -10,17 +10,6 @@ var Database = require("../core/Database");
  * @extends Movable
  */
 class Mob extends Movable{
-	constructor(options){
-		super(options);
-
-		/**
-		 * The player currently managing us.
-		 * @alias Mob#player
-		 * @type {?Player}
-		 */
-		this._player = null;
-	}
-
 	get strength(){
 		var strength = 0;
 		strength += this.race.getStrengthByLevel(this.level);
@@ -178,14 +167,14 @@ class Mob extends Movable{
 	}
 
 	__JSONWrite(key, value, json){
-		if(key == "race") json.race = value.display;
-		else if(key == "class") json.class = value.display;
+		if(key == "race") json.race = value.id;
+		else if(key == "class") json.class = value.id;
 		else Movable.__JSONWrite.call(this, key, value, json);
 	}
 
 	__JSONRead(key, value){
-		if(key == "race") this.race = Database.getRaceByName(value);
-		else if(key == "class") this.class = Database.getClassByName(value);
+		if(key == "race") this.race = Database.getRaceByID(value);
+		else if(key == "class") this.class = Database.getClassByID(value);
 		else Movable.__JSONRead.call(this, key, value);
 	}
 
@@ -202,7 +191,19 @@ class Mob extends Movable{
 	 */
 	logout(){
 	}
+
+	sendLine(line){
+		if(!this.player) return;
+		this.player.sendLine(line);
+	}
 }
+
+/**
+ * The player currently managing us.
+ * @alias Mob#player
+ * @type {?Player}
+ */
+Mob.prototype._player = null;
 
 /**
  * This mob's race.

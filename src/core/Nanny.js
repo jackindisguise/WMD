@@ -14,10 +14,6 @@ var Logger = require("../util/Logger");
 class Nanny{
     constructor(options){
         this.player = options.player;
-        this.name = null;
-        this.mob = null;
-        this.race = null;
-        this.class = null;
     }
 
     login(){
@@ -46,8 +42,9 @@ class Nanny{
             msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
         }
 
-        msg += _("%s------------------", "\r\n");
-        this.player.sendLine(_("%s%s", "\r\n", msg));
+        msg += "\r\n";
+        msg += _("------------------");
+        this.player.sendLine(msg);
         this.player.ask("Enter a race:", function(input){
             this.processRace(input);
         }.bind(this));
@@ -71,7 +68,8 @@ class Nanny{
             msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
         }
 
-        msg += _("%s------------------", "\r\n");
+        msg += "\r\n";
+        msg += _("------------------");
         this.player.sendLine(msg);
         this.player.ask(_("Enter a class:"), function(input){
             this.processClass(input);
@@ -93,6 +91,8 @@ class Nanny{
     createCharacter(){
         this.mob = new Mob();
         this.mob.name = this.name;
+        this.mob.race = this.race;
+        this.mob.class = this.class;
         this.motd();
     }
 
@@ -103,9 +103,15 @@ class Nanny{
 
     finish(){
         this.player.mob = this.mob;
-        this.player.sendLine(_("Welcome to the game, %s!", this.mob.name));
+        this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob.race.name, this.mob.class.name));
     }
 }
+
+Nanny.prototype.player = null;
+Nanny.prototype.name = null;
+Nanny.prototype.mob = null;
+Nanny.prototype.race = null;
+Nanny.prototype.class = null;
 
 module.exports = Nanny;
 

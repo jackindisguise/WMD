@@ -19,5 +19,12 @@
 	"Welcome to the game, %s!": "Welcome to the game, %s!",
 	"You said: '%s'": "You said: '%s'",
 	"disconnected client": "disconnected client",
-	"disconnected player": "disconnected player"
+	"disconnected player": "disconnected player",
+	"%s%s": "%s%s",
+	"That isn't a valid race.": "That isn't a valid race.",
+	"Welcome to the game, %s the %s %s!": "Welcome to the game, %s the %s %s!",
+	"Loading commands...": "Loading commands...",
+	"Loaded command '%s'": "Loaded command '%s'",
+	"Players Connected: %d": "Players Connected: %d",
+	"%s": "%s"
 }

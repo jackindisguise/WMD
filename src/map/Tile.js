@@ -17,12 +17,6 @@ class Tile extends MapObject{
 	constructor(options){
 		super();
 
-		/** @default "tile" */
-		this.keywords = "tile";
-
-		/** @default "Tile" */
-		this.display = "Tile";
-
 		if(options){
 			if(options.map){
 				this._map = options.map;
@@ -73,5 +67,17 @@ class Tile extends MapObject{
 		if(mapobject.loc !== this) this._map.remove(mapobject);
 	}
 }
+
+Tile.prototype._map = null;
+
+Tile.prototype._x = null;
+Tile.prototype._y = null;
+Tile.prototype._z = null;
+
+/** @default "tile" */
+Tile.prototype.keywords = "tile";
+
+/** @default "Tile" */
+Tile.prototype.display = "Tile";
 
 module.exports = Tile;

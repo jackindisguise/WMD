@@ -2,12 +2,8 @@
  * The basic classification system for races and classes.
  */
 class Classification{
-    constructor(){
-        /**
-         * Unique ID for this classification.
-         * @type {number}
-         */
-        this.id = 0;
+    get name(){
+        return this.display;
     }
 
     getToNextLevelByLevel(level){
@@ -74,6 +70,12 @@ class Classification{
         return this.energyBase + (this.energyPerLevel*Math.max(0,level-1));
     }
 }
+
+/**
+ * Unique ID for this classification.
+ * @type {number}
+ */
+Classification.prototype.id = 0;
 
 /**
  * Keyword for referencing this classification.

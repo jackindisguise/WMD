@@ -10,14 +10,6 @@ class Map{
 	 * @param {number} options.levels
 	 */
 	constructor(options){
-		// proportions
-		this._width = 0;
-		this._height = 0;
-		this._levels = 0;
-
-		// literal representation of the grid
-		this._grid = null;
-
 		// keeping track of all objects
 		this._tiles = [];
 		this._objects = [];
@@ -115,5 +107,17 @@ class Map{
 		}
 	}
 }
+
+// proportions
+Map.prototype._width = 0;
+Map.prototype._height = 0;
+Map.prototype._levels = 0;
+
+// literal representation of the grid
+Map.prototype._grid = null;
+
+// keeping track of all objects
+Map.prototype._tiles = null;
+Map.prototype._objects = null;
 
 module.exports = Map;

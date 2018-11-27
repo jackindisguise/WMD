@@ -18,14 +18,15 @@ class Player extends EventEmitter {
 	 */
 	constructor(options){
 		super();
-		this._client = null;
-		this._mob = null;
-		this._callback = null;
 
 		if(options){
 			if(options.client) this.connect(options.client);
 			if(options.mob) this.mob = options.mob;
 		}
+	}
+
+	get socketID(){
+		return this._client ? this._client.id : null;
 	}
 
 	get mob(){
@@ -88,15 +89,16 @@ class Player extends EventEmitter {
 	 * @param {string} input
 	 */
 	command(input){
-		if(this._callback) {
+		if(this._callback) { // callback piping
 			var callback = this._callback;
 			this._callback = null;
 			callback.call(this, input);
-		} else {
-			this.sendLine(_("You said: '%s'", input));
+		} else if(this.mob) { // command processing
+			Database.processCommand(this.mob, input);
 		}
 
-		Logger.verbose(_("Player command: '%s'", input));
+		// log commands
+		Logger.debug(_("Player command: '%s'", input));
 	}
 
 	/**
@@ -122,7 +124,7 @@ class Player extends EventEmitter {
 	 * @param {Client} client
 	 */
 	connect(client){
-		Logger.verbose(_("connected player"));
+		Logger.debug(_("connected player"));
 
 		// start listening for commands
 		this._client = client;
@@ -142,7 +144,7 @@ class Player extends EventEmitter {
 	 * Stop managing the current client.
 	 */
 	disconnect(){
-		Logger.verbose(_("disconnected player"));
+		Logger.debug(_("disconnected player"));
 
 		var oclient = this._client;
 		this._client = null;
@@ -150,8 +152,18 @@ class Player extends EventEmitter {
 		// stop listening for disconnection?
 
 		this.leave(oclient);
+
+		/**
+		 * Propagates socket disconnect event.
+		 * @event Player#disconnect
+		 */
+		this.emit("disconnect");
 	}
 }
+
+Player.prototype._client = null;
+Player.prototype._mob = null;
+Player.prototype._callback = null;
 
 module.exports = Player;
 

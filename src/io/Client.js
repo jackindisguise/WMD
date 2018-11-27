@@ -16,11 +16,14 @@ class Client extends EventEmitter {
 	 */
 	constructor(options){
 		super();
-		this._socket = null;
 
 		if(options){
 			if(options.socket) this.connect(options.socket);
 		}
+	}
+
+	get id(){
+		return this._socket ? this._socket.id : null;
 	}
 
 	/**
@@ -48,7 +51,7 @@ class Client extends EventEmitter {
 	 * @param {Object} socket A socket stream.
 	 */
 	connect(socket){
-		Logger.verbose(_("connected client"));
+		Logger.debug(_("connected client"));
 		this._socket = socket;
 
 		// start listening for commands
@@ -66,7 +69,7 @@ class Client extends EventEmitter {
 	 * Stop managing a socket.
 	 */
 	disconnect(){
-		Logger.verbose(_("disconnected client"));
+		Logger.debug(_("disconnected client"));
 		/**
 		 * Propagates socket disconnect event.
 		 * @event Client#disconnect
@@ -75,5 +78,7 @@ class Client extends EventEmitter {
 		this._socket = null;
 	}
 }
+
+Client.prototype._socket = null;
 
 module.exports = Client;

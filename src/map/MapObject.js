@@ -8,19 +8,6 @@ class MapObject{
 	 * @param {MapObject} options.loc Location to move to.
 	 */
 	constructor(options){
-		/**
-		 * The object we currently inhabit.
-		 * If your loc is an object, that means you are inside that object's contents list.
-		 * @alias MapObject#loc
-		 * @type {?MapObject}
-		 */
-		this._loc = null;
-
-		/**
-		 * A list of all the objects inhabiting us.
-		 * @alias MapObject#contents
-		 * @type {!MapObject[]}
-		 */
 		this._contents = [];
 
 		if(options){
@@ -122,6 +109,21 @@ class MapObject{
 		if(mapobject.loc == this) mapobject.loc = null; // cyclical dereference
 	}
 }
+
+/**
+ * The object we currently inhabit.
+ * If your loc is an object, that means you are inside that object's contents list.
+ * @alias MapObject#loc
+ * @type {?MapObject}
+ */
+MapObject.prototype._loc = null;
+
+/**
+ * A list of all the objects inhabiting us.
+ * @alias MapObject#contents
+ * @type {!MapObject[]}
+ */
+MapObject.prototype._contents = null;
 
 /**
  * Keywords for referring to this object.

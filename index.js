@@ -9,5 +9,5 @@ var port = config.defaultPort ? config.defaultPort : 80;
 
 // start MUD
 MUD.start(port, function(){
-    Logger.verbose(_("The MUD is up and running.", port));
+    Logger.info(_("The MUD is up and running.", port));
 });

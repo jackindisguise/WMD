@@ -13,6 +13,7 @@ var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
 var _motd = fs.readFileSync("./data/motd.txt", "utf8");
 var _races = [];
 var _classes = [];
+var _commands = [];
 
 // generic namespace
 class Database{
@@ -78,7 +79,7 @@ class Database{
      * @param {function} callback 
      */
     static loadRaces(callback){
-        Logger.verbose(_("Loading races..."));
+        Logger.info(_("Loading races..."));
         fs.readdir("./data/race", function(err, files){
             var size = files.length;
             for(var file of files){
@@ -87,7 +88,7 @@ class Database{
                     var race = new Race();
                     race.__fromJSON(json);
                     _races.push(race);
-                    Logger.verbose(_("Loaded race '%s'", race.display));
+                    Logger.info(_("Loaded race '%s'", race.display));
                     if(!--size) callback();
                 });
             }
@@ -100,7 +101,7 @@ class Database{
      * @param {function} callback 
      */
     static loadClasses(callback){
-        Logger.verbose(_("Loading classes..."));
+        Logger.info(_("Loading classes..."));
         fs.readdir("./data/class", function(err, files){
             var size = files.length;
             for(var file of files){
@@ -109,11 +110,44 @@ class Database{
                     var _class = new Class();
                     _class.__fromJSON(json);
                     _classes.push(_class);
-                    Logger.verbose(_("Loaded class '%s'", _class.display));
+                    Logger.info(_("Loaded class '%s'", _class.display));
                     if(!--size) callback();
                 });
             }
         });
+    }
+
+    static processCommand(mob, input){
+        for(var command of _commands){
+            if(command.match(mob, input)) {
+                command.run(mob, input);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    static sortCommandsBySpecificity(){
+        _commands.sort(function(a,b){
+            return b.specificity - a.specificity;
+        });
+    }
+
+    static loadCommands(callback){
+        Logger.info(_("Loading commands..."));
+        fs.readdir("./data/command", function(err, files){
+            for(var file of files){
+                var _class = require("../../data/command/"+file);
+                var command = new _class();
+                if(!command.rule) continue;
+                _commands.push(command);
+                Logger.info(_("Loaded command '%s'", command.plain));
+            }
+
+            Database.sortCommandsBySpecificity();
+            callback();
+        })
     }
 
     /**
@@ -122,10 +156,10 @@ class Database{
      * @param {function} callback 
      */
     static load(callback){
-        Logger.verbose(_("Loading database..."));
+        Logger.info(_("Loading database..."));
 
         // specify loaders in the order they should be run
-        var loaders = [Database.loadRaces, Database.loadClasses];
+        var loaders = [Database.loadRaces, Database.loadClasses, Database.loadCommands];
 
         // create a "loader iterator"
         var i = 0;
@@ -134,7 +168,7 @@ class Database{
             // redundant code. allows us to keep the 1 line loader and we can just
             // check for the final loader at the start of the next iteration.
             if(i==loaders.length) {
-                Logger.verbose(_("Database loaded."));
+                Logger.info(_("Database loaded."));
                 callback();
                 return;
             }
