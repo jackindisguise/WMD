@@ -2,8 +2,8 @@
 var Classification = require("./Classification");
 
 /**
- * Basic race classifier.
- * Tends to offer base stats and TNL.
+ * Basic class classifier.
+ * Tends to offer base attributes and attributes per level.
  */
 class Class extends Classification{
 }
