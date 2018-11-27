@@ -1,0 +1,5 @@
+commit 6d4e7ff577cec07c5f3302ee6cf7cc094b50f7b5
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Nov 27 02:59:53 2018 -0600
+
+    I think I'm finally happy with this.
