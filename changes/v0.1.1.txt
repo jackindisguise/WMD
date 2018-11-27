@@ -1,0 +1,15 @@
+commit f8d3806725ba516647a5bc9da38f8a04f284945f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Nov 27 13:15:08 2018 -0600
+
+    Added OOC command.
+    
+    MUD.connect(client) now returns the created player.
+    
+    Player.sendLine is now sanitized for client-less players.
+    
+    Client.sendLine is now sanitized for socket-less clients. (debug)
+    
+    Restructured unit tests.
+    
+    Added Math unit tests.
