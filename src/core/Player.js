@@ -18,7 +18,7 @@ class Player extends EventEmitter {
 	 */
 	constructor(options){
 		super();
-
+		this._channels = [];
 		if(options){
 			if(options.client) this.connect(options.client);
 			if(options.mob) this.mob = options.mob;
@@ -115,6 +115,15 @@ class Player extends EventEmitter {
 	}
 
 	/**
+	 * Sends a categorized message to the player.
+	 * @param {string} line 
+	 * @param {} category 
+	 */
+	sendMessage(line, category){
+		if(this._client) this._client.sendMessage(line, category);
+	}
+
+	/**
 	 * Send a line of text to the player.
 	 * @param {string} line
 	 */
@@ -164,9 +173,11 @@ class Player extends EventEmitter {
 	}
 }
 
+Player.prototype._lastMessageCategory = null;
 Player.prototype._client = null;
 Player.prototype._mob = null;
 Player.prototype._callback = null;
+Player.prototype._channels = null;
 
 module.exports = Player;
 

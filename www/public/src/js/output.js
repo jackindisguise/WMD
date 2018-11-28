@@ -1,6 +1,7 @@
 "use strict";
 
-function addMessage(message,_class){
+var currentCategory = null;
+function addMessage(message, category, timestamp){
 	// determine if the window is at the bottom
 	var output = $("#output")[0];
 	var bottom = output.scrollHeight - $("#output").height();
@@ -8,9 +9,15 @@ function addMessage(message,_class){
 
 	var dMessage = document.createElement("div");
 	dMessage.className = "message";
-	dMessage.timestamp = Date.now();
-	console.log(_class);
-	if(_class) $(dMessage).addClass(_class);
+	var now = Date.now();
+	dMessage.sentTimestamp = timestamp;
+	dMessage.receivedTimestamp = now;
+	dMessage.latency = now - timestamp;
+
+	// set new category
+	$(dMessage).addClass(category);
+	if(currentCategory && currentCategory != category) $(dMessage).addClass("new");
+	currentCategory = category;
 
 	// format message
 	message = message.replace("<", "&lt;"); // remove HTML tags.
@@ -19,10 +26,6 @@ function addMessage(message,_class){
 	dBody.className = "body";
 	dBody.innerHTML = message;
 	dMessage.appendChild(dBody);
-
-	var dClear = document.createElement("div");
-	dClear.className = "clear";
-	dMessage.appendChild(dClear);
 
 	$("#output").append(dMessage);
 

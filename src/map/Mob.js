@@ -218,6 +218,11 @@ Mob.prototype.race = new Race();
 Mob.prototype.class = new Class();
 
 /**
+ * This mob's player data.
+ */
+Mob.prototype.playerData = null;
+
+/**
  * This mob's experience level.
  * @type {!number}
  */

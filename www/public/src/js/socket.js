@@ -16,11 +16,8 @@ function configureSocket(socket){
 		addMessage("Disconnected!", "debug");
 	});
 
-	socket.on('message', function (message, timestamp) {
-		console.log(arguments);
-		addMessage(message, timestamp);
-		var escaped = message.replace(/\<.*?\>/g, "").replace(/\<br\/?\>/,"\r\n");
-		console.log(escaped);
+	socket.on('message', function (message, category, timestamp) {
+		addMessage(message, category, timestamp);
 	});
 
 	socket.on("_error", function(body){

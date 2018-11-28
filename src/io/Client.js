@@ -4,6 +4,7 @@ var EventEmitter = require("events");
 // local includes
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
+var MessageCategory = require("../core/MessageCategory");
 
 /**
  * Handles low level MUD client.
@@ -39,11 +40,19 @@ class Client extends EventEmitter {
 	}
 
 	/**
+	 * Sends a categorized message.
+	 * @param {string} message
+	 */
+	sendMessage(message, category){
+		if(this._socket) this._socket.emit("message", message, category, Date.now());
+	}
+
+	/**
 	 * Send a line of text to the client.
 	 * @param {string} line The line of text to send.
 	 */
 	sendLine(line){
-		if(this._socket) this._socket.emit("message", line, Date.now());
+		if(this._socket) this.sendMessage(line, MessageCategory.DEFAULT);
 	}
 
 	/**

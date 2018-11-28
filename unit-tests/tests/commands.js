@@ -33,7 +33,7 @@ describe("Command", function(){
     });
 
     it("OOC", function(done){
-        var ooc = new (require("../../data/command/OOC"))();
+        var ooc = new (require("../../data/command/OOC.1.js"))();
         player2.once("line", function(line){ // listen to see if the other player receives it
             var msg = _("%s OOC '%s'", player.mob.name, "hello");
             expect(line).is.equal(msg);

@@ -22,7 +22,14 @@ class Command{
     }
 }
 
+/**
+ * Regex rule for matching input to this command.
+ */
 Command.prototype.rule = null;
+
+/**
+ * Plain command syntax.
+ */
 Command.prototype.plain = null;
 
 /**
@@ -30,4 +37,4 @@ Command.prototype.plain = null;
  */
 Command.prototype.specificity = null;
 
-module.exports = Command;
+module.exports = {Command:Command, SPECIFICITY:{FIRST:100, LAST:-100}};
