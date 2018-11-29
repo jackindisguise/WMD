@@ -18,6 +18,7 @@ Object.prototype.__JSONWrite = function(key, value, json){
     if(this.constructor.prototype[key] == value) return; // don't save default values
     if(typeof value === "function") return; // don't save functions
     if(typeof value === "object") return; // ignore objects
+    if(typeof value === "array") return; // ignore arrays
     json[key] = value;
 }
 

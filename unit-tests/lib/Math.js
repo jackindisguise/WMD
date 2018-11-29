@@ -2,7 +2,7 @@
 var expect = require("chai").expect;
 
 // local includes
-require("../../../src/lib/Math");
+require("../../src/lib/Math");
 
 // MMath testing goes here!
 describe("Math", function(){

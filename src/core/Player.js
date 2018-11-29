@@ -5,6 +5,7 @@ var EventEmitter = require("events");
 var MUD, Database, Mob, Nanny;
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
+var MessageCategory = require("./MessageCategory");
 
 /**
  * Higher level abstraction between the client and the game.
@@ -12,9 +13,7 @@ var Logger = require("../util/Logger");
 class Player extends EventEmitter {
 	/**
 	 * Construct a player.
-	 * @param {Object} options Constructor options.
-	 * @param {Client} options.client The client to manage.
-	 * @param {Mob} options.mob The mob to manage.
+	 * @param {PlayerConstructorOptions} options Constructor options.
 	 */
 	constructor(options){
 		super();
@@ -54,34 +53,32 @@ class Player extends EventEmitter {
 		}
 	}
 
-	/**
-	 * Runs when a mob is connected to this Player.
-	 * @param {Mob} mob Mob connected to.
-	 */
-	login(){
+	joinChannels(){
+		for(var channel of Database.channels){
+			this.joinChannel(channel);
+		}
 	}
 
-	/**
-	 * Runs when a mob is disconnected from this Player.
-	 * @param {Mob} mob Mob disconnected from.
-	 */
-	logout(){
+	leaveChannels(){
+		// this is annoying and gross
+		var channel = this._channels[0];
+		while(channel) {
+			this.leaveChannel(channel);
+			channel = this._channels[0];
+		}
 	}
 
-	/**
-	 * Runs when a client is connected to this Player.
-	 * @param {Client} client Client connected to.
-	 */
-	join(){
-		var nanny = new Nanny({player:this});
-		nanny.login();
+	joinChannel(channel){
+		if(this._channels.indexOf(channel) != -1) return; // already in channel
+		this._channels.push(channel);
+		channel.add(this);
 	}
 
-	/**
-	 * Runs when a client is disconnected from this Player.
-	 * @param {Client} client Client disconnected from.
-	 */
-	leave(){
+	leaveChannel(channel){
+		var pos = this._channels.indexOf(channel);
+		if(pos == -1) return // not in channel
+		this._channels.splice(pos, 1);
+		channel.remove(this);
 	}
 
 	/**
@@ -128,7 +125,39 @@ class Player extends EventEmitter {
 	 * @param {string} line
 	 */
 	sendLine(line){
-		if(this._client) this._client.sendLine(line);
+		this.sendMessage(line, MessageCategory.DEFAULT);
+	}
+
+	/**
+	 * Runs when a mob is connected to this Player.
+	 * @param {Mob} mob Mob connected to.
+	 */
+	login(){
+		this.joinChannels();
+	}
+
+	/**
+	 * Runs when a mob is disconnected from this Player.
+	 * @param {Mob} mob Mob disconnected from.
+	 */
+	logout(){
+		this.leaveChannels();
+	}
+
+	/**
+	 * Runs when a client is connected to this Player.
+	 * @param {Client} client Client connected to.
+	 */
+	join(){
+		var nanny = new Nanny({player:this});
+		nanny.login();
+	}
+
+	/**
+	 * Runs when a client is disconnected from this Player.
+	 * @param {Client} client Client disconnected from.
+	 */
+	leave(){
 	}
 
 	/**
@@ -180,6 +209,13 @@ Player.prototype._callback = null;
 Player.prototype._channels = null;
 
 module.exports = Player;
+
+/**
+ * Sole valid argument for `new Player()`.
+ * @typedef {Object} PlayerConstructorOptions
+ * @property {Client} client The client to manage.
+ * @property {Mob} mob The mob to manage.
+ */
 
 // cyclical includes
 MUD = require("./MUD");

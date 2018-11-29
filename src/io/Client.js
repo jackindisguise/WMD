@@ -12,8 +12,7 @@ var MessageCategory = require("../core/MessageCategory");
 class Client extends EventEmitter {
 	/**
 	 * Construct a client.
-	 * @param {Object} options Constructor options.
-	 * @param {socket} options.socket A socket stream.
+	 * @param {ClientConstructorOptions} options Constructor options.
 	 */
 	constructor(options){
 		super();
@@ -23,6 +22,9 @@ class Client extends EventEmitter {
 		}
 	}
 
+	/**
+	 * Socket.IO socket ID.
+	 */
 	get id(){
 		return this._socket ? this._socket.id : null;
 	}
@@ -52,7 +54,7 @@ class Client extends EventEmitter {
 	 * @param {string} line The line of text to send.
 	 */
 	sendLine(line){
-		if(this._socket) this.sendMessage(line, MessageCategory.DEFAULT);
+		this.sendMessage(line, MessageCategory.DEFAULT);
 	}
 
 	/**
@@ -91,3 +93,9 @@ class Client extends EventEmitter {
 Client.prototype._socket = null;
 
 module.exports = Client;
+
+/**
+ * Sole valid argument for `new Client()`.
+ * @typedef {Object} ClientConstructorOptions
+ * @property {socket} socket A socket stream.
+ */

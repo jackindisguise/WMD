@@ -2,7 +2,7 @@
 var expect = require("chai").expect;
 
 // local includes
-require("../../../src/lib/Object");
+require("../../src/lib/Object");
 
 // testing
 class A{};

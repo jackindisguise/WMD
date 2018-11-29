@@ -1,7 +1,8 @@
 // local includes
+var _ = require("../../i18n");
 var MUD = require("../../src/core/MUD");
 var Command = require("../../src/core/Command");
-var _ = require("../../i18n");
+var MessageCategory = require("../../src/core/MessageCategory");
 
 class Who extends Command.Command{
     exec(mob){

@@ -1,9 +1,11 @@
+require("../start");
+
 // npm includes
 var expect = require("chai").expect;
 
 // local includes
-var Mob = require("../../../src/map/Mob");
-var Player = require("../../../src/core/Player");
+var Mob = require("../../src/map/Mob");
+var Player = require("../../src/core/Player");
 
 // testing
 describe("Player", function(){
@@ -12,6 +14,7 @@ describe("Player", function(){
 		var p = new Player({mob:mob});
 		expect(p.mob).is.equal(mob);
 		expect(mob.player).is.equal(p);
+		p.mob = null;
 		done();
 	});
 

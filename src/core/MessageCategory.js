@@ -1,9 +1,9 @@
 /**
  * Enum for message categories.
- * @enum {number}
+ * @enum {string}
  */
 var MessageCategory = module.exports = {
-    DEFAULT: "DEFAUT",
+    DEFAULT: "DEFAULT",
     WHISPER: "WHISPER",
     CHAT: "CHAT",
     SAY: "SAY",

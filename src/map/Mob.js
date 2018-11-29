@@ -4,12 +4,26 @@ var Movable = require("./Movable");
 var Race = require("../core/Race");
 var Class = require("../core/Class");
 var Database = require("../core/Database");
+var PlayerData = require("../core/PlayerData");
+var MessageCategory = require("../../src/core/MessageCategory");
 
 /**
  * Represents an animate creature on the map.
  * @extends Movable
  */
 class Mob extends Movable{
+	/**
+	 * Construct a Mob.
+	 * @param {MobConstructorOptions} options 
+	 */
+	constructor(options){
+		super(options);
+
+		if(options){
+			if(options.isCharacter) this.playerData = new PlayerData();
+		}
+	}
+
 	get strength(){
 		var strength = 0;
 		strength += this.race.getStrengthByLevel(this.level);
@@ -192,9 +206,29 @@ class Mob extends Movable{
 	logout(){
 	}
 
+	/**
+	 * Is this mob acting in the role of a player's character?
+	 * @returns {boolean}
+	 */
+	isCharacter(){
+		return this.playerData ? true : false;
+	}
+
+	/**
+	 * Shortcut for `player.sendMessage(message, category)`.
+	 * @param {string} message 
+	 * @param {MessageCategory} category
+	 */
+	sendMessage(message, category){
+		if(this.player) this.player.sendMessage(message, category);
+	}
+
+	/**
+	 * Shortcut for `player.sendLine(line)`.
+	 * @param {string} line 
+	 */
 	sendLine(line){
-		if(!this.player) return;
-		this.player.sendLine(line);
+		this.sendMessage(line, MessageCategory.DEFAULT);
 	}
 }
 
@@ -204,6 +238,11 @@ class Mob extends Movable{
  * @type {?Player}
  */
 Mob.prototype._player = null;
+
+/**
+ * This mob's player data.
+ */
+Mob.prototype.playerData = null;
 
 /**
  * This mob's race.
@@ -216,11 +255,6 @@ Mob.prototype.race = new Race();
  * @type {?Class}
  */
 Mob.prototype.class = new Class();
-
-/**
- * This mob's player data.
- */
-Mob.prototype.playerData = null;
 
 /**
  * This mob's experience level.
@@ -243,3 +277,10 @@ Mob.prototype.display = "Mob";
 module.exports = Mob;
 
 Player = require("../core/Player");
+
+/**
+ * Sole valid argument for `new Mob()`.
+ * @typedef {Object} MobConstructorOptions
+ * @property {MapObject} loc Location to move to.
+ * @property {boolean} isCharacter Is this mob going to be used for a player's character?
+ */

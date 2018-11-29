@@ -3,10 +3,12 @@ var fs = require("fs");
 
 // local includes
 require("../lib/Object");
-var Race = require("./Race");
-var Class = require("./Class");
+require("../lib/Array");
 var Logger = require("../util/Logger");
 var _ = require("../../i18n");
+var Race = require("./Race");
+var Class = require("./Class");
+var Channel = require("../core/Channel");
 
 // local
 var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
@@ -14,6 +16,7 @@ var _motd = fs.readFileSync("./data/motd.txt", "utf8");
 var _races = [];
 var _classes = [];
 var _commands = [];
+var _channels = [];
 
 // generic namespace
 class Database{
@@ -31,6 +34,10 @@ class Database{
 
     static get classes(){
         return _classes;
+    }
+
+    static get channels(){
+        return _channels;
     }
 
     /**
@@ -150,6 +157,31 @@ class Database{
         })
     }
 
+    static getChannelByKeywords(keywords){
+        return Array.search(keywords);
+    }
+
+    static getChannelByID(id){
+        for(var channel of _channels){
+            if(channel.id == id) return channel;
+        }
+    }
+
+    static loadChannels(callback){
+        Logger.info(_("Loading channels..."));
+        fs.readdir("./data/channel", function(err, files){
+            for(var file of files){
+                var _channel = require("../../data/channel/"+file);
+                var channel = new Channel();
+                channel.__fromJSON(_channel);
+                _channels.push(channel);
+                Logger.info(_("Loaded channel '%s'", channel.name));
+            }
+
+            callback();
+        });
+    }
+
     /**
      * Load all data into database.
      * Calls callback at the end.
@@ -159,7 +191,7 @@ class Database{
         Logger.info(_("Loading database..."));
 
         // specify loaders in the order they should be run
-        var loaders = [Database.loadRaces, Database.loadClasses, Database.loadCommands];
+        var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands];
 
         // create a "loader iterator"
         var i = 0;

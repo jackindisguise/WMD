@@ -1,3 +1,6 @@
+// mocha order
+require("./start");
+
 // node includes
 var util = require("util");
 
@@ -7,18 +10,12 @@ var http = require("http");
 var io = require("socket.io-client");
 
 // local includes
-var _ = require("../../i18n");
-var _package = require("../../package.json");
-var MUD = require("../../src/core/MUD");
-var Database = require("../../src/core/Database");
+var _ = require("../i18n");
+var _package = require("../package.json");
+var MUD = require("../src/core/MUD");
+var Database = require("../src/core/Database");
 
 describe("Net", function(){
-    describe("Start", function(){
-        it("start Express HTTP server", function(done){
-            MUD.start(8000, done);
-		});
-	});
-
 	describe("PUG", function(){
         it("PUG frontend received properly", function(done){
             // create a connection
@@ -117,7 +114,7 @@ describe("Net", function(){
                         break;
 
                     case 9:
-                        expect(message).to.equal(_("%s OOC '%s'", "Judas", "test"));
+                        expect(message).to.equal(_("You OOC: %s", "test"));
                         player.emit("command", "blah");
                         break;
 
@@ -135,13 +132,6 @@ describe("Net", function(){
 		it("disconnect player", function(done){
 			player.close();
 			expect(player.disconnected).to.equal(true);
-			done();
-		});
-	});
-
-	describe("Stop", function(){
-		it("stopping Express HTTP server", function(done){
-			MUD.stop();
 			done();
 		});
 	});

@@ -30,5 +30,10 @@
 	"%s%s %s %s %s": "%s%s %s %s %s",
 	"%s OOC '%s'": "%s OOC '%s'",
 	"Do what, now?": "Do what, now?",
-	"What do you want to say?": "What do you want to say?"
+	"What do you want to say?": "What do you want to say?",
+	"Loading channels...": "Loading channels...",
+	"Loaded channel '%s'": "Loaded channel '%s'",
+	"You OOC %s": "You OOC %s",
+	"You OOC: %s": "You OOC: %s",
+	"You OOC: '%s'": "You OOC: '%s'"
 }

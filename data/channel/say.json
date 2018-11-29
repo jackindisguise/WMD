@@ -1,0 +1,10 @@
+{
+    "id":0,
+    "keywords":"say",
+    "name":"say",
+    "default":true,
+    "format":{
+        "firstPerson":"You say: %s",
+        "thirdPerson":"%s says: %s"
+    }
+}

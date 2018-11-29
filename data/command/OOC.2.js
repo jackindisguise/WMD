@@ -1,7 +1,6 @@
 // local includes
-var MUD = require("../../src/core/MUD");
-var Command = require("../../src/core/Command");
 var _ = require("../../i18n");
+var Command = require("../../src/core/Command");
 
 class OOC extends Command.Command{
     exec(mob){

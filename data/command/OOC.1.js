@@ -1,13 +1,18 @@
 // local includes
-var MUD = require("../../src/core/MUD");
 var Command = require("../../src/core/Command");
-var _ = require("../../i18n");
+var Database = require("../../src/core/Database");
+var channel = Database.getChannelByID(1);
 
 class OOC extends Command.Command{
     exec(mob, input){
-        for(var player of MUD.players){
-            player.sendLine(_("%s OOC '%s'", mob.name, input));
+        if(!mob.player) return;
+
+        if(!channel.isParticipating(mob.player)){
+            mob.sendLine("You'll have to join the channel first.");
+            return;
         }
+
+        channel.chat(mob.player, input);
     }
 }
 

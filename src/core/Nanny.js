@@ -12,6 +12,10 @@ var Logger = require("../util/Logger");
  * Used for transitioning a client into a proper playable state.
  */
 class Nanny{
+    /**
+     * Construct a Nanny.
+     * @param {NannyConstructorOptions} options 
+     */
     constructor(options){
         this.player = options.player;
     }
@@ -114,6 +118,12 @@ Nanny.prototype.race = null;
 Nanny.prototype.class = null;
 
 module.exports = Nanny;
+
+/**
+ * Sole valid argument for `new Nanny()`.
+ * @typedef {Object} NannyConstructorOptions
+ * @property {Player} player The player to begin baby sitting.
+ */
 
 // cyclical include
 Database = require("./Database");

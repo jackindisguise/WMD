@@ -8,11 +8,7 @@ var MapObject = require("./MapObject");
 class Tile extends MapObject{
 	/**
 	 * Construct a tile.
-	 * @param {Object} options Constructor options.
-	 * @param {Map} options.map The map we're a part of.
-	 * @param {number} options.x The x location we inhabit. Can only be set at creation.
-	 * @param {number} options.y The y location we inhabit. Can only be set at creation.
-	 * @param {number} options.z The z location we inhabit. Can only be set at creation.
+	 * @param {TileConstructorOptions} options Constructor options.
 	 */
 	constructor(options){
 		super();
@@ -81,3 +77,12 @@ Tile.prototype.keywords = "tile";
 Tile.prototype.display = "Tile";
 
 module.exports = Tile;
+
+/**
+ * Sole valid argument for `new Tile()`.
+ * @typedef {Object} TileConstructorOptions
+ * @property {Map} map The map we're a part of.
+ * @property {number} x The x location we inhabit. Can only be set at creation.
+ * @property {number} y The y location we inhabit. Can only be set at creation.
+ * @property {number} z The z location we inhabit. Can only be set at creation.
+ */

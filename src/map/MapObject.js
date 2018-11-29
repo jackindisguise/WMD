@@ -4,8 +4,7 @@
 class MapObject{
 	/**
 	 * Construct a MapObject.
-	 * @param {Object} options Constructor options.
-	 * @param {MapObject} options.loc Location to move to.
+	 * @param {MapObjectConstructorOptions} options
 	 */
 	constructor(options){
 		this._contents = [];
@@ -147,3 +146,9 @@ MapObject.prototype.display = "MapObject";
 MapObject.prototype.description = null;
 
 module.exports = MapObject;
+
+/**
+ * Sole valid argument for `new MapObject()`.
+ * @typedef {Object} MapObjectConstructorOptions
+ * @property {MapObject} loc Location to move to.
+ */

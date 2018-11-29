@@ -4,10 +4,7 @@ var Tile = require("./Tile");
 class Map{
 	/**
 	 * Construct a map.
-	 * @param {Object} options Constructor options.
-	 * @param {number} options.width
-	 * @param {number} options.height
-	 * @param {number} options.levels
+	 * @param {MapConstructorOptions} options Constructor options.
 	 */
 	constructor(options){
 		// keeping track of all objects
@@ -21,14 +18,6 @@ class Map{
 			}
 		}
 	}
-
-	/**
-	 * Returned by `Map.size`.
-	 * @typedef {Object} MapSize
-	 * @property {number} MapSize.width
-	 * @property {number} MapSize.height
-	 * @property {number} MapSize.levels
-	 */
 
 	/** @return {MapSize} */
 	get size(){
@@ -121,3 +110,19 @@ Map.prototype._tiles = null;
 Map.prototype._objects = null;
 
 module.exports = Map;
+
+/**
+ * Sole valid argument for `new Map()`.
+ * @typedef {Object} MapConstructorOptions
+ * @property {number} width
+ * @property {number} height
+ * @property {number} levels
+ */
+
+/**
+ * Returned by `Map.size`.
+ * @typedef {Object} MapSize
+ * @property {number} width
+ * @property {number} height
+ * @property {number} levels
+ */
