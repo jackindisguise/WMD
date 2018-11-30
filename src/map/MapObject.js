@@ -14,6 +14,10 @@ class MapObject{
 		}
 	}
 
+	toString(){
+		return "{MapObject}";
+	}
+
 	get contents(){
 		return this._contents;
 	}

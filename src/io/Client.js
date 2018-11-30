@@ -88,6 +88,10 @@ class Client extends EventEmitter {
 		this.emit("disconnect");
 		this._socket = null;
 	}
+
+	quit(){
+		this._socket.disconnect(true);
+	}
 }
 
 Client.prototype._socket = null;

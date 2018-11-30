@@ -41,6 +41,17 @@ class MUD extends EventEmitter{
 	}
 
 	/**
+	 * Retreive a player based on its keywords.
+	 * @param {string} name 
+	 */
+	getPlayerByName(name){
+		for(var player of this._players){
+			if(!player.mob) continue;
+			if(player.mob.matchKeywords(name)) return;
+		}
+	}
+
+	/**
 	 * Start any vital MUD processes, including the server.
 	 * @param {int} port
 	 * @param {function} callback

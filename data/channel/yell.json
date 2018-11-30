@@ -1,0 +1,10 @@
+{
+    "id":1,
+    "keywords":"yell",
+    "name":"yell",
+    "default":true,
+    "format":{
+        "firstPerson":"You yell: %s",
+        "thirdPerson":"%s yell: %s"
+    }
+}

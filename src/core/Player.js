@@ -1,5 +1,6 @@
 // node include
 var EventEmitter = require("events");
+var util = require("util");
 
 // local includes
 var MUD, Database, Mob, Nanny;
@@ -22,6 +23,12 @@ class Player extends EventEmitter {
 			if(options.client) this.connect(options.client);
 			if(options.mob) this.mob = options.mob;
 		}
+	}
+
+	toString(){
+		if(this.mob) return util.format("{Player@%s}", this.mob.name);
+		if(this.socketID) return util.format("{Player#%s}", this.socketID);
+		return "{Player}";
 	}
 
 	get socketID(){
@@ -199,6 +206,11 @@ class Player extends EventEmitter {
 		 * @event Player#disconnect
 		 */
 		this.emit("disconnect");
+	}
+
+	quit(){
+		this.sendLine("Later, skater.");
+		this._client.quit();
 	}
 }
 

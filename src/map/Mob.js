@@ -1,3 +1,6 @@
+// node includes
+var util = require("util");
+
 // local includes
 var Player;
 var Movable = require("./Movable");
@@ -22,6 +25,11 @@ class Mob extends Movable{
 		if(options){
 			if(options.isCharacter) this.playerData = new PlayerData();
 		}
+	}
+
+	toString(){
+		if(this.name) return this.name;
+		return util.format("{Mob@%s}", Movable.toString.call(this));
 	}
 
 	get strength(){

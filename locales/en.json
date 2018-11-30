@@ -36,5 +36,6 @@
 	"You OOC %s": "You OOC %s",
 	"You OOC: %s": "You OOC: %s",
 	"You OOC: '%s'": "You OOC: '%s'",
-	"%s OOC: %s": "%s OOC: %s"
+	"%s OOC: %s": "%s OOC: %s",
+	"That isn't a valid class.": "That isn't a valid class."
 }

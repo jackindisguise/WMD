@@ -1,3 +1,7 @@
+// node includes
+var util = require("util");
+
+// local includes
 var MapObject = require("./MapObject");
 var Tile;
 
@@ -19,6 +23,10 @@ class Movable extends MapObject{
 	get z(){
 		if(this.loc instanceof Tile)
 			return this.loc.z;
+	}
+
+	toString(){
+		return util.format("{Movable<%d,%d,%d>}", this.x, this.y, this.z)
 	}
 
 	/**

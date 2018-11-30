@@ -80,10 +80,10 @@ describe("Command", function(){
 
     it("input: quit", function(done){
         player.once("message", function(message, category){
-            expect(message).is.equal("Players Connected: 2\r\n[Player]\r\n[Other]");
+            expect(message).is.equal("Later, skater.");
             done();
         });
 
-        player.emit("quit");
+        player.emit("command", "quit");
     })
 });
