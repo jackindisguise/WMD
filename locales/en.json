@@ -35,5 +35,6 @@
 	"Loaded channel '%s'": "Loaded channel '%s'",
 	"You OOC %s": "You OOC %s",
 	"You OOC: %s": "You OOC: %s",
-	"You OOC: '%s'": "You OOC: '%s'"
+	"You OOC: '%s'": "You OOC: '%s'",
+	"%s OOC: %s": "%s OOC: %s"
 }

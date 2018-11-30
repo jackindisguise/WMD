@@ -28,7 +28,7 @@ class Channel extends EventEmitter{
         for(var target of this._participants){
             if(filter && !filter(speaker, target)) continue // filtered out this target
             if(target == speaker) target.sendMessage(util.format(this.format.firstPerson, message));
-            else target.sendMessage(util.format(this.format.firstPerson, speaker.mob.name ? speaker.mob.name : speaker.socketID, message));
+            else target.sendMessage(util.format(this.format.thirdPerson, speaker.mob.name ? speaker.mob.name : speaker.socketID, message));
         }
     }
 
@@ -57,11 +57,10 @@ Channel.prototype.default = false;
 
 /**
  * The message format for this channel.
- * @type {ActFormat}
  */
 Channel.prototype.format = {
-    firstPerson: "You: $m",
-    thirdPerson: "$n: $m"
+    firstPerson: "You: %s",
+    thirdPerson: "%s: %s"
 }
 
 /**
