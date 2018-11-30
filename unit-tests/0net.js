@@ -110,15 +110,10 @@ describe("Net", function(){
 
                     case 8:
                         expect(message).to.equal(_("Welcome to the game, %s the %s %s!", sPlayer.mob.name, sPlayer.mob.race.name, sPlayer.mob.class.name));
-                        player.emit("command", "ooc test");
-                        break;
-
-                    case 9:
-                        expect(message).to.equal(_("You OOC: %s", "test"));
                         player.emit("command", "blah");
                         break;
 
-                     case 10:
+                     case 9:
                         expect(message).to.equal(_("Do what, now?"));
                         done();
                         break;
