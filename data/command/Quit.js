@@ -9,7 +9,7 @@ class Quit extends Command.Command{
     }
 }
 
-Quit.prototype.rule = /^(?:q|qu|qui|quit)/;
+Quit.prototype.rule = /^(?:q|qu|qui|quit)$/;
 Quit.prototype.plain = "quit";
 Quit.prototype.specificity = Command.SPECIFICITY.FIRST;
 

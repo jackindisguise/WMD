@@ -37,5 +37,12 @@
 	"You OOC: %s": "You OOC: %s",
 	"You OOC: '%s'": "You OOC: '%s'",
 	"%s OOC: %s": "%s OOC: %s",
-	"That isn't a valid class.": "That isn't a valid class."
+	"That isn't a valid class.": "That isn't a valid class.",
+	"Whisper what to whom?": "Whisper what to whom?",
+	"Sure, but what do you want to whisper them?": "Sure, but what do you want to whisper them?",
+	"There's nobody with that name arund.": "There's nobody with that name arund.",
+	"%s tells you: %s": "%s tells you: %s",
+	"You tell %s: %s": "You tell %s: %s",
+	"%s whispers to you: %s": "%s whispers to you: %s",
+	"You whisper to %s: %s": "You whisper to %s: %s"
 }

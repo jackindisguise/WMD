@@ -52,7 +52,7 @@ describe("Command", function(){
     });
 
     it("input: ooc", function(done){
-        player.once("message", function(message, category){ // listen to see if the other player receives it
+        player.once("message", function(message, category){
             expect(message).is.equal(_("What do you want to say?"));
             done();
         });
@@ -61,12 +61,64 @@ describe("Command", function(){
     });
 
     it("input: ooc hello", function(done){
-        other.once("message", function(message, category){ // listen to see if the other player receives it
+        var c=0;
+        function d(){
+            c--;
+            if(c == 0) done();
+        }
+
+        c++;
+        player.once("message", function(message, category){
+            expect(message).is.equal("You OOC: hello");
+            d();
+        });
+
+        c++;
+        other.once("message", function(message, category){
             expect(message).is.equal("Player OOC: hello");
-            done();
+            d();
         });
 
         player.emit("command", "ooc hello");
+    });
+
+    it("input: whisper", function(done){
+        player.once("message", function(message, category){
+            expect(message).is.equal(_("Whisper what to whom?"));
+            done();
+        });
+
+        player.emit("command", "whisper");
+    });
+
+    it("input: whisper other", function(done){
+        player.once("message", function(message, category){
+            expect(message).is.equal(_("Sure, but what do you want to whisper them?"));
+            done();
+        });
+
+        player.emit("command", "whisper other");
+    });
+
+    it("input: whisper other hello", function(done){
+        var c=0;
+        function d(){
+            c--;
+            if(c == 0) done();
+        }
+
+        c++;
+        player.once("message", function(message, category){
+            expect(message).is.equal("You whisper to Other: hello");
+            d();
+        });
+
+        other.once("message", function(message, category){
+            expect(message).is.equal("Player whispers to you: hello");
+            d();
+        })
+
+        player.emit("command", "whisper other hello");
     });
 
     it("input: who", function(done){
@@ -85,5 +137,5 @@ describe("Command", function(){
         });
 
         player.emit("command", "quit");
-    })
+    });
 });

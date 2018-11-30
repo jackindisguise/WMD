@@ -2,6 +2,9 @@
 var EventEmitter = require("events");
 var util = require("util");
 
+// local includes
+var MessageCategory = require("./MessageCategory");
+
 /**
  * Controls communication avenues.
  */
@@ -27,8 +30,8 @@ class Channel extends EventEmitter{
     chat(speaker, message, filter){
         for(var target of this._participants){
             if(filter && !filter(speaker, target)) continue // filtered out this target
-            if(target == speaker) target.sendMessage(util.format(this.format.firstPerson, message));
-            else target.sendMessage(util.format(this.format.thirdPerson, speaker.mob.name ? speaker.mob.name : speaker.socketID, message));
+            if(target == speaker) target.sendMessage(util.format(this.format.firstPerson, message), MessageCategory.CHAT);
+            else target.sendMessage(util.format(this.format.thirdPerson, speaker.mob.name ? speaker.mob.name : speaker.socketID, message), MessageCategory.CHAT);
         }
     }
 

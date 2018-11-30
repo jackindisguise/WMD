@@ -47,7 +47,7 @@ class MUD extends EventEmitter{
 	getPlayerByName(name){
 		for(var player of this._players){
 			if(!player.mob) continue;
-			if(player.mob.matchKeywords(name)) return;
+			if(player.mob.matchKeywords(name)) return player;
 		}
 	}
 

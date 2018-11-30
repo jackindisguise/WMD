@@ -47,12 +47,23 @@ class Act{
     }
 
     /**
-     * Filters only mobs in the same room.
+     * Filters out all but mobs in the same room.
      * @param {Mob} actor 
      * @param {Mob} target 
+     * @param {Object} fields
      */
-    static filterSameRoom(actor, target){
+    static filterSameRoom(actor, target, fields){
         return actor.loc == target.loc;
+    }
+
+    /**
+     * Filters out all but the actor and the victim.
+     * @param {Mob} actor 
+     * @param {Mob} target 
+     * @param {Object} fields
+     */
+    static filterActorVictimOnly(actor, target, fields){
+        return target == actor ? true : target == fields.victim ? true : false;
     }
 }
 
