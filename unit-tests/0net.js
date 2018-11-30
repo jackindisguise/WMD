@@ -12,8 +12,8 @@ var io = require("socket.io-client");
 // local includes
 var _ = require("../i18n");
 var _package = require("../package.json");
-var MUD = require("../src/core/MUD");
-var Database = require("../src/core/Database");
+var MUD = require("../src/mud/core/MUD");
+var Database = require("../src/mud/core/Database");
 
 describe("Net", function(){
 	describe("PUG", function(){

@@ -4,9 +4,9 @@ var util = require("util");
 
 // local includes
 var MUD, Database, Mob, Nanny;
-var _ = require("../../i18n");
-var Logger = require("../util/Logger");
-var MessageCategory = require("./MessageCategory");
+var _ = require("../../../i18n");
+var Logger = require("../../util/Logger");
+var MessageCategory = require("../MessageCategory");
 
 /**
  * Higher level abstraction between the client and the game.
@@ -232,5 +232,5 @@ module.exports = Player;
 // cyclical includes
 MUD = require("./MUD");
 Database = require("./Database");
-Mob = require("../map/Mob");
-Nanny = require("./Nanny");
+Mob = require("../../map/Mob");
+Nanny = require("../Nanny");

@@ -1,7 +1,7 @@
 // local includes
 var _ = require("../../i18n");
-var MUD = require("../../src/core/MUD");
-var Command = require("../../src/core/Command");
+var MUD = require("../../src/mud/core/MUD");
+var Command = require("../../src/mud/Command");
 
 class Who extends Command.Command{
     exec(mob){

@@ -3,12 +3,12 @@ var EventEmitter = require("events");
 var fs = require("fs");
 
 // local includes
-var _ = require("../../i18n");
-var Logger = require("../util/Logger");
+var _ = require("../../../i18n");
+var Logger = require("../../util/Logger");
 var Database = require("./Database");
-var Server = require("../io/Server");
+var Server = require("../../io/Server");
 var Player = require("./Player");
-var _package = require("../../package.json");
+var _package = require("../../../package.json");
 
 /**
  * MUD handler.

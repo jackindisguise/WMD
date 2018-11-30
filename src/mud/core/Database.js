@@ -2,12 +2,12 @@
 var fs = require("fs");
 
 // local includes
-require("../lib/Object");
-require("../lib/Array");
-var _ = require("../../i18n");
-var Logger = require("../util/Logger");
-var Race = require("./Race");
-var Class = require("./Class");
+require("../../lib/Object");
+require("../../lib/Array");
+var _ = require("../../../i18n");
+var Logger = require("../../util/Logger");
+var Race = require("../Race");
+var Class = require("../Class");
 
 // local
 var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
@@ -144,7 +144,7 @@ class Database{
         Logger.info(_("Loading commands..."));
         fs.readdir("./data/command", function(err, files){
             for(var file of files){
-                var _class = require("../../data/command/"+file);
+                var _class = require("../../../data/command/"+file);
                 var command = new _class();
                 if(!command.rule) continue;
                 _commands.push(command);

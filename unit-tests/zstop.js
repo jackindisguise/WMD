@@ -5,7 +5,7 @@ require("./start");
 var expect = require("chai").expect;
 
 // local includes
-var MUD = require("../src/core/MUD");
+var MUD = require("../src/mud/core/MUD");
 
 // testing goes here
 describe("<<< Stop", function(){

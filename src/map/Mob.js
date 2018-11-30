@@ -4,11 +4,11 @@ var util = require("util");
 // local includes
 var Player;
 var Movable = require("./Movable");
-var Race = require("../core/Race");
-var Class = require("../core/Class");
-var Database = require("../core/Database");
-var PlayerData = require("../core/PlayerData");
-var MessageCategory = require("../../src/core/MessageCategory");
+var Race = require("../mud/Race");
+var Class = require("../mud/Class");
+var Database = require("../mud/core/Database");
+var PlayerData = require("../mud/core/PlayerData");
+var MessageCategory = require("../mud/MessageCategory");
 
 /**
  * Represents an animate creature on the map.
@@ -288,7 +288,7 @@ Mob.prototype.display = "Mob";
 
 module.exports = Mob;
 
-Player = require("../core/Player");
+Player = require("../mud/core/Player");
 
 /**
  * Sole valid argument for `new Mob()`.

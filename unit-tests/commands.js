@@ -11,9 +11,9 @@ var io = require("socket.io-client");
 
 // local includes
 var _ = require("../i18n");
-var MUD = require("../src/core/MUD");
-var Database = require("../src/core/Database");
-var Player = require("../src/core/Player");
+var MUD = require("../src/mud/core/MUD");
+var Database = require("../src/mud/core/Database");
+var Player = require("../src/mud/core/Player");
 var Mob = require("../src/map/Mob");
 var Client = require("../src/io/Client");
 

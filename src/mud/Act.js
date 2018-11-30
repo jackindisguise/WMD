@@ -1,4 +1,5 @@
 // local includes
+var Mob, Player;
 var MessageCategory = require("./MessageCategory");
 
 // stuff
@@ -15,7 +16,7 @@ class Act{
     static act(actor, format, targets, fields, filter){
         if(targets.indexOf(this) == -1) targets.push(actor);
         for(var target of targets){
-            if(filter && !filter(this, target)) continue; // target filtered out
+            if(filter && actor instanceof Mob && target instanceof Mob && !filter(actor, fields, target)) continue; // target filtered out
 
             // process string
             var processed;
@@ -29,19 +30,19 @@ class Act{
 
     /**
      * Replace field codes with field values.
-     * @param {string} string 
+     * @param {string} string
+     * @param {Mob} actor
      * @param {Object} fields 
      */
     static fieldCodeReplace(string, actor, fields){
         return string.replace(/\$(.)/g, function(full, code){
             switch(code){
-                case "n": return actor.name; break;
-                case "N": return fields.victim ? fields.victim.name : "(unknown)"; break;
-                case "m": return fields.message ? fields.message : "(unknown)"; break;
+                case "n": return String(actor);
+                case "N": return fields.victim ? String(fields.victim) : "(unknown)";
+                case "m": return fields.message ? fields.message : "(unknown)";
                 default:
                     Logger.error(_("Bad act code: $%s", code));
                     return "???";
-                    break;
             }
         });
     }
@@ -68,3 +69,7 @@ class Act{
 }
 
 module.exports = Act;
+
+// cyclical includes
+Player = require("./core/Player");
+Mob = require("../map/Mob");

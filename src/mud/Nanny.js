@@ -126,6 +126,6 @@ module.exports = Nanny;
  */
 
 // cyclical include
-Database = require("./Database");
-MUD = require("./MUD");
+Database = require("./core/Database");
+MUD = require("./core/MUD");
 Mob = require("../map/Mob");
