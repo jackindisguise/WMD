@@ -69,9 +69,9 @@ describe("MapObject", function(){
 
     it("JSON test", function(done){
         var object = new MapObject();
-        object.display = "THE JEWS DID 9/11";
+        object.display = "not racist";
         var json = object.__toJSON();
-        expect(JSON.stringify(json)).to.equal('{"display":"THE JEWS DID 9/11"}');
+        expect(JSON.stringify(json)).to.equal('{"display":"not racist"}');
         done();
     });
 })

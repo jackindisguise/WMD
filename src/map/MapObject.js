@@ -50,9 +50,47 @@ class MapObject{
 	}
 
 	__JSONWrite(key, value, json){
-		if(key == "_loc") return; // ignore loc
-		else if(key == "_contents") return; // ignore contents
-		else Object.__JSONWrite.call(this, key, value, json);
+		switch(key){
+			// no loc
+			case "_loc": return;
+
+			// convert contents list to JSON
+			case "_contents":
+				break;
+				if(!value.length) return;
+
+				// convert inventory to JSON
+				var converted = [];
+				for(var object of value){
+					if(object instanceof MapObject) converted.push(object.__toJSON());
+				}
+		
+				if(converted.length) json.contents = converted;
+				break;
+
+			// write value generically
+			default:
+				Object.__JSONWrite.call(this, key, value, json);
+				break;
+		}
+	}
+
+	__JSONRead(key, value){
+		switch(key){
+			// load contents
+			case "contents":
+			/*	// something like this;
+				// load objects
+				var loaded = [];
+				for(var json of value){
+					var obj = Database.loadObject(json);
+					if(obj) loaded.push(obj);
+				}*/
+				break;
+
+			// read value generically
+			default: Object.__JSONRead.call(this, key, value); break;
+		}
 	}
 
 	/**

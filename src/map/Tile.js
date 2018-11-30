@@ -1,3 +1,6 @@
+// node includes
+var util = require("util");
+
 // local includes
 var MapObject = require("./MapObject");
 
@@ -25,6 +28,10 @@ class Tile extends MapObject{
 				this._z = options.z;
 			}
 		}
+	}
+
+	toString(){
+		return util.format("{Tile<%d,%d,%d>}", this.x, this.y, this.z)
 	}
 
 	get map(){

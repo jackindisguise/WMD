@@ -189,15 +189,19 @@ class Mob extends Movable{
 	}
 
 	__JSONWrite(key, value, json){
-		if(key == "race") json.race = value.id;
-		else if(key == "class") json.class = value.id;
-		else Movable.__JSONWrite.call(this, key, value, json);
+		switch(key){
+			case "race": json.race = value.id; break;
+			case "class": json.class = value.id; break;
+			default: Movable.__JSONWrite.call(this, key, value, json); break;
+		}
 	}
 
 	__JSONRead(key, value){
-		if(key == "race") this.race = Database.getRaceByID(value);
-		else if(key == "class") this.class = Database.getClassByID(value);
-		else Movable.__JSONRead.call(this, key, value);
+		switch(key){
+			case "race": this.race = Database.getRaceByID(value); break;
+			case "class": this.class = Database.getClassByID(value); break;
+			default: Movable.__JSONRead.call(this, key, value); break;
+		}
 	}
 
 	/**
