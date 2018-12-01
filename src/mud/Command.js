@@ -1,5 +1,6 @@
+// local includes
 var Logger = require("../util/Logger");
-var Mob = require("../map/Mob");
+var Mob = require("./map/Mob");
 
 class Command{
     // match to input

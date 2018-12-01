@@ -1,11 +1,11 @@
-require("../start");
+require("../../start");
 
 // npm includes
 var expect = require("chai").expect;
 
 // local includes
-var Mob = require("../../src/map/Mob");
-var Player = require("../../src/mud/core/Player");
+var Mob = require("../../../src/mud/map/Mob");
+var Player = require("../../../src/mud/core/Player");
 
 // testing
 describe("Player", function(){

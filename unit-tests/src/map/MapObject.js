@@ -2,9 +2,9 @@
 var expect = require("chai").expect;
 
 // local includes
-require("../../src/lib/Object");
-var Map = require("../../src/map/Map");
-var MapObject = require("../../src/map/MapObject");
+require("../../../src/lib/Object");
+var Map = require("../../../src/mud/map/Map");
+var MapObject = require("../../../src/mud/map/MapObject");
 
 // testing
 describe("MapObject", function(){

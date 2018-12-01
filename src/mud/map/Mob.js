@@ -4,11 +4,11 @@ var util = require("util");
 // local includes
 var Player;
 var Movable = require("./Movable");
-var Race = require("../mud/Race");
-var Class = require("../mud/Class");
-var Database = require("../mud/core/Database");
-var PlayerData = require("../mud/core/PlayerData");
-var MessageCategory = require("../mud/MessageCategory");
+var Race = require("../Race");
+var Class = require("../Class");
+var Database = require("../core/Database");
+var PlayerData = require("../core/PlayerData");
+var MessageCategory = require("../MessageCategory");
 
 /**
  * Represents an animate creature on the map.
@@ -21,6 +21,7 @@ class Mob extends Movable{
 	 */
 	constructor(options){
 		super(options);
+		this._channels = [];
 
 		if(options){
 			if(options.isCharacter) this.playerData = new PlayerData();
@@ -204,11 +205,40 @@ class Mob extends Movable{
 		}
 	}
 
+	joinChannels(){
+		for(var channel of Database.channels){
+			this.joinChannel(channel);
+		}
+	}
+
+	leaveChannels(){
+		// this is annoying and gross
+		var channel = this._channels[0];
+		while(channel) {
+			this.leaveChannel(channel);
+			channel = this._channels[0];
+		}
+	}
+
+	joinChannel(channel){
+		if(this._channels.indexOf(channel) != -1) return; // already in channel
+		this._channels.push(channel);
+		channel.add(this);
+	}
+
+	leaveChannel(channel){
+		var pos = this._channels.indexOf(channel);
+		if(pos == -1) return // not in channel
+		this._channels.splice(pos, 1);
+		channel.remove(this);
+	}
+
 	/**
 	 * Runs when a Player is connected to this Mob.
 	 * @param {Player} player Player connected to.
 	 */
 	login(){
+		this.joinChannels();
 	}
 
 	/**
@@ -216,6 +246,7 @@ class Mob extends Movable{
 	 * @param {Player} player Player disconnected from.
 	 */
 	logout(){
+		this.leaveChannels();
 	}
 
 	/**
@@ -243,6 +274,8 @@ class Mob extends Movable{
 		this.sendMessage(line, MessageCategory.DEFAULT);
 	}
 }
+
+Mob.prototype._channels = null;
 
 /**
  * The player currently managing us.
@@ -288,7 +321,7 @@ Mob.prototype.display = "Mob";
 
 module.exports = Mob;
 
-Player = require("../mud/core/Player");
+Player = require("../core/Player");
 
 /**
  * Sole valid argument for `new Mob()`.

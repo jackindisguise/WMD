@@ -1,5 +1,5 @@
 // local includes
-var _package = require("../../package.json");
+var _package = require("../../../package.json");
 
 // npm includes
 var express = require("express");
@@ -17,7 +17,7 @@ var app = express();
 app.use(session);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../../www/public')));
+app.use(express.static(path.join(__dirname, '../../../www/public')));
 app.use(cookie());
 app.set("view engine", "pug");
 app.set("views", "./www/pug/page");

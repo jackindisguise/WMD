@@ -1,6 +1,6 @@
 // local includes
 var config = require("./config.json");
-var MUD = require("./src/core/MUD");
+var MUD = require("./src/mud/core/MUD");
 var Logger = require("./src/util/Logger");
 var _ = require("./i18n");
 

@@ -18,7 +18,6 @@ class Player extends EventEmitter {
 	 */
 	constructor(options){
 		super();
-		this._channels = [];
 		if(options){
 			if(options.client) this.connect(options.client);
 			if(options.mob) this.mob = options.mob;
@@ -58,34 +57,6 @@ class Player extends EventEmitter {
 			mob.player = this;
 			this.login();
 		}
-	}
-
-	joinChannels(){
-		for(var channel of Database.channels){
-			this.joinChannel(channel);
-		}
-	}
-
-	leaveChannels(){
-		// this is annoying and gross
-		var channel = this._channels[0];
-		while(channel) {
-			this.leaveChannel(channel);
-			channel = this._channels[0];
-		}
-	}
-
-	joinChannel(channel){
-		if(this._channels.indexOf(channel) != -1) return; // already in channel
-		this._channels.push(channel);
-		channel.add(this);
-	}
-
-	leaveChannel(channel){
-		var pos = this._channels.indexOf(channel);
-		if(pos == -1) return // not in channel
-		this._channels.splice(pos, 1);
-		channel.remove(this);
 	}
 
 	/**
@@ -140,7 +111,6 @@ class Player extends EventEmitter {
 	 * @param {Mob} mob Mob connected to.
 	 */
 	login(){
-		this.joinChannels();
 	}
 
 	/**
@@ -148,7 +118,6 @@ class Player extends EventEmitter {
 	 * @param {Mob} mob Mob disconnected from.
 	 */
 	logout(){
-		this.leaveChannels();
 	}
 
 	/**
@@ -218,7 +187,6 @@ Player.prototype._lastMessageCategory = null;
 Player.prototype._client = null;
 Player.prototype._mob = null;
 Player.prototype._callback = null;
-Player.prototype._channels = null;
 
 module.exports = Player;
 
@@ -232,5 +200,5 @@ module.exports = Player;
 // cyclical includes
 MUD = require("./MUD");
 Database = require("./Database");
-Mob = require("../../map/Mob");
+Mob = require("../map/Mob");
 Nanny = require("../Nanny");

@@ -44,5 +44,6 @@
 	"%s tells you: %s": "%s tells you: %s",
 	"You tell %s: %s": "You tell %s: %s",
 	"%s whispers to you: %s": "%s whispers to you: %s",
-	"You whisper to %s: %s": "You whisper to %s: %s"
+	"You whisper to %s: %s": "You whisper to %s: %s",
+	"Later, skater.": "Later, skater."
 }

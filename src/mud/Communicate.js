@@ -1,9 +1,8 @@
 // local includes
-var Mob, Player;
 var MessageCategory = require("./MessageCategory");
 
 // stuff
-class Act{
+class Communicate{
     /**
      * Express an action to those around a mob.
      * ***TODO*** add documentation for legal fields
@@ -12,49 +11,41 @@ class Act{
      * @param {Mob[]} targets
      * @param {Object} fields
      * @param {function} filter
+     * @param {MessageCategory} category
      */
-    static act(actor, format, targets, fields, filter){
-        if(targets.indexOf(this) == -1) targets.push(actor);
+    static act(actor, format, targets, fields, filter, category=MessageCategory.ACTION){
+        if(targets.indexOf(actor) == -1) targets.push(actor);
         for(var target of targets){
-            if(filter && actor instanceof Mob && target instanceof Mob && !filter(actor, fields, target)) continue; // target filtered out
+            // target filtered out
+            if(filter && !filter(actor, fields, target)) continue;
 
             // process string
             var processed;
-            if(target == actor) processed = Act.fieldCodeReplace(format.firstPerson, actor, fields);
-            else processed = Act.fieldCodeReplace(format.thirdPerson, actor, fields);
+            if(target == actor) processed = Communicate.actFieldCodeReplace(format.firstPerson, actor, fields);
+            else processed = Communicate.actFieldCodeReplace(format.thirdPerson, actor, fields);
 
             // send message
-            target.sendMessage(processed, MessageCategory.ACTION);
+            target.sendMessage(processed, category);
         }
     }
 
     /**
-     * Replace field codes with field values.
+     * Replace act field codes with field values.
      * @param {string} string
      * @param {Mob} actor
      * @param {Object} fields 
      */
-    static fieldCodeReplace(string, actor, fields){
+    static actFieldCodeReplace(string, actor, fields){
         return string.replace(/\$(.)/g, function(full, code){
             switch(code){
-                case "n": return String(actor);
-                case "N": return fields.victim ? String(fields.victim) : "(unknown)";
+                case "n": return actor.name;
+                case "N": return fields.victim ? fields.victim.name : "(unknown)";
                 case "m": return fields.message ? fields.message : "(unknown)";
                 default:
                     Logger.error(_("Bad act code: $%s", code));
                     return "???";
             }
         });
-    }
-
-    /**
-     * Filters out all but mobs in the same room.
-     * @param {Mob} actor 
-     * @param {Mob} target 
-     * @param {Object} fields
-     */
-    static filterSameRoom(actor, target, fields){
-        return actor.loc == target.loc;
     }
 
     /**
@@ -68,8 +59,4 @@ class Act{
     }
 }
 
-module.exports = Act;
-
-// cyclical includes
-Player = require("./core/Player");
-Mob = require("../map/Mob");
+module.exports = Communicate;

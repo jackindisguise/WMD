@@ -2,9 +2,9 @@
 var expect = require("chai").expect;
 
 // local includes
-var Race = require("../../src/mud/Race");
-var Class = require("../../src/mud/Class");
-var Mob = require("../../src/map/Mob");
+var Race = require("../../../src/mud/Race");
+var Class = require("../../../src/mud/Class");
+var Mob = require("../../../src/mud/map/Mob");
 
 // testing
 describe("Mob", function(){

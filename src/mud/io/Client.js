@@ -2,9 +2,9 @@
 var EventEmitter = require("events");
 
 // local includes
-var _ = require("../../i18n");
-var Logger = require("../util/Logger");
-var MessageCategory = require("../mud/MessageCategory");
+var _ = require("../../../i18n");
+var Logger = require("../../util/Logger");
+var MessageCategory = require("../MessageCategory");
 
 /**
  * Handles low level MUD client.
