@@ -158,19 +158,19 @@ class Mob extends Movable{
 
 		var oplayer;
 		if(this._player) {
+			this.logout();
 			oplayer = this._player;
 			this._player = null;
 		}
 
 		if(oplayer) {
 			oplayer.mob = null;
-			this.logout(oplayer);
 		}
 
 		if(player && (player instanceof Player)){
 			this._player = player;
 			player.mob = this;
-			this.login(player);
+			this.login();
 		}
 	}
 
@@ -234,19 +234,15 @@ class Mob extends Movable{
 	}
 
 	/**
-	 * Runs when a Player is connected to this Mob.
-	 * @param {Player} player Player connected to.
+	 * Runs after a Player is connected to this Mob.
 	 */
 	login(){
-		this.joinChannels();
 	}
 
 	/**
-	 * Runs when a Player is disconnected from this Mob.
-	 * @param {Player} player Player disconnected from.
+	 * Runs before a Player is disconnected from this Mob.
 	 */
 	logout(){
-		this.leaveChannels();
 	}
 
 	/**

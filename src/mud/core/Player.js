@@ -43,13 +43,13 @@ class Player extends EventEmitter {
 
 		var omob;
 		if(this._mob) {
+			this.logout();
 			omob = this._mob;
 			this._mob = null;
 		}
 
 		if(omob) {
 			omob.player = null;
-			this.logout();
 		}
 
 		if(mob && mob instanceof Mob){
@@ -64,19 +64,22 @@ class Player extends EventEmitter {
 	 * @param {string} input
 	 */
 	command(input){
-		if(this._callback) { // callback piping
+		// log input
+		Logger.debug(_("Player command: '%s'", input));
+
+		// callback piping
+		if(this._callback) {
 			var callback = this._callback;
 			this._callback = null;
 			callback.call(this, input);
-		} else if(this.mob) { // command processing
+
+		// command processing
+		} else if(this.mob) {
 			var result = Database.processCommand(this.mob, input);
 			if(!result) {
 				this.sendLine(_("Do what, now?"));
 			}
 		}
-
-		// log commands
-		Logger.debug(_("Player command: '%s'", input));
 	}
 
 	/**
@@ -107,17 +110,17 @@ class Player extends EventEmitter {
 	}
 
 	/**
-	 * Runs when a mob is connected to this Player.
-	 * @param {Mob} mob Mob connected to.
+	 * Runs after a mob is connected to this Player.
 	 */
 	login(){
+		this.mob.joinChannels();
 	}
 
 	/**
-	 * Runs when a mob is disconnected from this Player.
-	 * @param {Mob} mob Mob disconnected from.
+	 * Runs before a mob is disconnected from this Player.
 	 */
-	logout(){
+	logout(mob){
+		this.mob.leaveChannels();
 	}
 
 	/**
