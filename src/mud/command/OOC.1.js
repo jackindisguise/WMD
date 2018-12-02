@@ -1,8 +1,9 @@
 // local includes
-var Command = require("../../src/mud/Command");
-var Database = require("../../src/mud/core/Database");
+var Database = require("../core/Database");
+var Command = require("../Command");
+var CommandSpecificity = require("../CommandSpecificity");
 
-class OOC extends Command.Command{
+class OOC extends Command{
     exec(mob, message){
         if(!mob.player) return;
 
@@ -18,6 +19,6 @@ class OOC extends Command.Command{
 
 OOC.prototype.rule = /^(?:o|oo|ooc) (.+)$/;
 OOC.prototype.plain = "ooc [message]";
-OOC.prototype.specificity = Command.SPECIFICITY.FIRST;
+OOC.prototype.specificity = CommandSpecificity.FIRST;
 
 module.exports = OOC;

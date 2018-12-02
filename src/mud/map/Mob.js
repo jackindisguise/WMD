@@ -7,7 +7,7 @@ var Movable = require("./Movable");
 var Race = require("../Race");
 var Class = require("../Class");
 var Database = require("../core/Database");
-var PlayerData = require("../core/PlayerData");
+var CharacterData = require("../CharacterData");
 var MessageCategory = require("../MessageCategory");
 
 /**
@@ -24,7 +24,7 @@ class Mob extends Movable{
 		this._channels = [];
 
 		if(options){
-			if(options.isCharacter) this.playerData = new PlayerData();
+			if(options.isCharacter) this.characterData = new CharacterData();
 		}
 	}
 
@@ -254,7 +254,7 @@ class Mob extends Movable{
 	 * @returns {boolean}
 	 */
 	isCharacter(){
-		return this.playerData ? true : false;
+		return this.characterData ? true : false;
 	}
 
 	/**
@@ -287,7 +287,7 @@ Mob.prototype._player = null;
 /**
  * This mob's player data.
  */
-Mob.prototype.playerData = null;
+Mob.prototype.characterData = null;
 
 /**
  * This mob's race.

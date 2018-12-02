@@ -143,9 +143,9 @@ class Database{
 
     static loadCommands(callback){
         Logger.info(_("Loading commands..."));
-        fs.readdir("./data/command", function(err, files){
+        fs.readdir("./src/mud/command/", function(err, files){
             for(var file of files){
-                var _class = require("../../../data/command/"+file);
+                var _class = require("../command/"+file);
                 var command = new _class();
                 if(!command.rule) continue;
                 _commands.push(command);
@@ -190,19 +190,17 @@ class Database{
         // specify loaders in the order they should be run
         var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands];
 
-        // create a "loader iterator"
+        // create a "loader iterator" that propagates callbacks
         var i = 0;
         function loadNext(){
-            // this is the simplest program flow that doesn't require a bunch of
-            // redundant code. allows us to keep the 1 line loader and we can just
-            // check for the final loader at the start of the next iteration.
-            if(i==loaders.length) {
+            if(!loaders.length){
                 Logger.info(_("Database loaded."));
                 callback();
                 return;
             }
 
-            loaders[i++](loadNext); // call each loader with the master loader
+            var next = loaders.shift();
+            next(loadNext); // call each loader with the master loader
         }
 
         // start iterator

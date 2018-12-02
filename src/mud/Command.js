@@ -38,4 +38,4 @@ Command.prototype.plain = null;
  */
 Command.prototype.specificity = null;
 
-module.exports = {Command:Command, SPECIFICITY:{FIRST:100, LAST:-100}};
+module.exports = Command;

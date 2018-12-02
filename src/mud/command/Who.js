@@ -1,9 +1,10 @@
 // local includes
-var _ = require("../../i18n");
-var MUD = require("../../src/mud/core/MUD");
-var Command = require("../../src/mud/Command");
+var _ = require("../../../i18n");
+var MUD = require("../core/MUD");
+var Command = require("../Command");
+var CommandSpecificity = require("../CommandSpecificity");
 
-class Who extends Command.Command{
+class Who extends Command{
     exec(mob){
         var msg = _("Players Connected: %d", MUD.players.length);
         for(var player of MUD.players){
@@ -17,6 +18,6 @@ class Who extends Command.Command{
 
 Who.prototype.rule = /^(?:w|wh|who)$/;
 Who.prototype.plain = "who";
-Who.prototype.specificity = Command.SPECIFICITY.FIRST;
+Who.prototype.specificity = CommandSpecificity.FIRST;
 
 module.exports = Who;
