@@ -174,21 +174,6 @@ class Mob extends Movable{
 		}
 	}
 
-	/**
-	 * Shortcut for the display name.
-	 */
-	get name(){
-		return this.display;
-	}
-
-	/**
-	 * Shortcut for setting both display name and keywords.
-	 */
-	set name(name){
-		this.display = name;
-		this.keywords = name;
-	}
-
 	__JSONWrite(key, value, json){
 		switch(key){
 			case "race": json.race = value.id; break;

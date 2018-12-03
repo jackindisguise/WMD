@@ -18,6 +18,21 @@ class MapObject{
 		return "{MapObject}";
 	}
 
+	/**
+	 * Shortcut for the display name.
+	 */
+	get name(){
+		return this.display;
+	}
+
+	/**
+	 * Shortcut for setting both display name and keywords.
+	 */
+	set name(name){
+		this.display = name;
+		this.keywords = name;
+	}
+
 	get contents(){
 		return this._contents;
 	}

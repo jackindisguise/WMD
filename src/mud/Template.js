@@ -32,7 +32,7 @@ class Template{
 				this.obj = obj;
 				break;
 
-			default: Object.call(this, key, value, json); break;
+			default: Object.call(this, key, value); break;
 		}
 	}
 
@@ -55,8 +55,9 @@ class Template{
 	}
 }
 
-Template.prototype.type = MapObject;
 
+Template.prototype.id = 0;
+Template.prototype.type = MapObject;
 Template.prototype.obj = null;
 
 module.exports = Template;

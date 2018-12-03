@@ -6,9 +6,7 @@ require("../../lib/Object");
 require("../../lib/Array");
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
-var Race = require("../Race");
-var Class = require("../Class");
-var Channel = require("../Channel");
+var Race, Class, Channel, Template;
 
 // local
 var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
@@ -17,6 +15,7 @@ var _races = [];
 var _classes = [];
 var _commands = [];
 var _channels = [];
+var _templates = [];
 var _characters = [];
 
 // generic namespace
@@ -39,6 +38,10 @@ class Database{
 
 	static get channels(){
 		return _channels;
+	}
+
+	static get templates(){
+		return _templates;
 	}
 
 	static get characters(){
@@ -165,9 +168,10 @@ class Database{
 	static getChannelByKeywords(keywords){
 		return Array.search(keywords);
 	}
-	 static getChannelByID(id){
+
+	static getChannelByID(id){
 		for(var channel of _channels){
-			if(channel.id == id) return channel;
+			if(channel.id === id) return channel;
 		}
 	}
 
@@ -186,6 +190,27 @@ class Database{
 		});
 	}
 
+	static getTemplateByID(id){
+		for(var template of _templates){
+			if(template.id === id) return template;
+		}
+	}
+
+	static loadTemplates(callback){
+		Logger.info(_("Loading templates..."));
+		fs.readdir("./data/template", function(err, files){
+			for(var file of files){
+				var _template = require("../../../data/template/"+file);
+				var template = new Template();
+				template.__fromJSON(_template);
+				_templates.push(template);
+				Logger.info(_("Loaded template for <%s> '%s'", _template.type, template.obj.name));
+			}
+
+			callback();
+		});
+	}
+
 	/**
 	 * Load all data into database.
 	 * Calls callback at the end.
@@ -195,7 +220,7 @@ class Database{
 		Logger.info(_("Loading database..."));
 
 		// specify loaders in the order they should be run
-		var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands];
+		var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands, Database.loadTemplates];
 
 		// create a "loader iterator" that propagates callbacks
 		var i = 0;
@@ -216,3 +241,9 @@ class Database{
 }
 
 module.exports = Database;
+
+// cyclical includes
+Race = require("../Race");
+Class = require("../Class");
+Channel = require("../Channel");
+Template = require("../Template");
