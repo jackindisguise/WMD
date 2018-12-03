@@ -12,14 +12,14 @@ var Item = require("../map/Item");
 class Score extends Command{
 	exec(mob){
 		var msg = _(" %s the %s %s ", mob.name, mob.race.display, mob.class.display).center(80, "-");
-		msg += "\r\n" + _("%s Health: %s/%s %s Mana: %s/%s %s Energy: %s/%s %s", "|", String(mob.health).padLeft(7), String(mob.health).padRight(7), "|", String(mob.mana).padLeft(9), String(mob.mana).padRight(8), "|", String(mob.energy).padLeft(7), String(mob.energy).padRight(7), "|");
+		msg += "\r\n" + _("%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s", "|", _("Health"), String(mob.health).padLeft(7), String(mob.health).padRight(7), "|", _("Mana"), String(mob.mana).padLeft(9), String(mob.mana).padRight(8), "|", _("Energy"), String(mob.energy).padLeft(7), String(mob.energy).padRight(7), "|");
 		msg += "\r\n" + _(" %s ", "Primary").center(80, "-");
 		msg += "\r\n" + _("%s %s %s %s %s %s %s", "|", "Strength".center(23), "|", "Agility".center(24), "|", "Intelligence".center(23), "|");
 		msg += "\r\n" + _("%s %s %s %s %s %s %s", "|", String(mob.strength).center(23), "|", String(mob.agility).center(24), "|", String(mob.intelligence).center(23), "|");
 		msg += "\r\n" + _(" %s ", "Secondary").center(80, "-");
-		msg += "\r\n" + _("%s %s %s %s %s %s %s %s %s %s", "|", "Attack Power:".padRight(14), String(mob.attackPower).padRight(8), "|", "Speed:".padRight(14), String(mob.speed).padRight(9), "|", "Magic Power:".padRight(14), String(mob.magicPower).padRight(8), "|");
-		msg += "\r\n" + _("%s %s %s %s %s %s %s %s %s %s", "|", "Defense:".padRight(14), String(mob.defense).padRight(8), "|", "Evasion:".padRight(14), String(mob.evasion).padRight(9), "|", "Resilience:".padRight(14), String(mob.resilience).padRight(8), "|");
-		msg += "\r\n" + _("%s %s %s %s %s %s %s %s %s %s", "|", "Vitality:".padRight(14), String(mob.vitality).padRight(8), "|", "Stamina:".padRight(14), String(mob.stamina).padRight(9), "|", "Wisdom:".padRight(14), String(mob.wisdom).padRight(8), "|");
+		msg += "\r\n" + _("%s %s: %s %s %s: %s %s %s: %s %s", "|", _("Attack Power").padLeft(13), String(mob.attackPower).padRight(8), "|", _("Speed").padLeft(13), String(mob.speed).padRight(9), "|", _("Magic Power").padLeft(13), String(mob.magicPower).padRight(8), "|");
+		msg += "\r\n" + _("%s %s: %s %s %s: %s %s %s: %s %s", "|", _("Defense").padLeft(13), String(mob.defense).padRight(8), "|", _("Evasion").padLeft(13), String(mob.evasion).padRight(9), "|", _("Resilience").padLeft(13), String(mob.resilience).padRight(8), "|");
+		msg += "\r\n" + _("%s %s: %s %s %s: %s %s %s: %s %s", "|", _("Vitality").padLeft(13), String(mob.vitality).padRight(8), "|", _("Stamina").padLeft(13), String(mob.stamina).padRight(9), "|", _("Wisdom").padLeft(13), String(mob.wisdom).padRight(8), "|");
 		msg += "\r\n" + _(" %s ", "Worth").center(80, "-");
 		msg += "\r\n" + _("%s %s %s", "|", _("You are carrying %d items.", mob.contents.length).center(76), "|");
 		msg += "\r\n" + _(" %s ", String(Math.rangeInt(1,100)).padLeft(3, "0")).center(80, "-");

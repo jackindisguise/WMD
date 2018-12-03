@@ -68,5 +68,19 @@
 	"%s Health: %s/%s %s Mana: %s/%s %s Energy: %s/%s %s": "%s Health: %s/%s %s Mana: %s/%s %s Energy: %s/%s %s",
 	"%s ": "%s ",
 	"%s %s %s": "%s %s %s",
-	"You are carrying %d items.": "You are carrying %d items."
+	"You are carrying %d items.": "You are carrying %d items.",
+	"Attack Power": "Attack Power",
+	"Speed": "Speed",
+	"Magic Power": "Magic Power",
+	"Defense": "Defense",
+	"Evasion": "Evasion",
+	"Resilience": "Resilience",
+	"Vitality": "Vitality",
+	"Stamina": "Stamina",
+	"Wisdom": "Wisdom",
+	"%s %s: %s %s %s: %s %s %s: %s %s": "%s %s: %s %s %s: %s %s %s: %s %s",
+	"Health": "Health",
+	"Mana": "Mana",
+	"Energy": "Energy",
+	"%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s": "%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s"
 }
