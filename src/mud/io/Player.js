@@ -201,7 +201,7 @@ module.exports = Player;
  */
 
 // cyclical includes
-MUD = require("./MUD");
-Database = require("./Database");
+MUD = require("../core/MUD");
+Database = require("../core/Database");
 Mob = require("../map/Mob");
 Nanny = require("../Nanny");

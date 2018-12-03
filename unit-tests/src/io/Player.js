@@ -5,7 +5,7 @@ var expect = require("chai").expect;
 
 // local includes
 var Mob = require("../../../src/mud/map/Mob");
-var Player = require("../../../src/mud/core/Player");
+var Player = require("../../../src/mud/io/Player");
 
 // testing
 describe("Player", function(){

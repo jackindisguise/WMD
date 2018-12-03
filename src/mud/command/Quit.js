@@ -5,9 +5,9 @@ var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 
 class Quit extends Command{
-    exec(mob){
-        if(mob.player) mob.player.quit();
-    }
+	exec(mob){
+		if(mob.player) mob.player.quit();
+	}
 }
 
 Quit.prototype.rule = /^(?:q|qu|qui|quit)\b/;

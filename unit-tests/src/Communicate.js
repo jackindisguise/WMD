@@ -5,18 +5,17 @@ var expect = require("chai").expect;
 var Communicate = require("../../src/mud/Communicate");
 var Map = require("../../src/mud/map/Map");
 var Mob = require("../../src/mud/map/Mob");
-var Player = require("../../src/mud/core/Player");
 
 // testing
 var map = new Map({width:1, height:1, levels:2});
 var mob = new Mob({loc:map.getTileByXYZ(0,0,0)});
-mob.name = "Player";
+mob.name = "Actor";
 
 var mob2 = new Mob({loc:map.getTileByXYZ(0,0,0)});
-mob2.name = "Other";
+mob2.name = "Receiver";
 
 describe("Communicate", function(){
-    it("speak", function(done){
+    it("act", function(done){
         // finisher
         var c = 0;
         function d(){ if(--c===0) done(); }
@@ -29,7 +28,7 @@ describe("Communicate", function(){
 
         c++;
         mob2.sendMessage = function(message){
-            expect(message).to.equal("Player says 'this is a test.'");
+            expect(message).to.equal("Actor says 'this is a test.'");
             d();
         };
 

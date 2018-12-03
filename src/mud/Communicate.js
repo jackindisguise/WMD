@@ -39,7 +39,7 @@ class Communicate{
         return string.replace(/\$(.)/g, function(full, code){
             switch(code){
                 case "n": return actor.name;
-                case "N": return fields.victim ? fields.victim.name : "(unknown)";
+                case "N": return fields.directObject ? fields.directObject.name : "(unknown)";
                 case "m": return fields.message ? fields.message : "(unknown)";
                 default:
                     Logger.error(_("Bad act code: $%s", code));
@@ -49,13 +49,13 @@ class Communicate{
     }
 
     /**
-     * Filters out all but the actor and the victim.
+     * Filters out all but the actor and the directObject.
      * @param {Mob} actor 
      * @param {Mob} target 
      * @param {Object} fields
      */
     static filterActorVictimOnly(actor, target, fields){
-        return target == actor ? true : target == fields.victim ? true : false;
+        return target == actor ? true : target == fields.directObject ? true : false;
     }
 }
 

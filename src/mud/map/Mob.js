@@ -317,7 +317,7 @@ Mob.prototype.display = "Mob";
 
 module.exports = Mob;
 
-Player = require("../core/Player");
+Player = require("../io/Player");
 
 /**
  * Sole valid argument for `new Mob()`.

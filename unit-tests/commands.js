@@ -1,5 +1,5 @@
 // mocha order
-require("./0net");
+require("./login");
 
 // npm includes
 var expect = require("chai").expect;
@@ -32,27 +32,27 @@ describe("Command", function(){
             // connect other now
             c++;
             other = io.connect("http://127.0.0.1:8000");
-            other.emit("command", "Other");
+            other.emit("command", "Second");
             other.emit("command", "human");
             other.emit("command", "warrior");
             other.emit("command", "motd");
             other.on("message", function(message, category){ // fully connected
-                if(message == _("Welcome to the game, %s the %s %s!", "Other", "Human", "Warrior")) d();
+                if(message == _("Welcome to the game, %s the %s %s!", "Second", "Human", "Warrior")) d();
             });
         });
 
-        player.emit("command", "Player");
+        player.emit("command", "First");
         player.emit("command", "human");
         player.emit("command", "warrior");
         player.emit("command", "motd");
         player.on("message", function(message, category){ // fully connected
-            if(message == _("Welcome to the game, %s the %s %s!", "Player", "Human", "Warrior")) d();
+            if(message == _("Welcome to the game, %s the %s %s!", "First", "Human", "Warrior")) d();
         });
     });
 
     it("input: who", function(done){
         player.once("message", function(message, category){
-            expect(message).is.equal("Players Connected: 2\r\n[Player]\r\n[Other]");
+            expect(message).is.equal("Players Connected: 2\r\n[First]\r\n[Second]");
             done();
         });
 
