@@ -186,25 +186,6 @@ class Database{
 		});
 	}
 
-	static loadCharacters(){
-		Logger.info(_("Loading characters..."));
-		fs.readdir("./data/character", function(err, files){
-			for(var file of files){
-				var _channel = require("../../../data/character/"+file);
-				var channel = new Channel();
-				channel.__fromJSON(_channel);
-				_channels.push(channel);
-				Logger.info(_("Loaded channel '%s'", channel.name));
-			}
-
-			callback();
-		});
-	}
-
-	static loadObject(template){
-		
-	}
-
 	/**
 	 * Load all data into database.
 	 * Calls callback at the end.
