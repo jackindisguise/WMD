@@ -4,11 +4,14 @@
 	},
 	"source":{
 		"include": [
-			"src/core",
-			"src/io",
-			"src/map",
-			"src/util",
-			"src/lib"
+			"src/lib",
+			"src/mud",
+			"src/mud/command",
+			"src/mud/core",
+			"src/mud/io",
+			"src/mud/manager",
+			"src/mud/map",
+			"src/util"
 		]
 	},
 	"plugins": ["plugins/markdown"],
