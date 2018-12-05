@@ -1,0 +1,195 @@
+commit c7a795ebaec26e6cf10cf8a2dce9cae7a01c7533
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 5 01:21:20 2018 -0600
+
+    MASSIVE overhaul of concepts in the source.
+    
+    I've added a class of objects called managers to avoid cyclical requirements.
+    What'll happen is the Database class will read files, and then pass them to the
+    individual managers. The races will go to the race manager, classes to class
+    manager, etc...
+    
+    This way, when you want to know who is online, you can just ask for the
+    PlayerManager instead of asking for the entire framework for loading
+    every single type of data from the local database (of JSON files).
+    
+    Not totally done (need to make a reference aka helpfile manager).
+    This manager will include stuff like the greeting and the MOTD.
+    
+    Added direction flags and an object for manipulating them.
+
+commit e5f6aafa880d705d217a8cdd4c43502b4a6e10a8
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 3 13:58:22 2018 -0600
+
+    Just wanted to make this a little more gross.
+
+commit 97b6613f6046d78e86e615454ee40281c4254481
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 3 13:50:10 2018 -0600
+
+    Working more on template stuff.
+    
+    Created a score command for fun.
+    It's kinda ugly.
+
+commit 4c1390d9a70d081977dcd2d3d08678747ae4c459
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 3 01:22:30 2018 -0600
+
+    Working on templates. I like the concept a lot.
+    
+    A template is basically two parts: the constructor and the
+    "prototype" of the full object. The prototype is an instance of
+    the base object type with all of its unique attributes set as
+    properties on the prototype.
+    
+    When spawning an instance of a template, it creates a second object
+    of the same base type, then assigns the "prototype" instance as the
+    instance's __proto__ attribute.
+
+commit bdbe66ce092f85c735140ecf847eebc994c2a04e
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 3 00:57:18 2018 -0600
+
+    Bunch of shit. Working on templates.
+
+commit 9f5b70c6553e2e4734ed4c18cd77885cc65de17b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Dec 2 00:34:59 2018 -0600
+
+    Changed login/logut on Player and Mob. login is always called before
+    the split, and logout is always called after the split. This ensures
+    it's always called in a context where you can reference the old
+    value.
+
+commit 182bd1d0e34cb005975293abb7ef2b81580651ea
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Dec 2 00:25:45 2018 -0600
+
+    Just learned about this neat word-break match.
+
+commit 1efb7af1c91079fec23d88e8bb8af8d5cc7cc366
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Dec 2 00:18:50 2018 -0600
+
+    Renamed PlayerData to CharacterData.
+    
+    Moved stock commands to /src/mud/command/ instead of /data/command.
+    Since they are literal source files, they belong in /src IMO.
+
+commit a7fc42188dbe731341ca55968bb9269f2a69dc83
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Nov 30 19:17:02 2018 -0600
+
+    I've opted to just make Communicate.act() require mobs.
+    
+    I'm ready to move on from this.
+
+commit bb4d6998294488907c5c318039318a3dbc6c6463
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Nov 30 06:40:06 2018 -0600
+
+    Restructured the source files a bit.
+    
+    Messed with Act and added some tests.
+    
+    Other stuff too.
+
+commit 5434cfd7b5ace93b68c91d3a61d1bf18fbe4fea4
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Nov 30 01:23:52 2018 -0600
+
+    Deleted all the channel stuff I did.
+
+commit 09086c872211f2ca3678e78f4f29efd30c9ed2ab
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Nov 30 01:01:09 2018 -0600
+
+    Switched from a massive list of if checks to a switch statement.
+
+commit 6c08fa4f8233e073e7d000db50baea7dea175570
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Nov 29 20:06:01 2018 -0600
+
+    Added shitty whisper. Added full tests for all the current commands. Whatever.
+
+commit 960dfa8f8ec7ffaf6a530dc1717b1d370a85821d
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Nov 29 19:23:29 2018 -0600
+
+    Added quit command that actually works. Yay.
+    
+    Added generic toString stuff for MapObject and MapObject inheriters.
+
+commit cd7133fdbe75b33a9c816c865f3ae569afb5a9ad
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Nov 29 18:41:18 2018 -0600
+
+    re-added commands test -- using legit socket.io clients to manage
+    connections. for some reason it seems really difficult to connect
+    a fake player locally. will work on that later.
+    
+    Channels are currently using an Act-like format object, but for
+    now it'll just be "you say %s" for first person and "%s says %s"
+    for third person.
+
+commit 879677e72dbee7aaf674cb15a43c0858daefcc32
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Nov 29 17:28:59 2018 -0600
+
+    This commit is not very good.
+    
+    I added the Act class, which is just a collection of functions
+    dedicated to describing actions to lists of mobs. This will be
+    used for combat, movement, and social things.
+    
+    I added a system that loads channels from JSON files in the
+    `/data/channel` folder. I'm not really sure if I want to load them
+    like this, and I have to differentiate between required/unrequired
+    channels (i.e. you can't leave the announcement channel).
+    
+    I also have to differentiate between COMMANDS that use channels and
+    the channels themselves. So I'll have to write the OOC.json channel
+    template, then I'll have to make the OOC command, and the OOC
+    command has to find the OOC channel and then call `channel.chat()`.
+    
+    I had some serious issues with my command unit-tests, as I cannot find
+    an acceptable way of ordering the tests. I'm also having trouble figuring
+    out how to make sure the full /unit-tests/net test has completed before
+    starting the next one. The old player is still around for quite some time
+    despite being closed manually.
+    
+    I've deleted the /unit-tests/commands test, cause I couldn't get it to
+    run after the MUD is fully loaded. Not sure how to get it to do so
+    either. Oh well.
+    
+    Other issues here, but I can't remember and I'm too tired to keep thinking
+    about the myriad issues I had.
+
+commit 72d15dad05e83b0dcb1485dddb38ffcebabf049f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Nov 28 13:06:48 2018 -0600
+
+    VSC won't shut up about this.
+
+commit 472bd5e403026ab5e18f2c2b8cd8b18af73ce1cc
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Nov 28 13:04:05 2018 -0600
+
+    Messing with a new concept on command error handling.
+    
+    Adding channels for handling communication.
+    
+    Added message categories. Categories are sent to the client.
+    Instead of the server sending a linebreak to the client if
+    the last message is a different category, processing will be
+    handled entirely on the client's side. This allows for more
+    flexibility on the user interface side.
+
+commit b88ac26a6ef5b6d442508fc5877a833c77586f35
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Nov 27 13:32:18 2018 -0600
+
+    Added no-command-found error messages.
+    [skip ci]
