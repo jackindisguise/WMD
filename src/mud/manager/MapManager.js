@@ -1,6 +1,4 @@
-var Map = require("../map/Map");
-
-var _map = new Map()
+var _map;
 
 class MapManager{
 	static get map(){

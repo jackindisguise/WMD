@@ -13,20 +13,16 @@ var Class = require("../Class");
 var CommandHandler = require("../manager/CommandManager");
 var Channel = require("../Channel");
 var ChannelManager = require("../manager/ChannelManager");
-var Template = require("../Template");
 var MapManager = require("../manager/MapManager");
 var Map = require("../map/Map");
+var TemplateManager = require("../manager/TemplateManager");
+var Template = require("../Template");
 
 // local
-var _templates = [];
 var _characters = [];
 
 // generic namespace
 class Database{
-	static get templates(){
-		return _templates;
-	}
-
 	static get characters(){
 		return _characters;
 	}
@@ -107,12 +103,6 @@ class Database{
 		});
 	}
 
-	static getTemplateByID(id){
-		for(var template of _templates){
-			if(template.id === id) return template;
-		}
-	}
-
 	static loadTemplates(callback){
 		Logger.info(_("Loading templates..."));
 		fs.readdir("./data/template", function(err, files){
@@ -120,7 +110,7 @@ class Database{
 				var _template = require("../../../data/template/"+file);
 				var template = new Template();
 				template.__fromJSON(_template);
-				_templates.push(template);
+				TemplateManager.add(template);
 				Logger.info(_("Loaded template for <%s> '%s'", _template.type, template.obj.name));
 			}
 
