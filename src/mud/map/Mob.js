@@ -274,7 +274,7 @@ class Mob extends Movable{
 		}
 
 		// default description
-		var desc = _("%s\r\n    %s", this.loc.name, this.loc.description);
+		var desc = util.format("%s\r\n    %s", this.loc.name, this.loc.description);
 
 		// generate exits
 		var exits = [];
@@ -287,7 +287,7 @@ class Mob extends Movable{
 
 		// generate content descriptions
 		for(var obj of this.loc.contents){
-			desc += "\r\n" + _("    %s", obj.name);
+			desc += "\r\n" + util.format("    %s", obj.name);
 		}
 
 		this.sendLine(desc);

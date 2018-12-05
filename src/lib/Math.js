@@ -1,4 +1,4 @@
-// I've been told this kind of behavior is immortal, but I don't care. Gonna keep doing it even if you ban me.
+// I've been told this kind of behavior is immoral, but I don't care. Gonna keep doing it even if you ban me.
 
 /**
  * Provides linear interpolation functionality.

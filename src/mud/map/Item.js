@@ -2,7 +2,6 @@
 var Movable = require("./Movable");
 
 class Item extends Movable{
-
 }
 
 /**

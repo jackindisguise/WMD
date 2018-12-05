@@ -1,5 +1,10 @@
 // local includes
-var MapObject, Movable, Mob, Item, Equipment, Tile;
+var MapObject = require("./map/MapObject");
+var Movable = require("./map/Movable");
+var Mob = require("./map/Mob");
+var Item = require("./map/Item");
+var Equipment = require("./map/Equipment");
+var Tile = require("./map/Tile");
 
 class Template{
 	__JSONRead(key, value){
@@ -56,10 +61,3 @@ Template.prototype.type = MapObject;
 Template.prototype.obj = null;
 
 module.exports = Template;
-
-MapObject = require("./map/MapObject");
-Movable = require("./map/Movable");
-Mob = require("./map/Mob");
-Item = require("./map/Item");
-Equipment = require("./map/Equipment");
-Tile = require("./map/Tile");

@@ -8,6 +8,18 @@ var Mob = require("../../../src/mud/map/Mob");
 
 // testing
 describe("Mob", function(){
+    it("constructor options", function(done){
+        var mob = new Mob(); // no options
+        expect(mob.loc).to.equal(null);
+        var mob2 = new Mob({}); // empty options
+        expect(mob2.loc).to.equal(null);
+        var mob3 = new Mob({"loc":mob2}); // valid location
+        expect(mob3.loc).to.equal(mob2);
+        var mob4 = new Mob({"loc":55}); // invalid location
+        expect(mob4.loc).to.equal(null);
+        done();
+    })
+
     describe("Attributes", function(){
         var Elf = new Race();
         Elf.healthBase = 25;

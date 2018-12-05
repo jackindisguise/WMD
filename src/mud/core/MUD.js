@@ -1,6 +1,5 @@
 // node includes
 var EventEmitter = require("events");
-var fs = require("fs");
 
 // local includes
 var _ = require("../../../i18n");

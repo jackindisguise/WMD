@@ -2,7 +2,6 @@
 var Item = require("./Item");
 
 class Equipment extends Item{
-
 }
 
 /** @default "equipment" */

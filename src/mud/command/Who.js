@@ -1,3 +1,6 @@
+// node includes
+var util = require("util");
+
 // local includes
 var _ = require("../../../i18n");
 var PlayerManager = require("../manager/PlayerManager");
@@ -9,7 +12,7 @@ class Who extends Command{
 		var msg = _("Players Connected: %d", PlayerManager.players.length);
 		for(var player of PlayerManager.players){
 			msg += "\r\n";
-			msg += _("%s", player.mob ? "["+player.mob.name+"]" : "{"+player.socketID+"}");
+			msg += util.format("%s", player.mob ? "["+player.mob.name+"]" : "{"+player.socketID+"}");
 		}
 
 		mob.sendLine(msg);

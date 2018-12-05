@@ -3,7 +3,6 @@ var EventEmitter = require("events");
 var util = require("util");
 
 // local includes
-// cyclical includes
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
 var CommandHandler = require("../manager/CommandManager");

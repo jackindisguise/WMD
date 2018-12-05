@@ -3,7 +3,7 @@ var util = require("util");
 
 // local includes
 var MapObject = require("./MapObject");
-var Tile;
+var Tile = require("./Tile");
 
 /**
  * Base object that can move around the map.
@@ -56,6 +56,3 @@ Movable.prototype.keywords = "movable";
 Movable.prototype.display = "Movable";
 
 module.exports = Movable;
-
-// cyclical includes
-Tile = require("./Tile");

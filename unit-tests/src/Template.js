@@ -7,7 +7,7 @@ var Template = require("../../src/mud/Template");
 
 describe("Template", function(){
 	var template;
-	it("Create new template", function(done){
+	it("create new template", function(done){
 		template = new Template();
 		template.type = Item;
 		template.obj = new Item();
@@ -17,7 +17,7 @@ describe("Template", function(){
 		done();
 	});
 
-	it("Spawn instance", function(done){
+	it("spawn instance", function(done){
 		var eye = template.spawn();
 		expect(eye.level).to.equal(54);
 		expect(eye.display).to.equal("Eye of Marduk");
