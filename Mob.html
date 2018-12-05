@@ -40,7 +40,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="Class.html">Class</a></li><li><a href="Classification.html">Classification</a></li><li><a href="Client.html">Client</a></li><li><a href="Map.html">Map</a></li><li><a href="MapObject.html">MapObject</a></li><li><a href="Mob.html">Mob</a></li><li><a href="Movable.html">Movable</a></li><li><a href="MUD.html">MUD</a></li><li><a href="Nanny.html">Nanny</a></li><li><a href="Player.html">Player</a></li><li><a href="Race.html">Race</a></li><li><a href="Server.html">Server</a></li><li><a href="Tile.html">Tile</a></li>
+					<li><a href="Channel.html">Channel</a></li><li><a href="Class.html">Class</a></li><li><a href="Classification.html">Classification</a></li><li><a href="Client.html">Client</a></li><li><a href="Direction.html">Direction</a></li><li><a href="Map.html">Map</a></li><li><a href="MapObject.html">MapObject</a></li><li><a href="Mob.html">Mob</a></li><li><a href="Movable.html">Movable</a></li><li><a href="MUD.html">MUD</a></li><li><a href="Nanny.html">Nanny</a></li><li><a href="Player.html">Player</a></li><li><a href="PlayerData.html">PlayerData</a></li><li><a href="Race.html">Race</a></li><li><a href="Server.html">Server</a></li><li><a href="Tile.html">Tile</a></li>
 				</ul>
 			</li>
 			
@@ -61,7 +61,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#MessageCategory">MessageCategory</a></li>
 				</ul>
 			</li>
 			
@@ -114,19 +114,73 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Mob"><span class="type-signature"></span>new Mob()</h4>
+    <h4 class="name" id="Mob"><span class="type-signature"></span>new Mob(options)</h4>
     
     
 </dt>
 <dd>
 
     
-
+    <div class="description">
+        <p>Construct a Mob.</p>
+    </div>
     
 
     
 
     
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#MobConstructorOptions">MobConstructorOptions</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -214,6 +268,66 @@
         <dl>
             
 <hr>
+<dt class="name" id="characterData">
+    <h4 id="characterData"><span class="type-signature"></span>characterData<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>This mob's player data.</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
 <dt class="name" id="class">
     <h4 id="class"><span class="type-signature">&lt;nullable> </span>class<span class="type-signature"> :<a href="Class.html">Class</a></span></h4>
 
@@ -265,173 +379,6 @@
 
 	
 
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="contents">
-    <h4 id="contents"><span class="type-signature">&lt;non-null> </span>contents<span class="type-signature"> :<a href="Array.html">Array</a>.&lt;<a href="MapObject.html">MapObject</a>></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>A list of all the objects inhabiting us.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type"><a href="Array.html">Array</a>.&lt;<a href="MapObject.html">MapObject</a>></span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#contents">MapObject#contents</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="description">
-    <h4 id="description"><span class="type-signature">&lt;nullable> </span>description<span class="type-signature"> :string</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>A description for this object.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">string</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#description">MapObject#description</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-default method-doc-label method-doc-details-label">Default Value:</dt>
-	<dd class="tag-default">
-		<ul class="dummy">
-			<li>null</li>
-		</ul>
-	</dd>
 	
 
 
@@ -730,206 +677,6 @@
         
             
 <hr>
-<dt class="name" id="loc">
-    <h4 id="loc"><span class="type-signature">&lt;nullable> </span>loc<span class="type-signature"> :<a href="MapObject.html">MapObject</a></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The object we currently inhabit.<br>If your loc is an object, that means you are inside that object's contents list.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type"><a href="MapObject.html">MapObject</a></span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#loc">MapObject#loc</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="name">
-    <h4 id="name"><span class="type-signature"></span>name<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Shortcut for the display name.</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="name">
-    <h4 id="name"><span class="type-signature"></span>name<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Shortcut for setting both display name and keywords.</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
 <dt class="name" id="player">
     <h4 id="player"><span class="type-signature">&lt;nullable> </span>player<span class="type-signature"> :<a href="Player.html">Player</a></span></h4>
 
@@ -1079,457 +826,6 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="add"><span class="type-signature"></span>add(mapobject)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Add an object to our contents.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mapobject</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="MapObject.html">MapObject</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Object to add.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#add">MapObject#add</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="canEnter"><span class="type-signature"></span>canEnter(enterer)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Check if an object can enter our contents.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>enterer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="MapObject.html">MapObject</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Object entering our contents.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#canEnter">MapObject#canEnter</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="canExit"><span class="type-signature"></span>canExit(exiter)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Check if an object can leave our contents.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>exiter</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="MapObject.html">MapObject</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Object leaving our contents.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#canExit">MapObject#canExit</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
     <h4 class="name" id="canMove"><span class="type-signature"></span>canMove(loc)</h4>
     
     
@@ -1667,7 +963,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="login"><span class="type-signature"></span>login(player)</h4>
+    <h4 class="name" id="getStep"><span class="type-signature"></span>getStep(dir)</h4>
     
     
 </dt>
@@ -1675,7 +971,7 @@
 
     
     <div class="description">
-        <p>Runs when a Player is connected to this Mob.</p>
+        <p>Get the tile in the given direction.</p>
     </div>
     
 
@@ -1710,13 +1006,13 @@
 
         <tr>
             
-                <td class="name"><code>player</code></td>
+                <td class="name"><code>dir</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Player.html">Player</a></span>
+<span class="param-type">Direction.flags</span>
 
 
 
@@ -1727,263 +1023,7 @@
 
             
 
-            <td class="description last"><p>Player connected to.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="logout"><span class="type-signature"></span>logout(player)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Runs when a Player is disconnected from this Mob.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>player</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Player.html">Player</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Player disconnected from.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="move"><span class="type-signature"></span>move(loc)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Formal move that respects <a href="MapObject.html#canMove"><code>MapObject#canMove</code></a>.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>loc</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="MapObject.html">MapObject</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Location to move to.</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -2005,7 +1045,7 @@
 	<dd class="inherited-from">
 		<ul class="dummy">
 			<li>
-				<a href="MapObject.html#move">MapObject#move</a>
+				<a href="Movable.html#getStep">Movable#getStep</a>
 			</li>
 		</ul>
 	</dd>
@@ -2060,7 +1100,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="remove"><span class="type-signature"></span>remove(mapobject)</h4>
+    <h4 class="name" id="isCharacter"><span class="type-signature"></span>isCharacter()</h4>
     
     
 </dt>
@@ -2068,7 +1108,261 @@
 
     
     <div class="description">
-        <p>Remove an object from our contents.</p>
+        <p>Is this mob acting in the role of a player's character?</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="login"><span class="type-signature"></span>login()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Runs after a Player is connected to this Mob.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="logout"><span class="type-signature"></span>logout()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Runs before a Player is disconnected from this Mob.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="sendLine"><span class="type-signature"></span>sendLine(line)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Shortcut for <code>player.sendLine(line)</code>.</p>
     </div>
     
 
@@ -2103,13 +1397,13 @@
 
         <tr>
             
-                <td class="name"><code>mapobject</code></td>
+                <td class="name"><code>line</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="MapObject.html">MapObject</a></span>
+<span class="param-type">string</span>
 
 
 
@@ -2120,7 +1414,7 @@
 
             
 
-            <td class="description last"><p>Object to remove.</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -2138,14 +1432,157 @@
 	
 
 	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="MapObject.html#remove">MapObject#remove</a>
-			</li>
-		</ul>
-	</dd>
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="sendMessage"><span class="type-signature"></span>sendMessage(message, category)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Shortcut for <code>player.sendMessage(message, category)</code>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#MessageCategory">MessageCategory</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
 	
 
     
@@ -2243,7 +1680,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on 2018-11-27T13:17:54-06:00
+		on 2018-12-05T01:30:33-06:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

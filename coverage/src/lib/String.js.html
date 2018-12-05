@@ -126,35 +126,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">98x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,12 +151,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4097x</span>
+<span class="cline-any cline-yes">4097x</span>
+<span class="cline-any cline-yes">4097x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,10 +162,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,16 +194,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// node includes
 var util = require("util");
-&nbsp;
-/**
- * Repeat a string.
- * @param {number} num
- */
-String.prototype.repeat = function(num){
-	var str = this;
-	for(var i=0;i&lt;num-1;i++) str += this;
-	return str;
-}
 &nbsp;
 /**
  * Check for matches to this string's keywords.
@@ -230,6 +220,16 @@ String.prototype.matchKeywords = function(match, sensitive=false){
 }
 &nbsp;
 /**
+ * Repeat a string.
+ * @param {number} num
+ */
+String.prototype.repeat = function(num){
+	var str = this;
+	for(var i=0;i&lt;num-1;i++) str += this;
+	return str;
+}
+&nbsp;
+/**
  * Centers a string.
  * @param {number} size
  * @param {string} padder
@@ -237,7 +237,7 @@ String.prototype.matchKeywords = function(match, sensitive=false){
 String.prototype.center = <span class="fstat-no" title="function not covered" >fu</span>nction(size, padder=<span class="branch-0 cbranch-no" title="branch not covered" >" ")</span>{
 	var pad = <span class="cstat-no" title="statement not covered" >size - this.length;</span>
 <span class="cstat-no" title="statement not covered" >	if(pad &lt; 1) <span class="cstat-no" title="statement not covered" >return this;</span></span>
-<span class="cstat-no" title="statement not covered" >	if(pad == 1) <span class="cstat-no" title="statement not covered" >return util.format("%s%s", this, " ");</span></span>
+<span class="cstat-no" title="statement not covered" >	if(pad == 1) <span class="cstat-no" title="statement not covered" >return util.format("%s%s", this, padder);</span></span>
 	var remainder = <span class="cstat-no" title="statement not covered" >pad%2;</span>
 <span class="cstat-no" title="statement not covered" >	pad -= remainder;</span>
 <span class="cstat-no" title="statement not covered" >	return util.format("%s%s%s", padder.repeat(pad/2), this, padder.repeat((pad/2) + remainder));</span>
@@ -251,7 +251,7 @@ String.prototype.center = <span class="fstat-no" title="function not covered" >f
 String.prototype.padLeft = function(size, padder=" "){
 	var pad = size - this.length;
 	<span class="missing-if-branch" title="if path not taken" >I</span>if(pad &lt; 1) <span class="cstat-no" title="statement not covered" >return this;</span>
-	<span class="missing-if-branch" title="if path not taken" >I</span>if(pad == 1) <span class="cstat-no" title="statement not covered" >return util.format("%s%s", " ", this);</span>
+	<span class="missing-if-branch" title="if path not taken" >I</span>if(pad == 1) <span class="cstat-no" title="statement not covered" >return util.format("%s%s", padder, this);</span>
 	return util.format("%s%s", padder.repeat(pad), this);
 };
 &nbsp;
@@ -263,7 +263,7 @@ String.prototype.padLeft = function(size, padder=" "){
 String.prototype.padRight = <span class="fstat-no" title="function not covered" >fu</span>nction(size, padder=<span class="branch-0 cbranch-no" title="branch not covered" >" ")</span>{
 	var pad = <span class="cstat-no" title="statement not covered" >size - this.length;</span>
 <span class="cstat-no" title="statement not covered" >	if(pad &lt; 1) <span class="cstat-no" title="statement not covered" >return this;</span></span>
-<span class="cstat-no" title="statement not covered" >	if(pad == 1) <span class="cstat-no" title="statement not covered" >return util.format("%s%s", this, " ");</span></span>
+<span class="cstat-no" title="statement not covered" >	if(pad == 1) <span class="cstat-no" title="statement not covered" >return util.format("%s%s", this, padder);</span></span>
 <span class="cstat-no" title="statement not covered" >	return util.format("%s%s", this, padder.repeat(pad));</span>
 };</pre></td></tr>
 </table></pre>
@@ -271,7 +271,7 @@ String.prototype.padRight = <span class="fstat-no" title="function not covered" 
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 27 2018 13:18:01 GMT-0600 (Central Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Dec 05 2018 01:30:41 GMT-0600 (Central Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>

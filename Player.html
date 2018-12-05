@@ -40,7 +40,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="Class.html">Class</a></li><li><a href="Classification.html">Classification</a></li><li><a href="Client.html">Client</a></li><li><a href="Map.html">Map</a></li><li><a href="MapObject.html">MapObject</a></li><li><a href="Mob.html">Mob</a></li><li><a href="Movable.html">Movable</a></li><li><a href="MUD.html">MUD</a></li><li><a href="Nanny.html">Nanny</a></li><li><a href="Player.html">Player</a></li><li><a href="Race.html">Race</a></li><li><a href="Server.html">Server</a></li><li><a href="Tile.html">Tile</a></li>
+					<li><a href="Channel.html">Channel</a></li><li><a href="Class.html">Class</a></li><li><a href="Classification.html">Classification</a></li><li><a href="Client.html">Client</a></li><li><a href="Direction.html">Direction</a></li><li><a href="Map.html">Map</a></li><li><a href="MapObject.html">MapObject</a></li><li><a href="Mob.html">Mob</a></li><li><a href="Movable.html">Movable</a></li><li><a href="MUD.html">MUD</a></li><li><a href="Nanny.html">Nanny</a></li><li><a href="Player.html">Player</a></li><li><a href="PlayerData.html">PlayerData</a></li><li><a href="Race.html">Race</a></li><li><a href="Server.html">Server</a></li><li><a href="Tile.html">Tile</a></li>
 				</ul>
 			</li>
 			
@@ -61,7 +61,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#MessageCategory">MessageCategory</a></li>
 				</ul>
 			</li>
 			
@@ -163,7 +163,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="Object.html">Object</a></span>
+<span class="param-type"><a href="global.html#PlayerConstructorOptions">PlayerConstructorOptions</a></span>
 
 
 
@@ -174,81 +174,7 @@
 
             
 
-            <td class="description last"><p>Constructor options.</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>client</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Client.html">Client</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The client to manage.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mob</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Mob.html">Mob</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The mob to manage.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>Constructor options.</p></td>
         </tr>
 
     
@@ -1076,7 +1002,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="login"><span class="type-signature"></span>login(mob)</h4>
+    <h4 class="name" id="login"><span class="type-signature"></span>login()</h4>
     
     
 </dt>
@@ -1084,7 +1010,7 @@
 
     
     <div class="description">
-        <p>Runs when a mob is connected to this Player.</p>
+        <p>Runs after a mob is connected to this Player.</p>
     </div>
     
 
@@ -1093,56 +1019,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mob</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Mob.html">Mob</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Mob connected to.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -1204,7 +1080,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="logout"><span class="type-signature"></span>logout(mob)</h4>
+    <h4 class="name" id="logout"><span class="type-signature"></span>logout()</h4>
     
     
 </dt>
@@ -1212,7 +1088,7 @@
 
     
     <div class="description">
-        <p>Runs when a mob is disconnected from this Player.</p>
+        <p>Runs before a mob is disconnected from this Player.</p>
     </div>
     
 
@@ -1221,56 +1097,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mob</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Mob.html">Mob</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Mob disconnected from.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -1385,6 +1211,152 @@
 
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="sendMessage"><span class="type-signature"></span>sendMessage(line, category)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sends a categorized message to the player.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>line</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
             
             </td>
 
@@ -1588,7 +1560,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on 2018-11-27T13:17:54-06:00
+		on 2018-12-05T01:30:33-06:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
