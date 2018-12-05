@@ -6,86 +6,29 @@ require("../../lib/Object");
 require("../../lib/Array");
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
-var Race, Class, Channel, Template;
+var RaceManager = require("../manager/RaceManager");
+var Race = require("../Race");
+var ClassManager = require("../manager/ClassManager");
+var Class = require("../Class");
+var CommandHandler = require("../manager/CommandManager");
+var Channel = require("../Channel");
+var ChannelManager = require("../manager/ChannelManager");
+var Template = require("../Template");
+var MapManager = require("../manager/MapManager");
+var Map = require("../map/Map");
 
 // local
-var _greeting = fs.readFileSync("./data/greeting.txt", "utf8");
-var _motd = fs.readFileSync("./data/motd.txt", "utf8");
-var _races = [];
-var _classes = [];
-var _commands = [];
-var _channels = [];
 var _templates = [];
 var _characters = [];
 
 // generic namespace
 class Database{
-	static get greeting(){
-		return _greeting;
-	}
-
-	static get motd(){
-		return _motd;
-	}
-
-	static get races(){
-		return _races;
-	}
-
-	static get classes(){
-		return _classes;
-	}
-
-	static get channels(){
-		return _channels;
-	}
-
 	static get templates(){
 		return _templates;
 	}
 
 	static get characters(){
 		return _characters;
-	}
-
-	/**
-	 * Get race by ID;
-	 * @param {number} id 
-	 */
-	static getRaceByID(id){
-		for(var race of _races){
-			if(race.id === id) return race;
-		}
-	}
-
-	/**
-	 * Get race by display name.
-	 * @param {string} name 
-	 */
-	static getRaceByName(name){
-		for(var race of _races){
-			if(race.display === name) return race;
-		}
-	}
-
-	/**
-	 * Get class by ID;
-	 * @param {number} id 
-	 */
-	static getClassByID(id){
-		for(var _class of _classes){
-			if(_class.id === id) return _class;
-		}
-	}
-
-	/**
-	 * Get class by display name.
-	 * @param {string} name 
-	 */
-	static getClassByName(name){
-		for(var _class of _classes){
-			if(_class.display === name) return _class;
-		}
 	}
 
 	/**
@@ -102,7 +45,7 @@ class Database{
 					var json = JSON.parse(data);
 					var race = new Race();
 					race.__fromJSON(json);
-					_races.push(race);
+					RaceManager.add(race);
 					Logger.info(_("Loaded race '%s'", race.display));
 					if(!--size) callback();
 				});
@@ -124,7 +67,7 @@ class Database{
 					var json = JSON.parse(data);
 					var _class = new Class();
 					_class.__fromJSON(json);
-					_classes.push(_class);
+					ClassManager.add(_class);
 					Logger.info(_("Loaded class '%s'", _class.display));
 					if(!--size) callback();
 				});
@@ -132,23 +75,7 @@ class Database{
 		});
 	}
 
-	static processCommand(mob, input){
-		for(var command of _commands){
-			if(command.match(mob, input)) {
-				command.run(mob, input);
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	static sortCommandsBySpecificity(){
-		_commands.sort(function(a,b){
-			return b.specificity - a.specificity;
-		});
-	}
-
+	// loads commands into commandhandler
 	static loadCommands(callback){
 		Logger.info(_("Loading commands..."));
 		fs.readdir("./src/mud/command/", function(err, files){
@@ -156,23 +83,13 @@ class Database{
 				var _class = require("../command/"+file);
 				var command = new _class();
 				if(!command.rule) continue;
-				_commands.push(command);
+				CommandHandler.add(command);
 				Logger.info(_("Loaded command '%s'", command.plain));
 			}
 
-			Database.sortCommandsBySpecificity();
+			CommandHandler.sortCommandsBySpecificity();
 			callback();
 		})
-	}
-
-	static getChannelByKeywords(keywords){
-		return Array.search(keywords);
-	}
-
-	static getChannelByID(id){
-		for(var channel of _channels){
-			if(channel.id === id) return channel;
-		}
 	}
 
 	static loadChannels(callback){
@@ -182,7 +99,7 @@ class Database{
 				var _channel = require("../../../data/channel/"+file);
 				var channel = new Channel();
 				channel.__fromJSON(_channel);
-				_channels.push(channel);
+				ChannelManager.add(channel);
 				Logger.info(_("Loaded channel '%s'", channel.name));
 			}
 
@@ -211,6 +128,14 @@ class Database{
 		});
 	}
 
+	static loadMap(callback){
+		Logger.info(_("Loading map..."));
+		// no map format, make a generic one
+		MapManager.map = new Map({width:100, height:100, levels:10});
+		Logger.info(_("Loaded map."));
+		callback();
+	}
+
 	/**
 	 * Load all data into database.
 	 * Calls callback at the end.
@@ -220,7 +145,7 @@ class Database{
 		Logger.info(_("Loading database..."));
 
 		// specify loaders in the order they should be run
-		var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands, Database.loadTemplates];
+		var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands, Database.loadTemplates, Database.loadMap];
 
 		// create a "loader iterator" that propagates callbacks
 		var i = 0;
@@ -241,9 +166,3 @@ class Database{
 }
 
 module.exports = Database;
-
-// cyclical includes
-Race = require("../Race");
-Class = require("../Class");
-Channel = require("../Channel");
-Template = require("../Template");

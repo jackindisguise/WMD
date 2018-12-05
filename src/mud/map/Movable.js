@@ -25,6 +25,15 @@ class Movable extends MapObject{
 			return this.loc.z;
 	}
 
+	/**
+	 * Get the tile in the given direction.
+	 * @param {Direction.flags} dir 
+	 */
+	getStep(dir){
+		if(this.loc instanceof Tile)
+			return this.loc.getStep(dir);
+	}
+
 	toString(){
 		return util.format("{Movable<%d,%d,%d>}", this.x, this.y, this.z)
 	}

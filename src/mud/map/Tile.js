@@ -69,6 +69,15 @@ class Tile extends MapObject{
 		super.remove(mapobject);
 		if(mapobject.loc !== this) this._map.remove(mapobject);
 	}
+
+	/**
+	 * Get the tile in the given direction.
+	 * @param {Direction.flags} dir 
+	 */
+	getStep(dir){
+		if(this.map)
+			return this.map.getStep(this.x, this.y, this.z, dir);
+	}
 }
 
 Tile.prototype._map = null;
@@ -82,6 +91,9 @@ Tile.prototype.keywords = "tile";
 
 /** @default "Tile" */
 Tile.prototype.display = "Tile";
+
+/** @default "A generic tile." */
+Tile.prototype.description = "A generic tile."
 
 module.exports = Tile;
 

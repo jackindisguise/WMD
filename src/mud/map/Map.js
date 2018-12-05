@@ -1,5 +1,6 @@
 // local includes
 var Tile = require("./Tile");
+var Direction = require("../Direction");
 
 class Map{
 	/**
@@ -57,7 +58,27 @@ class Map{
 	 * @param {number} z The level.
 	 */
 	getTileByXYZ(x,y,z){
+		if(x < 0 || x > this.width) return;
+		if(y < 0 || y > this.height) return;
+		if(z < 0 || z > this.levels) return;
 		return this._grid[z][y][x];
+	}
+
+	/**
+	 * Get the tile in the given direction.
+	 * @param {number} x 
+	 * @param {number} y 
+	 * @param {number} z 
+	 * @param {Direction.flags} dir 
+	 */
+	getStep(x,y,z,dir){
+		if(dir&Direction.flag.NORTH) y--;
+		if(dir&Direction.flag.SOUTH) y++;
+		if(dir&Direction.flag.EAST) x++;
+		if(dir&Direction.flag.WEST) x--;
+		if(dir&Direction.flag.UP) z++;
+		if(dir&Direction.flag.DOWN) z--;
+		return this.getTileByXYZ(x,y,z);
 	}
 
 	/**

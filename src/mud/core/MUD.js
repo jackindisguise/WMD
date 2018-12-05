@@ -4,21 +4,15 @@ var fs = require("fs");
 
 // local includes
 var _ = require("../../../i18n");
-var Logger = require("../../util/Logger");
-var Database = require("./Database");
-var Server = require("../io/Server");
-var Player = require("../io/Player");
 var _package = require("../../../package.json");
+var PlayerManager = require("../manager/PlayerManager");
+var Logger = require("../../util/Logger");
+var Server = require("../io/Server");
 
 /**
  * MUD handler.
  */
 class MUD extends EventEmitter{
-	constructor(){
-		super();
-		this._players = [];
-	}
-
 	/**
 	 * Shortcut for package.json's "name" value.
 	 */
@@ -34,39 +28,19 @@ class MUD extends EventEmitter{
 	}
 
 	/**
-	 * The players connected to this MUD.
-	 */
-	get players(){
-		return this._players;
-	}
-
-	/**
-	 * Retreive a player based on its mob's keywords.
-	 * @param {string} name 
-	 */
-	getPlayerByName(name){
-		for(var player of this._players){
-			if(!player.mob) continue;
-			if(player.mob.matchKeywords(name)) return player;
-		}
-	}
-
-	/**
 	 * Start any vital MUD processes, including the server.
 	 * @param {int} port
 	 * @param {function} callback
 	 */
 	start(port, callback){
-		Database.load(function(){
-			Server.open(port, function(){
-				Logger.info(_("Server started on port %s", port));
-				// start listening for new client connections
-				Server.on("connect", function(client){
-					this.connect(client);
-				}.bind(this));
-
-				if(callback) callback();
+		Server.open(port, function(){
+			Logger.info(_("Server started on port %s", port));
+			// start listening for new client connections
+			Server.on("connect", function(client){
+				this.connect(client);
 			}.bind(this));
+
+			if(callback) callback();
 		}.bind(this));
 	}
 
@@ -81,8 +55,7 @@ class MUD extends EventEmitter{
 	 * Connect a new MUDClient.
 	 */
 	connect(client){
-		var player = new Player({client:client});
-		this._players.push(player);
+		var player = PlayerManager.connect(client);
 
 		// start listening for disconnect event
 		player.once("disconnect", function(){
@@ -101,9 +74,7 @@ class MUD extends EventEmitter{
 	 * Disconnect a player.
 	 */
 	disconnect(player){
-		var pos = this._players.indexOf(player);
-		if(pos === -1) return;
-		this._players.splice(pos, 1);
+		PlayerManager.disconnect(player);
 
 		/**
 		 * @event MUD#disconnect
@@ -112,5 +83,7 @@ class MUD extends EventEmitter{
 		this.emit("disconnect", player);
 	}
 }
+
+MUD.prototype._map = null;
 
 module.exports = new MUD();

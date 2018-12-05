@@ -2,11 +2,13 @@
 var util = require("util");
 
 // local includes
-var Player;
+var _ = require("../../../i18n");
+var ChannelManager = require("../manager/ChannelManager");
+var Direction = require("../Direction");
 var Movable = require("./Movable");
+var Tile = require("../map/Tile");
 var Race = require("../Race");
 var Class = require("../Class");
-var Database = require("../core/Database");
 var CharacterData = require("../CharacterData");
 var MessageCategory = require("../MessageCategory");
 
@@ -167,7 +169,8 @@ class Mob extends Movable{
 			oplayer.mob = null;
 		}
 
-		if(player && (player instanceof Player)){
+//		if(player && player instance of Player){
+		if(player){
 			this._player = player;
 			player.mob = this;
 			this.login();
@@ -176,6 +179,10 @@ class Mob extends Movable{
 
 	__JSONWrite(key, value, json){
 		switch(key){
+			case "loc":
+				if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
+				break;
+
 			case "race": json.race = value.id; break;
 			case "class": json.class = value.id; break;
 			default: Movable.__JSONWrite.call(this, key, value, json); break;
@@ -184,14 +191,56 @@ class Mob extends Movable{
 
 	__JSONRead(key, value){
 		switch(key){
-			case "race": this.race = Database.getRaceByID(value); break;
-			case "class": this.class = Database.getClassByID(value); break;
+			case "loc":
+				this._loc = value;
+				break;
+
+			// move this to Database to avoid cyclical includes
+//			case "race": this.race = Database.getRaceByID(value); break;
+//			case "class": this.class = Database.getClassByID(value); break;
 			default: Movable.__JSONRead.call(this, key, value); break;
 		}
 	}
 
+	/**
+	 * Is this mob acting in the role of a player's character?
+	 * @returns {boolean}
+	 */
+	isCharacter(){
+		return this.characterData ? true : false;
+	}
+
+	/**
+	 * Runs after a Player is connected to this Mob.
+	 */
+	login(){
+	}
+
+	/**
+	 * Runs before a Player is disconnected from this Mob.
+	 */
+	logout(){
+	}
+
+	/**
+	 * Shortcut for `player.sendMessage(message, category)`.
+	 * @param {string} message 
+	 * @param {MessageCategory} category
+	 */
+	sendMessage(message, category){
+		if(this.player) this.player.sendMessage(message, category);
+	}
+
+	/**
+	 * Shortcut for `player.sendLine(line)`.
+	 * @param {string} line 
+	 */
+	sendLine(line){
+		this.sendMessage(line, MessageCategory.DEFAULT);
+	}
+
 	joinChannels(){
-		for(var channel of Database.channels){
+		for(var channel of ChannelManager.channels){
 			this.joinChannel(channel);
 		}
 	}
@@ -218,41 +267,30 @@ class Mob extends Movable{
 		channel.remove(this);
 	}
 
-	/**
-	 * Runs after a Player is connected to this Mob.
-	 */
-	login(){
-	}
+	showRoom(){
+		if(!this.loc) {
+			this.sendLine("You aren't anywhere!");
+			return;
+		}
 
-	/**
-	 * Runs before a Player is disconnected from this Mob.
-	 */
-	logout(){
-	}
+		// default description
+		var desc = _("%s\r\n    %s", this.loc.name, this.loc.description);
 
-	/**
-	 * Is this mob acting in the role of a player's character?
-	 * @returns {boolean}
-	 */
-	isCharacter(){
-		return this.characterData ? true : false;
-	}
+		// generate exits
+		var exits = [];
+		for(var name in Direction.flag){
+			var step = this.getStep(Direction.flag[name]);
+			if(step && this.canMove(step)) exits.push(Direction.long[name]);
+		}
 
-	/**
-	 * Shortcut for `player.sendMessage(message, category)`.
-	 * @param {string} message 
-	 * @param {MessageCategory} category
-	 */
-	sendMessage(message, category){
-		if(this.player) this.player.sendMessage(message, category);
-	}
+		desc += "\r\n\r\n" + _("[Exits: %s]", exits.length ? exits.join(" ") : "none");
 
-	/**
-	 * Shortcut for `player.sendLine(line)`.
-	 * @param {string} line 
-	 */
-	sendLine(line){
-		this.sendMessage(line, MessageCategory.DEFAULT);
+		// generate content descriptions
+		for(var obj of this.loc.contents){
+			desc += "\r\n" + _("    %s", obj.name);
+		}
+
+		this.sendLine(desc);
 	}
 }
 
@@ -301,8 +339,6 @@ Mob.prototype.keywords = "mob";
 Mob.prototype.display = "Mob";
 
 module.exports = Mob;
-
-Player = require("../io/Player");
 
 /**
  * Sole valid argument for `new Mob()`.

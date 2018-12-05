@@ -82,5 +82,9 @@
 	"Health": "Health",
 	"Mana": "Mana",
 	"Energy": "Energy",
-	"%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s": "%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s"
+	"%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s": "%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s",
+	"Loading map...": "Loading map...",
+	"Loaded map.": "Loaded map.",
+	"%s\r\n    %s": "%s\r\n    %s",
+	"[Exits: %s]": "[Exits: %s]"
 }

@@ -1,12 +1,20 @@
 // node includes
 var util = require("util");
+var fs = require("fs");
 
 // local includes
 require("../lib/String");
 require("../lib/Array");
-var Database, MUD, Mob;
 var _ = require("../../i18n");
 var Logger = require("../util/Logger");
+var RaceManager = require("./manager/RaceManager");
+var ClassManager = require("./manager/ClassManager");
+var MapManager = require("./manager/MapManager");
+var Mob = require("./map/Mob");
+
+// text data
+var greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
+var motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
 
 /**
  * Used for transitioning a client into a proper playable state.
@@ -25,7 +33,7 @@ class Nanny{
     }
 
     greet(){
-        this.player.sendLine(Database.greeting);
+        this.player.sendLine(greeting);
         this.askForName();
     }
 
@@ -42,7 +50,7 @@ class Nanny{
 
     askForRace(){
         var msg = _("------------------");
-        for(var race of Database.races){
+        for(var race of RaceManager.races){
             msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
         }
 
@@ -55,7 +63,7 @@ class Nanny{
     }
 
     processRace(input){
-        var race = Database.races.search(input);
+        var race = RaceManager.races.search(input);
         if(!race) {
             this.player.sendLine(_("That isn't a valid race."));
             this.askForRace();
@@ -68,7 +76,7 @@ class Nanny{
 
     askForClass(){
         var msg = _("------------------");
-        for(var _class of Database.classes){
+        for(var _class of ClassManager.classes){
             msg += util.format(_("%s%s %s %s %s"), "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
         }
 
@@ -81,7 +89,7 @@ class Nanny{
     }
 
     processClass(input){
-        var _class = Database.classes.search(input);
+        var _class = ClassManager.classes.search(input);
         if(!_class) {
             this.player.sendLine(_("That isn't a valid class."));
             this.askForClass();
@@ -93,6 +101,7 @@ class Nanny{
     }
 
     createCharacter(){
+        this.isNew = true;
         this.mob = new Mob();
         this.mob.name = this.name;
         this.mob.race = this.race;
@@ -101,13 +110,31 @@ class Nanny{
     }
 
     motd(){
-        this.player.sendLine(Database.motd);
+        this.player.sendLine(motd);
         this.player.ask(_("Press enter to continue..."), this.finish.bind(this));
     }
 
     finish(){
+        // assign our mob
         this.player.mob = this.mob;
-        this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob.race.name, this.mob.class.name));
+
+        // move to new location
+        if(this.isNew){
+            this.mob.loc = MapManager.map.getTileByXYZ(0,0,0);
+            this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob.race.name, this.mob.class.name));
+
+        // load old location
+        } else {
+            var tile = MapManager.map.getTileByXYZ(this.loc.x, this.loc.y, this.loc.z);
+            if(tile) this.loc = tile;
+            else {
+                Logger.error("bad loc %s on character login", JSON.stringify(this.loc));
+                this.loc = MapManager.map.getTileByXYZ(0,0,0);
+            }
+        }
+
+        // show room
+        this.mob.showRoom();
     }
 }
 
@@ -116,6 +143,7 @@ Nanny.prototype.name = null;
 Nanny.prototype.mob = null;
 Nanny.prototype.race = null;
 Nanny.prototype.class = null;
+Nanny.prototype.isNew = false;
 
 module.exports = Nanny;
 
@@ -124,8 +152,3 @@ module.exports = Nanny;
  * @typedef {Object} NannyConstructorOptions
  * @property {Player} player The player to begin baby sitting.
  */
-
-// cyclical include
-Database = require("./core/Database");
-MUD = require("./core/MUD");
-Mob = require("./map/Mob");

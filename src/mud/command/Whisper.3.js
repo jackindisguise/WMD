@@ -1,6 +1,5 @@
 // local includes
 var _ = require("../../../i18n");
-var Database = require("../core/Database");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 

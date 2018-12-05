@@ -1,13 +1,13 @@
 // local includes
 var _ = require("../../../i18n");
-var MUD = require("../core/MUD");
+var PlayerManager = require("../manager/PlayerManager");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 
 class Who extends Command{
 	exec(mob){
-		var msg = _("Players Connected: %d", MUD.players.length);
-		for(var player of MUD.players){
+		var msg = _("Players Connected: %d", PlayerManager.players.length);
+		for(var player of PlayerManager.players){
 			msg += "\r\n";
 			msg += _("%s", player.mob ? "["+player.mob.name+"]" : "{"+player.socketID+"}");
 		}

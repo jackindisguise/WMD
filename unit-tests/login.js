@@ -3,6 +3,7 @@ require("./PUG");
 
 // node includes
 var util = require("util");
+var fs = require("fs");
 
 // npm includes
 var expect = require("chai").expect;
@@ -11,7 +12,13 @@ var io = require("socket.io-client");
 // local includes
 var _ = require("../i18n");
 var MUD = require("../src/mud/core/MUD");
+var RaceManager = require("../src/mud/manager/RaceManager");
+var ClassManager = require("../src/mud/manager/ClassManager");
 var Database = require("../src/mud/core/Database");
+
+// text data
+var greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
+var motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
 
 describe("Login", function(){
     var player;
@@ -22,7 +29,7 @@ describe("Login", function(){
         function sequence(message){
             switch(c++){
                 case 0:
-                    expect(message).to.equal(Database.greeting);
+                    expect(message).to.equal(greeting);
                     break;
 
                 case 1:
@@ -32,7 +39,7 @@ describe("Login", function(){
 
                 case 2:
                     var msg = _("------------------");
-                    for(var race of Database.races){
+                    for(var race of RaceManager.races){
                         msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
                     }
             
@@ -48,7 +55,7 @@ describe("Login", function(){
 
                 case 4:
                     var msg = _("------------------");
-                    for(var _class of Database.classes){
+                    for(var _class of ClassManager.classes){
                         msg += util.format(_("%s%s %s %s %s"), "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
                     }
             
@@ -63,7 +70,7 @@ describe("Login", function(){
                     break;
 
                 case 6:
-                    expect(message).to.equal(Database.motd);
+                    expect(message).to.equal(motd);
                     break;
 
                 case 7:
@@ -73,10 +80,15 @@ describe("Login", function(){
 
                 case 8:
                     expect(message).to.equal(_("Welcome to the game, %s the %s %s!", sPlayer.mob.name, sPlayer.mob.race.name, sPlayer.mob.class.name));
+                    break;
+
+                case 9:
+                    var msg = "Tile\r\n    A generic tile.\r\n\r\n[Exits: south east southeast up]\r\n    Judas";
+                    expect(message).to.equal(msg);
                     player.emit("command", "blah");
                     break;
 
-                    case 9:
+                case 10:
                     expect(message).to.equal(_("Do what, now?"));
                     done();
                     break;

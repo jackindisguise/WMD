@@ -1,9 +1,7 @@
 // local includes
 var _ = require("../../../i18n");
-var Database = require("../core/Database");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
-var channel = Database.getChannelByID(0);
 
 class Whisper extends Command{
 	exec(mob, message){

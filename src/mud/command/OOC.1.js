@@ -1,9 +1,9 @@
 // local includes
 var _ = require("../../../i18n");
-var Database = require("../core/Database");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
-var channel = Database.getChannelByID(1);
+var ChannelManager = require("../manager/ChannelManager");
+var channel = ChannelManager.getChannelByID(1);
 
 class OOC extends Command{
 	exec(mob, message){

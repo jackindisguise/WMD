@@ -3,9 +3,11 @@ var EventEmitter = require("events");
 var util = require("util");
 
 // local includes
-var MUD, Database, Mob, Nanny;
+// cyclical includes
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
+var CommandHandler = require("../manager/CommandManager");
+var Nanny = require("../Nanny");
 var MessageCategory = require("../MessageCategory");
 
 /**
@@ -52,7 +54,8 @@ class Player extends EventEmitter {
 			omob.player = null;
 		}
 
-		if(mob && mob instanceof Mob){
+//		if(mob && mob instanceof Mob){
+		if(mob){
 			this._mob = mob;
 			mob.player = this;
 			this.login();
@@ -75,7 +78,7 @@ class Player extends EventEmitter {
 
 		// command processing
 		} else if(this.mob) {
-			var result = Database.processCommand(this.mob, input);
+			var result = CommandHandler.processCommand(this.mob, input);
 			if(!result) {
 				this.sendLine(_("Do what, now?"));
 			}
@@ -199,9 +202,3 @@ module.exports = Player;
  * @property {Client} client The client to manage.
  * @property {Mob} mob The mob to manage.
  */
-
-// cyclical includes
-MUD = require("../core/MUD");
-Database = require("../core/Database");
-Mob = require("../map/Mob");
-Nanny = require("../Nanny");
