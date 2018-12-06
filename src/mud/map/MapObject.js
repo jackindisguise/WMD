@@ -57,12 +57,6 @@ class MapObject{
 		if(this._template) return;
 		this.__proto__ = template.obj;
 		this._template = template;
-
-		// clone contents of template
-		for(var obj of template.obj.contents){
-			var clone = obj.clone();
-			clone.loc = this;
-		}
 	}
 
 	get template(){
