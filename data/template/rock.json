@@ -1,7 +1,7 @@
 {
     "name": "rock",
-    "type": "Item",
     "obj":{
+        "constructor": "Item",
         "keywords": "rock",
         "display": "a rock"
     }

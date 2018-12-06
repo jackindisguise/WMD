@@ -71,7 +71,7 @@ describe("MapObject", function(){
         var object = new MapObject();
         object.display = "not racist";
         var json = object.__toJSON();
-        expect(JSON.stringify(json)).to.equal('{"display":"not racist"}');
+        expect(JSON.stringify(json)).to.equal('{"constructor":"MapObject","display":"not racist"}');
         done();
     });
 })

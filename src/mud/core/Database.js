@@ -17,7 +17,7 @@ var Channel = require("../Channel");
 var ChannelManager = require("../manager/ChannelManager");
 var MapManager = require("../manager/MapManager");
 var Map = require("../map/Map");
-var MapObjectFactory = require("../factory/MapObjectFactory");
+var ObjectFactory = require("../factory/ObjectFactory");
 var TemplateManager = require("../manager/TemplateManager");
 var Template = require("../Template");
 
@@ -127,12 +127,12 @@ class Database{
 			var contents = template._contents;
 			if(!contents) continue;
 			for(var json of contents){
-				var obj = MapObjectFactory.loadFromInstanceJSON(json);
+				var obj = ObjectFactory.loadFromJSON(json);
 				if(obj) obj.loc = template.obj;
 			}
 
 			delete template._contents;
-			Logger.info(_("Finished loading template for <%s> '%s'", template.type.name, template.obj.name));
+			Logger.info(_("Finished loading template for <%s> '%s'", template.obj.constructor.name, template.obj.name));
 		}
 
 		callback();

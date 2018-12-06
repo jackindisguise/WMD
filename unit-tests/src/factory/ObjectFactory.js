@@ -3,9 +3,9 @@ var expect = require("chai").expect;
 
 // local includes
 var TemplateManager = require("../../../src/mud/manager/TemplateManager");
-var MapObjectFactory = require("../../../src/mud/factory/MapObjectFactory");
+var ObjectFactory = require("../../../src/mud/factory/ObjectFactory");
 
-describe("MapObjectFactory", function(){
+describe("ObjectFactory", function(){
 	it("create a MapObject from a Template", function(done){
 		var rock = TemplateManager.getTemplateByName("rock");
 		var instance = rock.spawn();

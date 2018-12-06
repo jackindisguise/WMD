@@ -1,5 +1,5 @@
 // local includes
-var MapObjectFactory = require("./factory/MapObjectFactory");
+var MapObjectFactory = require("./factory/ObjectFactory");
 
 class Template{
 	constructor(options){
@@ -10,16 +10,9 @@ class Template{
 
 	__JSONRead(key, value){
 		switch(key){
-			// get the literal constructor based on the name
-			case "type":
-				var constructor = MapObjectFactory.getConstructorByType(value);
-				if(!constructor) Logger.error(_("bad constructor %s", value));
-				else this.type = constructor;
-				break;
-
 			// object instance with attributes assigned.
 			case "obj":
-				this.obj = MapObjectFactory.loadFromBaseJSON(value, this.type);
+				this.obj = MapObjectFactory.loadFromJSON(value);
 				break;
 
 			default:
@@ -29,7 +22,6 @@ class Template{
 
 	__JSONWrite(key, value, json){
 		switch(key){
-			case "type": json.type = value.name; break; // save constructor name as type
 			case "obj": json.obj = value.__toJSON(); break; // save JSON object
 			default: Object.__JSONWrite.call(this, key, value, json); break;
 		}
@@ -39,9 +31,9 @@ class Template{
 	 * Spawn an instance of this template.
 	 */
 	spawn(){
-		var constructor = this.type;
-		var instance = new constructor({template:this});
-		return instance;
+		var obj = this.obj.clone();
+		obj.template = this;
+		return obj;
 	}
 }
 

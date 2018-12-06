@@ -140,11 +140,6 @@ class MapObject{
 			// to accomplish it here without cyclical
 			// includes. which i'm trying to avoid. :)
 			case "contents":
-/*				var loaded = [];
-				for(var json of value){
-					var obj = MapObjectFactory.loadFromTemplate(json);
-					if(obj) loaded.push(obj);
-				}*/
 				break;
 
 			// read value generically

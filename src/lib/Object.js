@@ -31,7 +31,7 @@ Object.defineProperty(Object.prototype, '__JSONWrite', {
  */
 Object.defineProperty(Object.prototype, '__toJSON', {
     value: function(){
-        var json = {};
+        var json = {constructor:this.constructor.name};
         for(var variable in this){
             this.__JSONWrite(variable, this[variable], json);
         }
@@ -55,6 +55,7 @@ Object.defineProperty(Object.prototype, '__JSONRead', {
 Object.defineProperty(Object.prototype, '__fromJSON', {
     value: function(json){
         for(var variable in json){
+            if(variable === "constructor") continue;
             this.__JSONRead(variable, json[variable]);
         }
     }

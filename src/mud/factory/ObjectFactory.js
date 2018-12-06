@@ -17,33 +17,36 @@ var _constructorNames = {
 	"Tile": Tile
 }
 
-class MapObjectFactory{
-	static getConstructorByType(name){
+class ObjectFactory{
+	static getConstructorByName(name){
 		return _constructorNames[name];
 	}
 
-	/**
-	 * Load from JSON from a base object with no template itself.
-	 * @param {Object} json 
-	 * @param {function} constructor 
-	 */
-	static loadFromBaseJSON(json, constructor){
+	static loadFromJSON(json){
+		if(json.template){
+			return ObjectFactory.loadFromJSONAsTemplate(json);
+		} if(json.constructor){
+			return ObjectFactory.loadFromJSONAsConstructor(json);
+		}
+	}
+
+	static loadFromJSONAsConstructor(json){
+		var constructor = ObjectFactory.getConstructorByName(json.constructor);
+		if(!constructor) return;
 		var obj = new constructor();
 		obj.__fromJSON(json);
 		return obj;
 	}
 
-	/**
-	 * Load from JSON from an instance object spawned from a template.
-	 * @param {Object} json 
-	 */
-	static loadFromInstanceJSON(json){
+	static loadFromJSONAsTemplate(json){
 		var templateName = json.template;
 		var template = TemplateManager.getTemplateByName(templateName);
-		var constructor = template.type;
-		var obj = new constructor({template:template});
+		var constructor = ObjectFactory.getConstructorByName(template.obj.constructor.name);
+		if(!constructor) return;
+		var obj = new constructor();
+		obj.__fromJSON(json);
 		return obj;
 	}
 }
 
-module.exports = MapObjectFactory;
+module.exports = ObjectFactory;

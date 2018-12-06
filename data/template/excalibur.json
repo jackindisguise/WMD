@@ -1,7 +1,7 @@
 {
     "name": "excalibur",
-    "type": "Weapon",
     "obj":{
+        "constructor": "Weapon",
         "keywords": "legendary sword excalibur",
         "display": "The Legendary Sword Excalibur"
     }

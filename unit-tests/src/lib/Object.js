@@ -27,7 +27,7 @@ describe("Object", function(){
         it("toJSON", function(done){
             var b = new B();
             var bJSON = b.__toJSON();
-            expect(JSON.stringify(bJSON)).to.equal('{}');
+            expect(JSON.stringify(bJSON)).to.equal('{"constructor":"B"}');
             done();
         });
 
@@ -35,7 +35,7 @@ describe("Object", function(){
             var b = new B();
             b.a = 55;
             var cJSON = b.__toJSON();
-            expect(JSON.stringify(cJSON)).to.equal('{"Z":550}');
+            expect(JSON.stringify(cJSON)).to.equal('{"constructor":"B","Z":550}');
 
             var bClone = new B();
             bClone.__fromJSON(cJSON);
