@@ -1,9 +1,8 @@
 {
-    "id": 0,
+    "name": "rock",
     "type": "Item",
     "obj":{
         "keywords": "rock",
-        "display": "rock",
-        "level": 55
+        "display": "a rock"
     }
 }

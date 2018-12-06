@@ -5,9 +5,9 @@ class Equipment extends Item{
 }
 
 /** @default "equipment" */
-Equipment.prototype.keywords = "item";
+Equipment.prototype.keywords = "equipment";
 
 /** @default "Equipment" */
-Equipment.prototype.display = "Item";
+Equipment.prototype.display = "Equipment";
 
 module.exports = Equipment;

@@ -40,7 +40,7 @@ describe("Login", function(){
                 case 2:
                     var msg = "------------------";
                     for(var race of RaceManager.races){
-                        msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
+                        msg += util.format("%s%s %s %s %s", "\r\n", "|", race.name.padLeft(14), "|", race.description);
                     }
             
                     msg += "\r\n";
@@ -56,7 +56,7 @@ describe("Login", function(){
                 case 4:
                     var msg = "------------------";
                     for(var _class of ClassManager.classes){
-                        msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
+                        msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.name.padLeft(14), "|", _class.description);
                     }
             
                     msg += "\r\n";

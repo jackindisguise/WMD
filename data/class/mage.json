@@ -1,6 +1,5 @@
 {
-    "id":2,
+    "name":"mage",
     "keywords":"mage",
-    "display":"Mage",
     "description":"A caster of spells."
 }

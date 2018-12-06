@@ -1,0 +1,13 @@
+{
+    "name": "belt",
+    "type": "Item",
+    "obj":{
+        "keywords": "belt",
+		"display": "a belt",
+		"contents":[
+			{
+				"template": "excalibur"
+			}
+		]
+    }
+}

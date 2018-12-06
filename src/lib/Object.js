@@ -45,7 +45,7 @@ Object.defineProperty(Object.prototype, '__toJSON', {
  */
 Object.defineProperty(Object.prototype, '__JSONRead', {
     value: function(key, value){
-     this[key] = value;
+        this[key] = value;
     }
 });
 

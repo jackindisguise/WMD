@@ -1,38 +1,29 @@
 // local includes
-var MapObject = require("./map/MapObject");
-var Movable = require("./map/Movable");
-var Mob = require("./map/Mob");
-var Item = require("./map/Item");
-var Equipment = require("./map/Equipment");
-var Tile = require("./map/Tile");
+var MapObjectFactory = require("./factory/MapObjectFactory");
 
 class Template{
+	constructor(options){
+		if(options){
+			if(options.name) this.name = options.name;
+		}
+	}
+
 	__JSONRead(key, value){
 		switch(key){
 			// get the literal constructor based on the name
 			case "type":
-				var v = MapObject;
-				switch(value){
-					case "Tile": v = Tile; break;
-					case "Equipment": v = Equipment; break;
-					case "Item": v = Item; break;
-					case "Mob": v = Mob; break;
-					case "Movable": v = Movable; break;
-					case "MapObject": v = MapObject; break;
-				}
-
-				this.type = v;
+				var constructor = MapObjectFactory.getConstructorByType(value);
+				if(!constructor) Logger.error(_("bad constructor %s", value));
+				else this.type = constructor;
 				break;
 
 			// object instance with attributes assigned.
 			case "obj":
-				var _constructor = this.type;
-				var obj = new _constructor();
-				obj.__fromJSON(value);
-				this.obj = obj;
+				this.obj = MapObjectFactory.loadFromBaseJSON(value, this.type);
 				break;
 
-			default: Object.call(this, key, value); break;
+			default:
+				Object.__JSONRead.call(this, key, value); break;
 		}
 	}
 
@@ -40,7 +31,7 @@ class Template{
 		switch(key){
 			case "type": json.type = value.name; break; // save constructor name as type
 			case "obj": json.obj = value.__toJSON(); break; // save JSON object
-			default: Object.call(this, key, value, json); break;
+			default: Object.__JSONWrite.call(this, key, value, json); break;
 		}
 	}
 
@@ -48,16 +39,15 @@ class Template{
 	 * Spawn an instance of this template.
 	 */
 	spawn(){
-		var _constructor = this.type;
-		var instance = new _constructor();
-		instance.__proto__ = this.obj;
+		var constructor = this.type;
+		var instance = new constructor({template:this});
 		return instance;
 	}
 }
 
 
-Template.prototype.id = 0;
-Template.prototype.type = MapObject;
+Template.prototype.name = null;
+Template.prototype.type = null;
 Template.prototype.obj = null;
 
 module.exports = Template;

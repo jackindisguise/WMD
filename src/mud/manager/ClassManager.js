@@ -19,22 +19,12 @@ class ClassManager{
 	}
 
 	/**
-	 * Get class by ID;
-	 * @param {number} id 
-	 */
-	static getClassByID(id){
-		for(var _class of _classes){
-			if(_class.id === id) return _class;
-		}
-	}
-
-	/**
-	 * Get class by display name.
+	 * Get class by name.
 	 * @param {string} name 
 	 */
 	static getClassByName(name){
 		for(var _class of _classes){
-			if(_class.display === name) return _class;
+			if(_class.name === name) return _class;
 		}
 	}
 }

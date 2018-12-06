@@ -1,3 +1,9 @@
+// local includes
+var TemplateManager = require("../manager/TemplateManager");
+
+// local
+var nextID = 0;
+
 /**
  * The base object that can legally inhabit a {@link Map}.
  */
@@ -7,15 +13,21 @@ class MapObject{
 	 * @param {MapObjectConstructorOptions} options
 	 */
 	constructor(options){
+		this._id = nextID++;
 		this._contents = [];
 
 		if(options){
 			if(options.loc != null) this.loc = options.loc;
+			if(options.template != null) this.template = options.template;
 		}
 	}
 
 	toString(){
 		return "{MapObject}";
+	}
+
+	get id(){
+		return this._id;
 	}
 
 	/**
@@ -39,6 +51,22 @@ class MapObject{
 
 	get loc(){
 		return this._loc;
+	}
+
+	set template(template){
+		if(this._template) return;
+		this.__proto__ = template.obj;
+		this._template = template;
+
+		// clone contents of template
+		for(var obj of template.obj.contents){
+			var clone = obj.clone();
+			clone.loc = this;
+		}
+	}
+
+	get template(){
+		return this._template;
 	}
 
 	// recursive reference between a map object's loc and the loc's contents.
@@ -66,18 +94,27 @@ class MapObject{
 
 	__JSONWrite(key, value, json){
 		switch(key){
+			// no id
+			case "_id": break;
+
 			// no loc
-			case "_loc": return;
+			case "_loc": break;
+
+			// save template ID
+			case "_template":
+				if(value === null) break;
+				json.template = value.name;
+				break;
 
 			// convert contents list to JSON
 			case "_contents":
-				break;
 				if(!value.length) return;
 
 				// convert inventory to JSON
 				var converted = [];
 				for(var object of value){
-					if(object instanceof MapObject) converted.push(object.__toJSON());
+					if(object instanceof MapObject)
+						converted.push(object.__toJSON());
 				}
 		
 				if(converted.length) json.contents = converted;
@@ -92,13 +129,20 @@ class MapObject{
 
 	__JSONRead(key, value){
 		switch(key){
-			// load contents
+			case "template":
+				var template = TemplateManager.getTemplateByName(value);
+				if(template) this.template = template;
+				break;
+
+			// load contents elsewhere
+			// since this requires the context of other
+			// descendent map objects, there's no way
+			// to accomplish it here without cyclical
+			// includes. which i'm trying to avoid. :)
 			case "contents":
-			/*	// something like this;
-				// load objects
-				var loaded = [];
+/*				var loaded = [];
 				for(var json of value){
-					var obj = Database.loadObject(json);
+					var obj = MapObjectFactory.loadFromTemplate(json);
 					if(obj) loaded.push(obj);
 				}*/
 				break;
@@ -164,7 +208,25 @@ class MapObject{
 		this._contents.splice(pos, 1);
 		if(mapobject.loc == this) mapobject.loc = null; // cyclical dereference
 	}
+
+	clone(obj){
+		var json = this.__toJSON();
+		var constructor = this.constructor;
+		var clone = new constructor();
+		clone.__fromJSON(json);
+
+		// clone contents
+		for(var obj of this.contents){
+			var _clone = obj.clone();
+			_clone.loc = clone;
+		}
+
+		return clone;
+	}
 }
+
+MapObject.prototype._id = null;
+MapObject.prototype._template = null;
 
 /**
  * The object we currently inhabit.

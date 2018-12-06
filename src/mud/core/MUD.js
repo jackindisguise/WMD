@@ -4,6 +4,7 @@ var EventEmitter = require("events");
 // local includes
 var _ = require("../../../i18n");
 var _package = require("../../../package.json");
+var Player = require("../io/Player");
 var PlayerManager = require("../manager/PlayerManager");
 var Logger = require("../../util/Logger");
 var Server = require("../io/Server");
@@ -54,7 +55,8 @@ class MUD extends EventEmitter{
 	 * Connect a new MUDClient.
 	 */
 	connect(client){
-		var player = PlayerManager.connect(client);
+		var player = new Player({client:client});
+		PlayerManager.add(player);
 
 		// start listening for disconnect event
 		player.once("disconnect", function(){
@@ -73,7 +75,7 @@ class MUD extends EventEmitter{
 	 * Disconnect a player.
 	 */
 	disconnect(player){
-		PlayerManager.disconnect(player);
+		PlayerManager.remove(player);
 
 		/**
 		 * @event MUD#disconnect

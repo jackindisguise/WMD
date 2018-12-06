@@ -19,16 +19,6 @@ class RaceManager{
 	}
 
 	/**
-	 * Get race by ID;
-	 * @param {number} id 
-	 */
-	static getRaceByID(id){
-		for(var race of _races){
-			if(race.id === id) return race;
-		}
-	}
-
-	/**
 	 * Get race by display name.
 	 * @param {string} name 
 	 */

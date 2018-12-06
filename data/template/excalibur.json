@@ -1,0 +1,8 @@
+{
+    "name": "excalibur",
+    "type": "Weapon",
+    "obj":{
+        "keywords": "legendary sword excalibur",
+        "display": "The Legendary Sword Excalibur"
+    }
+}

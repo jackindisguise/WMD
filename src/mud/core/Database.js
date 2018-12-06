@@ -6,6 +6,8 @@ require("../../lib/Object");
 require("../../lib/Array");
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
+var CharacterManager = require("../manager/CharacterManager");
+var Mob = require("../map/Mob");
 var RaceManager = require("../manager/RaceManager");
 var Race = require("../Race");
 var ClassManager = require("../manager/ClassManager");
@@ -15,18 +17,12 @@ var Channel = require("../Channel");
 var ChannelManager = require("../manager/ChannelManager");
 var MapManager = require("../manager/MapManager");
 var Map = require("../map/Map");
+var MapObjectFactory = require("../factory/MapObjectFactory");
 var TemplateManager = require("../manager/TemplateManager");
 var Template = require("../Template");
 
-// local
-var _characters = [];
-
 // generic namespace
 class Database{
-	static get characters(){
-		return _characters;
-	}
-
 	/**
 	 * Load all the races into the database.
 	 * Calls callback at the end.
@@ -42,7 +38,7 @@ class Database{
 					var race = new Race();
 					race.__fromJSON(json);
 					RaceManager.add(race);
-					Logger.info(_("Loaded race '%s'", race.display));
+					Logger.info(_("Loaded race '%s'", race.name));
 					if(!--size) callback();
 				});
 			}
@@ -64,11 +60,16 @@ class Database{
 					var _class = new Class();
 					_class.__fromJSON(json);
 					ClassManager.add(_class);
-					Logger.info(_("Loaded class '%s'", _class.display));
+					Logger.info(_("Loaded class '%s'", _class.name));
 					if(!--size) callback();
 				});
 			}
 		});
+	}
+
+	static loadCharacters(callback){
+		// no character loading ATM
+		callback();
 	}
 
 	// loads commands into commandhandler
@@ -85,7 +86,7 @@ class Database{
 
 			CommandHandler.sortCommandsBySpecificity();
 			callback();
-		})
+		});
 	}
 
 	static loadChannels(callback){
@@ -103,19 +104,38 @@ class Database{
 		});
 	}
 
-	static loadTemplates(callback){
-		Logger.info(_("Loading templates..."));
+	static preloadTemplates(callback){
+		Logger.info(_("Preloading templates..."));
 		fs.readdir("./data/template", function(err, files){
 			for(var file of files){
 				var _template = require("../../../data/template/"+file);
 				var template = new Template();
+				if(_template.obj.contents) template._contents = _template.obj.contents;
 				template.__fromJSON(_template);
 				TemplateManager.add(template);
-				Logger.info(_("Loaded template for <%s> '%s'", _template.type, template.obj.name));
+				if(template._contents) Logger.info(_("Loaded half of template for <%s> '%s'", _template.type, template.obj.name));
+				else Logger.info(_("Loaded full template for <%s> '%s'", _template.type, template.obj.name));
 			}
 
 			callback();
 		});
+	}
+
+	static loadTemplates(callback){
+		Logger.info(_("Finish templates..."));
+		for(var template of TemplateManager.templates){
+			var contents = template._contents;
+			if(!contents) continue;
+			for(var json of contents){
+				var obj = MapObjectFactory.loadFromInstanceJSON(json);
+				if(obj) obj.loc = template.obj;
+			}
+
+			delete template._contents;
+			Logger.info(_("Finished loading template for <%s> '%s'", template.type.name, template.obj.name));
+		}
+
+		callback();
 	}
 
 	static loadMap(callback){
@@ -135,7 +155,7 @@ class Database{
 		Logger.info(_("Loading database..."));
 
 		// specify loaders in the order they should be run
-		var loaders = [Database.loadRaces, Database.loadClasses, Database.loadChannels, Database.loadCommands, Database.loadTemplates, Database.loadMap];
+		var loaders = [Database.loadRaces, Database.loadClasses, Database.preloadTemplates, Database.loadTemplates, Database.loadChannels, Database.loadCommands, Database.loadMap, Database.loadCharacters];
 
 		// create a "loader iterator" that propagates callbacks
 		var i = 0;

@@ -1,6 +1,3 @@
-// node includes
-var util = require("util");
-
 // local includes
 require("../../lib/Math");
 var _ = require("../../../i18n");
@@ -10,7 +7,7 @@ var CommandSpecificity = require("../CommandSpecificity");
 
 class Create extends Command{
 	exec(mob){
-		var template = TemplateManager.getTemplateByID(0);
+		var template = TemplateManager.getTemplateByName("rock");
 		var obj = template.spawn();
 		obj.loc = mob;
 		mob.sendLine(_("You created a rock out of nothing. Very cool."));

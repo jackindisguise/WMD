@@ -20,9 +20,9 @@ class TemplateManager{
 		_templates.splice(pos, 1);
 	}
 
-	static getTemplateByID(id){
+	static getTemplateByName(name){
 		for(var template of _templates){
-			if(template.id === id) return template;
+			if(template.name === name) return template;
 		}
 	}
 }

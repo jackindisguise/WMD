@@ -7,7 +7,9 @@ var ChannelManager = require("../manager/ChannelManager");
 var Direction = require("../Direction");
 var Movable = require("./Movable");
 var Tile = require("../map/Tile");
+var RaceManager = require("../manager/RaceManager");
 var Race = require("../Race");
+var ClassManager = require("../manager/ClassManager");
 var Class = require("../Class");
 var CharacterData = require("../CharacterData");
 var MessageCategory = require("../MessageCategory");
@@ -195,9 +197,8 @@ class Mob extends Movable{
 				this._loc = value;
 				break;
 
-			// move this to Database to avoid cyclical includes
-//			case "race": this.race = Database.getRaceByID(value); break;
-//			case "class": this.class = Database.getClassByID(value); break;
+			case "race": this.race = RaceManager.getRaceByID(value); break;
+			case "class": this.class = ClassManager.getClassByID(value); break;
 			default: Movable.__JSONRead.call(this, key, value); break;
 		}
 	}

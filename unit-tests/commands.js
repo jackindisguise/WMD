@@ -36,8 +36,13 @@ describe("Command", function(){
             other.emit("command", "human");
             other.emit("command", "warrior");
             other.emit("command", "motd");
+            var m=0;
             other.on("message", function(message, category){ // fully connected
-                if(message == _("Welcome to the game, %s the %s %s!", "Second", "Human", "Warrior")) d();
+                m++;
+                if(m==9){
+                    expect(message).is.equal(_("Welcome to the game, %s the %s %s!", "Second", "human", "warrior"));
+                    d();
+                }
             });
         });
 
@@ -45,8 +50,13 @@ describe("Command", function(){
         player.emit("command", "human");
         player.emit("command", "warrior");
         player.emit("command", "motd");
+        var m=0;
         player.on("message", function(message, category){ // fully connected
-            if(message == _("Welcome to the game, %s the %s %s!", "First", "Human", "Warrior")) d();
+            m++;
+            if(m==9){
+                expect(message).is.equal(_("Welcome to the game, %s the %s %s!", "First", "human", "warrior"));
+                d();
+            }
         });
     });
 

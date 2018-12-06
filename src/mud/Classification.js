@@ -2,10 +2,6 @@
  * The basic classification system for races and classes.
  */
 class Classification{
-    get name(){
-        return this.display;
-    }
-
     getToNextLevelByLevel(level){
         return this.toNextLevelBase + (this.toNextLevelPerLevel*Math.max(0,level-1));
     }
@@ -78,16 +74,16 @@ class Classification{
 Classification.prototype.id = 0;
 
 /**
+ * Internal name for this classification.
+ * @type {string}
+ */
+Classification.prototype.name = "unknown";
+
+/**
  * Keyword for referencing this classification.
  * @type {string}
  */
 Classification.prototype.keywords = "unknown";
-
-/**
- * Display string for this classification.
- * @type {string}
- */
-Classification.prototype.display = "Unknown";
 
 /**
  * A simple description for this classification.

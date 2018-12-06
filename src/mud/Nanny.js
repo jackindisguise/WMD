@@ -51,7 +51,7 @@ class Nanny{
     askForRace(){
         var msg = "------------------";
         for(var race of RaceManager.races){
-            msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
+            msg += util.format("%s%s %s %s %s", "\r\n", "|", race.name.padLeft(14), "|", race.description);
         }
 
         msg += "\r\n";
@@ -77,7 +77,7 @@ class Nanny{
     askForClass(){
         var msg = "------------------";
         for(var _class of ClassManager.classes){
-            msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
+            msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.name.padLeft(14), "|", _class.description);
         }
 
         msg += "\r\n";

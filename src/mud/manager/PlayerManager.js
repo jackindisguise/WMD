@@ -1,10 +1,19 @@
-var Player = require("../io/Player");
-
 var _players = [];
 
 class PlayerManager{
 	static get players(){
 		return _players;
+	}
+
+	static add(player){
+		if(_players.indexOf(player) != -1) return;
+		_players.push(player);
+	}
+
+	static remove(player){
+		var pos = _players.indexOf(player);
+		if(pos == -1) return;
+		_players.splice(pos, 1);
 	}
 
 	/**
@@ -16,18 +25,6 @@ class PlayerManager{
 			if(!player.mob) continue;
 			if(player.mob.matchKeywords(name)) return player;
 		}
-	}
-
-	static connect(client){
-		var player = new Player({client:client});
-		_players.push(player);
-		return player;
-	}
-
-	static disconnect(player){
-		var pos = _players.indexOf(player);
-		if(pos == -1) return;
-		_players.splice(pos, 1);
 	}
 }
 
