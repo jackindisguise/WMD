@@ -9,10 +9,8 @@ var _ = require("./i18n");
 var port = config.defaultPort ? config.defaultPort : 80;
 
 // load database
-Logger.info("Loading database...");
 Database.load(function(){
-    Logger.info("Loaded database...");
-
+    Logger.info(_("Starting MUD..."));
     // start MUD
     MUD.start(port, function(){
         Logger.info(_("The MUD is up and running.", port));

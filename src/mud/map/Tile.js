@@ -57,7 +57,7 @@ class Tile extends MapObject{
 	 */
 	add(mapobject){
 		super.add(mapobject);
-		if(mapobject.loc === this) this._map.add(mapobject);
+		if(mapobject.loc === this && this._map) this._map.add(mapobject);
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Tile extends MapObject{
 	 */
 	remove(mapobject){
 		super.remove(mapobject);
-		if(mapobject.loc !== this) this._map.remove(mapobject);
+		if(mapobject.loc !== this && this._map) this._map.remove(mapobject);
 	}
 
 	/**

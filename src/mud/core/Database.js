@@ -113,8 +113,8 @@ class Database{
 				if(_template.obj.contents) template._contents = _template.obj.contents;
 				template.__fromJSON(_template);
 				TemplateManager.add(template);
-				if(template._contents) Logger.info(_("Loaded half of template for <%s> '%s'", _template.type, template.obj.name));
-				else Logger.info(_("Loaded full template for <%s> '%s'", _template.type, template.obj.name));
+				if(template._contents) Logger.info(_("Loaded half of template for <%s> '%s'", template.obj.constructor.name, template.obj.name));
+				else Logger.info(_("Loaded full template for <%s> '%s'", template.obj.constructor.name, template.obj.name));
 			}
 
 			callback();
@@ -140,8 +140,20 @@ class Database{
 
 	static loadMap(callback){
 		Logger.info(_("Loading map..."));
-		// no map format, make a generic one
-		MapManager.map = new Map({width:100, height:100, levels:10});
+		var json = require("../../../data/map/map.json");
+		MapManager.map = new Map(json.proportions);
+		for(var z=0;z<json.proportions.levels;z++){
+			for(var y=0;y<json.proportions.height;y++){
+				for(var x=0;x<json.proportions.width;x++){
+					var char = json.map.tiles[z][y][x];
+					var tileJSON = json.materials[char];
+					var tile = ObjectFactory.loadFromJSON(tileJSON.tile);
+					console.log(tile);
+					MapManager.map.setTile(tile, x, y, z);
+				}
+			}
+		}
+
 		Logger.info(_("Loaded map."));
 		callback();
 	}

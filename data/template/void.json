@@ -1,0 +1,9 @@
+{
+    "name": "void",
+    "obj":{
+        "constructor": "Tile",
+        "keywords": "void",
+		"display": "In The Void",
+		"description": "It's a big fuckin' empty void."
+    }
+}

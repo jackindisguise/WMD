@@ -55,5 +55,6 @@
 	"You got a belt with something inside it.": "You got a belt with something inside it.",
 	"Loaded half of template for <%s> '%s'": "Loaded half of template for <%s> '%s'",
 	"Loaded full template for <%s> '%s'": "Loaded full template for <%s> '%s'",
-	"Finish templates...": "Finish templates..."
+	"Finish templates...": "Finish templates...",
+	"Starting MUD...": "Starting MUD..."
 }

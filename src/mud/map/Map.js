@@ -58,9 +58,9 @@ class Map{
 	 * @param {number} z The level.
 	 */
 	getTileByXYZ(x,y,z){
-		if(x < 0 || x > this.width) return;
-		if(y < 0 || y > this.height) return;
-		if(z < 0 || z > this.levels) return;
+		if(x < 0 || x >= this.width) return;
+		if(y < 0 || y >= this.height) return;
+		if(z < 0 || z >= this.levels) return;
 		return this._grid[z][y][x];
 	}
 
@@ -100,6 +100,15 @@ class Map{
 		this._objects.splice(pos, 1);
 	}
 
+	setTile(tile, x, y, z){
+		this._tiles.push(tile);
+		this._grid[z][y][x] = tile;
+		tile._x = x;
+		tile._y = y;
+		tile._z = z;
+		tile._map = this;
+	}
+
 	/**
 	 * Generate a new map grid.
 	 */
@@ -110,8 +119,7 @@ class Map{
 			for(var y=0;y<this._height;y++){
 				this._grid[z][y] = [];
 				for(var x=0;x<this._width;x++){
-					this._grid[z][y][x] = new Tile({map:this,x:x,y:y,z:z});
-					this._tiles.push(this._grid[z][y][x]);
+					this._grid[z][y][x] = null;
 				}
 			}
 		}

@@ -9,7 +9,7 @@ var CommandSpecificity = require("../CommandSpecificity");
 
 class Score extends Command{
 	exec(mob){
-		var msg = _(" %s the %s %s ", mob.name, mob.race.display, mob.class.display).center(80, "-");
+		var msg = _(" %s the %s %s ", mob.name, mob.race.name, mob.class.name).center(80, "-");
 		msg += "\r\n" + util.format("%s %s: %s/%s %s %s: %s/%s %s %s: %s/%s %s", "|", _("Health"), String(mob.health).padLeft(7), String(mob.health).padRight(7), "|", _("Mana"), String(mob.mana).padLeft(9), String(mob.mana).padRight(8), "|", _("Energy"), String(mob.energy).padLeft(7), String(mob.energy).padRight(7), "|");
 		msg += "\r\n" + util.format(" %s ", "Primary").center(80, "-");
 		msg += "\r\n" + util.format("%s %s %s %s %s %s %s", "|", "Strength".center(23), "|", "Agility".center(24), "|", "Intelligence".center(23), "|");
