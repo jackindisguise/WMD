@@ -9,7 +9,7 @@ var Class = require("../Class");
 
 // class loader
 module.exports = function(callback){
-	fs.readdir("./data/Class", function(err, files){
+	fs.readdir("./data/class", function(err, files){
 		for(var file of files){
 			var json = require("../../../data/class/"+file);
 			var cLass = new Class();
