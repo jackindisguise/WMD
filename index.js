@@ -1,8 +1,9 @@
 // local includes
 var _ = require("./i18n");
+var Logger = require("./src/util/Logger");
 var config = require("./config.json");
 var MUD = require("./src/mud/core/MUD");
-var Loader = require("./src/mud/core/MUD");
+var Loader = require("./src/mud/loader/Loader");
 
 // process settings
 var port = config.defaultPort ? config.defaultPort : 80;

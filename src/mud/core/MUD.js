@@ -12,18 +12,18 @@ var Server = require("../io/Server");
 /**
  * MUD handler.
  */
-class MUD extends EventEmitter{
+class MUD{
 	/**
 	 * Shortcut for package.json's "name" value.
 	 */
-	get name(){
+	static get name(){
 		return _package.name;
 	}
 
 	/**
 	 * Shortcut for package.json's "version" value.
 	 */
-	get version(){
+	static get version(){
 		return _package.version;
 	}
 
@@ -32,59 +32,46 @@ class MUD extends EventEmitter{
 	 * @param {int} port
 	 * @param {function} callback
 	 */
-	start(port, callback){
+	static start(port, callback){
 		Server.open(port, function(){
 			Logger.info(_("Server started on port %s", port));
 			// start listening for new client connections
 			Server.on("connect", function(client){
-				this.connect(client);
-			}.bind(this));
+				MUD.connect(client);
+			});
 
-			if(callback) callback();
-		}.bind(this));
+			callback();
+		});
 	}
 
 	/**
 	 * Stop the MUD processes.
 	 */
-	stop(){
+	static stop(){
 		Server.close();
 	}
 
 	/**
 	 * Connect a new MUDClient.
 	 */
-	connect(client){
+	static connect(client){
 		var player = new Player({client:client});
 		PlayerManager.add(player);
 
 		// start listening for disconnect event
 		player.once("disconnect", function(){
-			this.disconnect(player);
-		}.bind(this));
+			MUD.disconnect(player);
+		});
 
-		/**
-		 * @event MUD#connect
-		 * @param {Player} player
-		 */
-		this.emit("connect", player);
 		return player;
 	}
 
 	/**
 	 * Disconnect a player.
 	 */
-	disconnect(player){
+	static disconnect(player){
 		PlayerManager.remove(player);
-
-		/**
-		 * @event MUD#disconnect
-		 * @param {Player} player
-		 */
-		this.emit("disconnect", player);
 	}
 }
 
-MUD.prototype._map = null;
-
-module.exports = new MUD();
+module.exports = MUD;

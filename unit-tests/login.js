@@ -14,6 +14,7 @@ var _ = require("../i18n");
 var MUD = require("../src/mud/core/MUD");
 var RaceManager = require("../src/mud/manager/RaceManager");
 var ClassManager = require("../src/mud/manager/ClassManager");
+var PlayerManager = require("../src/mud/manager/PlayerManager");
 
 // text data
 var greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
@@ -22,12 +23,12 @@ var motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
 describe("Login", function(){
     var player;
     var sPlayer;
-    MUD.once("connect", function(player) { sPlayer = player; });
     it("connect player", function(done){
         var c = 0;
         function sequence(message){
             switch(c++){
                 case 0:
+                    sPlayer = PlayerManager.players[0];
                     expect(message).to.equal(greeting);
                     break;
 
