@@ -1,0 +1,67 @@
+commit 458c0ddd430f2dc13637dbde19cee74ca07e8710
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Dec 9 22:45:44 2018 -0600
+
+    Added a special set of functions called Loaders. They're designed
+    to replace the Database object and its various functions for
+    loading data files.
+    
+    Loaders are now designed to populate Managers.
+    
+    This kind of obfuscates the need for the MUD object, too. I'll
+    probably restructure again in a bit.
+
+commit 18fae70b78d60ac870651136b315816dd0c60475
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Dec 7 23:42:46 2018 -0600
+
+    Working on getting a working map thing.
+
+commit a4780e82aa68d197228944fd43d168ee9b716005
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Dec 6 14:33:43 2018 -0600
+
+    Fixed bug introduced by both clone and `set template` cloning the contents.
+
+commit 5dfbcf1a6882943488d4b7daaa753907b1ddebd6
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Dec 6 14:30:14 2018 -0600
+
+    Laid some of the groundwork for changing the way objects are saved and loaded.
+
+commit d57acad2edf619712dae6483bbc93f44b546aab6
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Dec 6 12:10:08 2018 -0600
+
+    Added a MapObjectFactory to disambiguate object loading functions
+    from either the Template or the MapObject.
+    
+    The MapObject can't be allowed to know about its children because
+    it creates a cyclical reference, which I am trying specifically
+    to avoid here in this change.
+    
+    Templates now have names instead of number IDs. You can basically
+    think of it as a string ID, but I changed it to name cause I felt
+    like it.
+    
+    Templates can now refer to objects that refer to other objects.
+    As of right now it only works for the contents of an object.
+    In future it can be adapted to do other stuff. :)
+
+commit c2aa1d3e3449119746cedbfbf4c6ae1c8f2e22bc
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 5 02:45:19 2018 -0600
+
+    No more cyclical includes. :)
+
+commit 9f0c21aee1448ebf4e7146c4c8409861005bfefd
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 5 01:56:22 2018 -0600
+
+    Added template manager.
+
+commit 4387a0eb611b09ac91b65c06db5985360989169f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 5 01:32:05 2018 -0600
+
+    Now matches new file structure.
