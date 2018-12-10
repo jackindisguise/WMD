@@ -15,7 +15,7 @@ class Map{
 		// process options
 		if(options){
 			if(options.width != null && options.height != null && options.levels != null) {
-				this.setSize(options.width, options.height, options.levels);
+				this.setSize(options.width, options.height, options.levels, options.fill);
 			}
 		}
 	}
@@ -43,12 +43,12 @@ class Map{
 	 * @param {!number} height New height of the map.
 	 * @param {!number} levels New levels of the map.
 	 */
-	setSize(width, height, levels){
+	setSize(width, height, levels, fill){
 		if(this._grid) return;
 		this._levels = levels;
 		this._height = height;
 		this._width = width;
-		this.generate();
+		this.generate(fill);
 	}
 
 	/**
@@ -112,14 +112,15 @@ class Map{
 	/**
 	 * Generate a new map grid.
 	 */
-	generate(){
+	generate(fill){
 		this._grid = [];
 		for(var z=0;z<this._levels;z++){
 			this._grid[z] = [];
 			for(var y=0;y<this._height;y++){
 				this._grid[z][y] = [];
 				for(var x=0;x<this._width;x++){
-					this._grid[z][y][x] = null;
+					if(fill) this._grid[z][y][x] = new fill({x:x,y:y,z:z});
+					else this._grid[z][y][x] = null;
 				}
 			}
 		}

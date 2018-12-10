@@ -56,5 +56,8 @@
 	"Loaded half of template for <%s> '%s'": "Loaded half of template for <%s> '%s'",
 	"Loaded full template for <%s> '%s'": "Loaded full template for <%s> '%s'",
 	"Finish templates...": "Finish templates...",
-	"Starting MUD...": "Starting MUD..."
+	"Starting MUD...": "Starting MUD...",
+	"Loaded Class '%s'": "Loaded Class '%s'",
+	"Loading...": "Loading...",
+	"Loaded!": "Loaded!"
 }

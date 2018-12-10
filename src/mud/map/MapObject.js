@@ -1,9 +1,6 @@
 // local includes
 var TemplateManager = require("../manager/TemplateManager");
 
-// local
-var nextID = 0;
-
 /**
  * The base object that can legally inhabit a {@link Map}.
  */
@@ -13,7 +10,6 @@ class MapObject{
 	 * @param {MapObjectConstructorOptions} options
 	 */
 	constructor(options){
-		this._id = nextID++;
 		this._contents = [];
 
 		if(options){
@@ -88,9 +84,6 @@ class MapObject{
 
 	__JSONWrite(key, value, json){
 		switch(key){
-			// no id
-			case "_id": break;
-
 			// no loc
 			case "_loc": break;
 
@@ -116,7 +109,7 @@ class MapObject{
 
 			// write value generically
 			default:
-				Object.__JSONWrite.call(this, key, value, json);
+				super.__JSONWrite(key, value, json);
 				break;
 		}
 	}
@@ -137,7 +130,7 @@ class MapObject{
 				break;
 
 			// read value generically
-			default: Object.__JSONRead.call(this, key, value); break;
+			default: super.__JSONRead(key, value); break;
 		}
 	}
 

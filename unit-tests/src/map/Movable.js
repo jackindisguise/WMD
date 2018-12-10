@@ -5,10 +5,11 @@ var expect = require("chai").expect;
 require("../../../src/lib/Object");
 var Map = require("../../../src/mud/map/Map");
 var Movable = require("../../../src/mud/map/Movable");
+var Tile = require("../../../src/mud/map/Tile");
 
 // testing
 var movable;
-var map = new Map({width:100, height:100, levels:10});
+var map = new Map({width:100, height:100, levels:1, fill:Tile});
 var tile = map.getTileByXYZ(0,0,0);
 var tile2 = map.getTileByXYZ(1,0,0);
 var tile3 = map.getTileByXYZ(2,0,0);

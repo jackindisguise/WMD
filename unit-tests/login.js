@@ -14,7 +14,6 @@ var _ = require("../i18n");
 var MUD = require("../src/mud/core/MUD");
 var RaceManager = require("../src/mud/manager/RaceManager");
 var ClassManager = require("../src/mud/manager/ClassManager");
-var Database = require("../src/mud/core/Database");
 
 // text data
 var greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
@@ -83,7 +82,7 @@ describe("Login", function(){
                     break;
 
                 case 9:
-                    var msg = "Tile\r\n    A generic tile.\r\n\r\n[Exits: south east southeast up]\r\n    Judas";
+                    var msg = "a big beautiful meadow\r\n    It\'s a big beautiful meadow. What more could you ask for?\r\n\r\n[Exits: south east southeast]\r\n    Judas";
                     expect(message).to.equal(msg);
                     player.emit("command", "blah");
                     break;

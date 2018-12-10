@@ -1,5 +1,5 @@
 // local includes
-var MapObjectFactory = require("./factory/ObjectFactory");
+var ObjectFactory = require("./factory/ObjectFactory");
 
 class Template{
 	constructor(options){
@@ -12,18 +12,18 @@ class Template{
 		switch(key){
 			// object instance with attributes assigned.
 			case "obj":
-				this.obj = MapObjectFactory.loadFromJSON(value);
+				this.obj = ObjectFactory.loadFromJSON(value);
 				break;
 
 			default:
-				Object.__JSONRead.call(this, key, value); break;
+				super.__JSONRead(key, value); break;
 		}
 	}
 
 	__JSONWrite(key, value, json){
 		switch(key){
 			case "obj": json.obj = value.__toJSON(); break; // save JSON object
-			default: Object.__JSONWrite.call(this, key, value, json); break;
+			default: super.__JSONWrite(key, value, json); break;
 		}
 	}
 

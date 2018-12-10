@@ -23,15 +23,18 @@ class Tile extends MapObject{
 
 			// xyz can only be set when being created
 			if(options.x != null && options.y != null && options.z != null){
-				this._x = options.x;
-				this._y = options.y;
-				this._z = options.z;
+				this.x = options.x;
+				this.y = options.y;
+				this.z = options.z;
 			}
 		}
 	}
 
 	toString(){
 		return util.format("{Tile<%d,%d,%d>}", this.x, this.y, this.z)
+	}
+
+	set map(map){
 	}
 
 	get map(){
@@ -42,12 +45,27 @@ class Tile extends MapObject{
 		return this._x;
 	}
 
+	set x(x){
+		if(this.x != null) return;
+		this._x = x;
+	}
+
 	get y(){
 		return this._y;
 	}
 
+	set y(y){
+		if(this.y != null) return;
+		this._y = y;
+	}
+
 	get z(){
 		return this._z;
+	}
+
+	set z(z){
+		if(this.z != null) return;
+		this._z = z;
 	}
 
 	/**

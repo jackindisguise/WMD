@@ -32,7 +32,7 @@ describe("Map", function(){
 	});
 
 	it("valid constructor options (100x100x10 map)", function(done){
-		map = new Map({width:100, height:100, levels:10});
+		map = new Map({width:100, height:100, levels:10, fill:Tile});
 		expect(map.size.width).to.equal(100);
 		expect(map.size.height).to.equal(100);
 		expect(map.size.levels).to.equal(10);
