@@ -8,7 +8,7 @@ var MUD = require("../src/mud/core/MUD");
 var Loader = require("../src/mud/loader/Loader");
 
 // testing goes here
-describe(">>> Start", function(){
+describe(">> Start", function(){
     it("Start MUD & HTTP Server", function(done){
         Loader(function(){
             MUD.start(8000, done);

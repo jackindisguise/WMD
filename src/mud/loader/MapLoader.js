@@ -10,7 +10,7 @@ var Map = require("../map/Map");
 
 // map loader
 module.exports = function(callback){
-	Logger.info(_("Loading map..."));
+	Logger.info(_("> Loading map..."));
 	var json = require("../../../data/map/map.json");
 	MapManager.map = new Map(json.proportions);
 	MapManager.map.generate();
@@ -25,6 +25,6 @@ module.exports = function(callback){
 		}
 	}
 
-	Logger.info(_("Loaded map."));
+	Logger.info(_("< Loaded map."));
 	callback();
 };

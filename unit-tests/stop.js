@@ -8,7 +8,7 @@ var expect = require("chai").expect;
 var MUD = require("../src/mud/core/MUD");
 
 // testing goes here
-describe("<<< Stop", function(){
+describe("<< Stop", function(){
     it("Stop MUD & HTTP Server", function(done){
         MUD.stop();
         done();

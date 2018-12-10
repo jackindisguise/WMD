@@ -1,5 +1,12 @@
 // local includes
 require("./String.js");
+var ObjectManager = require("../mud/manager/ObjectManager");
+
+Object.defineProperty(Object.prototype, "uuid", {
+    get: function(){
+        return ObjectManager.identify(this);
+    }
+});
 
 /**
  * Check for matches to this Object's keywords member.

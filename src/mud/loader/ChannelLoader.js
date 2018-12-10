@@ -11,16 +11,17 @@ var Channel = require("../Channel");
 
 // load channels
 module.exports = function(callback){
-	Logger.info(_("Loading channels..."));
+	Logger.info(_("> Loading channels..."));
 	fs.readdir("./data/channel", function(err, files){
 		for(var file of files){
 			var json = require("../../../data/channel/"+file);
 			var channel = new Channel();
 			channel.__fromJSON(json);
 			ChannelManager.add(channel);
-			Logger.info(_("Loaded channel '%s'", channel.name));
+			Logger.info(_(">> Loaded channel '%s'", channel.name));
 		}
 
+		Logger.info(_("< Channels loaded!"));
 		callback();
 	});
 };

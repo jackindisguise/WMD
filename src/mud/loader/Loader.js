@@ -13,7 +13,7 @@ var MapLoader = require("../loader/MapLoader");
 
 // full database loader
 module.exports = function(callback){
-	Logger.info(_("Loading..."));
+	Logger.info(_("> Loading..."));
 
 	// specify loaders in the order they should be run
 	var loaders = [RaceLoader, ClassLoader, TemplateLoader, ChannelLoader, CommandLoader, MapLoader, CharacterLoader];
@@ -22,7 +22,7 @@ module.exports = function(callback){
 	var i = 0;
 	function loadNext(){
 		if(!loaders.length){
-			Logger.info(_("Loaded!"));
+			Logger.info(_("< Loaded!"));
 			callback();
 			return;
 		}
