@@ -1,0 +1,61 @@
+commit 45b1791cb8d2a41656f0e7a60ab2a45ae58cb7bf
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Dec 11 13:17:10 2018 -0600
+
+    Fixed some issues with models and templates not loading properly.
+    
+    Added macros for numpad / directions. Not perfect. Will fix later.
+
+commit c0a774ad161a9a23bfe942ffa91ec8a5148b41b5
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Dec 11 11:17:56 2018 -0600
+
+    MODELS:
+    -------
+    Added a concept of models, which use templates to create a fully
+    fleshed out instance of an object in the game.
+    
+    For example, the HobGoblin template will inform the basic parameters
+    of what a HobGoblin is, while the "Keith the HobGoblin" model will
+    have things like what equipment he's wearing, what items are in his
+    inventory, and things like that.
+    
+    Objects that have a template or a model shouldn't save their
+    constructor -- the model and template will do that for us.
+    
+    I've also set it up so models and templates can be stored in
+    arbitrary sub directores in order to help with organizing different
+    groups. I'll have to set it up so that when saving a model/template,
+    it uses the name to determine where to save it. As it stands, the
+    name of a model/template should indicate the subdirectory tree.
+    i.e. the Weapon.excalibur template should be saved in
+    /data/template/Weapon/excalibur. Same for models.
+    
+    I did this for 2 reasons:
+    1) It makes sense to have basic types with nothing associated with
+       them.
+    
+    2) It makes it easier to deal with since all basic types will be
+       loaded as Templates before I used them in Models. This means
+       I don't have to do any extra pre-processing to avoid
+       things like loading them out of order.
+
+commit 5b54622193ff92b36583c2b8d2252e43c88610fd
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 10 00:06:36 2018 -0600
+
+    Did some irrelevant stuff.
+
+commit 7c4e344a303befc02ab3a3ba03b1bf9d609c247d
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Dec 9 23:17:34 2018 -0600
+
+    MUD is now a static class singleton.
+    
+    Not sure how useful it is right about now.
+
+commit db5e2650e716db2c8288ca5ac6f150d1ab4c1a61
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Dec 9 23:00:50 2018 -0600
+
+    Very annoying.
