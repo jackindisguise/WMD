@@ -4,7 +4,7 @@ var fs = require("fs");
 // local includes
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
-var ObjectFactory = require("../factory/ObjectFactory");
+var ObjectFactory = require("../factory/MapObjectFactory");
 var MapManager = require("../manager/MapManager");
 var Map = require("../map/Map");
 
@@ -25,6 +25,5 @@ module.exports = function(callback){
 		}
 	}
 
-	Logger.info(_("< Loaded map."));
 	callback();
 };

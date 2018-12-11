@@ -9,20 +9,19 @@ var ChannelLoader = require("../loader/ChannelLoader");
 var CharacterLoader = require("../loader/CharacterLoader");
 var CommandLoader = require("../loader/CommandLoader");
 var TemplateLoader = require("../loader/TemplateLoader");
+var ModelLoader = require("../loader/ModelLoader");
 var MapLoader = require("../loader/MapLoader");
 
 // full database loader
 module.exports = function(callback){
-	Logger.info(_("> Loading..."));
 
 	// specify loaders in the order they should be run
-	var loaders = [RaceLoader, ClassLoader, TemplateLoader, ChannelLoader, CommandLoader, MapLoader, CharacterLoader];
+	var loaders = [RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, CommandLoader, MapLoader, CharacterLoader];
 
 	// create a "loader iterator" that propagates callbacks
 	var i = 0;
 	function loadNext(){
 		if(!loaders.length){
-			Logger.info(_("< Loaded!"));
 			callback();
 			return;
 		}

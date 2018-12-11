@@ -19,7 +19,6 @@ module.exports = function(callback){
 			Logger.info(_(">> Loaded Class '%s'", cLass.name));
 		}
 
-		Logger.info(_("< Classes loaded!"));
 		callback();
 	});
 };

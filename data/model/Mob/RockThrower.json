@@ -1,0 +1,9 @@
+{
+	"name":"Mob.RockThrower",
+	"obj":{
+		"template":"Mob.BigBoy",
+		"keywords":"rock thrower rockthrower",
+		"display":"a Rock Thrower",
+		"contents":[{"template":"Item.rock"}]
+	}
+}

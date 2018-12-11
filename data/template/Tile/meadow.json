@@ -1,5 +1,5 @@
 {
-    "name": "meadow",
+    "name": "Tile.meadow",
     "obj":{
         "constructor": "Tile",
         "keywords": "meadow",

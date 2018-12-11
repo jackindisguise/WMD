@@ -1,0 +1,8 @@
+{
+    "name": "Item.belt",
+    "obj":{
+		"constructor": "Item",
+        "keywords": "belt",
+		"display": "a belt"
+    }
+}

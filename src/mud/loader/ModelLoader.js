@@ -5,8 +5,8 @@ var fs = require("fs");
 require("../../lib/Object");
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
-var TemplateManager = require("../manager/TemplateManager");
-var Template = require("../Template");
+var ModelManager = require("../manager/ModelManager");
+var Model = require("../Model");
 
 // deep file search
 function deepSearch(directory, fileFun, callback){
@@ -22,19 +22,19 @@ function deepSearch(directory, fileFun, callback){
 	});
 }
 
-function loadTemplates(callback){
-	Logger.info(_("> Loading templates..."));
-	deepSearch("./data/template", function(file, next){
-		var f = file.slice("./data/template".length); // cut off relative path from root
-		var _template = require("../../../data/template/"+f);
-		var template = new Template();
-		template.__fromJSON(_template);
-		TemplateManager.add(template);
-		Logger.info(_(">> Loaded template for <%s>", template.name));
+function loadModels(callback){
+	Logger.info(_("> Loading models..."));
+	deepSearch("./data/model", function(file, next){
+		var f = file.slice("./data/model".length); // cut off relative path from root
+		var _model = require("../../../data/model/"+f);
+		var model = new Model();
+		model.__fromJSON(_model);
+		ModelManager.add(model);
+		Logger.info(_(">> Loaded model for <%s>", model.name));
 		next();
 	}, callback);
 }
 
 module.exports = function(callback){
-	loadTemplates(callback);
+	loadModels(callback);
 };

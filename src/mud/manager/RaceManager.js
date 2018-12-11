@@ -24,7 +24,7 @@ class RaceManager{
 	 */
 	static getRaceByName(name){
 		for(var race of _races){
-			if(race.display === name) return race;
+			if(race.name === name) return race;
 		}
 	}
 }

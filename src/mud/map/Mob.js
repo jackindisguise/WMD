@@ -26,6 +26,8 @@ class Mob extends Movable{
 	constructor(options){
 		super(options);
 		this._channels = [];
+		this.race = RaceManager.getRaceByName("human");
+		this.class = ClassManager.getClassByName("warrior");
 
 		if(options){
 			if(options.isCharacter) this.characterData = new CharacterData();
@@ -185,9 +187,9 @@ class Mob extends Movable{
 				if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
 				break;
 
-			case "race": json.race = value.id; break;
-			case "class": json.class = value.id; break;
-			default: Movable.__JSONWrite.call(this, key, value, json); break;
+			case "race": json.race = value.name; break;
+			case "class": json.class = value.name; break;
+			default: super.__JSONWrite(key, value, json); break;
 		}
 	}
 
@@ -197,9 +199,9 @@ class Mob extends Movable{
 				this._loc = value;
 				break;
 
-			case "race": this.race = RaceManager.getRaceByID(value); break;
-			case "class": this.class = ClassManager.getClassByID(value); break;
-			default: Movable.__JSONRead.call(this, key, value); break;
+			case "race": this.race = RaceManager.getRaceByName(value); break;
+			case "class": this.class = ClassManager.getClassByName(value); break;
+			default: super.__JSONRead(key, value); break;
 		}
 	}
 
@@ -313,13 +315,13 @@ Mob.prototype.characterData = null;
  * This mob's race.
  * @type {?Race}
  */
-Mob.prototype.race = new Race();
+Mob.prototype.race = null;
 
 /**
  * This mob's class.
  * @type {?Class}
  */
-Mob.prototype.class = new Class();
+Mob.prototype.class = null;
 
 /**
  * This mob's experience level.

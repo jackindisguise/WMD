@@ -18,7 +18,6 @@ module.exports = function(callback){
 			Logger.info(_(">> Loaded command '%s'", command.plain));
 		}
 
-		Logger.info(_("< Commands loaded..."));
 		CommandManager.sortCommandsBySpecificity();
 		callback();
 	});

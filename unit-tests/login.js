@@ -83,7 +83,7 @@ describe("Login", function(){
                     break;
 
                 case 9:
-                    var msg = "a big beautiful meadow\r\n    It\'s a big beautiful meadow. What more could you ask for?\r\n\r\n[Exits: south east southeast]\r\n    Judas";
+                    var msg = "a big beautiful meadow\r\n    It\'s a big beautiful meadow. What more could you ask for?\r\n\r\n[Exits: south east southeast]\r\n    a Rock Thrower\r\n    Judas";
                     expect(message).to.equal(msg);
                     player.emit("command", "blah");
                     break;

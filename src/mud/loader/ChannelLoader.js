@@ -21,7 +21,6 @@ module.exports = function(callback){
 			Logger.info(_(">> Loaded channel '%s'", channel.name));
 		}
 
-		Logger.info(_("< Channels loaded!"));
 		callback();
 	});
 };

@@ -1,7 +1,7 @@
 // local includes
 var ObjectFactory = require("./factory/MapObjectFactory");
 
-class Template{
+class Model{
 	constructor(options){
 		if(options){
 			if(options.name) this.name = options.name;
@@ -32,13 +32,13 @@ class Template{
 	 */
 	spawn(){
 		var obj = this.obj.clone();
-		obj.template = this;
+		obj.model = this;
 		return obj;
 	}
 }
 
 
-Template.prototype.name = null;
-Template.prototype.obj = null;
+Model.prototype.name = null;
+Model.prototype.obj = null;
 
-module.exports = Template;
+module.exports = Model;

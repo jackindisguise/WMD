@@ -1,5 +1,5 @@
 {
-    "name": "void",
+    "name": "Tile.void",
     "obj":{
         "constructor": "Tile",
         "keywords": "void",

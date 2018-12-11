@@ -18,8 +18,7 @@ module.exports = function(callback){
 			RaceManager.add(race);
 			Logger.info(_(">> Loaded race '%s'", race.name));
 		}
-
-		Logger.info(_("< Races loaded..."));
+	
 		callback();
 	});
 };

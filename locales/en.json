@@ -98,5 +98,15 @@
 	"> Finishing templates...": "> Finishing templates...",
 	"> Loading channels...": "> Loading channels...",
 	"< Channels loaded!": "< Channels loaded!",
-	"> Loading map...": "> Loading map..."
+	"> Loading map...": "> Loading map...",
+	">> Partially loaded template for '%s'": ">> Partially loaded template for '%s'",
+	">> Loaded full template for '%s'": ">> Loaded full template for '%s'",
+	">> Finished loading template for '%s'": ">> Finished loading template for '%s'",
+	">> Partially loaded template for <%s>": ">> Partially loaded template for <%s>",
+	">> Loaded full template for <%s>": ">> Loaded full template for <%s>",
+	">> Finished loading template for <%s>": ">> Finished loading template for <%s>",
+	"> Loading templates...": "> Loading templates...",
+	">> Loaded template for <%s>": ">> Loaded template for <%s>",
+	"> Loading models...": "> Loading models...",
+	">> Loaded model for <%s>": ">> Loaded model for <%s>"
 }

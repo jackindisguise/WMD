@@ -1,0 +1,9 @@
+{
+    "name": "Mob.BigBoy",
+    "obj":{
+		"constructor": "Mob",
+        "keywords": "bigboy big boy",
+		"display": "BigBoy",
+		"level": 5000
+    }
+}

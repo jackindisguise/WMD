@@ -1,5 +1,5 @@
 {
-    "name": "excalibur",
+    "name": "Weapon.excalibur",
     "obj":{
         "constructor": "Weapon",
         "keywords": "legendary sword excalibur",

@@ -1,5 +1,5 @@
 {
-    "name": "rock",
+    "name": "Item.rock",
     "obj":{
         "constructor": "Item",
         "keywords": "rock",

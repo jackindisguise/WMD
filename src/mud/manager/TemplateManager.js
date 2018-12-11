@@ -5,10 +5,6 @@ class TemplateManager{
 		return _templates;
 	}
 
-	static set templates(template){
-		_templates = template;
-	}
-
 	static add(template){
 		if(_templates.indexOf(template) != -1) return;
 		_templates.push(template);

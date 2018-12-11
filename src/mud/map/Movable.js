@@ -47,6 +47,12 @@ class Movable extends MapObject{
 		if(!loc.canEnter(this)) return;
 		return true;
 	}
+
+	step(dir){
+		var tile = this.getStep(dir);
+		if(!tile) return false;
+		return this.move(tile);
+	}
 }
 
 /** @default "movable" */

@@ -1,5 +1,6 @@
 // local includes
 var TemplateManager = require("../manager/TemplateManager");
+var ModelManager = require("../manager/ModelManager");
 
 /**
  * The base object that can legally inhabit a {@link Map}.
@@ -50,13 +51,23 @@ class MapObject{
 	}
 
 	set template(template){
-		if(this._template) return;
+		if(this._model) return;
 		this.__proto__ = template.obj;
 		this._template = template;
 	}
 
+	set model(model){
+		if(this._template) this._template = null;
+		this.__proto__ = model.obj;
+		this._model = model;
+	}
+
 	get template(){
 		return this._template;
+	}
+
+	get model(){
+		return this._model;
 	}
 
 	// recursive reference between a map object's loc and the loc's contents.
@@ -87,10 +98,16 @@ class MapObject{
 			// no loc
 			case "_loc": break;
 
-			// save template ID
+			// save template name
 			case "_template":
 				if(value === null) break;
 				json.template = value.name;
+				break;
+
+			// save mode name
+			case "_model":
+				if(value === null) break;
+				json.model = value.name;
 				break;
 
 			// convert contents list to JSON
@@ -119,6 +136,11 @@ class MapObject{
 			case "template":
 				var template = TemplateManager.getTemplateByName(value);
 				if(template) this.template = template;
+				break;
+
+			case "model":
+				var model = ModelManager.getModelByName(value);
+				if(model) this.model = model;
 				break;
 
 			// load contents elsewhere
@@ -166,8 +188,9 @@ class MapObject{
 	 * @param {MapObject} loc Location to move to.
 	 */
 	move(loc){
-		if(!this.canMove(loc)) return;
+		if(!this.canMove(loc)) return false;
 		this.loc = loc;
+		return true;
 	}
 
 	/**
@@ -209,6 +232,7 @@ class MapObject{
 
 MapObject.prototype._id = null;
 MapObject.prototype._template = null;
+MapObject.prototype._model = null;
 
 /**
  * The object we currently inhabit.

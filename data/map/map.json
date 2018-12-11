@@ -1,15 +1,15 @@
 {
 	"proportions":{
-		"width": 100,
-		"height": 100,
+		"width": 3,
+		"height": 3,
 		"levels": 1
 	},
 	"materials":{
 		"a":{
-			"tile": {"constructor":"Tile", "template":"void"}
+			"tile": {"template":"Tile.void"}
 		},
 		"b":{
-			"tile": {"constructor":"Tile", "template":"meadow"}
+			"tile": {"template":"Tile.meadow", "contents":[{"model":"Mob.RockThrower"}]}
 		}
 	},
 	"map":{

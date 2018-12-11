@@ -7,7 +7,7 @@ var CommandSpecificity = require("../CommandSpecificity");
 
 class Create extends Command{
 	exec(mob){
-		var template = TemplateManager.getTemplateByName("rock");
+		var template = TemplateManager.getTemplateByName("Item.rock");
 		var obj = template.spawn();
 		obj.loc = mob;
 		mob.sendLine(_("You created a rock out of nothing. Very cool."));
