@@ -19,7 +19,7 @@ class OOC extends Command{
 }
 
 OOC.prototype.rule = /^(?:o|oo|ooc) (.+)\b/;
-OOC.prototype.plain = "ooc [message]";
+OOC.prototype.plain = "ooc";
 OOC.prototype.specificity = CommandSpecificity.FIRST;
 
 module.exports = OOC;

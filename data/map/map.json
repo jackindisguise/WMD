@@ -9,7 +9,7 @@
 			"tile": {"template":"Tile.void"}
 		},
 		"b":{
-			"tile": {"template":"Tile.meadow", "contents":[{"model":"Mob.RockThrower"}]}
+			"tile": {"model":"Tile.meadow"}
 		}
 	},
 	"map":{

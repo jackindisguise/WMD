@@ -229,10 +229,9 @@ class MapObject{
 		return clone;
 	}
 }
-
-MapObject.prototype._id = null;
 MapObject.prototype._template = null;
 MapObject.prototype._model = null;
+MapObject.prototype._id = null;
 
 /**
  * The object we currently inhabit.

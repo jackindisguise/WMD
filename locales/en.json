@@ -108,5 +108,6 @@
 	"> Loading templates...": "> Loading templates...",
 	">> Loaded template for <%s>": ">> Loaded template for <%s>",
 	"> Loading models...": "> Loading models...",
-	">> Loaded model for <%s>": ">> Loaded model for <%s>"
+	">> Loaded model for <%s>": ">> Loaded model for <%s>",
+	"Commands": "Commands"
 }

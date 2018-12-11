@@ -10,10 +10,13 @@ var Direction = require("../Direction");
 
 class Movement extends Command{
 	exec(mob){
-		mob.step(this.direction);
+		var result = mob.step(this.direction);
+		if(!result) mob.sendLine("You can't go that way.");
+		else mob.showRoom();
 	}
 }
 
 Movement.prototype.direction = null;
+Movement.prototype.specificity = CommandSpecificity.FIRST;
 
 module.exports = Movement;

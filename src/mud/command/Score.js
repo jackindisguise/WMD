@@ -27,6 +27,6 @@ class Score extends Command{
 
 Score.prototype.rule = /^(?:s|sc|sco|scor|score)\b/;
 Score.prototype.plain = "score";
-Score.prototype.specificity = CommandSpecificity.FIRST;
+Score.prototype.specificity = CommandSpecificity.LAST;
 
 module.exports = Score;

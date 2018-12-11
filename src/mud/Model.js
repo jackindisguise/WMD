@@ -1,5 +1,5 @@
 // local includes
-var ObjectFactory = require("./factory/MapObjectFactory");
+var MapObjectFactory = require("./factory/MapObjectFactory");
 
 class Model{
 	constructor(options){
@@ -12,7 +12,7 @@ class Model{
 		switch(key){
 			// object instance with attributes assigned.
 			case "obj":
-				this.obj = ObjectFactory.loadFromJSON(value);
+				this.obj = MapObjectFactory.loadFromJSON(value);
 				break;
 
 			default:

@@ -10,7 +10,8 @@ class Whisper extends Command{
 }
 
 Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (.+)\b/;
-Whisper.prototype.plain = "whisper [target]";
-Whisper.prototype.specificity = CommandSpecificity.FIRST;
+Whisper.prototype.plain = "whisper";
+Whisper.prototype.specificity = CommandSpecificity.LAST;
+Whisper.prototype.error = true;
 
 module.exports = Whisper;

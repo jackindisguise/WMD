@@ -38,20 +38,16 @@ class MapObjectFactory{
 	static loadFromJSONAsTemplate(json){
 		var templateName = json.template;
 		var template = TemplateManager.getTemplateByName(templateName);
-		var constructor = MapObjectFactory.getConstructorByName(template.obj.constructor.name);
-		if(!constructor) return;
-		var obj = MapObjectFactory.construct(constructor, json);
-		obj.template = template;
+		var obj = template.spawn();
+		obj.__fromJSON(json);
 		return obj;
 	}
 
 	static loadFromJSONAsModel(json){
 		var modelName = json.model;
 		var model = ModelManager.getModelByName(modelName);
-		var constructor = MapObjectFactory.getConstructorByName(model.obj.constructor.name);
-		if(!constructor) return;
-		var obj = MapObjectFactory.construct(constructor, json);
-		obj.model = model;
+		var obj = model.spawn();
+		obj.__fromJSON(json);
 		return obj;
 	}
 

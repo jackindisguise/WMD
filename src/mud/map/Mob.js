@@ -11,7 +11,6 @@ var RaceManager = require("../manager/RaceManager");
 var Race = require("../Race");
 var ClassManager = require("../manager/ClassManager");
 var Class = require("../Class");
-var CharacterData = require("../CharacterData");
 var MessageCategory = require("../MessageCategory");
 
 /**
@@ -28,10 +27,6 @@ class Mob extends Movable{
 		this._channels = [];
 		this.race = RaceManager.getRaceByName("human");
 		this.class = ClassManager.getClassByName("warrior");
-
-		if(options){
-			if(options.isCharacter) this.characterData = new CharacterData();
-		}
 	}
 
 	toString(){
@@ -203,14 +198,6 @@ class Mob extends Movable{
 			case "class": this.class = ClassManager.getClassByName(value); break;
 			default: super.__JSONRead(key, value); break;
 		}
-	}
-
-	/**
-	 * Is this mob acting in the role of a player's character?
-	 * @returns {boolean}
-	 */
-	isCharacter(){
-		return this.characterData ? true : false;
 	}
 
 	/**

@@ -1,6 +1,9 @@
 var _commands = [];
 
 class CommandManager{
+	static get commands(){
+		return _commands;
+	}
 	static add(command){
 		if(_commands.indexOf(command) != -1) return;
 		_commands.push(command);

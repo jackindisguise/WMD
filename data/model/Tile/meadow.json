@@ -4,6 +4,7 @@
         "constructor": "Tile",
         "keywords": "meadow",
 		"display": "a big beautiful meadow",
-		"description": "It's a big beautiful meadow. What more could you ask for?"
+        "description": "It's a big beautiful meadow. What more could you ask for?",
+        "contents":[{"model":"Mob.RockThrower"}]
     }
 }

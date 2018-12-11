@@ -23,6 +23,9 @@ class Command{
     }
 }
 
+// represents an error processor
+Command.prototype.error = false;
+
 /**
  * Regex rule for matching input to this command.
  */
