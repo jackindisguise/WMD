@@ -67,3 +67,13 @@ Object.defineProperty(Object.prototype, '__fromJSON', {
         }
     }
 });
+
+Object.defineProperty(Object.prototype, "__createClone", {
+    value: function(){
+        var json = this.__toJSON();
+        var constructor = this.constructor;
+        var clone = new constructor();
+        clone.__fromJSON(json);
+        return clone;
+    }
+});

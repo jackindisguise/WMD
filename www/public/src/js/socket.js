@@ -17,7 +17,7 @@ function configureSocket(socket){
 	});
 
 	socket.on('message', function (message, category, timestamp) {
-		addMessage(message, category, timestamp);
+		addMessage(message, category, timestamp, true);
 	});
 
 	socket.on("_error", function(body){

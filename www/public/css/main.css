@@ -37,7 +37,6 @@ body{
 	bottom:20px;
 	left:0px;
 	right:0px;
-	font-size:15px;
 	
 }
 
@@ -83,6 +82,7 @@ body{
 	left:0px;
 	right:0px;
 	bottom:10px;
+	font-size:15px;
 	overflow:auto;
 }
 

@@ -214,15 +214,12 @@ class MapObject{
 		if(mapobject.loc == this) mapobject.loc = null; // cyclical dereference
 	}
 
-	clone(obj){
-		var json = this.__toJSON();
-		var constructor = this.constructor;
-		var clone = new constructor();
-		clone.__fromJSON(json);
+	__createClone(obj){
+		var clone = super.__createClone();
 
 		// clone contents
 		for(var obj of this.contents){
-			var _clone = obj.clone();
+			var _clone = obj.__createClone();
 			_clone.loc = clone;
 		}
 

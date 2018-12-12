@@ -21,51 +21,42 @@ $(document).ready(function(){
 			case 13:{
 				var line = $("#command").val();
 
-				// keepCommand
+				// keepmanualCommand
 				if(options.keepCommand){
 					$("#command")[0].select();
 				} else {
 					$("#command").val(null);
 				}
-	
-				addMessage(line, "echo");
-				command(line);
+
+				manualCommand(line);
 				break;
 			}
 		}
 
 		switch(event.originalEvent.code){
 			case "Numpad7":
-				addMessage("nw", "echo");
-				command("nw");
+				manualCommand("nw");
 				break;
 			case "Numpad8":
-				addMessage("north", "echo");
-				command("north");
+				manualCommand("north");
 				break;
 			case "Numpad9":
-				addMessage("ne", "echo");
-				command("ne");
+				manualCommand("ne");
 				break;
 			case "Numpad4":
-				addMessage("west", "echo");
-				command("west");
+				manualCommand("west");
 				break;
 			case "Numpad6":
-				addMessage("east", "echo");
-				command("east");
+				manualCommand("east");
 				break;
 			case "Numpad1":
-				addMessage("sw", "echo");
-				command("sw");
+				manualCommand("sw");
 				break;
 			case "Numpad2":
-				addMessage("south", "echo");
-				command("south");
+				manualCommand("south");
 				break;
 			case "Numpad3":
-				addMessage("se", "echo");
-				command("se");
+				manualCommand("se");
 				break;
 		}
 	});

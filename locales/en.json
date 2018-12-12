@@ -109,5 +109,9 @@
 	">> Loaded template for <%s>": ">> Loaded template for <%s>",
 	"> Loading models...": "> Loading models...",
 	">> Loaded model for <%s>": ">> Loaded model for <%s>",
-	"Commands": "Commands"
+	"Commands": "Commands",
+	" {W%s the %s %s{G ": " {W%s the %s %s{G ",
+	" {R%s the %s %s{x ": " {R%s the %s %s{x ",
+	" {W%s the %s %s{x ": " {W%s the %s %s{x ",
+	"You are carrying {W%d{x items.": "You are carrying {W%d{x items."
 }

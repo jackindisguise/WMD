@@ -31,7 +31,7 @@ class Model{
 	 * Spawn an instance of this template.
 	 */
 	spawn(){
-		var obj = this.obj.clone();
+		var obj = this.obj.__createClone();
 		obj.model = this;
 		return obj;
 	}

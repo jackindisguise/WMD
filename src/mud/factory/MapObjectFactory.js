@@ -1,3 +1,4 @@
+// local includes
 var TemplateManager = require("../manager/TemplateManager");
 var ModelManager = require("../manager/ModelManager");
 var MapObject = require("../map/MapObject");
@@ -8,7 +9,8 @@ var Equipment = require("../map/Equipment");
 var Weapon = require("../map/Weapon");
 var Tile = require("../map/Tile");
 
-var _constructorNames = {
+// constructor name table
+var constructorNames = {
 	"MapObject": MapObject,
 	"Movable": Movable,
 	"Mob": Mob,
@@ -18,24 +20,27 @@ var _constructorNames = {
 	"Tile": Tile
 }
 
+/**
+ * Handles creation of MapObjects from JSON.
+ */
 class MapObjectFactory{
 	static getConstructorByName(name){
-		return _constructorNames[name];
+		return constructorNames[name];
 	}
 
 	static loadFromJSON(json){
-		if(json.model) return MapObjectFactory.loadFromJSONAsModel(json);
-		if(json.template) return MapObjectFactory.loadFromJSONAsTemplate(json);
-		if(json.constructor) return MapObjectFactory.loadFromJSONAsConstructor(json);
+		if(json.model) return MapObjectFactory.loadFromJSONByModel(json);
+		if(json.template) return MapObjectFactory.loadFromJSONByTemplate(json);
+		if(json.constructor) return MapObjectFactory.loadFromJSONByConstructor(json);
 	}
 
-	static loadFromJSONAsConstructor(json){
+	static loadFromJSONByConstructor(json){
 		var constructor = MapObjectFactory.getConstructorByName(json.constructor);
 		if(!constructor) return;
 		return MapObjectFactory.construct(constructor, json);
 	}
 
-	static loadFromJSONAsTemplate(json){
+	static loadFromJSONByTemplate(json){
 		var templateName = json.template;
 		var template = TemplateManager.getTemplateByName(templateName);
 		var obj = template.spawn();
@@ -43,7 +48,7 @@ class MapObjectFactory{
 		return obj;
 	}
 
-	static loadFromJSONAsModel(json){
+	static loadFromJSONByModel(json){
 		var modelName = json.model;
 		var model = ModelManager.getModelByName(modelName);
 		var obj = model.spawn();
