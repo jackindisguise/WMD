@@ -113,5 +113,6 @@
 	" {W%s the %s %s{G ": " {W%s the %s %s{G ",
 	" {R%s the %s %s{x ": " {R%s the %s %s{x ",
 	" {W%s the %s %s{x ": " {W%s the %s %s{x ",
-	"You are carrying {W%d{x items.": "You are carrying {W%d{x items."
+	"You are carrying {W%d{x items.": "You are carrying {W%d{x items.",
+	"{c[{CExits: {W%s{c]{x": "{c[{CExits: {W%s{c]{x"
 }

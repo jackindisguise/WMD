@@ -264,7 +264,7 @@ class Mob extends Movable{
 		}
 
 		// default description
-		var desc = util.format("%s\r\n    %s", this.loc.name, this.loc.description);
+		var desc = util.format("{C%s\r\n    {c%s{x", this.loc.name, this.loc.description);
 
 		// generate exits
 		var exits = [];
@@ -273,7 +273,7 @@ class Mob extends Movable{
 			if(step && this.canMove(step)) exits.push(Direction.long[name]);
 		}
 
-		desc += "\r\n\r\n" + _("[Exits: %s]", exits.length ? exits.join(" ") : "none");
+		desc += "\r\n\r\n" + _("{c[{CExits: {W%s{c]{x", exits.length ? exits.join(" ") : "none");
 
 		// generate content descriptions
 		for(var obj of this.loc.contents){

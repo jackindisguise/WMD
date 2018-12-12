@@ -38,13 +38,13 @@ describe("Login", function(){
                     break;
 
                 case 2:
-                    var msg = "------------------";
+                    var msg = "{y------------------";
                     for(var race of RaceManager.races){
-                        msg += util.format("%s%s %s %s %s", "\r\n", "|", race.name.padLeft(14), "|", race.description);
+                        msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.name.padLeft(14), "|", race.description);
                     }
             
                     msg += "\r\n";
-                    msg += "------------------";
+                    msg += "------------------{x";
                     expect(message).to.equal(msg);
                     break;
 
@@ -54,13 +54,13 @@ describe("Login", function(){
                     break;
 
                 case 4:
-                    var msg = "------------------";
+                    var msg = "{c------------------";
                     for(var _class of ClassManager.classes){
-                        msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.name.padLeft(14), "|", _class.description);
+                        msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.name.padLeft(14), "|", _class.description);
                     }
             
                     msg += "\r\n";
-                    msg += "------------------";
+                    msg += "------------------{x";
                     expect(message).to.equal(msg);
                     break;
 
@@ -83,7 +83,7 @@ describe("Login", function(){
                     break;
 
                 case 9:
-                    var msg = "a big beautiful meadow\r\n    It\'s a big beautiful meadow. What more could you ask for?\r\n\r\n[Exits: south east southeast]\r\n    a Rock Thrower\r\n    Judas";
+                    var msg = "{Ba big beautiful meadow\r\n    {wIt\'s a big beautiful meadow. What more could you ask for?{x\r\n\r\n{c[{CExits: {Wsouth east southeast{c]{x\r\n    a Rock Thrower\r\n    Judas";
                     expect(message).to.equal(msg);
                     player.emit("command", "blah");
                     break;
