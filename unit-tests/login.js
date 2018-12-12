@@ -83,7 +83,7 @@ describe("Login", function(){
                     break;
 
                 case 9:
-                    var msg = "{Ba big beautiful meadow\r\n    {wIt\'s a big beautiful meadow. What more could you ask for?{x\r\n\r\n{c[{CExits: {Wsouth east southeast{c]{x\r\n    a Rock Thrower\r\n    Judas";
+                    var msg = "{Ca big beautiful meadow\r\n    {cIt\'s a big beautiful meadow. What more could you ask for?{x\r\n\r\n{c[{CExits: {Wsouth east southeast{c]{x\r\n    a Rock Thrower\r\n    Judas";
                     expect(message).to.equal(msg);
                     player.emit("command", "blah");
                     break;
