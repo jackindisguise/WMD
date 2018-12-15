@@ -22,7 +22,7 @@ function deepSearch(directory, fileFun, callback){
 	});
 }
 
-function loadModels(callback){
+module.exports = function(callback){
 	Logger.info(_("> Loading models..."));
 	deepSearch("./data/model", function(file, next){
 		var f = file.slice("./data/model".length); // cut off relative path from root
@@ -33,8 +33,4 @@ function loadModels(callback){
 		Logger.info(_(">> Loaded model for <%s>", model.name));
 		next();
 	}, callback);
-}
-
-module.exports = function(callback){
-	loadModels(callback);
 };

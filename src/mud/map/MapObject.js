@@ -23,10 +23,6 @@ class MapObject{
 		return "{MapObject}";
 	}
 
-	get id(){
-		return this._id;
-	}
-
 	/**
 	 * Shortcut for the display name.
 	 */
@@ -226,9 +222,9 @@ class MapObject{
 		return clone;
 	}
 }
+
 MapObject.prototype._template = null;
 MapObject.prototype._model = null;
-MapObject.prototype._id = null;
 
 /**
  * The object we currently inhabit.

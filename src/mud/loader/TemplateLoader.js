@@ -22,7 +22,7 @@ function deepSearch(directory, fileFun, callback){
 	});
 }
 
-function loadTemplates(callback){
+module.exports = function(callback){
 	Logger.info(_("> Loading templates..."));
 	deepSearch("./data/template", function(file, next){
 		var f = file.slice("./data/template".length); // cut off relative path from root
@@ -33,8 +33,4 @@ function loadTemplates(callback){
 		Logger.info(_(">> Loaded template for <%s>", template.name));
 		next();
 	}, callback);
-}
-
-module.exports = function(callback){
-	loadTemplates(callback);
 };

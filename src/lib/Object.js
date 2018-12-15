@@ -1,3 +1,6 @@
+// node includes
+var util = require("util");
+
 // local includes
 require("./String.js");
 var ObjectManager = require("../mud/manager/ObjectManager");
@@ -20,12 +23,23 @@ Object.defineProperty(Object.prototype, 'matchKeywords', {
     }
 });
 
+
+class JSONBadProperty extends Error{
+    constructor(message, constructor, json){
+        super(util.format("Bad property '%s' not found in base class '%s'", message, constructor.name));
+        this.class = constructor;
+        this.json = json;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
 /**
  * Write a value to a JSON object.
  */
 Object.defineProperty(Object.prototype, '__JSONWrite', {
     value: function(key, value, json){
-        if(this.constructor.prototype[key] == value) return; // don't save default values
+        if(this.constructor.prototype[key] === undefined) throw new JSONBadProperty(key, this.constructor, json) // don't have variable
+        if(this.constructor.prototype[key] === value) return; // don't save default values
         if(typeof value === "function") return; // don't save functions
         if(typeof value === "object") return; // ignore objects
         if(typeof value === "array") return; // ignore arrays
