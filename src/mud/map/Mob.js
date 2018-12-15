@@ -38,116 +38,116 @@ class Mob extends Movable{
 		var strength = 0;
 		strength += this.race.getStrengthByLevel(this.level);
 		strength += this.class.getStrengthByLevel(this.level);
-		return strength;
+		return Math.floor(strength);
 	}
 
 	get attackPower(){
 		var attackPower = this.strength;
 		attackPower += this.race.getAttackPowerByLevel(this.level);
 		attackPower += this.class.getAttackPowerByLevel(this.level);
-		return attackPower;
+		return Math.floor(attackPower);
 	}
 
 	get defense(){
 		var defense = this.strength;
 		defense += this.race.getDefenseByLevel(this.level);
 		defense += this.class.getDefenseByLevel(this.level);
-		return defense;
+		return Math.floor(defense);
 	}
 
 	get vitality(){
 		var vitality = this.strength;
 		vitality += this.race.getVitalityByLevel(this.level);
 		vitality += this.class.getVitalityByLevel(this.level);
-		return vitality;
+		return Math.floor(vitality);
 	}
 
 	get health(){
 		var health = this.vitality * 10;
 		health += this.race.getHealthByLevel(this.level);
 		health += this.class.getHealthByLevel(this.level);
-		return health;
+		return Math.floor(health);
 	}
 
 	get agility(){
 		var agility = 0;
 		agility += this.race.getAgilityByLevel(this.level);
 		agility += this.class.getAgilityByLevel(this.level);
-		return agility;
+		return Math.floor(agility);
 	}
 
 	get speed(){
 		var speed = this.agility;
 		speed += this.race.getSpeedByLevel(this.level);
 		speed += this.class.getSpeedByLevel(this.level);
-		return speed;
+		return Math.floor(speed);
 	}
 
 	get evasion(){
 		var evasion = this.agility;
 		evasion += this.race.getEvasionByLevel(this.level);
 		evasion += this.class.getEvasionByLevel(this.level);
-		return evasion;
+		return Math.floor(evasion);
 	}
 
 	get stamina(){
 		var stamina = this.agility;
 		stamina += this.race.getStaminaByLevel(this.level);
 		stamina += this.class.getStaminaByLevel(this.level);
-		return stamina;
+		return Math.floor(stamina);
 	}
 
 	get energy(){
 		var energy = this.stamina * 10;
 		energy += this.race.getEnergyByLevel(this.level);
 		energy += this.class.getEnergyByLevel(this.level);
-		return energy;
+		return Math.floor(energy);
 	}
 
 	get intelligence(){
 		var intelligence = 0;
 		intelligence += this.race.getIntelligenceByLevel(this.level);
 		intelligence += this.class.getIntelligenceByLevel(this.level);
-		return intelligence;
+		return Math.floor(intelligence);
 	}
 
 	get magicPower(){
 		var magicPower = this.intelligence;
 		magicPower += this.race.getMagicPowerByLevel(this.level);
 		magicPower += this.class.getMagicPowerByLevel(this.level);
-		return magicPower;
+		return Math.floor(magicPower);
 	}
 
 	get resilience(){
 		var resilience = this.intelligence;
 		resilience += this.race.getResilienceByLevel(this.level);
 		resilience += this.class.getResilienceByLevel(this.level);
-		return resilience;
+		return Math.floor(resilience);
 	}
 
 	get wisdom(){
 		var wisdom = this.intelligence;
 		wisdom += this.race.getWisdomByLevel(this.level);
 		wisdom += this.class.getWisdomByLevel(this.level);
-		return wisdom;
+		return Math.floor(wisdom);
 	}
 
 	get mana(){
 		var mana = this.wisdom * 10;
 		mana += this.race.getManaByLevel(this.level);
 		mana += this.class.getManaByLevel(this.level);
-		return mana;
+		return Math.floor(mana);
 	}
 
 	get toNextLevel(){
 		var tnl = 0;
 		tnl += this.race.getToNextLevelByLevel(this.level);
 		tnl += this.class.getToNextLevelByLevel(this.level);
-		return tnl;
+		return Math.floor(tnl);
 	}
 
 	get tnl(){
-		return this.toNextLevel;
+		return Math.floor(this.toNextLevel);
 	}
 
 	get player(){
@@ -281,6 +281,55 @@ class Mob extends Movable{
 		}
 
 		this.sendLine(desc);
+	}
+
+	gainExperience(amount){
+		this.experience += amount;
+		if(this.experience >= this.toNextLevel) levelup();
+	}
+
+	levelup(){
+		var originalAttributes = this.getAttributes();
+		this.level++;
+		this.experience = 0;
+		var newAttributes = this.getAttributes();
+		var diffAttributes = {};
+		for(var attribute in originalAttributes){
+			if(newAttributes[attribute] == originalAttributes[attribute]) continue;
+			diffAttributes[attribute] = newAttributes[attribute] - originalAttributes[attribute];
+		}
+
+		var msg = "{Y" + util.format(" %s ", _("{WLevel Up{Y")).center(80, "-") + "{x";
+		msg += "\r\n" + _("You are now level {W%d{x!", this.level).center(80, " ");
+
+		msg += "\r\n{Y" + util.format(" %s ", _("{WAttribute Changes{Y")).center(80, "-") + "{x";
+		for(var attribute in diffAttributes){
+			msg += "\r\n" + _("Your {W%s{x has increased to {G%d{x (%s%d{x).", attribute, newAttributes[attribute], diffAttributes[attribute] > 0 ? "{G+" : "{R-", diffAttributes[attribute]).center(80);
+		}
+
+		msg += "\r\n{Y" + util.format(" %s ", _("{WLevel Up{Y")).center(80, "-") + "{x";
+
+		this.sendLine(msg);
+	}
+
+	getAttributes(){
+		return {
+			"strength": this.strength,
+			"agility": this.agility,
+			"intelligence": this.intelligence,
+			"attackPower": this.attackPower-this.strength,
+			"defense": this.defense-this.strength,
+			"vitality": this.vitality-this.strength,
+			"speed": this.speed-this.agility,
+			"evasion": this.evasion-this.agility,
+			"stamina": this.stamina-this.agility,
+			"magicPower": this.magicPower-this.intelligence,
+			"resilience": this.resilience-this.intelligence,
+			"wisdom": this.wisdom-this.intelligence,
+			"health": this.health-(this.vitality*10),
+			"energy": this.energy-(this.stamina*10),
+			"mana": this.mana-(this.wisdom*10)
+		}
 	}
 }
 

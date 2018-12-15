@@ -8,7 +8,7 @@ var TemplateManager = require("../manager/TemplateManager");
 
 class Test extends Command{
 	exec(mob){
-
+		mob.levelup();
 	}
 }
 

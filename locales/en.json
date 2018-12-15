@@ -114,5 +114,15 @@
 	" {R%s the %s %s{x ": " {R%s the %s %s{x ",
 	" {W%s the %s %s{x ": " {W%s the %s %s{x ",
 	"You are carrying {W%d{x items.": "You are carrying {W%d{x items.",
-	"{c[{CExits: {W%s{c]{x": "{c[{CExits: {W%s{c]{x"
+	"{c[{CExits: {W%s{c]{x": "{c[{CExits: {W%s{c]{x",
+	"Level Up!": "Level Up!",
+	"You are now level %d": "You are now level %d",
+	"Your %s has increased to %d (%s%d).": "Your %s has increased to %d (%s%d).",
+	"Level Up": "Level Up",
+	"You are now level %d!": "You are now level %d!",
+	"Attribute Changes": "Attribute Changes",
+	"Your {W%s{x has increased to {G%d{x (%s%d{x).": "Your {W%s{x has increased to {G%d{x (%s%d{x).",
+	"{WLevel Up{Y": "{WLevel Up{Y",
+	"You are now level {W%d{x!": "You are now level {W%d{x!",
+	"{WAttribute Changes{Y": "{WAttribute Changes{Y"
 }
