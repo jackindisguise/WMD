@@ -1,5 +1,6 @@
 // local includes
 require("./String");
+require("./Math");
 
 /**
  * Search all entries in an array and compare their keyword values.
@@ -20,4 +21,12 @@ Array.prototype.search = function(keywords){
             }
         }
     }
+}
+
+/**
+ * Pick a random element of this array.
+ */
+Array.prototype.pick = function(){
+    if(this.length === 0) return;
+    return this[Math.rangeInt(0,this.length-1)];
 }

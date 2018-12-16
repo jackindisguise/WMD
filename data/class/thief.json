@@ -1,5 +1,8 @@
 {
     "name":"thief",
     "keywords":"thief",
-    "description":"A trickster with a focus on stealth, ambushing, and fatal strikes."
+    "description":"A trickster with a focus on stealth, ambushing, and fatal strikes.",
+    "strengthPerLevel": 0.75,
+    "agilityPerLevel": 2.5,
+    "intelligencePerLevel": 1
 }

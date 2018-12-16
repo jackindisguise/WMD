@@ -124,5 +124,22 @@
 	"Your {W%s{x has increased to {G%d{x (%s%d{x).": "Your {W%s{x has increased to {G%d{x (%s%d{x).",
 	"{WLevel Up{Y": "{WLevel Up{Y",
 	"You are now level {W%d{x!": "You are now level {W%d{x!",
-	"{WAttribute Changes{Y": "{WAttribute Changes{Y"
+	"{WAttribute Changes{Y": "{WAttribute Changes{Y",
+	"Your {W%s{x has increased to {G%d{x (%s%s{x).": "Your {W%s{x has increased to {G%d{x (%s%s{x).",
+	"{WEvolved{Y": "{WEvolved{Y",
+	"You became a/n {G%s{x!": "You became a/n {G%s{x!",
+	"Your {W%s{x has %s to {G%d{x (%s%d{x).": "Your {W%s{x has %s to {G%d{x (%s%d{x).",
+	"Your {W%s{x has %s to %s%d{x (%s%d{x).": "Your {W%s{x has %s to %s%d{x (%s%d{x).",
+	"{GLevel Up{x": "{GLevel Up{x",
+	"You are now level {G%d{x!": "You are now level {G%d{x!",
+	"{GAttribute Changes{x": "{GAttribute Changes{x",
+	"Your {G%s{x has %s to %s%d{x (%s%d{x).": "Your {G%s{x has %s to %s%d{x (%s%d{x).",
+	"{GEvolved{x": "{GEvolved{x",
+	"Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%d{x).": "Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%d{x).",
+	"Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x).": "Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x).",
+	"RACIAL SUPERIORITY ACHIEVED! You became a/n {G%s{x!": "RACIAL SUPERIORITY ACHIEVED! You became a/n {G%s{x!",
+	"CLASS SUPERIORITY ACHIEVED! You became a/n {G%s{x!": "CLASS SUPERIORITY ACHIEVED! You became a/n {G%s{x!",
+	"RANDOM RACE CHANGE! You became a/n {G%s{x!": "RANDOM RACE CHANGE! You became a/n {G%s{x!",
+	"RANDOM CLASS CHANGE! You became a/n {G%s{x!": "RANDOM CLASS CHANGE! You became a/n {G%s{x!",
+	"Your bonus {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x).": "Your bonus {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x)."
 }

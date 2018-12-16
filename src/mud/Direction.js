@@ -3,7 +3,7 @@
  * @alias Direction#flags
  * @enum {bitflag}
  */
-var _flag = {
+var flag = {
 	NORTH: 0x1,
 	SOUTH: 0x2,
 	EAST: 0x4,
@@ -21,7 +21,7 @@ var _flag = {
  * @alias Direction#long
  * @enum {string}
  */
-var _long = {
+var long = {
 	NORTH: "north",
 	SOUTH: "south",
 	EAST: "east",
@@ -39,7 +39,7 @@ var _long = {
  * @alias Direction#short
  * @enum {string}
  */
-var _short = {
+var short = {
 	NORTH: "n",
 	SOUTH: "s",
 	EAST: "e",
@@ -57,44 +57,44 @@ var _short = {
  */
 class Direction{
 	static get flag(){
-		return _flag;
+		return flag;
 	}
 
 	static get long(){
-		return _long;
+		return long;
 	}
 
 	static get short(){
-		return _short;
+		return short;
 	}
 
 	static flag2name(flag){
-		for(var name of _flag){
-			if(_flag[name] == flag) return name;
+		for(var name of flag){
+			if(flag[name] == flag) return name;
 		}
 	}
 
 	static flag2long(flag){
-		for(var name of _flag){
-			if(_flag[name] == flag) return _long[name];
+		for(var name of flag){
+			if(flag[name] == flag) return long[name];
 		}
 	}
 
 	static flag2short(flag){
-		for(var name of _flag){
-			if(_flag[name] == flag) return _short[name];
+		for(var name of flag){
+			if(flag[name] == flag) return short[name];
 		}
 	}
 
 	static short2flag(short){
-		for(var name of _short){
-			if(_short[name] == short) return _flag[name];
+		for(var name of short){
+			if(short[name] == short) return flag[name];
 		}
 	}
 
 	static long2flag(long){
-		for(var name of _long){
-			if(_long[name] == long) return _flag[name];
+		for(var name of long){
+			if(long[name] == long) return flag[name];
 		}
 	}
 }
