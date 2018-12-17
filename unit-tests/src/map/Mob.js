@@ -44,7 +44,7 @@ describe("Mob", function(){
             expect(mob.attackPower).is.equal(5);
             expect(mob.defense).is.equal(5);
             expect(mob.vitality).is.equal(5);
-            expect(mob.health).is.equal(75);
+            expect(mob.health).is.equal(30);
             done();
         });
 
@@ -53,7 +53,7 @@ describe("Mob", function(){
             expect(mob.magicPower).is.equal(20);
             expect(mob.resilience).is.equal(20);
             expect(mob.wisdom).is.equal(20);
-            expect(mob.mana).is.equal(400);
+            expect(mob.mana).is.equal(220);
             done();
         });
 
@@ -62,7 +62,7 @@ describe("Mob", function(){
             expect(mob.speed).is.equal(5);
             expect(mob.evasion).is.equal(5);
             expect(mob.stamina).is.equal(5);
-            expect(mob.energy).is.equal(125);
+            expect(mob.energy).is.equal(80);
             done();
         });
 
