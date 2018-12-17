@@ -2,5 +2,5 @@
     "name":"elf",
     "keywords":"elf",
     "description":"A very magical race.",
-    "intelligencePerLevel": 0.333
+    "intelligencePerLevel": 0.6
 }

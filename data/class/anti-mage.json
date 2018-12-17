@@ -1,0 +1,9 @@
+{
+    "name":"anti-mage",
+    "keywords":"anti-mage",
+    "description":"A killer of spells.",
+    "strengthPerLevel": 0.6,
+    "agilityPerLevel": 0.6,
+    "intelligencePerLevel": 0.4,
+    "resiliencePerLevel": 1.2
+}

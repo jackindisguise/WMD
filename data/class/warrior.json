@@ -2,7 +2,7 @@
     "name":"warrior",
     "keywords":"warrior",
     "description":"A fighter that utilizes weapons and armor and stuff.",
-    "strengthPerLevel": 2.5,
-    "agilityPerLevel": 1,
-    "intelligencePerLevel": 0.75
+    "strengthPerLevel": 1.4,
+    "agilityPerLevel": 0.4,
+    "intelligencePerLevel": 0.4
 }

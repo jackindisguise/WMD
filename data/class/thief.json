@@ -2,7 +2,7 @@
     "name":"thief",
     "keywords":"thief",
     "description":"A trickster with a focus on stealth, ambushing, and fatal strikes.",
-    "strengthPerLevel": 0.75,
-    "agilityPerLevel": 2.5,
-    "intelligencePerLevel": 1
+    "strengthPerLevel": 0.4,
+    "agilityPerLevel": 1.4,
+    "intelligencePerLevel": 0.4
 }

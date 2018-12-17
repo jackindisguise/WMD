@@ -2,5 +2,5 @@
     "name":"dwarf",
     "keywords":"dwarf",
     "description":"A very unadaptive and unmagical race.",
-    "strengthPerLevel": 0.333
+    "strengthPerLevel": 0.6
 }

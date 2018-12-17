@@ -49,6 +49,7 @@ String.prototype.center = function(size, padder=" "){
 	if(pad == 1) return util.format("%s%s", this, padder);
 	var remainder = pad%2;
 	pad -= remainder;
+	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s%s", padder.repeat(pad/2), this, padder.repeat((pad/2) + remainder));
 };
 
@@ -61,6 +62,7 @@ String.prototype.padLeft = function(size, padder=" "){
 	var pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
 	if(pad == 1) return util.format("%s%s", padder, this);
+	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s", padder.repeat(pad), this);
 };
 
@@ -73,6 +75,7 @@ String.prototype.padRight = function(size, padder=" "){
 	var pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
 	if(pad == 1) return util.format("%s%s", this, padder);
+	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s", this, padder.repeat(pad));
 };
 

@@ -99,7 +99,7 @@ class Mob extends Movable{
 	}
 
 	get health(){
-		var health = this.vitality * 10;
+		var health = this.vitality;
 		health += this.race.getHealthByLevel(this.level);
 		health += this.class.getHealthByLevel(this.level);
 		return Math.floor(health);
@@ -169,7 +169,7 @@ class Mob extends Movable{
 	}
 
 	get energy(){
-		var energy = this.stamina * 10;
+		var energy = this.stamina;
 		energy += this.race.getEnergyByLevel(this.level);
 		energy += this.class.getEnergyByLevel(this.level);
 		return Math.floor(energy);
@@ -239,7 +239,7 @@ class Mob extends Movable{
 	}
 
 	get mana(){
-		var mana = this.wisdom * 10;
+		var mana = this.wisdom;
 		mana += this.race.getManaByLevel(this.level);
 		mana += this.class.getManaByLevel(this.level);
 		return Math.floor(mana);
@@ -253,7 +253,7 @@ class Mob extends Movable{
 	}
 
 	get tnl(){
-		return Math.floor(this.toNextLevel);
+		return this.toNextLevel;
 	}
 
 	get player(){
@@ -403,8 +403,8 @@ class Mob extends Movable{
 		}
 
 		// changes to race/class can happen here
-		if(Math.probability(0.25)) this.race = RaceManager.races.pick();
-		if(Math.probability(0.25)) this.class = ClassManager.classes.pick();
+//		if(Math.probability(0.25)) this.race = RaceManager.races.pick();
+//		if(Math.probability(0.25)) this.class = ClassManager.classes.pick();
 
 		this.level++;
 

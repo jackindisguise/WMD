@@ -2,7 +2,7 @@
     "name":"mage",
     "keywords":"mage",
     "description":"A caster of spells.",
-    "strengthPerLevel": 0.75,
-    "agilityPerLevel": 1.25,
-    "intelligencePerLevel": 2.25
+    "strengthPerLevel": 0.4,
+    "agilityPerLevel": 0.4,
+    "intelligencePerLevel": 1.4
 }
