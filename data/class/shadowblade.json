@@ -1,9 +1,0 @@
-{
-    "name":"shadowblade",
-    "keywords":"shadowblade",
-    "description":"A dude that can't get hit.",
-    "strengthPerLevel": 0.4,
-    "agilityPerLevel": 1,
-    "intelligencePerLevel": 0.4,
-    "evasionPerLevel": 1.2
-}

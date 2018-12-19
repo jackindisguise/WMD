@@ -3,6 +3,7 @@ var util = require("util");
 
 // local includes
 var _ = require("../../../i18n");
+var Logger = require("../../util/Logger");
 var ChannelManager = require("../manager/ChannelManager");
 var Direction = require("../Direction");
 var Movable = require("./Movable");
@@ -13,6 +14,7 @@ var ClassManager = require("../manager/ClassManager");
 var Class = require("../Class");
 var MessageCategory = require("../MessageCategory");
 var Attributes = require("../Attributes");
+var WearLocation = require("../WearLocation");
 
 /**
  * Represents an animate creature on the map.
@@ -26,8 +28,21 @@ class Mob extends Movable{
 	constructor(options){
 		super(options);
 		this._channels = [];
-		this.race = RaceManager.getRaceByName("human");
-		this.class = ClassManager.getClassByName("warrior");
+		this.wearLocation = {
+			HEAD: null,
+			NECK: null,
+			SHOULDER: null,
+			ARMS: null,
+			HANDS: null,
+			FINGER_A: null,
+			FINGER_B: null,
+			TORSO: null,
+			WAIST: null,
+			LEGS: null,
+			FEET: null,
+			HAND_OFF: null,
+			HAND_PRIMARY: null
+		};
 	}
 
 	toString(){
@@ -37,218 +52,218 @@ class Mob extends Movable{
 
 	get rawStrength(){
 		var strength = 0;
-		strength += this.race.getStrengthByLevel(this.level);
-		strength += this.class.getStrengthByLevel(this.level);
+		strength += this._race.getStrengthByLevel(this.level);
+		strength += this._class.getStrengthByLevel(this.level);
 		return Math.floor(strength);
 	}
 
 	get strength(){
 		var strength = 0;
-		strength += this.race.getStrengthByLevel(this.level);
-		strength += this.class.getStrengthByLevel(this.level);
+		strength += this._race.getStrengthByLevel(this.level);
+		strength += this._class.getStrengthByLevel(this.level);
 		return Math.floor(strength);
 	}
 
 	get rawAttackPower(){
 		var attackPower = 0;
-		attackPower += this.race.getAttackPowerByLevel(this.level);
-		attackPower += this.class.getAttackPowerByLevel(this.level);
+		attackPower += this._race.getAttackPowerByLevel(this.level);
+		attackPower += this._class.getAttackPowerByLevel(this.level);
 		return Math.floor(attackPower);
 	}
 
 	get attackPower(){
 		var attackPower = this.strength;
-		attackPower += this.race.getAttackPowerByLevel(this.level);
-		attackPower += this.class.getAttackPowerByLevel(this.level);
+		attackPower += this._race.getAttackPowerByLevel(this.level);
+		attackPower += this._class.getAttackPowerByLevel(this.level);
 		return Math.floor(attackPower);
 	}
 
 	get rawDefense(){
 		var defense = 0;
-		defense += this.race.getDefenseByLevel(this.level);
-		defense += this.class.getDefenseByLevel(this.level);
+		defense += this._race.getDefenseByLevel(this.level);
+		defense += this._class.getDefenseByLevel(this.level);
 		return Math.floor(defense);
 	}
 
 	get defense(){
 		var defense = this.strength;
-		defense += this.race.getDefenseByLevel(this.level);
-		defense += this.class.getDefenseByLevel(this.level);
+		defense += this._race.getDefenseByLevel(this.level);
+		defense += this._class.getDefenseByLevel(this.level);
 		return Math.floor(defense);
 	}
 
 	get rawVitality(){
 		var vitality = 0;
-		vitality += this.race.getVitalityByLevel(this.level);
-		vitality += this.class.getVitalityByLevel(this.level);
+		vitality += this._race.getVitalityByLevel(this.level);
+		vitality += this._class.getVitalityByLevel(this.level);
 		return Math.floor(vitality);
 	}
 
 	get vitality(){
 		var vitality = this.strength;
-		vitality += this.race.getVitalityByLevel(this.level);
-		vitality += this.class.getVitalityByLevel(this.level);
+		vitality += this._race.getVitalityByLevel(this.level);
+		vitality += this._class.getVitalityByLevel(this.level);
 		return Math.floor(vitality);
 	}
 
-	get rawHealth(){
+	get rawMaxHealth(){
 		var health = 0;
-		health += this.race.getHealthByLevel(this.level);
-		health += this.class.getHealthByLevel(this.level);
+		health += this._race.getHealthByLevel(this.level);
+		health += this._class.getHealthByLevel(this.level);
 		return Math.floor(health);
 	}
 
-	get health(){
+	get maxHealth(){
 		var health = this.vitality;
-		health += this.race.getHealthByLevel(this.level);
-		health += this.class.getHealthByLevel(this.level);
+		health += this._race.getHealthByLevel(this.level);
+		health += this._class.getHealthByLevel(this.level);
 		return Math.floor(health);
 	}
 
 	get rawAgility(){
 		var agility = 0;
-		agility += this.race.getAgilityByLevel(this.level);
-		agility += this.class.getAgilityByLevel(this.level);
+		agility += this._race.getAgilityByLevel(this.level);
+		agility += this._class.getAgilityByLevel(this.level);
 		return Math.floor(agility);
 	}
 
 	get agility(){
 		var agility = 0;
-		agility += this.race.getAgilityByLevel(this.level);
-		agility += this.class.getAgilityByLevel(this.level);
+		agility += this._race.getAgilityByLevel(this.level);
+		agility += this._class.getAgilityByLevel(this.level);
 		return Math.floor(agility);
 	}
 
 	get rawSpeed(){
 		var speed = 0;
-		speed += this.race.getSpeedByLevel(this.level);
-		speed += this.class.getSpeedByLevel(this.level);
+		speed += this._race.getSpeedByLevel(this.level);
+		speed += this._class.getSpeedByLevel(this.level);
 		return Math.floor(speed);
 	}
 
 	get speed(){
 		var speed = this.agility;
-		speed += this.race.getSpeedByLevel(this.level);
-		speed += this.class.getSpeedByLevel(this.level);
+		speed += this._race.getSpeedByLevel(this.level);
+		speed += this._class.getSpeedByLevel(this.level);
 		return Math.floor(speed);
 	}
 
 	get rawEvasion(){
 		var evasion = 0;
-		evasion += this.race.getEvasionByLevel(this.level);
-		evasion += this.class.getEvasionByLevel(this.level);
+		evasion += this._race.getEvasionByLevel(this.level);
+		evasion += this._class.getEvasionByLevel(this.level);
 		return Math.floor(evasion);
 	}
 
 	get evasion(){
 		var evasion = this.agility;
-		evasion += this.race.getEvasionByLevel(this.level);
-		evasion += this.class.getEvasionByLevel(this.level);
+		evasion += this._race.getEvasionByLevel(this.level);
+		evasion += this._class.getEvasionByLevel(this.level);
 		return Math.floor(evasion);
 	}
 
 	get rawStamina(){
 		var stamina = 0;
-		stamina += this.race.getStaminaByLevel(this.level);
-		stamina += this.class.getStaminaByLevel(this.level);
+		stamina += this._race.getStaminaByLevel(this.level);
+		stamina += this._class.getStaminaByLevel(this.level);
 		return Math.floor(stamina);
 	}
 
 	get stamina(){
 		var stamina = this.agility;
-		stamina += this.race.getStaminaByLevel(this.level);
-		stamina += this.class.getStaminaByLevel(this.level);
+		stamina += this._race.getStaminaByLevel(this.level);
+		stamina += this._class.getStaminaByLevel(this.level);
 		return Math.floor(stamina);
 	}
 
-	get rawEnergy(){
+	get rawMaxEnergy(){
 		var energy = 0;
-		energy += this.race.getEnergyByLevel(this.level);
-		energy += this.class.getEnergyByLevel(this.level);
+		energy += this._race.getEnergyByLevel(this.level);
+		energy += this._class.getEnergyByLevel(this.level);
 		return Math.floor(energy);
 	}
 
-	get energy(){
+	get maxEnergy(){
 		var energy = this.stamina;
-		energy += this.race.getEnergyByLevel(this.level);
-		energy += this.class.getEnergyByLevel(this.level);
+		energy += this._race.getEnergyByLevel(this.level);
+		energy += this._class.getEnergyByLevel(this.level);
 		return Math.floor(energy);
 	}
 
 	get rawIntelligence(){
 		var intelligence = 0;
-		intelligence += this.race.getIntelligenceByLevel(this.level);
-		intelligence += this.class.getIntelligenceByLevel(this.level);
+		intelligence += this._race.getIntelligenceByLevel(this.level);
+		intelligence += this._class.getIntelligenceByLevel(this.level);
 		return Math.floor(intelligence);
 	}
 
 	get intelligence(){
 		var intelligence = 0;
-		intelligence += this.race.getIntelligenceByLevel(this.level);
-		intelligence += this.class.getIntelligenceByLevel(this.level);
+		intelligence += this._race.getIntelligenceByLevel(this.level);
+		intelligence += this._class.getIntelligenceByLevel(this.level);
 		return Math.floor(intelligence);
 	}
 
 	get rawMagicPower(){
 		var magicPower = 0;
-		magicPower += this.race.getMagicPowerByLevel(this.level);
-		magicPower += this.class.getMagicPowerByLevel(this.level);
+		magicPower += this._race.getMagicPowerByLevel(this.level);
+		magicPower += this._class.getMagicPowerByLevel(this.level);
 		return Math.floor(magicPower);
 	}
 
 	get magicPower(){
 		var magicPower = this.intelligence;
-		magicPower += this.race.getMagicPowerByLevel(this.level);
-		magicPower += this.class.getMagicPowerByLevel(this.level);
+		magicPower += this._race.getMagicPowerByLevel(this.level);
+		magicPower += this._class.getMagicPowerByLevel(this.level);
 		return Math.floor(magicPower);
 	}
 
 	get rawResilience(){
 		var resilience = 0;
-		resilience += this.race.getResilienceByLevel(this.level);
-		resilience += this.class.getResilienceByLevel(this.level);
+		resilience += this._race.getResilienceByLevel(this.level);
+		resilience += this._class.getResilienceByLevel(this.level);
 		return Math.floor(resilience);
 	}
 
 	get resilience(){
 		var resilience = this.intelligence;
-		resilience += this.race.getResilienceByLevel(this.level);
-		resilience += this.class.getResilienceByLevel(this.level);
+		resilience += this._race.getResilienceByLevel(this.level);
+		resilience += this._class.getResilienceByLevel(this.level);
 		return Math.floor(resilience);
 	}
 
 	get rawWisdom(){
 		var wisdom = 0;
-		wisdom += this.race.getWisdomByLevel(this.level);
-		wisdom += this.class.getWisdomByLevel(this.level);
+		wisdom += this._race.getWisdomByLevel(this.level);
+		wisdom += this._class.getWisdomByLevel(this.level);
 		return Math.floor(wisdom);
 	}
 
 	get wisdom(){
 		var wisdom = this.intelligence;
-		wisdom += this.race.getWisdomByLevel(this.level);
-		wisdom += this.class.getWisdomByLevel(this.level);
+		wisdom += this._race.getWisdomByLevel(this.level);
+		wisdom += this._class.getWisdomByLevel(this.level);
 		return Math.floor(wisdom);
 	}
 
-	get rawMana(){
+	get rawMaxMana(){
 		var mana = 0;
-		mana += this.race.getManaByLevel(this.level);
-		mana += this.class.getManaByLevel(this.level);
+		mana += this._race.getManaByLevel(this.level);
+		mana += this._class.getManaByLevel(this.level);
 		return Math.floor(mana);
 	}
 
-	get mana(){
+	get maxMana(){
 		var mana = this.wisdom;
-		mana += this.race.getManaByLevel(this.level);
-		mana += this.class.getManaByLevel(this.level);
+		mana += this._race.getManaByLevel(this.level);
+		mana += this._class.getManaByLevel(this.level);
 		return Math.floor(mana);
 	}
 
 	get toNextLevel(){
 		var tnl = 0;
-		tnl += this.race.getToNextLevelByLevel(this.level);
-		tnl += this.class.getToNextLevelByLevel(this.level);
+		tnl += this._race.getToNextLevelByLevel(this.level);
+		tnl += this._class.getToNextLevelByLevel(this.level);
 		return Math.floor(tnl);
 	}
 
@@ -281,6 +296,28 @@ class Mob extends Movable{
 		}
 	}
 
+	set race(race){
+		this._race = race;
+		this.health = this.maxHealth;
+		this.energy = this.maxEnergy;
+		this.mana = this.maxMana;
+	}
+
+	get race(){
+		return this._race;
+	}
+
+	set class(cLass){
+		this._class = cLass;
+		this.health = this.maxHealth;
+		this.energy = this.maxEnergy;
+		this.mana = this.maxMana;
+	}
+
+	get class(){
+		return this._class;
+	}
+
 	__JSONWrite(key, value, json){
 		switch(key){
 			case "loc":
@@ -289,6 +326,7 @@ class Mob extends Movable{
 
 			case "race": json.race = value.name; break;
 			case "class": json.class = value.name; break;
+			case "wearLocation": break;
 			default: super.__JSONWrite(key, value, json); break;
 		}
 	}
@@ -299,8 +337,19 @@ class Mob extends Movable{
 				this._loc = value;
 				break;
 
-			case "race": this.race = RaceManager.getRaceByName(value); break;
-			case "class": this.class = ClassManager.getClassByName(value); break;
+			case "race":
+				var race = RaceManager.getRaceByName(value);
+				if(!race) Logger.error(_("BAD RACE: '%s'", value));
+				this._race = race;
+				break;
+
+			case "class":
+				var cLass = ClassManager.getClassByName(value);
+				if(!cLass) Logger.error(_("BAD CLASS: '%s'", value));
+				this._class = cLass;
+				break;
+
+			case "wearLocation": break;
 			default: super.__JSONRead(key, value); break;
 		}
 	}
@@ -395,18 +444,24 @@ class Mob extends Movable{
 
 	levelup(quiet){
 		var oRace, oClass, oRawAttributes;
-		this.experience = 0;
 		if(!quiet || !this.player){
-			oRace = this.race;
-			oClass = this.class;
+			oRace = this._race;
+			oClass = this._class;
 			oRawAttributes = this.getRawAttributes();
 		}
 
-		// changes to race/class can happen here
-//		if(Math.probability(0.25)) this.race = RaceManager.races.pick();
-//		if(Math.probability(0.25)) this.class = ClassManager.classes.pick();
+		this.experience = 0;
 
+		// changes to race/class can happen here
+
+		// create an anonymous status restoration function
+		var restore = this.__restoreStatusF();
+
+		// changes our level -- changes everything
 		this.level++;
+
+		// restore status based on previous %
+		restore();
 
 		// leveling up is done. don't bother creating a message.
 		if(quiet || !this.player) return;
@@ -421,26 +476,10 @@ class Mob extends Movable{
 		}
 
 		var msg = _("You are now level {G%d{x!", this.level);
-
-		if(this.race != oRace){
-			msg += "\r\n" + _("RANDOM RACE CHANGE! You became a/n {G%s{x!", this.race.name);
-		}
-
-		if(this.class != oClass){
-			msg += "\r\n" + _("RANDOM CLASS CHANGE! You became a/n {G%s{x!", this.class.name);
-		}
-
 		for(var attribute in diffAttributes){
 			var emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
 			var gain = diffAttributes[attribute] > 0;
 			var word = gain ? "increased" : "decreased";
-/*
-			msg += "\r\n" + _("Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x).",
-								emphasis, Attributes.names[attribute],
-								emphasis, gain ? "increased" : "decreased",
-								emphasis, nRawAttributes[attribute],
-								emphasis, gain ? "+" : "", diffAttributes[attribute]);
-*/
 			msg += "\r\n" + _("Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x).",
 								emphasis, Attributes.names[attribute],
 								emphasis, word,
@@ -451,23 +490,115 @@ class Mob extends Movable{
 		this.sendLine(msg);
 	}
 
+	wear(equipment){
+		var slot = null;
+		switch(equipment.wearLoc){
+			case WearLocation.locations.FINGER:
+				if(this.wearLocation.FINGER_A == null) {
+					this.wearLocation.FINGER_A = equipment;
+					slot = WearLocation.slots.FINGER_A;
+				} else if(this.wearLocation.FINGER_B == null) {
+					this.wearLocation.FINGER_B = equipment;
+					slot = WearLocation.slots.FINGER_B;
+				} else return false;
+				break;
+
+			case WearLocation.locations.HOLD:
+				if(this.wearLocation.HAND_OFF == null) {
+					this.wearLocation.HAND_OFF = equipment;
+					slot = WearLocation.slots.HAND_OFF;
+				} else return false;
+				break;
+
+			case WearLocation.locations.WEAPON:
+				if(this.wearLocation.HAND_PRIMARY == null) {
+					this.wearLocation.HAND_PRIMARY = equipment;
+					slot = WearLocation.slots.HAND_PRIMARY;
+				} else return false;
+				break;
+
+			default:
+				if(!this.wearLocation.hasOwnProperty(equipment.wearLoc)) return false;
+				if(this.wearLocation[equipment.wearLoc] != null) return false;
+				this.wearLocation[equipment.wearLoc] = equipment;
+				slot = equipment.wearLoc;
+				break;
+		}
+
+		equipment.worn = true;
+		return slot;
+	}
+
+	remove(equipment){
+		var slot = null;
+		switch(equipment.wearLoc){
+			case WearLocation.locations.FINGER:
+				if(this.wearLocation.FINGER_A == equipment) {
+					this.wearLocation.FINGER_A = null;
+					slot = WearLocation.slots.FINGER_A;
+				} else if(this.wearLocation.FINGER_B == equipment) {
+					this.wearLocation.FINGER_B = null;
+					slot = WearLocation.slots.FINGER_B;
+				} else return false;
+				break;
+
+			case WearLocation.locations.HOLD:
+				if(this.wearLocation.HAND_OFF == equipment) {
+					this.wearLocation.HAND_OFF = null;
+					slot = WearLocation.slots.HAND_OFF;
+				} else return false;
+				break;
+
+			case WearLocation.locations.WEAPON:
+				if(this.wearLocation.HAND_PRIMARY == equipment) {
+					this.wearLocation.HAND_PRIMARY = null;
+					slot = WearLocation.slots.HAND_PRIMARY;
+				} else return false;
+				break;
+
+			default:
+				if(!this.wearLocation.hasOwnProperty(equipment.wearLoc)) return false;
+				if(this.wearLocation[equipment.wearLoc] != equipment) return false;
+				this.wearLocation[equipment.wearLoc] = null;
+				slot = equipment.wearLoc;
+				break;
+		}
+
+		equipment.worn = false;
+		return slot;
+	}
+
+	__restoreStatusF(){
+		// derive a percentage of our stats
+		var healthP = this.health/this.maxHealth;
+		var energyP = this.energy/this.maxEnergy;
+		var manaP = this.mana/this.maxMana;
+
+		// returns restoration function for later usage
+		return function(){
+			this.health = healthP * this.maxHealth;
+			this.energy = energyP * this.maxEnergy;
+			this.mana = manaP * this.maxMana;
+		}.bind(this);
+	}
+
 	getAttributes(){
 		return {
 			STRENGTH: this.strength,
 			ATTACK_POWER: this.attackPower,
 			DEFENSE: this.defense,
 			VITALITY: this.vitality,
-			HEALTH: this.health,
+			HEALTH: this.maxHealth,
 			AGILITY: this.agility,
 			SPEED: this.speed,
 			EVASION: this.evasion,
 			STAMINA: this.stamina,
-			ENERGY: this.energy,
+			ENERGY: this.maxEnergy,
 			INTELLIGENCE: this.intelligence,
 			MAGIC_POWER: this.magicPower,
 			RESILIENCE: this.resilience,
 			WISDOM: this.wisdom,
-			MANA: this.mana
+			MANA: this.maxMana
 		};
 	}
 
@@ -477,22 +608,27 @@ class Mob extends Movable{
 			ATTACK_POWER: this.rawAttackPower,
 			DEFENSE: this.rawDefense,
 			VITALITY: this.rawVitality,
-			HEALTH: this.rawHealth,
+			HEALTH: this.rawMaxHealth,
 			AGILITY: this.rawAgility,
 			SPEED: this.rawSpeed,
 			EVASION: this.rawEvasion,
 			STAMINA: this.rawStamina,
-			ENERGY: this.rawEnergy,
+			ENERGY: this.rawMaxEnergy,
 			INTELLIGENCE: this.rawIntelligence,
 			MAGIC_POWER: this.rawMagicPower,
 			RESILIENCE: this.rawResilience,
 			WISDOM: this.rawWisdom,
-			MANA: this.rawMana
+			MANA: this.rawMaxMana
 		};
 	}
 }
 
-Mob.prototype._channels = null;
+
+/** @default "mob" */
+Mob.prototype.keywords = "mob";
+
+/** @default "Mob" */
+Mob.prototype.display = "Mob";
 
 /**
  * The player currently managing us.
@@ -500,6 +636,9 @@ Mob.prototype._channels = null;
  * @type {?Player}
  */
 Mob.prototype._player = null;
+
+/** Channels this mob is participating in. */
+Mob.prototype._channels = null;
 
 /**
  * This mob's player data.
@@ -510,13 +649,13 @@ Mob.prototype.characterData = null;
  * This mob's race.
  * @type {?Race}
  */
-Mob.prototype.race = null;
+Mob.prototype._race = new Race();
 
 /**
  * This mob's class.
  * @type {?Class}
  */
-Mob.prototype.class = null;
+Mob.prototype._class = new Class();
 
 /**
  * This mob's experience level.
@@ -530,11 +669,11 @@ Mob.prototype.level = 1;
  */
 Mob.prototype.experience = 0;
 
-/** @default "mob" */
-Mob.prototype.keywords = "mob";
+Mob.prototype.health = 0;
+Mob.prototype.energy = 0;
+Mob.prototype.mana = 0;
 
-/** @default "Mob" */
-Mob.prototype.display = "Mob";
+Mob.prototype.wearLocation = null;
 
 module.exports = Mob;
 

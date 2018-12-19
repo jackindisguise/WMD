@@ -8,7 +8,7 @@ var Mob = require("../../../src/mud/map/Mob");
 var Player = require("../../../src/mud/io/Player");
 
 // testing
-describe("Player", function(){
+describe("[PLAYER]", function(){
 	it("constructor options", function(done){
 		var mob = new Mob();
 		var p = new Player({mob:mob});

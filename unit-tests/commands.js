@@ -8,7 +8,7 @@ var io = require("socket.io-client");
 // local includes
 var _ = require("../i18n");
 
-describe("Command", function(){
+describe("[COMMAND]", function(){
     var player, other;
     afterEach(function(){ // gets rid of any false positives
         player.removeAllListeners("message");
@@ -60,7 +60,7 @@ describe("Command", function(){
         });
     });
 
-    it("input: who", function(done){
+    it("'who'", function(done){
         player.once("message", function(message, category){
             expect(message).is.equal("Players Connected: 2\r\n[First]\r\n[Second]");
             done();
@@ -69,7 +69,7 @@ describe("Command", function(){
         player.emit("command", "who");
     });
 
-    it("input: quit", function(done){
+    it("'quit'", function(done){
         player.once("message", function(message, category){
             expect(message).is.equal(_("Later, skater."));
             done();

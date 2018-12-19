@@ -1,0 +1,13 @@
+{
+    "name":"PC.anti-mage",
+    "display":"anti-mage",
+    "keywords":"anti-mage",
+    "description":"A killer of spells.",
+    "strengthBase":6,
+    "strengthPerLevel": 0.5,
+    "agilityBase":8,
+    "agilityPerLevel": 1,
+    "intelligenceBase":6,
+    "intelligencePerLevel": 0.25,
+    "resiliencePerLevel": 0.75
+}

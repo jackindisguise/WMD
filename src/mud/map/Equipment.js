@@ -1,4 +1,5 @@
 // local includes
+var WearLocation = require("../WearLocation");
 var Item = require("./Item");
 
 class Equipment extends Item{

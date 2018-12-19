@@ -7,7 +7,7 @@ var Tile = require("../../../src/mud/map/Tile");
 
 // testing
 var map;
-describe("Map", function(){
+describe("[MAP]", function(){
 	it("invalid constructor options", function(done){
 		map = new Map();
 		expect(map.size.width).to.equal(0);

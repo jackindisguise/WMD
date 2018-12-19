@@ -26,11 +26,11 @@ module.exports = function(callback){
 	Logger.info(_("> Loading templates..."));
 	deepSearch("./data/template", function(file, next){
 		var f = file.slice("./data/template".length); // cut off relative path from root
-		var _template = require("../../../data/template/"+f);
+		var json = require("../../../data/template/"+f);
+		Logger.info(_(">> Loading template for <%s>", json.name));
 		var template = new Template();
-		template.__fromJSON(_template);
+		template.__fromJSON(json);
 		TemplateManager.add(template);
-		Logger.info(_(">> Loaded template for <%s>", template.name));
 		next();
 	}, callback);
 };

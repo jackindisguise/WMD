@@ -1,0 +1,13 @@
+{
+    "name":"PC.shadowblade",
+    "display":"shadowblade",
+    "keywords":"shadowblade",
+    "description":"A dude that can't get hit.",
+    "strengthBase":6,
+    "strengthPerLevel": 0.5,
+    "agilityBase":8,
+    "agilityPerLevel": 1,
+    "intelligenceBase":6,
+    "intelligencePerLevel": 0.25,
+    "evasionPerLevel": 0.75
+}

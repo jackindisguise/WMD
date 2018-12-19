@@ -15,7 +15,7 @@ var tile2 = map.getTileByXYZ(1,0,0);
 var tile3 = map.getTileByXYZ(2,0,0);
 var noenter = map.getTileByXYZ(3,0,0);
 noenter.canEnter = function(){ return false; };
-describe("Movable", function(){
+describe("[MOVABLE]", function(){
 	it("constructor options", function(done){
 		movable = new Movable();
 		done();

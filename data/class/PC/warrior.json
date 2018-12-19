@@ -1,0 +1,12 @@
+{
+    "name":"PC.warrior",
+    "display":"warrior",
+    "keywords":"warrior",
+    "description":"A fighter that utilizes weapons and armor and stuff.",
+    "strengthBase":8,
+    "strengthPerLevel": 1,
+    "agilityBase":6,
+    "agilityPerLevel": 0.5,
+    "intelligenceBase":6,
+    "intelligencePerLevel": 0.5
+}

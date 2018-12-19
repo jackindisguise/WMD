@@ -1,0 +1,12 @@
+{
+    "name":"PC.mage",
+    "display":"mage",
+    "keywords":"mage",
+    "description":"A caster of spells.",
+    "strengthBase":6,
+    "strengthPerLevel": 0.5,
+    "agilityBase":6,
+    "agilityPerLevel": 0.5,
+    "intelligenceBase":8,
+    "intelligencePerLevel": 1
+}

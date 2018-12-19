@@ -1,0 +1,12 @@
+{
+    "name":"PC.thief",
+    "display":"thief",
+    "keywords":"thief",
+    "description":"A trickster with a focus on stealth, ambushing, and fatal strikes.",
+    "strengthBase":6,
+    "strengthPerLevel": 0.5,
+    "agilityBase":8,
+    "agilityPerLevel": 1,
+    "intelligenceBase":6,
+    "intelligencePerLevel": 0.5
+}

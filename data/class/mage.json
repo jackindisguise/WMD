@@ -1,8 +1,0 @@
-{
-    "name":"mage",
-    "keywords":"mage",
-    "description":"A caster of spells.",
-    "strengthPerLevel": 0.4,
-    "agilityPerLevel": 0.4,
-    "intelligencePerLevel": 1.4
-}

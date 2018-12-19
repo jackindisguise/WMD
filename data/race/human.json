@@ -1,8 +1,0 @@
-{
-    "name":"human",
-    "keywords":"human",
-    "description":"A very adaptive race.",
-    "strengthPerLevel": 0.2,
-    "agilityPerLevel": 0.2,
-    "intelligencePerLevel": 0.2
-}

@@ -1,8 +1,0 @@
-{
-    "name":"warrior",
-    "keywords":"warrior",
-    "description":"A fighter that utilizes weapons and armor and stuff.",
-    "strengthPerLevel": 1.4,
-    "agilityPerLevel": 0.4,
-    "intelligencePerLevel": 0.4
-}

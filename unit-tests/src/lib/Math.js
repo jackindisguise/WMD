@@ -5,7 +5,7 @@ var expect = require("chai").expect;
 require("../../../src/lib/Math");
 
 // MMath testing goes here!
-describe("Math", function(){
+describe("[MATH]", function(){
 	it("lerp", function(done){
 		expect(Math.lerp(0,1,0.5)).to.equal(0.5);
 		done();

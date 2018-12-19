@@ -80,6 +80,12 @@ Classification.prototype.id = 0;
 Classification.prototype.name = "unknown";
 
 /**
+ * Display name for this classification.
+ * @type {string}
+ */
+Classification.prototype.display = "unknown";
+
+/**
  * Keyword for referencing this classification.
  * @type {string}
  */

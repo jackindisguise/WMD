@@ -20,7 +20,7 @@ var PlayerManager = require("../src/mud/manager/PlayerManager");
 var greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
 var motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
 
-describe("Login", function(){
+describe("[LOGIN]", function(){
     var player;
     var sPlayer;
     it("connect player", function(done){
@@ -40,7 +40,7 @@ describe("Login", function(){
                 case 2:
                     var msg = "{y------------------";
                     for(var race of RaceManager.races){
-                        msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.name.padLeft(14), "|", race.description);
+                        msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.display.padLeft(14), "|", race.description);
                     }
             
                     msg += "\r\n";
@@ -56,7 +56,7 @@ describe("Login", function(){
                 case 4:
                     var msg = "{c------------------";
                     for(var _class of ClassManager.classes){
-                        msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.name.padLeft(14), "|", _class.description);
+                        msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
                     }
             
                     msg += "\r\n";
@@ -79,7 +79,7 @@ describe("Login", function(){
                     break;
 
                 case 8:
-                    expect(message).to.equal(_("Welcome to the game, %s the %s %s!", sPlayer.mob.name, sPlayer.mob.race.name, sPlayer.mob.class.name));
+                    expect(message).to.equal(_("Welcome to the game, %s the %s %s!", sPlayer.mob.name, sPlayer.mob.race.display, sPlayer.mob.class.display));
                     break;
 
                 case 9:

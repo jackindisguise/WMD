@@ -12,7 +12,7 @@ class Inventory extends Command{
 		var msg = _("You are carrying:");
 		if(mob.contents.length){
 			for(var obj of mob.contents){
-				msg += "\r\n" + util.format("    %s", obj.name);
+				msg += "\r\n" + util.format("%s %s", (obj.worn ? _("{Y(worn){x") : "      "), obj.name);
 			}
 		} else {
 			msg += "\r\n" + "    nothing";

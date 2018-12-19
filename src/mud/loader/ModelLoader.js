@@ -26,11 +26,11 @@ module.exports = function(callback){
 	Logger.info(_("> Loading models..."));
 	deepSearch("./data/model", function(file, next){
 		var f = file.slice("./data/model".length); // cut off relative path from root
-		var _model = require("../../../data/model/"+f);
+		var json = require("../../../data/model/"+f);
+		Logger.info(_(">> Loading model for <%s>", json.name));
 		var model = new Model();
-		model.__fromJSON(_model);
+		model.__fromJSON(json);
 		ModelManager.add(model);
-		Logger.info(_(">> Loaded model for <%s>", model.name));
 		next();
 	}, callback);
 };

@@ -5,7 +5,7 @@ var expect = require("chai").expect;
 var Item = require("../../src/mud/map/Item");
 var Template = require("../../src/mud/Template");
 
-describe("Template", function(){
+describe("[TEMPLATE]", function(){
 	var template;
 	it("create new template", function(done){
 		template = new Template();

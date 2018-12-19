@@ -14,7 +14,7 @@ mob.name = "Actor";
 var mob2 = new Mob({loc:map.getTileByXYZ(0,0,0)});
 mob2.name = "Receiver";
 
-describe("Communicate", function(){
+describe("[COMMUNICATE]", function(){
     it("act", function(done){
         // finisher
         var c = 0;

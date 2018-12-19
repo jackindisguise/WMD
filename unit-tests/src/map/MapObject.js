@@ -7,7 +7,7 @@ var Map = require("../../../src/mud/map/Map");
 var MapObject = require("../../../src/mud/map/MapObject");
 
 // testing
-describe("MapObject", function(){
+describe("[MAPOBJECT]", function(){
     it("constructor options", function(done){
         var object = new MapObject(); // no options
         expect(object.loc).to.equal(null);

@@ -1,0 +1,7 @@
+{
+    "name":"PC.elf",
+    "display":"elf",
+    "keywords":"elf",
+    "description":"A very magical race.",
+    "intelligencePerLevel": 0.5
+}

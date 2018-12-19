@@ -22,7 +22,7 @@ class B extends A{
 };
 B.prototype.c = 3;
 B.prototype.d = 4;
-describe("Object", function(){
+describe("[OBJECT]", function(){
     describe("JSON Read/Write", function(){
         it("toJSON", function(done){
             var b = new B();

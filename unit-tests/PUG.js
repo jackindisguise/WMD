@@ -12,8 +12,8 @@ var http = require("http");
 var _package = require("../package.json");
 
 // test goes here
-describe("PUG HTTP Interface", function(){
-    it("PUG frontend received properly", function(done){
+describe("[PUG]", function(){
+    it("frontend received properly", function(done){
         // create a connection
         http.get("http://127.0.0.1:8000/", function(res){
             res.setEncoding("utf8");
@@ -29,7 +29,7 @@ describe("PUG HTTP Interface", function(){
         });
     });
 
-    it("PUG frontend redirected properly", function(done){
+    it("frontend redirected properly", function(done){
         // create a connection
         http.get("http://127.0.0.1:8000/ldjkgjdhgkjdhfgkshg", function(res){
             res.setEncoding("utf8");

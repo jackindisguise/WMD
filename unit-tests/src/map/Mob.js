@@ -7,7 +7,7 @@ var Class = require("../../../src/mud/Class");
 var Mob = require("../../../src/mud/map/Mob");
 
 // testing
-describe("Mob", function(){
+describe("[MOB]", function(){
     it("constructor options", function(done){
         var mob = new Mob(); // no options
         expect(mob.loc).to.equal(null);

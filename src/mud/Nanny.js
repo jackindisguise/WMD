@@ -51,7 +51,7 @@ class Nanny{
     askForRace(){
         var msg = "{y------------------";
         for(var race of RaceManager.races){
-            msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.name.padLeft(14), "|", race.description);
+            msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.display.padLeft(14), "|", race.description);
         }
 
         msg += "\r\n";
@@ -77,7 +77,7 @@ class Nanny{
     askForClass(){
         var msg = "{c------------------";
         for(var _class of ClassManager.classes){
-            msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.name.padLeft(14), "|", _class.description);
+            msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
         }
 
         msg += "\r\n";
@@ -121,7 +121,7 @@ class Nanny{
         // move to new location
         if(this.isNew){
             this.mob.loc = MapManager.map.getTileByXYZ(0,0,0);
-            this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob.race.name, this.mob.class.name));
+            this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob._race.display, this.mob._class.display));
 
         // load old location
         } else {

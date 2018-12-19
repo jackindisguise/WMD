@@ -1,6 +1,7 @@
 {
-    "name":"dwarf",
+    "name":"PC.dwarf",
+    "display":"dwarf",
     "keywords":"dwarf",
     "description":"A very unadaptive and unmagical race.",
-    "strengthPerLevel": 0.6
+    "strengthPerLevel": 0.5
 }

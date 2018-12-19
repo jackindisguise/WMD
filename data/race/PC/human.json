@@ -1,0 +1,9 @@
+{
+    "name":"PC.human",
+    "display":"human",
+    "keywords":"human",
+    "description":"A very adaptive race.",
+    "strengthPerLevel": 0.167,
+    "agilityPerLevel": 0.167,
+    "intelligencePerLevel": 0.167
+}

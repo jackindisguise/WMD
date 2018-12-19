@@ -1,5 +1,6 @@
 // local includes
 var Movable = require("./Movable");
+var WearLocation = require("../WearLocation");
 
 class Item extends Movable{
 }
@@ -9,6 +10,9 @@ class Item extends Movable{
  * Dictates stat bonuses, damage, defense, etc...
  */
 Item.prototype.level = 0;
+
+Item.prototype.wearLoc = WearLocation.locations.HOLD;
+Item.prototype.worn = false;
 
 /** @default "item" */
 Item.prototype.keywords = "item";

@@ -15,10 +15,10 @@ module.exports = function(callback){
 	fs.readdir("./data/channel", function(err, files){
 		for(var file of files){
 			var json = require("../../../data/channel/"+file);
+			Logger.info(_(">> Loading channel '%s'", json.name));
 			var channel = new Channel();
 			channel.__fromJSON(json);
 			ChannelManager.add(channel);
-			Logger.info(_(">> Loaded channel '%s'", channel.name));
 		}
 
 		callback();
