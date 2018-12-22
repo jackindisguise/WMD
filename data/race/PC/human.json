@@ -3,7 +3,7 @@
     "display":"human",
     "keywords":"human",
     "description":"A very adaptive race.",
-    "strengthPerLevel": 0.167,
-    "agilityPerLevel": 0.167,
-    "intelligencePerLevel": 0.167
+    "strengthPerLevel": 0.041,
+    "agilityPerLevel": 0.041,
+    "intelligencePerLevel": 0.041
 }

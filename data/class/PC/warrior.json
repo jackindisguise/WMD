@@ -8,5 +8,5 @@
     "agilityBase":6,
     "agilityPerLevel": 0.5,
     "intelligenceBase":6,
-    "intelligencePerLevel": 0.5
+    "intelligencePerLevel": 0.25
 }

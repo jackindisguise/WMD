@@ -4,10 +4,11 @@
     "keywords":"shadowblade",
     "description":"A dude that can't get hit.",
     "strengthBase":6,
-    "strengthPerLevel": 0.5,
+    "strengthPerLevel": 0.25,
     "agilityBase":8,
-    "agilityPerLevel": 1,
+    "agilityPerLevel": 0.75,
     "intelligenceBase":6,
     "intelligencePerLevel": 0.25,
+    "speedPerLevel": 0.75,
     "evasionPerLevel": 0.75
 }

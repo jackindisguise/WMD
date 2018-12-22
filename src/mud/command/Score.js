@@ -23,7 +23,7 @@ class Score extends Command{
 		msg += "\r\n" + _("             {R%d{x vitality, granting {R%d{x maximum health.", attributes.VITALITY, attributes.VITALITY);
 		msg += "\r\n" + _("          {G%d{x agility, granting {G%d{x speed, evasion, and stamina.", attributes.AGILITY, attributes.AGILITY);
 		msg += "\r\n" + _("             {G%d{x speed, granting {G%d{x hit rating.", attributes.SPEED, attributes.SPEED);
-		msg += "\r\n" + _("             {G%d{x evasion, granting {G%.2f{x evasion rating.", attributes.EVASION, attributes.EVASION*0.1);
+		msg += "\r\n" + _("             {G%d{x evasion, granting {G%.2f{x evasion rating.", attributes.EVASION, attributes.EVASION*0.50);
 		msg += "\r\n" + _("             {G%d{x stamina, granting {G%d{x maximum energy.", attributes.STAMINA, attributes.STAMINA);
 		msg += "\r\n" + _("          {C%d{x intelligence, granting {C%d{x magic power, resilience, and wisdom.", mob.intelligence, mob.intelligence);
 		msg += "\r\n" + _("             {C%d{x magic power, granting {C%d{x magical damage.", mob.magicPower, mob.magicPower);

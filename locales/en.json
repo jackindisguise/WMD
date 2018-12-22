@@ -76,5 +76,9 @@
 	"You can't remove that.": "You can't remove that.",
 	"You stop wearing %s.": "You stop wearing %s.",
 	"You put %s on your %s and wear it.": "You put %s on your %s and wear it.",
-	"You put %s in your %s and wear it.": "You put %s in your %s and wear it."
+	"You put %s in your %s and wear it.": "You put %s in your %s and wear it.",
+	"             {G%d{x speed, granting {G%.2f{x hit rating.": "             {G%d{x speed, granting {G%.2f{x hit rating.",
+	"Commands": "Commands",
+	"You can't wear that.": "You can't wear that.",
+	"That isn't a valid class.": "That isn't a valid class."
 }

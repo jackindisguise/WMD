@@ -8,7 +8,9 @@ var TemplateManager = require("../manager/TemplateManager");
 
 class Test extends Command{
 	exec(mob){
-		mob.levelup();
+		var txt = JSON.stringify(mob.__toJSON(), null, "\t");
+		txt = txt.replace("{", "{{");
+		mob.sendLine(txt);
 	}
 }
 
