@@ -9,6 +9,7 @@ class Outfitt extends Command{
 	exec(mob){
 		var outfit = [
 			"Weapon.excalibur",
+			"Shield.buckler",
 			"Armor.skullcap",
 			"Armor.breastplate"
 		];

@@ -13,7 +13,8 @@ var location = {
 	LEGS: "LEGS",
 	FEET: "FEET",
 	HOLD: "HOLD",
-	WEAPON: "WEAPON"
+	WEAPON: "WEAPON",
+	SHIELD: "SHIELD"
 };
 
 /**
@@ -31,7 +32,8 @@ var display = {
 	LEGS: "legs",
 	FEET: "feet",
 	HOLD: "hold",
-	WEAPON: "weapon"
+	WEAPON: "weapon",
+	SHIELD: "shield"
 };
 
 class WearLocation{

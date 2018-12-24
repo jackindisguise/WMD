@@ -50,7 +50,7 @@ Equipment.prototype.intelligenceBonus = 0;
 Equipment.prototype.magicPowerBonus = 0;
 Equipment.prototype.resilienceBonus = 0;
 Equipment.prototype.wisdomBonus = 0;
-Equipment.prototype.energyBonus = 0;
+Equipment.prototype.manaBonus = 0;
 
 Equipment.prototype.wearLoc = null;
 Equipment.prototype.worn = false;

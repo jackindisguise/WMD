@@ -12,6 +12,7 @@ var Item = require("../map/Item");
 var Equipment = require("../map/Equipment");
 var Weapon = require("../map/Weapon");
 var Armor = require("../map/Armor");
+var Shield = require("../map/Shield");
 var Tile = require("../map/Tile");
 
 // constructor name table
@@ -22,6 +23,7 @@ var constructorNames = {
 	"Item": Item,
 	"Equipment": Equipment,
 	"Armor": Armor,
+	"Shield": Shield,
 	"Weapon": Weapon,
 	"Tile": Tile
 }

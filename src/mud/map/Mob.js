@@ -581,6 +581,13 @@ class Mob extends Movable{
 				} else return false;
 				break;
 
+			case WearLocation.location.SHIELD:
+				if(this.worn.HAND_OFF == null){
+					this.worn.HAND_OFF = equipment;
+					slot = WearSlot.slot.HAND_OFF;
+				} else return false;
+				break;
+
 			default:
 				if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
 				if(this.worn[equipment.wearLoc] != null) return false;
@@ -619,6 +626,13 @@ class Mob extends Movable{
 				if(this.worn.HAND_PRIMARY == equipment) {
 					this.worn.HAND_PRIMARY = null;
 					slot = WearSlot.slot.HAND_PRIMARY;
+				} else return false;
+				break;
+
+			case WearLocation.location.SHIELD:
+				if(this.worn.HAND_OFF == equipment){
+					this.worn.HAND_OFF = null;
+					slot = WearSlot.slot.HAND_OFF;
 				} else return false;
 				break;
 
