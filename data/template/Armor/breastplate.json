@@ -1,0 +1,9 @@
+{
+    "name": "Armor.breastplate",
+    "obj":{
+        "constructor": "Armor",
+        "keywords": "breastplate",
+        "display": "a breastplate",
+        "wearLoc": "TORSO"
+    }
+}

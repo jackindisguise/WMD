@@ -15,6 +15,8 @@ var Class = require("../Class");
 var MessageCategory = require("../MessageCategory");
 var Attributes = require("../Attributes");
 var WearLocation = require("../WearLocation");
+var WearSlot = require("../WearSlot");
+var Equipment = require("./Equipment");
 
 /**
  * Represents an animate creature on the map.
@@ -28,7 +30,7 @@ class Mob extends Movable{
 	constructor(options){
 		super(options);
 		this._channels = [];
-		this.wearLocation = {
+		this.worn = {
 			HEAD: null,
 			NECK: null,
 			SHOULDER: null,
@@ -61,6 +63,10 @@ class Mob extends Movable{
 		var strength = 0;
 		strength += this._race.getStrengthByLevel(this.level);
 		strength += this._class.getStrengthByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) strength += eq.strength;
+		}
 		return Math.floor(strength);
 	}
 
@@ -75,6 +81,10 @@ class Mob extends Movable{
 		var attackPower = this.strength;
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) attackPower += eq.attackPower;
+		}
 		return Math.floor(attackPower);
 	}
 
@@ -89,6 +99,10 @@ class Mob extends Movable{
 		var defense = this.strength;
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) defense += eq.defense;
+		}
 		return Math.floor(defense);
 	}
 
@@ -103,6 +117,10 @@ class Mob extends Movable{
 		var vitality = this.strength;
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) vitality += eq.vitality;
+		}
 		return Math.floor(vitality);
 	}
 
@@ -117,6 +135,10 @@ class Mob extends Movable{
 		var health = this.vitality;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) health += eq.health;
+		}
 		return Math.floor(health);
 	}
 
@@ -131,6 +153,10 @@ class Mob extends Movable{
 		var agility = 0;
 		agility += this._race.getAgilityByLevel(this.level);
 		agility += this._class.getAgilityByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) agility += eq.agility;
+		}
 		return Math.floor(agility);
 	}
 
@@ -145,6 +171,10 @@ class Mob extends Movable{
 		var speed = this.agility;
 		speed += this._race.getSpeedByLevel(this.level);
 		speed += this._class.getSpeedByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) speed += eq.speed;
+		}
 		return Math.floor(speed);
 	}
 
@@ -159,6 +189,10 @@ class Mob extends Movable{
 		var evasion = this.agility;
 		evasion += this._race.getEvasionByLevel(this.level);
 		evasion += this._class.getEvasionByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) evasion += eq.evasion;
+		}
 		return Math.floor(evasion);
 	}
 
@@ -173,6 +207,10 @@ class Mob extends Movable{
 		var stamina = this.agility;
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) stamina += eq.stamina;
+		}
 		return Math.floor(stamina);
 	}
 
@@ -187,6 +225,10 @@ class Mob extends Movable{
 		var energy = this.stamina;
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) energy += eq.energy;
+		}
 		return Math.floor(energy);
 	}
 
@@ -201,6 +243,10 @@ class Mob extends Movable{
 		var intelligence = 0;
 		intelligence += this._race.getIntelligenceByLevel(this.level);
 		intelligence += this._class.getIntelligenceByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) intelligence += eq.intelligence;
+		}
 		return Math.floor(intelligence);
 	}
 
@@ -215,6 +261,10 @@ class Mob extends Movable{
 		var magicPower = this.intelligence;
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) magicPower += eq.magicPower;
+		}
 		return Math.floor(magicPower);
 	}
 
@@ -229,6 +279,10 @@ class Mob extends Movable{
 		var resilience = this.intelligence;
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) resilience += eq.resilience;
+		}
 		return Math.floor(resilience);
 	}
 
@@ -243,6 +297,10 @@ class Mob extends Movable{
 		var wisdom = this.intelligence;
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) wisdom += eq.wisdom;
+		}
 		return Math.floor(wisdom);
 	}
 
@@ -257,6 +315,10 @@ class Mob extends Movable{
 		var mana = this.wisdom;
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
+		for(var slot in this.worn){
+			var eq = this.worn[slot];
+			if(eq) mana += eq.mana;
+		}
 		return Math.floor(mana);
 	}
 
@@ -418,7 +480,7 @@ class Mob extends Movable{
 		}
 
 		// default description
-		var desc = util.format("{C%s\r\n    {c%s{x", this.loc.name, this.loc.description);
+		var desc = util.format("{C%s {D(%s){x\r\n    {c%s{x", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z), this.loc.description);
 
 		// generate exits
 		var exits = [];
@@ -439,7 +501,7 @@ class Mob extends Movable{
 
 	gainExperience(amount){
 		this.experience += amount;
-		if(this.experience >= this.toNextLevel) levelup();
+		while(this.experience >= this.toNextLevel) levelup();
 	}
 
 	levelup(quiet){
@@ -455,7 +517,7 @@ class Mob extends Movable{
 		// changes to race/class can happen here
 
 		// create an anonymous status restoration function
-		var restore = this.__restoreStatusF();
+		var restore = this.getRestoreStatusFunc();
 
 		// changes our level -- changes everything
 		this.level++;
@@ -490,37 +552,39 @@ class Mob extends Movable{
 		this.sendLine(msg);
 	}
 
-	wear(equipment){
+	equip(equipment){
+		if(!(equipment instanceof Equipment)) return false;
+
 		var slot = null;
 		switch(equipment.wearLoc){
-			case WearLocation.locations.FINGER:
-				if(this.wearLocation.FINGER_A == null) {
-					this.wearLocation.FINGER_A = equipment;
-					slot = WearLocation.slots.FINGER_A;
-				} else if(this.wearLocation.FINGER_B == null) {
-					this.wearLocation.FINGER_B = equipment;
-					slot = WearLocation.slots.FINGER_B;
+			case WearLocation.location.FINGER:
+				if(this.worn.FINGER_A == null) {
+					this.worn.FINGER_A = equipment;
+					slot = WearSlot.slot.FINGER_A;
+				} else if(this.worn.FINGER_B == null) {
+					this.worn.FINGER_B = equipment;
+					slot = WearSlot.slot.FINGER_B;
 				} else return false;
 				break;
 
-			case WearLocation.locations.HOLD:
-				if(this.wearLocation.HAND_OFF == null) {
-					this.wearLocation.HAND_OFF = equipment;
-					slot = WearLocation.slots.HAND_OFF;
+			case WearLocation.location.HOLD:
+				if(this.worn.HAND_OFF == null) {
+					this.worn.HAND_OFF = equipment;
+					slot = WearSlot.slot.HAND_OFF;
 				} else return false;
 				break;
 
-			case WearLocation.locations.WEAPON:
-				if(this.wearLocation.HAND_PRIMARY == null) {
-					this.wearLocation.HAND_PRIMARY = equipment;
-					slot = WearLocation.slots.HAND_PRIMARY;
+			case WearLocation.location.WEAPON:
+				if(this.worn.HAND_PRIMARY == null) {
+					this.worn.HAND_PRIMARY = equipment;
+					slot = WearSlot.slot.HAND_PRIMARY;
 				} else return false;
 				break;
 
 			default:
-				if(!this.wearLocation.hasOwnProperty(equipment.wearLoc)) return false;
-				if(this.wearLocation[equipment.wearLoc] != null) return false;
-				this.wearLocation[equipment.wearLoc] = equipment;
+				if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
+				if(this.worn[equipment.wearLoc] != null) return false;
+				this.worn[equipment.wearLoc] = equipment;
 				slot = equipment.wearLoc;
 				break;
 		}
@@ -529,57 +593,45 @@ class Mob extends Movable{
 		return slot;
 	}
 
-	remove(equipment){
+	unequip(equipment){
+		if(!(equipment instanceof Equipment)) return false;
+
 		var slot = null;
 		switch(equipment.wearLoc){
-			case WearLocation.locations.FINGER:
-				if(this.wearLocation.FINGER_A == equipment) {
-					this.wearLocation.FINGER_A = null;
-					slot = WearLocation.slots.FINGER_A;
-				} else if(this.wearLocation.FINGER_B == equipment) {
-					this.wearLocation.FINGER_B = null;
-					slot = WearLocation.slots.FINGER_B;
+			case WearLocation.location.FINGER:
+				if(this.worn.FINGER_A == equipment) {
+					this.worn.FINGER_A = null;
+					slot = WearSlot.slot.FINGER_A;
+				} else if(this.worn.FINGER_B == equipment) {
+					this.worn.FINGER_B = null;
+					slot = WearSlot.slot.FINGER_B;
 				} else return false;
 				break;
 
-			case WearLocation.locations.HOLD:
-				if(this.wearLocation.HAND_OFF == equipment) {
-					this.wearLocation.HAND_OFF = null;
-					slot = WearLocation.slots.HAND_OFF;
+			case WearLocation.location.HOLD:
+				if(this.worn.HAND_OFF == equipment) {
+					this.worn.HAND_OFF = null;
+					slot = WearSlot.slot.HAND_OFF;
 				} else return false;
 				break;
 
-			case WearLocation.locations.WEAPON:
-				if(this.wearLocation.HAND_PRIMARY == equipment) {
-					this.wearLocation.HAND_PRIMARY = null;
-					slot = WearLocation.slots.HAND_PRIMARY;
+			case WearLocation.location.WEAPON:
+				if(this.worn.HAND_PRIMARY == equipment) {
+					this.worn.HAND_PRIMARY = null;
+					slot = WearSlot.slot.HAND_PRIMARY;
 				} else return false;
 				break;
 
 			default:
-				if(!this.wearLocation.hasOwnProperty(equipment.wearLoc)) return false;
-				if(this.wearLocation[equipment.wearLoc] != equipment) return false;
-				this.wearLocation[equipment.wearLoc] = null;
+				if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
+				if(this.worn[equipment.wearLoc] != equipment) return false;
+				this.worn[equipment.wearLoc] = null;
 				slot = equipment.wearLoc;
 				break;
 		}
 
 		equipment.worn = false;
 		return slot;
-	}
-
-	__restoreStatusF(){
-		// derive a percentage of our stats
-		var healthP = this.health/this.maxHealth;
-		var energyP = this.energy/this.maxEnergy;
-		var manaP = this.mana/this.maxMana;
-
-		// returns restoration function for later usage
-		return function(){
-			this.health = healthP * this.maxHealth;
-			this.energy = energyP * this.maxEnergy;
-			this.mana = manaP * this.maxMana;
-		}.bind(this);
 	}
 
 	getAttributes(){
@@ -621,8 +673,23 @@ class Mob extends Movable{
 			MANA: this.rawMaxMana
 		};
 	}
+
+	getRestoreStatusFunc(){
+		// store our stat percentages
+		var healthP = this.health/this.maxHealth;
+		var energyP = this.energy/this.maxEnergy;
+		var manaP = this.mana/this.maxMana;
+
+		// returns restoration function for later usage
+		return function(){
+			this.health = Math.ceil(healthP * this.maxHealth);
+			this.energy = Math.ceil(energyP * this.maxEnergy);
+			this.mana = Math.ceil(manaP * this.maxMana);
+		}.bind(this);
+	}
 }
 
+Mob.prototype.worn = null;
 
 /** @default "mob" */
 Mob.prototype.keywords = "mob";
@@ -673,7 +740,7 @@ Mob.prototype.health = 0;
 Mob.prototype.energy = 0;
 Mob.prototype.mana = 0;
 
-Mob.prototype.wearLocation = null;
+Mob.prototype.worn = null;
 
 module.exports = Mob;
 

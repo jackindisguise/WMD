@@ -1,4 +1,8 @@
+// node includes
+var util = require("util");
+
 // local includes
+var Logger = require("../../util/Logger");
 var TemplateManager = require("../manager/TemplateManager");
 var ModelManager = require("../manager/ModelManager");
 var MapObject = require("../map/MapObject");
@@ -7,6 +11,7 @@ var Mob = require("../map/Mob");
 var Item = require("../map/Item");
 var Equipment = require("../map/Equipment");
 var Weapon = require("../map/Weapon");
+var Armor = require("../map/Armor");
 var Tile = require("../map/Tile");
 
 // constructor name table
@@ -16,6 +21,7 @@ var constructorNames = {
 	"Mob": Mob,
 	"Item": Item,
 	"Equipment": Equipment,
+	"Armor": Armor,
 	"Weapon": Weapon,
 	"Tile": Tile
 }
@@ -36,7 +42,11 @@ class MapObjectFactory{
 
 	static loadFromJSONByConstructor(json){
 		var constructor = MapObjectFactory.getConstructorByName(json.constructor);
-		if(!constructor) return;
+		if(!constructor) {
+			Logger.error(util.format("BAD MAPOBJECT CONSTRUCTOR: %s", json.constructor));
+			return;
+		}
+
 		return MapObjectFactory.construct(constructor, json);
 	}
 

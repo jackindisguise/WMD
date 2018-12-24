@@ -11,9 +11,6 @@ class Item extends Movable{
  */
 Item.prototype.level = 0;
 
-Item.prototype.wearLoc = WearLocation.locations.HOLD;
-Item.prototype.worn = false;
-
 /** @default "item" */
 Item.prototype.keywords = "item";
 

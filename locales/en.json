@@ -80,5 +80,9 @@
 	"             {G%d{x speed, granting {G%.2f{x hit rating.": "             {G%d{x speed, granting {G%.2f{x hit rating.",
 	"Commands": "Commands",
 	"You can't wear that.": "You can't wear that.",
-	"That isn't a valid class.": "That isn't a valid class."
+	"That isn't a valid class.": "That isn't a valid class.",
+	"You take %s out of your %s and remove it.": "You take %s out of your %s and remove it.",
+	"You pray for an outfit...": "You pray for an outfit...",
+	"You got %s.": "You got %s.",
+	"You take %s off of your %s and remove it.": "You take %s off of your %s and remove it."
 }

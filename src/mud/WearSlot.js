@@ -1,42 +1,38 @@
-/**
- * Valid wear locations for equipment.
- */
-var location = {
+var slot = {
 	HEAD: "HEAD",
 	NECK: "NECK",
 	SHOULDER: "SHOULDER",
 	ARMS: "ARMS",
 	HANDS: "HANDS",
-	FINGER: "FINGER",
+	FINGER_A: "FINGER_A",
+	FINGER_B: "FINGER_B",
 	TORSO: "TORSO",
 	WAIST: "WAIST",
 	LEGS: "LEGS",
 	FEET: "FEET",
-	HOLD: "HOLD",
-	WEAPON: "WEAPON"
+	HAND_OFF: "HAND_OFF",
+	HAND_PRIMARY: "HAND_PRIMARY"
 };
 
-/**
- * Public names for wear locations.
- */
 var display = {
 	HEAD: "head",
 	NECK: "neck",
 	SHOULDER: "shoulder",
 	ARMS: "arms",
 	HANDS: "hands",
-	FINGER: "finger",
+	FINGER_A: "left ring finger",
+	FINGER_B: "right ring finger",
 	TORSO: "torso",
 	WAIST: "waist",
 	LEGS: "legs",
 	FEET: "feet",
-	HOLD: "hold",
-	WEAPON: "weapon"
+	HAND_OFF: "offhand",
+	HAND_PRIMARY: "primary hand"
 };
 
-class WearLocation{
-	static get location(){
-		return location;
+class WearSlot{
+	static get slot(){
+		return slot;
 	}
 
 	static get display(){
@@ -44,4 +40,4 @@ class WearLocation{
 	}
 }
 
-module.exports = WearLocation;
+module.exports = WearSlot;

@@ -6,13 +6,14 @@ var _ = require("../../../i18n");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 var WearLocation = require("../WearLocation");
+var WearSlot = require("../WearSlot");
 
 class Equipment extends Command{
 	exec(mob){
 		var msg = _("You are wearing...");
-		for(var slot in mob.wearLocation){
-			var eq = mob.wearLocation[slot];
-			var name = WearLocation.slotNames[slot]; 
+		for(var slot in mob.worn){
+			var eq = mob.worn[slot];
+			var name = WearSlot.display[slot]; 
 			msg += "\r\n" + util.format("{G%s:{x %s", name.padLeft(18), eq ? eq.display : "nothing");
 		}
 

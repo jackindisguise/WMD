@@ -1,5 +1,6 @@
 // local includes
 var ObjectFactory = require("./factory/MapObjectFactory");
+var Logger = require("../util/Logger");
 
 class Template{
 	constructor(options){

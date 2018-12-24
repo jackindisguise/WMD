@@ -1,0 +1,9 @@
+{
+    "name": "Armor.skullcap",
+    "obj":{
+        "constructor": "Armor",
+        "keywords": "skullcap",
+        "display": "a skullcap",
+        "wearLoc": "HEAD"
+    }
+}
