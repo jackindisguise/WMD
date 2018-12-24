@@ -4,6 +4,8 @@ var util = require("util");
 // local includes
 var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
+var CombatManager = require("../manager/CombatManager");
+var Communicate = require("../Communicate");
 var ChannelManager = require("../manager/ChannelManager");
 var Direction = require("../Direction");
 var Movable = require("./Movable");
@@ -701,9 +703,103 @@ class Mob extends Movable{
 			this.mana = Math.ceil(manaP * this.maxMana);
 		}.bind(this);
 	}
+
+	engage(victim){
+		if(this.fighting) return;
+		this.fighting = victim;
+		victim.engage(this);
+		CombatManager.add(this);
+	}
+
+	disengage(){
+		if(!this.fighting) return;
+		this.fighting = null;
+	}
+
+	combatRound(){
+		if(!this.fighting) {
+			this.disengage();
+			return;
+		}
+
+		if(this.fighting.loc != this.loc) {
+			if(this.fighting == this) victim.disengage();
+			this.disengage();
+			return;
+		}
+
+		this.hit(this.fighting);
+	}
+
+	hit(target){
+		// determine hit rate
+		var hitRate = this.speed;
+		var evasionRate = target.evasion * 0.5;
+		var hitChance = 1 - (evasionRate / hitRate);
+
+		if(Math.probability(hitChance)){
+			// determine damage
+			var damage = target.preDamage(this, this.attackPower, false);
+			Communicate.act(
+				this,
+				{
+					firstPerson: util.format("You hit $N for %d damage.", damage),
+					secondPerson: util.format("$n hits you for %d damage.", damage),
+					thirdPerson: util.format("$n hits $N for %d damage.", damage)
+				},
+				this.loc.contents,
+				{directObject:target}
+			);
+
+			target.damage(this, damage)
+		} else {
+			Communicate.act(
+				this,
+				{
+					firstPerson: "Your hit misses $N.",
+					secondPerson: "$n's hit misses you.",
+					thirdPerson: "$n's hit misses $N."
+				},
+				this.loc.contents,
+				{directObject:target}
+			);
+		}
+	}
+
+	preDamage(attacker, amount, magic){
+		if(magic) amount -= this.resilience * 0.5;
+		else amount -= this.defense * 0.5;
+		return Math.floor(amount);
+	}
+
+	damage(attacker, amount){
+		this.health -= amount;
+		if(!this.fighting) this.engage(attacker);
+		if(this.health <= 0) {
+			this.health = 0;
+			this.die(attacker);
+		}
+	}
+
+	die(killer){
+		Communicate.act(
+			this,
+			{
+				firstPerson: "You die.",
+				thirdPerson: "$n dies."
+			},
+			this.loc.contents
+		);
+
+		this.health = this.maxHealth;
+		if(this.fighting) this.fighting.disengage();
+		this.disengage();
+	}
 }
 
 Mob.prototype.worn = null;
+
+Mob.prototype.fighting = null;
 
 /** @default "mob" */
 Mob.prototype.keywords = "mob";

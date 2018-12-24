@@ -1,29 +1,29 @@
 require("../../lib/Array");
 
-var _channels = [];
+var channels = [];
 
 class ChannelManager{
 	static get channels(){
-		return _channels;
+		return channels;
 	}
 
 	static add(channel){
-		if(_channels.indexOf(channel) != -1) return;
-		_channels.push(channel);
+		if(channels.indexOf(channel) != -1) return;
+		channels.push(channel);
 	}
 
 	static remove(channel){
-		var pos = _channels.indexOf(channel);
+		var pos = channels.indexOf(channel);
 		if(pos == -1) return;
-		_channels.splice(pos, 1);
+		channels.splice(pos, 1);
 	}
 
 	static getChannelByKeywords(keywords){
-		return _channels.search(keywords);
+		return channels.search(keywords);
 	}
 
 	static getChannelByID(id){
-		for(var channel of _channels){
+		for(var channel of channels){
 			if(channel.id === id) return channel;
 		}
 	}

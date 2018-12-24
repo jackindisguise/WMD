@@ -1,23 +1,23 @@
-var _models = [];
+var models = [];
 
 class ModelManager{
 	static get models(){
-		return _models;
+		return models;
 	}
 
 	static add(model){
-		if(_models.indexOf(model) != -1) return;
-		_models.push(model);
+		if(models.indexOf(model) != -1) return;
+		models.push(model);
 	}
 
 	static remove(model){
-		var pos = _models.indexOf(model);
+		var pos = models.indexOf(model);
 		if(pos == -1) return;
-		_models.splice(pos, 1);
+		models.splice(pos, 1);
 	}
 
 	static getModelByName(name){
-		for(var model of _models){
+		for(var model of models){
 			if(model.name === name) return model;
 		}
 	}

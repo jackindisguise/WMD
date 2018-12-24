@@ -1,21 +1,21 @@
 require("../../lib/Array");
 
-var _classes = [];
+var classes = [];
 
 class ClassManager{
 	static get classes(){
-		return _classes;
+		return classes;
 	}
 
 	static add(_class){
-		if(_classes.indexOf(_class) != -1) return;
-		_classes.push(_class);
+		if(classes.indexOf(_class) != -1) return;
+		classes.push(_class);
 	}
 
 	static remove(_class){
-		var pos = _classes.indexOf(_class);
+		var pos = classes.indexOf(_class);
 		if(pos == -1) return;
-		_classes.splice(pos, 1);
+		classes.splice(pos, 1);
 	}
 
 	/**
@@ -23,7 +23,7 @@ class ClassManager{
 	 * @param {string} name 
 	 */
 	static getClassByName(name){
-		for(var _class of _classes){
+		for(var _class of classes){
 			if(_class.name === name) return _class;
 		}
 	}

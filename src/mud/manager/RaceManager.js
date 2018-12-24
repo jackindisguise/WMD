@@ -1,21 +1,21 @@
 require("../../lib/Array");
 
-var _races = [];
+var races = [];
 
 class RaceManager{
 	static get races(){
-		return _races;
+		return races;
 	}
 
 	static add(race){
-		if(_races.indexOf(race) != -1) return;
-		_races.push(race);
+		if(races.indexOf(race) != -1) return;
+		races.push(race);
 	}
 
 	static remove(race){
-		var pos = _races.indexOf(race);
+		var pos = races.indexOf(race);
 		if(pos == -1) return;
-		_races.splice(pos, 1);
+		races.splice(pos, 1);
 	}
 
 	/**
@@ -23,7 +23,7 @@ class RaceManager{
 	 * @param {string} name 
 	 */
 	static getRaceByName(name){
-		for(var race of _races){
+		for(var race of races){
 			if(race.name === name) return race;
 		}
 	}

@@ -20,13 +20,10 @@ class Mock extends Command{
 		var attackDamage = mob.attackPower;
 		var attackDamageMitigation = victim.defense / 2;
 		var damage = attackDamage - attackDamageMitigation;
-		var hitChance = 1 - ((victim.evasion/2) / mob.speed);
-		var msg = util.format("Your attack damage: %d", attackDamage);
-		msg += "\r\n" + util.format("%s's defense: %d", victim.name, attackDamageMitigation);
-		msg += "\r\n" + util.format("Your damage vs. %s: %d", victim.name, attackDamage - attackDamageMitigation);
-		msg += "\r\n" + util.format("Your hit rating: %d", mob.speed);
-		msg += "\r\n" + util.format("%s's evasion rating: %f", victim.name, victim.evasion/2);
-		msg += "\r\n" + util.format("Your chance to hit %s: %f", victim.name, 1 - ((victim.evasion/2) / mob.speed));
+		var hitChance = 1 - ((victim.evasion*0.10) / mob.speed);
+		var msg = util.format("Your damage vs. %s: %d (%d attack power vs. %d defense)", victim.name, damage, mob.attackPower, victim.defense);
+		msg += "\r\n" + util.format("Your hit chance vs. %s: %f%% (%d speed vs. %d evasion)", victim.name, hitChance*100, mob.speed, victim.evasion);
+		msg += "\r\n"+ util.format("Your HP: %d vs. %s's HP: %d", mob.maxHealth, victim.name, victim.maxHealth);
 		if(Math.probability(hitChance)) msg += "\r\n" + util.format("You mock hit %s for %d damage.", victim.name, damage);
 		else msg += "\r\n" + util.format("You miss %s.", victim.name);
 		mob.sendLine(msg);

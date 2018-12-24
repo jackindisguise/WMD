@@ -22,6 +22,7 @@ class Communicate{
             // process string
             var processed;
             if(target == actor) processed = Communicate.actFieldCodeReplace(format.firstPerson, actor, fields);
+            else if(fields && target == fields.directObject) processed = Communicate.actFieldCodeReplace(format.secondPerson, actor, fields);
             else processed = Communicate.actFieldCodeReplace(format.thirdPerson, actor, fields);
 
             // send message
@@ -42,7 +43,7 @@ class Communicate{
                 case "N": return fields.directObject ? fields.directObject.name : "(unknown)";
                 case "m": return fields.message ? fields.message : "(unknown)";
                 default:
-                    Logger.error(_("Bad act code: $%s", code));
+                    Logger.error(_("BAD ACT CODE: %s", code));
                     return "???";
             }
         });

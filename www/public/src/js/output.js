@@ -19,18 +19,6 @@ function addMessage(message, category, timestamp, color){
 	if(currentCategory && currentCategory != category) $(dMessage).addClass("new");
 	currentCategory = category;
 
-	// add timestamp
-	var dTimestamp = document.createElement("div");
-	dTimestamp.className = "timestamp";
-	dTimestamp.style.float = "left";
-	dTimestamp.style.width = "50px";
-	dTimestamp.style.lineHeight = "17px";
-	dTimestamp.style.fontSize = "50%";
-	dTimestamp.style.textAlign = "center";
-	var date = new Date(now);
-	dTimestamp.innerHTML = `${String(date.getHours())}:${String(date.getMinutes())}:${String(date.getSeconds())}`;
-	dMessage.appendChild(dTimestamp);
-
 	// format message
 	message = message.replace("<", "&lt;"); // remove HTML tags.
 	message = message.replace(">", "&gt;");
@@ -63,17 +51,19 @@ function addMessage(message, category, timestamp, color){
 	}
 
 	// add body
-	var dBody = document.createElement("div");
+	var dBody = document.createElement("span");
 	dBody.className = "body";
 	dBody.innerHTML = message;
-	dBody.style.float = "left";
-	dBody.style.marginLeft = "10px";
 	dMessage.appendChild(dBody);
 
-	// add clear
-	var dClear = document.createElement("div");
-	dClear.style.clear = "both";
-	dMessage.appendChild(dClear);
+	// add timestamp
+	var dTimestamp = document.createElement("span");
+	dTimestamp.className = "timestamp";
+	dTimestamp.style.marginLeft = "10px";
+	dTimestamp.style.display = "none";
+	var date = new Date(now);
+	dTimestamp.innerHTML = `[${String(date.getHours())}:${String(date.getMinutes())}:${String(date.getSeconds())}]`;
+	dMessage.appendChild(dTimestamp);
 
 	$("#output").append(dMessage);
 

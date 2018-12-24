@@ -1,23 +1,23 @@
-var _templates = [];
+var templates = [];
 
 class TemplateManager{
 	static get templates(){
-		return _templates;
+		return templates;
 	}
 
 	static add(template){
-		if(_templates.indexOf(template) != -1) return;
-		_templates.push(template);
+		if(templates.indexOf(template) != -1) return;
+		templates.push(template);
 	}
 
 	static remove(template){
-		var pos = _templates.indexOf(template);
+		var pos = templates.indexOf(template);
 		if(pos == -1) return;
-		_templates.splice(pos, 1);
+		templates.splice(pos, 1);
 	}
 
 	static getTemplateByName(name){
-		for(var template of _templates){
+		for(var template of templates){
 			if(template.name === name) return template;
 		}
 	}

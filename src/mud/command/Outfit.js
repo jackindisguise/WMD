@@ -20,6 +20,7 @@ class Outfitt extends Command{
 			if(!template) continue;
 			var obj = template.spawn();
 			obj.loc = mob;
+			obj.level = mob.level;
 			msg += "\r\n" + _("You got %s.", obj.display);
 		}
 		mob.sendLine(msg);

@@ -1,12 +1,12 @@
-var _map;
+var map;
 
 class MapManager{
 	static get map(){
-		return _map;
+		return map;
 	}
 
-	static set map(map){
-		_map = map;
+	static set map(_map){
+		map = _map;
 	}
 }
 
