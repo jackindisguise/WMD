@@ -519,7 +519,7 @@ class Mob extends Movable{
 		// changes to race/class can happen here
 
 		// create an anonymous status restoration function
-		var restore = this.getRestoreStatusFunc();
+		var restore = this.getRestoreRelativeStatusFunc();
 
 		// changes our level -- changes everything
 		this.level++;
@@ -690,7 +690,7 @@ class Mob extends Movable{
 		};
 	}
 
-	getRestoreStatusFunc(){
+	getRestoreRelativeStatusFunc(){
 		// store our stat percentages
 		var healthP = this.health/this.maxHealth;
 		var energyP = this.energy/this.maxEnergy;
@@ -702,6 +702,12 @@ class Mob extends Movable{
 			this.energy = Math.ceil(energyP * this.maxEnergy);
 			this.mana = Math.ceil(manaP * this.maxMana);
 		}.bind(this);
+	}
+
+	restore(){
+		this.health = this.maxHealth;
+		this.energy = this.maxEnergy;
+		this.mana = this.maxMana;
 	}
 
 	engage(victim){
@@ -723,7 +729,7 @@ class Mob extends Movable{
 		}
 
 		if(this.fighting.loc != this.loc) {
-			if(this.fighting == this) victim.disengage();
+			if(this.fighting.fighting == this) this.fighting.disengage();
 			this.disengage();
 			return;
 		}
@@ -743,9 +749,9 @@ class Mob extends Movable{
 			Communicate.act(
 				this,
 				{
-					firstPerson: util.format("You hit $N for %d damage.", damage),
-					secondPerson: util.format("$n hits you for %d damage.", damage),
-					thirdPerson: util.format("$n hits $N for %d damage.", damage)
+					firstPerson: util.format("You hit $N for %d damage. [{Y%d/%d{x]", damage, target.health-damage, target.maxHealth),
+					secondPerson: util.format("$n hits you for %d damage. [{R%d/%d{x]", damage, target.health-damage, target.maxHealth),
+					thirdPerson: util.format("$n hits $N for %d damage. [{P%d/%d{x]", damage, target.health-damage, target.maxHealth)
 				},
 				this.loc.contents,
 				{directObject:target}
@@ -791,9 +797,9 @@ class Mob extends Movable{
 			this.loc.contents
 		);
 
-		this.health = this.maxHealth;
 		if(this.fighting) this.fighting.disengage();
 		this.disengage();
+		this.restore();
 	}
 }
 

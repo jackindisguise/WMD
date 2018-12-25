@@ -10,13 +10,12 @@ var PlayerManager = require("../manager/PlayerManager");
 
 class Mock extends Command{
 	exec(mob, target){
-		var victim = PlayerManager.getPlayerByName(target);
+		var victim = mob.loc.contents.search(target);
 		if(!victim){
 			mob.sendLine("There's nobody like that around.");
 			return;
 		}
 
-		victim = victim.mob;
 		var attackDamage = mob.attackPower;
 		var attackDamageMitigation = victim.defense / 2;
 		var damage = attackDamage - attackDamageMitigation;
