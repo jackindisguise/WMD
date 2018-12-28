@@ -503,7 +503,7 @@ class Mob extends Movable{
 
 	gainExperience(amount){
 		this.experience += amount;
-		while(this.experience >= this.toNextLevel) levelup();
+		while(this.experience >= this.toNextLevel) this.levelup();
 	}
 
 	levelup(quiet){
@@ -743,6 +743,7 @@ class Mob extends Movable{
 		var evasionRate = target.evasion * 0.5;
 		var hitChance = 1 - (evasionRate / hitRate);
 
+		// on hit
 		if(Math.probability(hitChance)){
 			// determine damage
 			var damage = target.preDamage(this, this.attackPower, false);
@@ -758,6 +759,8 @@ class Mob extends Movable{
 			);
 
 			target.damage(this, damage)
+
+		// on miss
 		} else {
 			Communicate.act(
 				this,
@@ -780,10 +783,12 @@ class Mob extends Movable{
 
 	damage(attacker, amount){
 		this.health -= amount;
-		if(!this.fighting) this.engage(attacker);
+		attacker.engage(this); //
+		this.engage(attacker); // make sure we're engaged on any damage instances
 		if(this.health <= 0) {
 			this.health = 0;
 			this.die(attacker);
+			attacker.killed(this);
 		}
 	}
 
@@ -800,6 +805,12 @@ class Mob extends Movable{
 		if(this.fighting) this.fighting.disengage();
 		this.disengage();
 		this.restore();
+	}
+
+	killed(victim){
+		var experience = victim.level*100;
+		this.sendLine(_("{CYou gain {W%d{C experience.{x", experience));
+		this.gainExperience(experience);
 	}
 }
 
@@ -822,11 +833,6 @@ Mob.prototype._player = null;
 
 /** Channels this mob is participating in. */
 Mob.prototype._channels = null;
-
-/**
- * This mob's player data.
- */
-Mob.prototype.characterData = null;
 
 /**
  * This mob's race.

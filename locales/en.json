@@ -84,5 +84,6 @@
 	"You take %s out of your %s and remove it.": "You take %s out of your %s and remove it.",
 	"You pray for an outfit...": "You pray for an outfit...",
 	"You got %s.": "You got %s.",
-	"You take %s off of your %s and remove it.": "You take %s off of your %s and remove it."
+	"You take %s off of your %s and remove it.": "You take %s off of your %s and remove it.",
+	"{CYou gain {W%d{C experience.{x": "{CYou gain {W%d{C experience.{x"
 }
