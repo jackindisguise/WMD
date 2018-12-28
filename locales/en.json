@@ -85,5 +85,8 @@
 	"You pray for an outfit...": "You pray for an outfit...",
 	"You got %s.": "You got %s.",
 	"You take %s off of your %s and remove it.": "You take %s off of your %s and remove it.",
-	"{CYou gain {W%d{C experience.{x": "{CYou gain {W%d{C experience.{x"
+	"{CYou gain {W%d{C experience.{x": "{CYou gain {W%d{C experience.{x",
+	"{YYou are now level {W%d{x!": "{YYou are now level {W%d{x!",
+	"{%sYour %s has %s to {W%d{%s (%s%d).{x": "{%sYour %s has %s to {W%d{%s (%s%d).{x",
+	"Your %s has %s to {W%d{x ({%s%s%d{x).": "Your %s has %s to {W%d{x ({%s%s%d{x)."
 }

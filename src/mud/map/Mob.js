@@ -539,16 +539,17 @@ class Mob extends Movable{
 			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
 		}
 
-		var msg = _("You are now level {G%d{x!", this.level);
+		var msg = _("{YYou are now level {W%d{x!", this.level);
 		for(var attribute in diffAttributes){
 			var emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
 			var gain = diffAttributes[attribute] > 0;
 			var word = gain ? "increased" : "decreased";
-			msg += "\r\n" + _("Your {%s%s{x has {%s%s{x to {%s%d{x ({%s%s%d{x).",
-								emphasis, Attributes.names[attribute],
-								emphasis, word,
-								emphasis, nAttributes[attribute],
-								emphasis, gain ? "+" : "", diffAttributes[attribute]);
+			msg += "\r\n" + _("Your %s has %s to {W%d{x ({%s%s%d{x).",
+								Attributes.names[attribute],
+								word,
+								nAttributes[attribute],
+								emphasis,
+								gain ? "+" : "", diffAttributes[attribute]);
 		}
 
 		this.sendLine(msg);
@@ -750,9 +751,9 @@ class Mob extends Movable{
 			Communicate.act(
 				this,
 				{
-					firstPerson: util.format("You hit $N for %d damage. [{Y%d/%d{x]", damage, target.health-damage, target.maxHealth),
-					secondPerson: util.format("$n hits you for %d damage. [{R%d/%d{x]", damage, target.health-damage, target.maxHealth),
-					thirdPerson: util.format("$n hits $N for %d damage. [{P%d/%d{x]", damage, target.health-damage, target.maxHealth)
+					firstPerson: util.format("You hit $N. {R-%d{x [{Y%d/%d{x]", damage, target.health-damage, target.maxHealth),
+					secondPerson: util.format("$n hits you. {R-%d{x [{R%d/%d{x]", damage, target.health-damage, target.maxHealth),
+					thirdPerson: util.format("$n hits $N. {R-%d{x [{P%d/%d{x]", damage, target.health-damage, target.maxHealth)
 				},
 				this.loc.contents,
 				{directObject:target}
@@ -778,7 +779,7 @@ class Mob extends Movable{
 	preDamage(attacker, amount, magic){
 		if(magic) amount -= this.resilience * 0.5;
 		else amount -= this.defense * 0.5;
-		return Math.floor(amount);
+		return Math.max(Math.floor(amount), 0);
 	}
 
 	damage(attacker, amount){
