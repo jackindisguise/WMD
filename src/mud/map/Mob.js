@@ -362,9 +362,6 @@ class Mob extends Movable{
 
 	set race(race){
 		this._race = race;
-		this.health = this.maxHealth;
-		this.energy = this.maxEnergy;
-		this.mana = this.maxMana;
 	}
 
 	get race(){
@@ -373,13 +370,21 @@ class Mob extends Movable{
 
 	set class(cLass){
 		this._class = cLass;
-		this.health = this.maxHealth;
-		this.energy = this.maxEnergy;
-		this.mana = this.maxMana;
 	}
 
 	get class(){
 		return this._class;
+	}
+
+	__fromJSON(json){
+		super.__fromJSON(json);
+
+		// equip things and apply status effects here
+
+		// if stat hasn't been loaded, just make it full
+		if(this.health == 0) this.health = this.maxHealth;
+		if(this.energy == 0) this.energy = this.maxEnergy;
+		if(this.mana == 0) this.mana = this.maxMana;
 	}
 
 	__JSONWrite(key, value, json){
@@ -390,6 +395,18 @@ class Mob extends Movable{
 
 			case "race": json.race = value.name; break;
 			case "class": json.class = value.name; break;
+			case "health":
+				if(value == this.maxHealth) break;
+				json.health = value;
+				break;
+			case "energy":
+				if(value == this.maxEnergy) break;
+				json.energy = value;
+				break;
+			case "mana":
+				if(value == this.maxMana) break;
+				json.mana = value;
+				break;
 			case "wearLocation": break;
 			default: super.__JSONWrite(key, value, json); break;
 		}
