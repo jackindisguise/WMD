@@ -1,0 +1,201 @@
+commit 55295744bb6479edf28285a5c267e7b9602f72ac
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 2 11:36:05 2019 -0600
+
+    Channels now use Player instead of Mob.
+
+commit 825d26ac65009884fbb1361e72388d995eac581c
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 2 10:29:17 2019 -0600
+
+    Fixed attribute unit tests (speed and evasion removed).
+
+commit 4b4f6e493254c030a242dbd912f4b09d82ed0bf2
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 2 03:44:33 2019 -0600
+
+    Added CombatActions. Essentially just verbs for combat actions. Punch, kick, etc...
+    
+    Working on a bunch of crap.
+
+commit 756bb3bbc27260826cf0a5acbdbf0206519bc4af
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 31 00:21:45 2018 -0600
+
+    Fixed unit tests.
+    
+    Engage command is also kill.
+    
+    Kill command does nothing if you're already in combat.
+    
+    If stats are maxxed, doesn't save. When loading, if stats aren't set, sets to max.
+    Setting race/class no longer updates stats.
+
+commit a95edf09d439155caaf31f629293d17c35e03412
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Dec 28 06:28:59 2018 -0600
+
+    Making combat a little prettier.
+
+commit 46c6f909275ff18dabb9cac84cd92fad6af98d48
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Dec 27 21:01:32 2018 -0600
+
+    Added the framework for gaining experience from kills, and therefore leveling up.
+
+commit 66a983525dbc0f36c3962d7f7b0efd89957ca0a8
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Dec 25 16:51:09 2018 -0600
+
+    Pushing for posterity's sake.
+
+commit 956c1044c08096b0c45487b1566ec490a6acfc52
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 24 11:02:20 2018 -0600
+
+    Working on the fundamentals of the combat system.
+    
+    It's pretty sloppy right now. I added an Engage command that initiates
+    combat and gets a free round off. Then a round cycles every 3 seconds.
+    Combat rounds cycle globally, so it's every 3 seconds starting from
+    12:00:00 GMT 1970, not from when you start a fight. This ensures
+    combat is equal for every mob in the game.
+    
+    Might have to mess with the CombatManager and how I'm adding/removing
+    from it, and how I'm managing mob.fighting.
+
+commit 44ab1d01412606a75da7f2182f715d3566b6cb94
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 24 04:09:09 2018 -0600
+
+    Added shields. Currently are worth 3 pieces of equal level armor.
+    Later on, I want shields to provide a flat % of damage mitigation.
+    
+    As it stands, strength is too strong. It provides 3 direct combat
+    attributes -- health and defense which reduce incoming damage, and
+    attack power which increases outgoing damage.
+    
+    Agility only provides 2 combat attributes. Each of them modify hit
+    and evasion chances, but 50% evasion rate isn't good enough if you
+    die in 1 hit. It's also not good enough to have 50% evasion rate if
+    you have to trade off 50% of your attack damage. Since that means
+    you will do 0 damage to someone with double your defense. Woo, I evade
+    90% of attacks, but I do 0 damage. Worthless.
+    
+    I think I need to trade off some strength for agility-based classes
+    to attack power.
+
+commit 1f2628dca5f22f93f34da1f34f5ac46b60a9d956
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 24 01:42:29 2018 -0600
+
+    Making sure it passes unit tests.
+    
+    TODO: redo all unit tests so they aren't dumb
+
+commit fc8cc117bf3d8dece032ba05155b07d7879f446b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 24 01:41:25 2018 -0600
+
+    You can only wear Equipment items now. I was trying to keep parity
+    with old MUDs where you can "hold" non-equipment items. But I see
+    no reason to keep that feature.
+    
+    Created Outfit command that creates some generic equipment.
+    
+    Equipment has an "item level" that is meant to balance content.
+    Level 1 items are designed for level 1 characters, level 5 items
+    for level 5 characters, etc... this ensures, from a design
+    perspective, that numbers stay in a relative range that will make
+    unbalanced items more obvious.
+    
+    Armor provides 1 defense and 0.333 defense per level.
+    Weapon provides 1 attack power and 0.333 attack power per level.
+    These values can be changed for potentially "higher tier" items,
+    but preferably not much.
+    
+    Added error message to MapObjectFactor for invalid constructor names.
+    
+    Renamed `wear(equipment)` and `remove(equipment)` to `equip` and `unequip`.
+    `remove` is already a function on all MapObjects that removes things from
+    its contents. Guess I forgot about that. Haha.
+
+commit ee25f96ef330378f0cd4c85ed98e8173a7c39907
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Dec 21 22:34:39 2018 -0600
+
+    Working on balance stuff.
+    
+    1 attribute point is too valuable, so I set it up so classes get 1.75 attribute
+    points to assign per level, and 20 to assign to starting attributes.
+    
+    Added specifiers to array keyword searches; 2.ex finds the 2nd match
+    to "ex" in the array.
+
+commit 2484eb5264b3146813b25cbdb68926b417ba792b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 19 12:45:41 2018 -0600
+
+    Working on equipment stuff.
+    
+    Races and classes now allow deep folder structures.
+
+commit d66ea4a48aecb16312dc82746e0ce8abbb2a3955
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 17 12:27:47 2018 -0600
+
+    Fixed test.
+
+commit ed15811076ce3025e72064928a7d769fdf276669
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Dec 17 12:24:56 2018 -0600
+
+    Messing with some balance stuff.
+    Also made score card more descriptive.
+
+commit 720c7709e1679727b89e3f909cad8d9941140a6b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Dec 15 21:37:10 2018 -0600
+
+    Adding some concepts that will be implemented later.
+    
+    Added an Attributes object for more uniform access to mob attribute-related stuff.
+    
+    Added Array.pick function. Pretty sweet.
+
+commit 356ee7bce83c892e0ade49d89f08c81249757aa1
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Dec 15 06:55:03 2018 -0600
+
+    Working on leveling system.
+
+commit 1e1a445a885de8609dfe94aea2d65dec4b9f8d22
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Dec 14 18:41:01 2018 -0600
+
+    Added some error handling for JSON loaders.
+
+commit b7ea3decdc00a61b03d0981fd43703c0c81e6f21
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 12 14:47:27 2018 -0600
+
+    Actually fixed.
+
+commit fce7f1ffed8ab9d2cf6df15f00c75161125e950f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 12 14:45:14 2018 -0600
+
+    Fixed test.
+
+commit 996d6fb0250988dd32e316bb301395517e2cc746
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 12 14:28:54 2018 -0600
+
+    Adding color support and stuff.
+
+commit 504acb96baf05f94a92062186628c086935b0c6b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Dec 12 10:16:49 2018 -0600
+
+    Didn't mean to include this.
+    [skip ci]
