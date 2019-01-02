@@ -59,8 +59,8 @@ describe("[MOB]", function(){
 
         it("agility + secondary attributes", function(done){
             expect(mob.agility).is.equal(5);
-            expect(mob.speed).is.equal(5);
-            expect(mob.evasion).is.equal(5);
+            expect(mob.precision).is.equal(5);
+            expect(mob.deflection).is.equal(5);
             expect(mob.stamina).is.equal(5);
             expect(mob.maxEnergy).is.equal(80);
             done();

@@ -1,8 +1,6 @@
 // local includes
 require("../../lib/Object");
 require("../../lib/Array");
-var _ = require("../../../i18n");
-var Logger = require("../../util/Logger");
 var RaceLoader = require("../loader/RaceLoader");
 var ClassLoader = require("../loader/ClassLoader");
 var ChannelLoader = require("../loader/ChannelLoader");
@@ -19,7 +17,6 @@ module.exports = function(callback){
 	var loaders = [RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, CommandLoader, MapLoader, CharacterLoader];
 
 	// create a "loader iterator" that propagates callbacks
-	var i = 0;
 	function loadNext(){
 		if(!loaders.length){
 			callback();
@@ -27,7 +24,7 @@ module.exports = function(callback){
 		}
 
 		var next = loaders.shift();
-		next(loadNext); // call each loader with the master loader
+		next(loadNext); // call each loader with the iterator
 	}
 
 	// start iterator
