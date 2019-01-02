@@ -106,6 +106,7 @@ class Nanny{
         this.mob.name = this.name;
         this.mob.race = this.race;
         this.mob.class = this.class;
+        this.mob.restore();
         this.motd();
     }
 

@@ -42,12 +42,12 @@ class Classification{
         return this.wisdomBase + (this.wisdomPerLevel*Math.max(0,level-1));
     }
 
-    getSpeedByLevel(level){
-        return this.speedBase + (this.speedPerLevel*Math.max(0,level-1));
+    getPrecisionByLevel(level){
+        return this.precisionBase + (this.precisionPerLevel*Math.max(0,level-1));
     }
 
-    getEvasionByLevel(level){
-        return this.evasionBase + (this.evasionPerLevel*Math.max(0,level-1));
+    getDeflectionByLevel(level){
+        return this.deflectionBase + (this.deflectionPerLevel*Math.max(0,level-1));
     }
 
     getStaminaByLevel(level){
@@ -113,8 +113,8 @@ Classification.prototype.vitalityBase = 0;
 Classification.prototype.magicPowerBase = 0;
 Classification.prototype.resilienceBase = 0;
 Classification.prototype.wisdomBase = 0;
-Classification.prototype.speedBase = 0;
-Classification.prototype.evasionBase = 0;
+Classification.prototype.precisionBase = 0;
+Classification.prototype.deflectionBase = 0;
 Classification.prototype.staminaBase = 0;
 
 // base stats
@@ -134,8 +134,8 @@ Classification.prototype.vitalityPerLevel = 0;
 Classification.prototype.magicPowerPerLevel = 0;
 Classification.prototype.resiliencePerLevel = 0;
 Classification.prototype.wisdomPerLevel = 0;
-Classification.prototype.speedPerLevel = 0;
-Classification.prototype.evasionPerLevel = 0;
+Classification.prototype.precisionPerLevel = 0;
+Classification.prototype.deflectionPerLevel = 0;
 Classification.prototype.staminaPerLevel = 0;
 
 // stats per level

@@ -19,6 +19,7 @@ var Attributes = require("../Attributes");
 var WearLocation = require("../WearLocation");
 var WearSlot = require("../WearSlot");
 var Equipment = require("./Equipment");
+var CombatAction = require("../CombatAction");
 
 /**
  * Represents an animate creature on the map.
@@ -162,17 +163,17 @@ class Mob extends Movable{
 		return Math.floor(agility);
 	}
 
-	get rawSpeed(){
+	get rawPrecision(){
 		var speed = 0;
-		speed += this._race.getSpeedByLevel(this.level);
-		speed += this._class.getSpeedByLevel(this.level);
+		speed += this._race.getPrecisionByLevel(this.level);
+		speed += this._class.getPrecisionByLevel(this.level);
 		return Math.floor(speed);
 	}
 
-	get speed(){
+	get precision(){
 		var speed = this.agility;
-		speed += this._race.getSpeedByLevel(this.level);
-		speed += this._class.getSpeedByLevel(this.level);
+		speed += this._race.getPrecisionByLevel(this.level);
+		speed += this._class.getPrecisionByLevel(this.level);
 		for(var slot in this.worn){
 			var eq = this.worn[slot];
 			if(eq) speed += eq.speed;
@@ -180,17 +181,17 @@ class Mob extends Movable{
 		return Math.floor(speed);
 	}
 
-	get rawEvasion(){
+	get rawDeflection(){
 		var evasion = 0;
-		evasion += this._race.getEvasionByLevel(this.level);
-		evasion += this._class.getEvasionByLevel(this.level);
+		evasion += this._race.getDeflectionByLevel(this.level);
+		evasion += this._class.getDeflectionByLevel(this.level);
 		return Math.floor(evasion);
 	}
 
-	get evasion(){
+	get deflection(){
 		var evasion = this.agility;
-		evasion += this._race.getEvasionByLevel(this.level);
-		evasion += this._class.getEvasionByLevel(this.level);
+		evasion += this._race.getDeflectionByLevel(this.level);
+		evasion += this._class.getDeflectionByLevel(this.level);
 		for(var slot in this.worn){
 			var eq = this.worn[slot];
 			if(eq) evasion += eq.evasion;
@@ -376,17 +377,6 @@ class Mob extends Movable{
 		return this._class;
 	}
 
-	__fromJSON(json){
-		super.__fromJSON(json);
-
-		// equip things and apply status effects here
-
-		// if stat hasn't been loaded, just make it full
-		if(this.health == 0) this.health = this.maxHealth;
-		if(this.energy == 0) this.energy = this.maxEnergy;
-		if(this.mana == 0) this.mana = this.maxMana;
-	}
-
 	__JSONWrite(key, value, json){
 		switch(key){
 			case "loc":
@@ -410,6 +400,17 @@ class Mob extends Movable{
 			case "wearLocation": break;
 			default: super.__JSONWrite(key, value, json); break;
 		}
+	}
+
+	__fromJSON(json){
+		super.__fromJSON(json);
+
+		// equip things and apply status effects here
+
+		// if stat hasn't been loaded, just make it full
+		if(!json.health) this.health = this.maxHealth;
+		if(!json.energy) this.energy = this.maxEnergy;
+		if(!json.mana) this.mana = this.maxMana;
 	}
 
 	__JSONRead(key, value){
@@ -676,8 +677,8 @@ class Mob extends Movable{
 			VITALITY: this.vitality,
 			HEALTH: this.maxHealth,
 			AGILITY: this.agility,
-			SPEED: this.speed,
-			EVASION: this.evasion,
+			PRECISION: this.precision,
+			DEFLECTION: this.deflection,
 			STAMINA: this.stamina,
 			ENERGY: this.maxEnergy,
 			INTELLIGENCE: this.intelligence,
@@ -696,8 +697,8 @@ class Mob extends Movable{
 			VITALITY: this.rawVitality,
 			HEALTH: this.rawMaxHealth,
 			AGILITY: this.rawAgility,
-			SPEED: this.rawSpeed,
-			EVASION: this.rawEvasion,
+			PRECISION: this.rawPrecision,
+			DEFLECTION: this.rawDeflection,
 			STAMINA: this.rawStamina,
 			ENERGY: this.rawMaxEnergy,
 			INTELLIGENCE: this.rawIntelligence,
@@ -757,29 +758,22 @@ class Mob extends Movable{
 
 	hit(target){
 		// determine hit rate
-		var hitRate = this.speed;
-		var evasionRate = target.evasion * 0.5;
-		var hitChance = 1 - (evasionRate / hitRate);
+		var hitChance = 1;
 
 		// on hit
 		if(Math.probability(hitChance)){
 			// determine damage
 			var damage = target.preDamage(this, this.attackPower, false);
-			Communicate.act(
-				this,
-				{
-					firstPerson: util.format("You hit $N. {R-%d{x [{Y%d/%d{x]", damage, target.health-damage, target.maxHealth),
-					secondPerson: util.format("$n hits you. {R-%d{x [{R%d/%d{x]", damage, target.health-damage, target.maxHealth),
-					thirdPerson: util.format("$n hits $N. {R-%d{x [{P%d/%d{x]", damage, target.health-damage, target.maxHealth)
-				},
-				this.loc.contents,
-				{directObject:target}
-			);
 
+			// damage message
+			Communicate.attack(this, target, CombatAction.PUNCH, damage);
+
+			// inflict damage
 			target.damage(this, damage)
 
 		// on miss
 		} else {
+			// miss message
 			Communicate.act(
 				this,
 				{
@@ -794,8 +788,11 @@ class Mob extends Movable{
 	}
 
 	preDamage(attacker, amount, magic){
-		if(magic) amount -= this.resilience * 0.5;
-		else amount -= this.defense * 0.5;
+		if(magic) amount -= this.resilience / 2;
+		else {
+			amount *= attacker.precision / this.deflection; // precision vs. deflection
+			amount -= this.defense / 2; // reduce damage by defense
+		}
 		return Math.max(Math.floor(amount), 0);
 	}
 

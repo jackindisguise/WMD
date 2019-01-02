@@ -1,3 +1,6 @@
+// node includes
+var util = require("util");
+
 // local includes
 var MessageCategory = require("./MessageCategory");
 
@@ -28,6 +31,19 @@ class Communicate{
             // send message
             target.sendMessage(processed, category);
         }
+    }
+
+    static attack(attacker, target, action, damage){
+        Communicate.act(
+            attacker,
+            {
+                firstPerson: util.format("You %s $N for {R%d{x damage. [{Y%d/%d{x]", action.firstPerson, damage, target.health-damage, target.maxHealth),
+                secondPerson: util.format("$n %s you for {R%d{x damage. [{R%d/%d{x]", action.thirdPerson, damage, target.health-damage, target.maxHealth),
+                thirdPerson: util.format("$n %s $N for {R%d{x damage. [{P%d/%d{x]", action.thirdPerson, damage, target.health-damage, target.maxHealth)
+            },
+            attacker.loc.contents,
+            {directObject:target}
+        );
     }
 
     /**

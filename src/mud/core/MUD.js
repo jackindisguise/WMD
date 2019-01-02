@@ -3,7 +3,6 @@ var EventEmitter = require("events");
 
 // local includes
 var _ = require("../../../i18n");
-var _package = require("../../../package.json");
 var Player = require("../io/Player");
 var PlayerManager = require("../manager/PlayerManager");
 var Logger = require("../../util/Logger");
@@ -14,28 +13,14 @@ var Server = require("../io/Server");
  */
 class MUD{
 	/**
-	 * Shortcut for package.json's "name" value.
-	 */
-	static get name(){
-		return _package.name;
-	}
-
-	/**
-	 * Shortcut for package.json's "version" value.
-	 */
-	static get version(){
-		return _package.version;
-	}
-
-	/**
 	 * Start any vital MUD processes, including the server.
 	 * @param {int} port
 	 * @param {function} callback
 	 */
 	static start(port, callback){
 		Server.open(port, function(){
-			Logger.info(_("Server started on port %s", port));
-			// start listening for new client connections
+			Logger.info(_("Server started on port %d", port));
+			// dtart listening for new client connections
 			Server.on("connect", function(client){
 				MUD.connect(client);
 			});

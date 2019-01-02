@@ -4,8 +4,8 @@
 		"constructor": "Mob",
         "keywords": "bigboy big boy",
         "display": "a big boy",
-		"level": 10,
         "race": "PC.human",
-        "class": "PC.warrior"
+        "class": "PC.warrior",
+		"level": 10
     }
 }

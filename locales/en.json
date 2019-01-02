@@ -88,5 +88,9 @@
 	"{CYou gain {W%d{C experience.{x": "{CYou gain {W%d{C experience.{x",
 	"{YYou are now level {W%d{x!": "{YYou are now level {W%d{x!",
 	"{%sYour %s has %s to {W%d{%s (%s%d).{x": "{%sYour %s has %s to {W%d{%s (%s%d).{x",
-	"Your %s has %s to {W%d{x ({%s%s%d{x).": "Your %s has %s to {W%d{x ({%s%s%d{x)."
+	"Your %s has %s to {W%d{x ({%s%s%d{x).": "Your %s has %s to {W%d{x ({%s%s%d{x).",
+	"Server started on port %d": "Server started on port %d",
+	"             {G%d{x precision, granting {G%d{x precision rating.": "             {G%d{x precision, granting {G%d{x precision rating.",
+	"             {G%d{x deflection, granting {G%d{x deflection rating.": "             {G%d{x deflection, granting {G%d{x deflection rating.",
+	"          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.": "          {G%d{x agility, granting {G%d{x precision, deflection, and stamina."
 }

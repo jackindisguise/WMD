@@ -9,6 +9,6 @@
     "agilityPerLevel": 0.75,
     "intelligenceBase":6,
     "intelligencePerLevel": 0.25,
-    "speedPerLevel": 0.75,
-    "evasionPerLevel": 0.75
+    "precisionPerLevel": 0.75,
+    "deflectionPerLevel": 0.75
 }

@@ -17,14 +17,15 @@ class Mock extends Command{
 		}
 
 		var attackDamage = mob.attackPower;
-		var attackDamageMitigation = victim.defense / 2;
-		var damage = attackDamage - attackDamageMitigation;
-		var hitChance = 1 - ((victim.evasion*0.10) / mob.speed);
-		var msg = util.format("Your damage vs. %s: %d (%d attack power vs. %d defense)", victim.name, damage, mob.attackPower, victim.defense);
-		msg += "\r\n" + util.format("Your hit chance vs. %s: %f%% (%d speed vs. %d evasion)", victim.name, hitChance*100, mob.speed, victim.evasion);
-		msg += "\r\n"+ util.format("Your HP: %d vs. %s's HP: %d", mob.maxHealth, victim.name, victim.maxHealth);
-		if(Math.probability(hitChance)) msg += "\r\n" + util.format("You mock hit %s for %d damage.", victim.name, damage);
-		else msg += "\r\n" + util.format("You miss %s.", victim.name);
+		var rawDamage = attackDamage;
+		var penetration = mob.precision / victim.deflection;
+		var damagePhaseOne = rawDamage * penetration;
+		var damagePhaseTwo = damagePhaseOne - (victim.defense / 2);
+		var msg = util.format("Mock hit vs. %s:", victim.name);
+		msg += "\r\n" + util.format("> Your initial damage: %d (%d attack power)", rawDamage);
+		msg += "\r\n" + util.format("> Your damage penetration: %f%% (%d precision vs. %d deflection)", penetration*100, mob.precision, victim.deflection);
+		msg += "\r\n" + util.format("> %s's damage mitigation: %d (%d defense)", victim.name, victim.defense/2, victim.defense);
+		msg += "\r\n" + util.format("You mock hit %s for %d damage.", victim.name, damagePhaseTwo);
 		mob.sendLine(msg);
 	}
 }
