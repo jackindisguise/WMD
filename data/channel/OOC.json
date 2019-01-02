@@ -1,7 +1,5 @@
 {
-    "id":1,
-    "keywords":"ooc",
-    "name":"OOC",
+    "name":"ooc",
     "default":true,
     "format":{
         "firstPerson":"You OOC: $m",

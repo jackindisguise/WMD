@@ -32,7 +32,6 @@ class Mob extends Movable{
 	 */
 	constructor(options){
 		super(options);
-		this._channels = [];
 		this.worn = {
 			HEAD: null,
 			NECK: null,
@@ -465,34 +464,6 @@ class Mob extends Movable{
 		this.sendMessage(line, MessageCategory.DEFAULT);
 	}
 
-	joinChannels(){
-		for(var channel of ChannelManager.channels){
-			this.joinChannel(channel);
-		}
-	}
-
-	leaveChannels(){
-		// this is annoying and gross
-		var channel = this._channels[0];
-		while(channel) {
-			this.leaveChannel(channel);
-			channel = this._channels[0];
-		}
-	}
-
-	joinChannel(channel){
-		if(this._channels.indexOf(channel) != -1) return; // already in channel
-		this._channels.push(channel);
-		channel.add(this);
-	}
-
-	leaveChannel(channel){
-		var pos = this._channels.indexOf(channel);
-		if(pos == -1) return // not in channel
-		this._channels.splice(pos, 1);
-		channel.remove(this);
-	}
-
 	showRoom(){
 		if(!this.loc) {
 			this.sendLine("You aren't anywhere!");
@@ -845,9 +816,6 @@ Mob.prototype.display = "Mob";
  * @type {?Player}
  */
 Mob.prototype._player = null;
-
-/** Channels this mob is participating in. */
-Mob.prototype._channels = null;
 
 /**
  * This mob's race.

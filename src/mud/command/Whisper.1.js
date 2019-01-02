@@ -3,29 +3,32 @@ var _ = require("../../../i18n");
 var MUD = require("../core/MUD");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
+var Channel = require("../Channel");
 var ChannelManager = require("../manager/ChannelManager");
-var channel = ChannelManager.getChannelByID(0);
+var PlayerManager = require("../manager/PlayerManager");
+var channel = ChannelManager.getChannelByName("whisper");
 
 class Whisper extends Command{
 	exec(mob, target, message){
-		if(!channel.isParticipating(mob)){
+		if(!mob.player) return;
+
+		if(!channel.isParticipating(mob.player)){
 			mob.sendLine(_("You'll have to join the channel first."));
 			return;
 		}
 
-		var victim = MUD.getPlayerByName(target);
+		var victim = PlayerManager.getPlayerByName(target);
 		if(!victim){
 			mob.sendLine("There's nobody like that around.");
 			return;
 		}
 
-		victim = victim.mob;
 		if(!channel.isParticipating(victim)){
 			mob.sendLine("You can't get their attention.");
 			return;
 		}
 
-		Communicate.act(mob, channel.format, [mob, victim], {message:message, directObject:victim});
+		channel.transmit(mob.player, message, victim, Channel.filterSpeakerTargetOnly);
 	}
 }
 

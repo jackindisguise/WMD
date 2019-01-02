@@ -92,5 +92,6 @@
 	"Server started on port %d": "Server started on port %d",
 	"             {G%d{x precision, granting {G%d{x precision rating.": "             {G%d{x precision, granting {G%d{x precision rating.",
 	"             {G%d{x deflection, granting {G%d{x deflection rating.": "             {G%d{x deflection, granting {G%d{x deflection rating.",
-	"          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.": "          {G%d{x agility, granting {G%d{x precision, deflection, and stamina."
+	"          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.": "          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.",
+	"You'll have to join the channel first.": "You'll have to join the channel first."
 }

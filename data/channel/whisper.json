@@ -1,10 +1,8 @@
 {
-    "id":0,
-    "keywords":"whisper",
-    "name":"Whisper",
+    "name":"whisper",
     "default":true,
     "format":{
         "firstPerson":"You whisper to $N: $m",
-        "thirdPerson":"$n whispers to you: $m"
+        "secondPerson":"$n whispers to you: $m"
     }
 }

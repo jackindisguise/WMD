@@ -3,18 +3,18 @@ var _ = require("../../../i18n");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 var ChannelManager = require("../manager/ChannelManager");
-var channel = ChannelManager.getChannelByID(1);
+var channel = ChannelManager.getChannelByName("ooc");
 
 class OOC extends Command{
 	exec(mob, message){
 		if(!mob.player) return;
 
-		if(!channel.isParticipating(mob)){
+		if(!channel.isParticipating(mob.player)){
 			mob.sendLine(_("You'll have to join the channel first."));
 			return;
 		}
 
-		channel.transmit(mob, message);
+		channel.transmit(mob.player, message);
 	}
 }
 

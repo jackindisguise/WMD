@@ -27,25 +27,63 @@ class Channel extends EventEmitter{
         return this._participants;
     }
 
-    transmit(speaker, message, filter){
-        Communicate.act(speaker, this.format, this._participants, {message:message}, filter, MessageCategory.CHAT);
+    transmit(speaker, message, target, filter){
+        var fields = {message:message, directObject:target}
+        for(var listener of this._participants){
+            // participant filtered out
+            if(filter && !filter(speaker, listener, fields)) continue;
+
+            // process string
+            var processed;
+            if(listener == speaker) processed = Channel.transmitFieldCodeReplace(this.format.firstPerson, speaker, fields);
+            else if(listener == fields.directObject) processed = Channel.transmitFieldCodeReplace(this.format.secondPerson, speaker, fields);
+            else processed = Channel.transmitFieldCodeReplace(this.format.thirdPerson, speaker, fields);
+
+            // send message
+            listener.sendMessage(processed, MessageCategory.CHAT);
+        }
     }
 
-    add(mob){
-        if(this._participants.indexOf(mob) != -1) return; // already participating
-        this._participants.push(mob);
-        mob.joinChannel(this);
+    add(player){
+        if(this._participants.indexOf(player) != -1) return; // already participating
+        this._participants.push(player);
+        player.joinChannel(this);
     }
 
-    remove(mob){
-        var pos = this._participants.indexOf(mob);
+    remove(player){
+        var pos = this._participants.indexOf(player);
         if(pos == -1) return; // already not participating
         this._participants.splice(pos, 1);
-        mob.leaveChannel(this);
+        player.leaveChannel(this);
     }
 
-    isParticipating(mob){
-        return this._participants.indexOf(mob) != -1;
+    isParticipating(player){
+        return this._participants.indexOf(player) != -1;
+    }
+
+    /**
+     * Replace act field codes with field values.
+     * @param {string} string
+     * @param {Mob} speaker
+     * @param {Object} fields 
+     */
+    static transmitFieldCodeReplace(string, speaker, fields){
+        return string.replace(/\$(.)/g, function(full, code){
+            switch(code){
+                case "n": return speaker.mob.name;
+                case "N": return fields.directObject ? fields.directObject.mob.name : "(unknown)";
+                case "m": return fields.message ? fields.message : "(unknown)";
+                default:
+                    Logger.error(_("BAD ACT CODE: %s", code));
+                    return "???";
+            }
+        });
+    }
+
+    static filterSpeakerTargetOnly(speaker, listener, fields){
+        if(listener == speaker) return true;
+        if(listener == fields.directObject) return true;
+        return false;
     }
 }
 
@@ -67,11 +105,6 @@ Channel.prototype.format = {
  * @alias Channel#participants
  */
 Channel.prototype._participants = null;
-
-/**
- * This channel's ID.
- */
-Channel.prototype.id = null;
 
 /**
  * This channel's name.

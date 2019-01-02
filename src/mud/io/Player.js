@@ -7,6 +7,7 @@ var _ = require("../../../i18n");
 var Logger = require("../../util/Logger");
 var CommandHandler = require("../manager/CommandManager");
 var Nanny = require("../Nanny");
+var ChannelManager = require("../manager/ChannelManager");
 var MessageCategory = require("../MessageCategory");
 
 /**
@@ -19,6 +20,8 @@ class Player extends EventEmitter {
 	 */
 	constructor(options){
 		super();
+		this._channels = [];
+
 		if(options){
 			if(options.client) this.connect(options.client);
 			if(options.mob) this.mob = options.mob;
@@ -111,18 +114,46 @@ class Player extends EventEmitter {
 		this.sendMessage(line, MessageCategory.DEFAULT);
 	}
 
+	joinChannels(){
+		for(var channel of ChannelManager.channels){
+			this.joinChannel(channel);
+		}
+	}
+
+	leaveChannels(){
+		// this is annoying and gross
+		var channel = this._channels[0];
+		while(channel) {
+			this.leaveChannel(channel);
+			channel = this._channels[0];
+		}
+	}
+
+	joinChannel(channel){
+		if(this._channels.indexOf(channel) != -1) return; // already in channel
+		this._channels.push(channel);
+		channel.add(this);
+	}
+
+	leaveChannel(channel){
+		var pos = this._channels.indexOf(channel);
+		if(pos == -1) return // not in channel
+		this._channels.splice(pos, 1);
+		channel.remove(this);
+	}
+
 	/**
 	 * Runs after a mob is connected to this Player.
 	 */
 	login(){
-		this.mob.joinChannels();
+		this.joinChannels();
 	}
 
 	/**
 	 * Runs before a mob is disconnected from this Player.
 	 */
 	logout(mob){
-		this.mob.leaveChannels();
+		this.leaveChannels();
 	}
 
 	/**

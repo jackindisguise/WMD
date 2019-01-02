@@ -1,5 +1,3 @@
-require("../../lib/Array");
-
 var channels = [];
 
 class ChannelManager{
@@ -18,13 +16,9 @@ class ChannelManager{
 		channels.splice(pos, 1);
 	}
 
-	static getChannelByKeywords(keywords){
-		return channels.search(keywords);
-	}
-
-	static getChannelByID(id){
+	static getChannelByName(name){
 		for(var channel of channels){
-			if(channel.id === id) return channel;
+			if(channel.name === name) return channel;
 		}
 	}
 }
