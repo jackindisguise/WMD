@@ -4,7 +4,6 @@ var util = require("util");
 var _ = require("../../../i18n");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
-var TemplateManager = require("../manager/TemplateManager");
 
 class Test extends Command{
 	exec(mob){
@@ -14,7 +13,7 @@ class Test extends Command{
 	}
 }
 
-Test.prototype.rule = /^(?:t|te|tes|test)\b/;
+Test.prototype.rule = /^(?:t|te|tes|test)\b/i;
 Test.prototype.plain = "test";
 Test.prototype.specificity = CommandSpecificity.FIRST;
 

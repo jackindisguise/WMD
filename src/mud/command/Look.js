@@ -13,7 +13,7 @@ class Look extends Command{
 	}
 }
 
-Look.prototype.rule = /^(?:l|lo|loo|look)\b/;
+Look.prototype.rule = /^(?:l|lo|loo|look)\b/i;
 Look.prototype.plain = "look";
 Look.prototype.specificity = CommandSpecificity.FIRST;
 

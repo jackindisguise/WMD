@@ -46,7 +46,7 @@ class Wear extends Command{
 	}
 }
 
-Wear.prototype.rule = /^(?:w|we|wea|wear|e|eq|equ|equi|equip) (.+)\b/;
+Wear.prototype.rule = /^(?:w|we|wea|wear|e|eq|equ|equi|equip) (.+)\b/i;
 Wear.prototype.plain = "wear|equip";
 Wear.prototype.specificity = CommandSpecificity.FIRST;
 

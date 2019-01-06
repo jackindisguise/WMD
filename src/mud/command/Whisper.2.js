@@ -9,7 +9,7 @@ class Whisper extends Command{
 	}
 }
 
-Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (.+)\b/;
+Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (.+)\b/i;
 Whisper.prototype.plain = "whisper|tell";
 Whisper.prototype.specificity = CommandSpecificity.LAST;
 Whisper.prototype.error = true;

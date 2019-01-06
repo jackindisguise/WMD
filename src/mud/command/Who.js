@@ -19,7 +19,7 @@ class Who extends Command{
 	}
 }
 
-Who.prototype.rule = /^(?:w|wh|who)\b/;
+Who.prototype.rule = /^(?:w|wh|who)\b/i;
 Who.prototype.plain = "who";
 Who.prototype.specificity = CommandSpecificity.FIRST;
 

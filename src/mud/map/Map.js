@@ -14,6 +14,7 @@ class Map{
 
 		// process options
 		if(options){
+			if(options.name) this.name = options.name;
 			if(options.width != null && options.height != null && options.levels != null) {
 				this.setSize(options.width, options.height, options.levels, options.fill);
 			}
@@ -125,7 +126,27 @@ class Map{
 			}
 		}
 	}
+
+	__JSONRead(key, value){
+		switch(key){
+			case "proportions":
+				this.setSize(value.width, value.height, value.levels);
+				this.generate();
+				break;
+
+			case "materials":
+			case "tiles":
+				break;
+
+			default:
+				super.__JSONRead(key, value);
+				break;
+		}
+	}
 }
+
+// identifier
+Map.prototype.name = null;
 
 // proportions
 Map.prototype._width = 0;

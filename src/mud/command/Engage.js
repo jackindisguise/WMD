@@ -2,7 +2,6 @@
 var _ = require("../../../i18n");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
-var CombatManager = require("../manager/CombatManager");
 
 class Engage extends Command{
 	exec(mob, target){
@@ -19,7 +18,7 @@ class Engage extends Command{
 	}
 }
 
-Engage.prototype.rule = /^(?:e|en|eng|enga|engag|engage|k|ki|kil|kill) (.+)/;
+Engage.prototype.rule = /^(?:e|en|eng|enga|engag|engage|k|ki|kil|kill) (.+)/i;
 Engage.prototype.plain = "engage|kill";
 Engage.prototype.specificity = CommandSpecificity.FIRST;
 

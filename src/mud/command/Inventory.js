@@ -22,7 +22,7 @@ class Inventory extends Command{
 	}
 }
 
-Inventory.prototype.rule = /^(?:i|in|inv|inve|inven|invent|invento|inventor|inventory)\b/;
+Inventory.prototype.rule = /^(?:i|in|inv|inve|inven|invent|invento|inventor|inventory)\b/i;
 Inventory.prototype.plain = "inventory";
 Inventory.prototype.specificity = CommandSpecificity.FIRST;
 

@@ -15,7 +15,7 @@ var Race = require("../Race");
 var ClassManager = require("../manager/ClassManager");
 var Class = require("../Class");
 var MessageCategory = require("../MessageCategory");
-var Attributes = require("../Attributes");
+var Attribute = require("../Attribute");
 var WearLocation = require("../WearLocation");
 var WearSlot = require("../WearSlot");
 var Equipment = require("./Equipment");
@@ -534,7 +534,7 @@ class Mob extends Movable{
 			var gain = diffAttributes[attribute] > 0;
 			var word = gain ? "increased" : "decreased";
 			msg += "\r\n" + _("Your %s has %s to {W%d{x ({%s%s%d{x).",
-								Attributes.names[attribute],
+								Attribute.display[attribute],
 								word,
 								nAttributes[attribute],
 								emphasis,
@@ -761,7 +761,9 @@ class Mob extends Movable{
 	preDamage(attacker, amount, magic){
 		if(magic) amount -= this.resilience / 2;
 		else {
-			amount *= attacker.precision / this.deflection; // precision vs. deflection
+			var precision = attacker.precision - this.deflection; // precision value
+			var precisionModifier = precision / 25; // 25 points of precision gives 100% bonus damage.
+			amount *= 1 + precisionModifier; // apply precision modifier
 			amount -= this.defense / 2; // reduce damage by defense
 		}
 		return Math.max(Math.floor(amount), 0);

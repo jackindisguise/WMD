@@ -8,6 +8,9 @@ var PlayerManager = require("../manager/PlayerManager");
 var Logger = require("../../util/Logger");
 var Server = require("../io/Server");
 
+// local variables
+var server = new Server();
+
 /**
  * MUD handler.
  */
@@ -18,10 +21,10 @@ class MUD{
 	 * @param {function} callback
 	 */
 	static start(port, callback){
-		Server.open(port, function(){
+		server.open(port, function(){
 			Logger.info(_("Server started on port %d", port));
 			// dtart listening for new client connections
-			Server.on("connect", function(client){
+			server.on("connect", function(client){
 				MUD.connect(client);
 			});
 
@@ -33,7 +36,7 @@ class MUD{
 	 * Stop the MUD processes.
 	 */
 	static stop(){
-		Server.close();
+		server.close();
 	}
 
 	/**

@@ -1,6 +1,5 @@
 // local includes
 var _ = require("../../../i18n");
-var MUD = require("../core/MUD");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 
@@ -10,7 +9,7 @@ class Quit extends Command{
 	}
 }
 
-Quit.prototype.rule = /^(?:q|qu|qui|quit)\b/;
+Quit.prototype.rule = /^(?:q|qu|qui|quit)\b/i;
 Quit.prototype.plain = "quit";
 Quit.prototype.specificity = CommandSpecificity.FIRST;
 

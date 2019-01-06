@@ -1,6 +1,5 @@
 // local includes
 var _ = require("../../../i18n");
-var MUD = require("../core/MUD");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
 var Channel = require("../Channel");
@@ -32,7 +31,7 @@ class Whisper extends Command{
 	}
 }
 
-Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (.*?) (.+)/;
+Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (.*?) (.+)/i;
 Whisper.prototype.plain = "whisper|tell";
 Whisper.prototype.specificity = CommandSpecificity.FIRST;
 

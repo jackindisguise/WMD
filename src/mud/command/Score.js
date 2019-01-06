@@ -34,7 +34,7 @@ class Score extends Command{
 	}
 }
 
-Score.prototype.rule = /^(?:s|sc|sco|scor|score)\b/;
+Score.prototype.rule = /^(?:s|sc|sco|scor|score)\b/i;
 Score.prototype.plain = "score";
 Score.prototype.specificity = CommandSpecificity.LAST;
 

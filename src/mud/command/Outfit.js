@@ -27,7 +27,7 @@ class Outfitt extends Command{
 	}
 }
 
-Outfitt.prototype.rule = /^(?:o|ou|out|outf|outfi|outfit)\b/;
+Outfitt.prototype.rule = /^(?:o|ou|out|outf|outfi|outfit)\b/i;
 Outfitt.prototype.plain = "outfit";
 Outfitt.prototype.specificity = CommandSpecificity.FIRST;
 

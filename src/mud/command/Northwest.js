@@ -8,7 +8,7 @@ var Direction = require("../Direction");
 class Northwest extends Movement{
 }
 
-Northwest.prototype.rule = /^(?:northw|northwe|northwes|northwest|nw)\b/;
+Northwest.prototype.rule = /^(?:northw|northwe|northwes|northwest|nw)\b/i;
 Northwest.prototype.plain = "northwest|nw";
 Northwest.prototype.direction = Direction.flag.NORTHWEST;
 

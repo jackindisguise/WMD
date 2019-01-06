@@ -5,13 +5,12 @@ var util = require("util");
 require("../../lib/Math");
 var _ = require("../../../i18n");
 var Movement = require("./Movement");
-var CommandSpecificity = require("../CommandSpecificity");
 var Direction = require("../Direction");
 
 class South extends Movement{
 }
 
-South.prototype.rule = /^(?:s|so|sou|sout|south)\b/;
+South.prototype.rule = /^(?:s|so|sou|sout|south)\b/i;
 South.prototype.plain = "south";
 South.prototype.direction = Direction.flag.SOUTH;
 

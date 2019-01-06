@@ -190,6 +190,7 @@ class Player extends EventEmitter {
 			this.disconnect();
 		}.bind(this));
 
+		// join client and player
 		this.join(client);
 	}
 

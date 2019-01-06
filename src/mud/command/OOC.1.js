@@ -18,7 +18,7 @@ class OOC extends Command{
 	}
 }
 
-OOC.prototype.rule = /^(?:o|oo|ooc) (.+)\b/;
+OOC.prototype.rule = /^(?:o|oo|ooc) (.+)\b/i;
 OOC.prototype.plain = "ooc";
 OOC.prototype.specificity = CommandSpecificity.FIRST;
 

@@ -1,6 +1,3 @@
-// node includes
-var util = require("util");
-
 // local includes
 require("../../lib/Math");
 var _ = require("../../../i18n");
@@ -37,7 +34,7 @@ class Remove extends Command{
 	}
 }
 
-Remove.prototype.rule = /^(?:r|re|rem|remo|remov|remove|u|un|une|uneq|unequ|unequi|unequip) (.+)\b/;
+Remove.prototype.rule = /^(?:r|re|rem|remo|remov|remove|u|un|une|uneq|unequ|unequi|unequip) (.+)\b/i;
 Remove.prototype.plain = "remove|unequip";
 Remove.prototype.specificity = CommandSpecificity.FIRST;
 

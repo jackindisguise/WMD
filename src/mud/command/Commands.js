@@ -30,7 +30,7 @@ class Commands extends Command{
 	}
 }
 
-Commands.prototype.rule = /^(?:c|co|com|comm|comma|comman|command|commands)\b/;
+Commands.prototype.rule = /^(?:c|co|com|comm|comma|comman|command|commands)\b/i;
 Commands.prototype.plain = "commands";
 Commands.prototype.specificity = CommandSpecificity.FIRST;
 

@@ -73,4 +73,4 @@ class Server extends EventEmitter {
 	}
 }
 
-module.exports = new Server();
+module.exports = Server;

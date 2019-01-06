@@ -5,7 +5,6 @@ var util = require("util");
 var _ = require("../../../i18n");
 var Command = require("../Command");
 var CommandSpecificity = require("../CommandSpecificity");
-var WearLocation = require("../WearLocation");
 var WearSlot = require("../WearSlot");
 
 class Equipment extends Command{
@@ -21,7 +20,7 @@ class Equipment extends Command{
 	}
 }
 
-Equipment.prototype.rule = /^(?:e|eq|equ|equi|equip|equipm|equipme|equipmen|equipment)\b/;
+Equipment.prototype.rule = /^(?:e|eq|equ|equi|equip|equipm|equipme|equipmen|equipment)\b/i;
 Equipment.prototype.plain = "equipment";
 Equipment.prototype.specificity = CommandSpecificity.FIRST;
 

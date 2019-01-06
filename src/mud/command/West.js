@@ -8,7 +8,7 @@ var Direction = require("../Direction");
 class West extends Movement{
 }
 
-West.prototype.rule = /^(?:w|we|wes|west)\b/;
+West.prototype.rule = /^(?:w|we|wes|west)\b/i;
 West.prototype.plain = "west";
 West.prototype.direction = Direction.flag.WEST;
 

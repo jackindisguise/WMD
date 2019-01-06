@@ -1,4 +1,4 @@
-var attributes = {
+var attribute = {
 	STRENGTH: "strength",
 	ATTACK_POWER: "attackPower",
 	DEFENSE: "defense",
@@ -16,7 +16,7 @@ var attributes = {
 	MANA: "mana"
 };
 
-var names = {
+var display = {
 	STRENGTH: "strength",
 	ATTACK_POWER: "attack power",
 	DEFENSE: "defense",
@@ -35,12 +35,12 @@ var names = {
 };
 
 class Attributes{
-	static get attributes(){
-		return attributes;
+	static get attribute(){
+		return attribute;
 	}
 
-	static get names(){
-		return names;
+	static get display(){
+		return display;
 	}
 }
 

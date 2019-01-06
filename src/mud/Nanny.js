@@ -10,6 +10,7 @@ var Logger = require("../util/Logger");
 var RaceManager = require("./manager/RaceManager");
 var ClassManager = require("./manager/ClassManager");
 var MapManager = require("./manager/MapManager");
+var worldmap = MapManager.getMapByName("World");
 var Mob = require("./map/Mob");
 
 // text data
@@ -25,7 +26,9 @@ class Nanny{
      * @param {NannyConstructorOptions} options 
      */
     constructor(options){
-        this.player = options.player;
+        if(options) {
+            if(options.player) this.player = options.player;
+        }
     }
 
     login(){
@@ -121,16 +124,16 @@ class Nanny{
 
         // move to new location
         if(this.isNew){
-            this.mob.loc = MapManager.map.getTileByXYZ(0,0,0);
+            this.mob.loc = worldmap.getTileByXYZ(0,0,0);
             this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob._race.display, this.mob._class.display));
 
         // load old location
         } else {
-            var tile = MapManager.map.getTileByXYZ(this.loc.x, this.loc.y, this.loc.z);
+            var tile = worldmap.map.getTileByXYZ(this.loc.x, this.loc.y, this.loc.z);
             if(tile) this.loc = tile;
             else {
-                Logger.error("bad loc %s on character login", JSON.stringify(this.loc));
-                this.loc = MapManager.map.getTileByXYZ(0,0,0);
+                Logger.error("BAD LOC %s ON CHARACTER LOGIN", JSON.stringify(this.loc));
+                this.loc = worldmap.map.getTileByXYZ(0,0,0);
             }
         }
 

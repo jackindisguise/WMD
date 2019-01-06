@@ -14,7 +14,7 @@ var MapLoader = require("../loader/MapLoader");
 module.exports = function(callback){
 
 	// specify loaders in the order they should be run
-	var loaders = [RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, CommandLoader, MapLoader, CharacterLoader];
+	var loaders = [RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, MapLoader, CharacterLoader, CommandLoader];
 
 	// create a "loader iterator" that propagates callbacks
 	function loadNext(){

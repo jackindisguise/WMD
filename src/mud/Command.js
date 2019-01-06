@@ -1,7 +1,3 @@
-// local includes
-var Logger = require("../util/Logger");
-var Mob = require("./map/Mob");
-
 class Command{
     // match to input
     match(mob, input){
