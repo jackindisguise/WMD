@@ -11,17 +11,20 @@
     "changes": "git log v%npm_package_version%..@ > changes/changes.txt",
     "preversion": "npm run test && npm run changes",
     "version": "mv changes/changes.txt changes/v%npm_package_version%.txt && git add -A .",
-    "postversion": "npm run generate-docs && npm run nyc && git push && git push --tags"
+    "postversion": "npm run generate-docs && npm run nyc && git push && git push --tags",
+    "coveralls": "nyc --reporter=lcovonly mocha --recursive ./unit-tests && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "author": "jackindisguise",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
     "ink-docstrap": "^1.3.2",
     "jsdoc": "^3.5.5",
     "jshint": "^2.9.6",
     "jshint-stylish": "^2.2.1",
     "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.6",
     "nyc": "^13.1.0",
     "socket.io-client": "^2.1.1"
