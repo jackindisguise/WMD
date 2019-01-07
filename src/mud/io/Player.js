@@ -152,12 +152,13 @@ class Player extends EventEmitter {
 	/**
 	 * Runs before a mob is disconnected from this Player.
 	 */
-	logout(mob){
+	logout(){
 		this.leaveChannels();
+		if(this.mob) this.mob.loc = null;
 	}
 
 	/**
-	 * Runs when a client is connected to this Player.
+	 * Runs after a client is connected to this Player.
 	 * @param {Client} client Client connected to.
 	 */
 	join(){
@@ -166,10 +167,10 @@ class Player extends EventEmitter {
 	}
 
 	/**
-	 * Runs when a client is disconnected from this Player.
+	 * Runs after a client is disconnected from this Player.
 	 * @param {Client} client Client disconnected from.
 	 */
-	leave(){
+	leave(client){
 	}
 
 	/**
@@ -212,6 +213,9 @@ class Player extends EventEmitter {
 		 * @event Player#disconnect
 		 */
 		this.emit("disconnect");
+
+		// disconnect from mob as well
+		this.mob = null;
 	}
 
 	quit(){
