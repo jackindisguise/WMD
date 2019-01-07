@@ -11,7 +11,6 @@ var io = require("socket.io-client");
 
 // local includes
 var _ = require("../i18n");
-var MUD = require("../src/mud/core/MUD");
 var RaceManager = require("../src/mud/manager/RaceManager");
 var ClassManager = require("../src/mud/manager/ClassManager");
 var PlayerManager = require("../src/mud/manager/PlayerManager");

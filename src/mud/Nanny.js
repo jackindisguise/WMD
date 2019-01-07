@@ -10,7 +10,6 @@ var Logger = require("../util/Logger");
 var RaceManager = require("./manager/RaceManager");
 var ClassManager = require("./manager/ClassManager");
 var MapManager = require("./manager/MapManager");
-var worldmap = MapManager.getMapByName("World");
 var Mob = require("./map/Mob");
 
 // text data
@@ -124,6 +123,7 @@ class Nanny{
 
         // move to new location
         if(this.isNew){
+            var worldmap = MapManager.getMapByName("World");
             this.mob.loc = worldmap.getTileByXYZ(0,0,0);
             this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob._race.display, this.mob._class.display));
 
