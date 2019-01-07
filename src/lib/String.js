@@ -1,8 +1,8 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var ColorCode = require("../mud/ColorCode");
+const ColorCode = require("../mud/ColorCode");
 
 /**
  * Check for matches to this string's keywords.

@@ -1,4 +1,4 @@
-var CombatActions = module.exports = {
+const CombatActions = module.exports = {
 	PUNCH:{
 		firstPerson: "punch",
 		thirdPerson: "punches"

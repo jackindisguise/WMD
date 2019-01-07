@@ -1,9 +1,9 @@
-var util = require("util");
-var Logger = require("../../util/Logger");
+const util = require("util");
+const Logger = require("../../util/Logger");
 
-var delayPerRound = 3000;
-var combatants = [];
-var loopID = null;
+const delayPerRound = 3000;
+let combatants = [];
+let loopID = null;
 
 class CombatManager{
 	static get combatants(){
@@ -18,17 +18,17 @@ class CombatManager{
 	}
 
 	static remove(mob){
-		var pos = combatants.indexOf(mob);
+		let pos = combatants.indexOf(mob);
 		if(pos == -1) return;
 		combatants.splice(pos, 1);
 	}
 
 	static round(){
 		loopID = null; // clear loop ID
-		var oCombatants = combatants;
+		let oCombatants = combatants;
 		combatants = [];
-		var done = [];
-		for(var combatant of oCombatants){
+		let done = [];
+		for(let combatant of oCombatants){
 			if(!combatant.fighting) continue; // no target
 			combatant.combatRound();
 			if(combatant.fighting) CombatManager.add(combatant);
@@ -36,7 +36,7 @@ class CombatManager{
 	}
 
 	static run(){
-		var delay = CombatManager.timeTilNextRound();
+		let delay = CombatManager.timeTilNextRound();
 		loopID = setTimeout(CombatManager.round, delay)
 	}
 

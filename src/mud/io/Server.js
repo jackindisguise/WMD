@@ -1,9 +1,9 @@
 // node includes
-var EventEmitter = require("events");
+const EventEmitter = require("events");
 
 // local includes
-var Web = require("./Web");
-var Client = require("./Client");
+const Web = require("./Web");
+const Client = require("./Client");
 
 /**
  * Handles low level MUD server.
@@ -43,7 +43,7 @@ class Server extends EventEmitter {
 	 * @param {Object} socket A socket stream.
 	 */
 	connect(socket){
-		var mudclient = new Client({socket:socket});
+		let mudclient = new Client({socket:socket});
 		this._clients.push(mudclient);
 		/**
 		 * @event Server#connect
@@ -62,7 +62,7 @@ class Server extends EventEmitter {
 	 * @param {Client} mudclient
 	 */
 	disconnect(mudclient){
-		var pos = this._clients.indexOf(mudclient);
+		let pos = this._clients.indexOf(mudclient);
 		this._clients.splice(pos, 1);
 		/**
 		 * Propagates client disconnect event.

@@ -1,5 +1,5 @@
 // npm includes
-var winston = require("winston");
+const winston = require("winston");
 
 /**
  * Instance of a winston logger.

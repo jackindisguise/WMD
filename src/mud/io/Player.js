@@ -1,14 +1,14 @@
 // node include
-var EventEmitter = require("events");
-var util = require("util");
+const EventEmitter = require("events");
+const util = require("util");
 
 // local includes
-var _ = require("../../../i18n");
-var Logger = require("../../util/Logger");
-var CommandHandler = require("../manager/CommandManager");
-var Nanny = require("../Nanny");
-var ChannelManager = require("../manager/ChannelManager");
-var MessageCategory = require("../MessageCategory");
+const _ = require("../../../i18n");
+const Logger = require("../../util/Logger");
+const CommandHandler = require("../manager/CommandManager");
+const Nanny = require("../Nanny");
+const ChannelManager = require("../manager/ChannelManager");
+const MessageCategory = require("../MessageCategory");
 
 /**
  * Higher level abstraction between the client and the game.
@@ -45,7 +45,7 @@ class Player extends EventEmitter {
 	set mob(mob){
 		if(this._mob === mob) return;
 
-		var omob;
+		let omob;
 		if(this._mob) {
 			this.logout();
 			omob = this._mob;
@@ -74,13 +74,13 @@ class Player extends EventEmitter {
 
 		// callback piping
 		if(this._callback) {
-			var callback = this._callback;
+			let callback = this._callback;
 			this._callback = null;
 			callback.call(this, input);
 
 		// command processing
 		} else if(this.mob) {
-			var result = CommandHandler.processCommand(this.mob, input);
+			let result = CommandHandler.processCommand(this.mob, input);
 			if(!result) {
 				this.sendLine(_("Do what, now?"));
 			}
@@ -115,14 +115,14 @@ class Player extends EventEmitter {
 	}
 
 	joinChannels(){
-		for(var channel of ChannelManager.channels){
+		for(let channel of ChannelManager.channels){
 			this.joinChannel(channel);
 		}
 	}
 
 	leaveChannels(){
 		// this is annoying and gross
-		var channel = this._channels[0];
+		let channel = this._channels[0];
 		while(channel) {
 			this.leaveChannel(channel);
 			channel = this._channels[0];
@@ -136,7 +136,7 @@ class Player extends EventEmitter {
 	}
 
 	leaveChannel(channel){
-		var pos = this._channels.indexOf(channel);
+		let pos = this._channels.indexOf(channel);
 		if(pos == -1) return // not in channel
 		this._channels.splice(pos, 1);
 		channel.remove(this);
@@ -161,7 +161,7 @@ class Player extends EventEmitter {
 	 * @param {Client} client Client connected to.
 	 */
 	join(){
-		var nanny = new Nanny({player:this});
+		let nanny = new Nanny({player:this});
 		nanny.login();
 	}
 
@@ -200,7 +200,7 @@ class Player extends EventEmitter {
 	disconnect(){
 		Logger.debug(_("disconnected player"));
 
-		var oclient = this._client;
+		let oclient = this._client;
 		this._client = null;
 		// stop listening for commands?
 		// stop listening for disconnection?

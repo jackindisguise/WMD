@@ -1,4 +1,4 @@
-var characters = [];
+let characters = [];
 
 class CharacterManager{
 	static get characters(){
@@ -11,7 +11,7 @@ class CharacterManager{
 	}
 
 	static remove(character){
-		var pos = characters.indexOf(character);
+		let pos = characters.indexOf(character);
 		if(pos == -1) return;
 		characters.splice(pos, 1);
 	}

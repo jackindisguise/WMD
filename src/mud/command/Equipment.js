@@ -1,18 +1,18 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
-var WearSlot = require("../WearSlot");
+const _ = require("../../../i18n");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
+const WearSlot = require("../WearSlot");
 
 class Equipment extends Command{
 	exec(mob){
-		var msg = _("You are wearing...");
-		for(var slot in mob.worn){
-			var eq = mob.worn[slot];
-			var name = WearSlot.display[slot]; 
+		let msg = _("You are wearing...");
+		for(let slot in mob.worn){
+			let eq = mob.worn[slot];
+			let name = WearSlot.display[slot]; 
 			msg += "\r\n" + util.format("{G%s:{x %s", name.padLeft(18), eq ? eq.display : "[nothing]");
 		}
 

@@ -1,5 +1,5 @@
 // local includes
-var Classification = require("./Classification");
+const Classification = require("./Classification");
 
 /**
  * Basic class classifier.

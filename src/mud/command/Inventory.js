@@ -1,11 +1,11 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
 require("../../lib/Math");
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
+const _ = require("../../../i18n");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
 
 class Inventory extends Command{
 	exec(mob){

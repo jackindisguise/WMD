@@ -1,5 +1,5 @@
 // local includes
-var MapObjectFactory = require("./factory/MapObjectFactory");
+const MapObjectFactory = require("./factory/MapObjectFactory");
 
 class Model{
 	constructor(options){
@@ -31,7 +31,7 @@ class Model{
 	 * Spawn an instance of this template.
 	 */
 	spawn(){
-		var obj = this.obj.__createClone();
+		let obj = this.obj.__createClone();
 		obj.model = this;
 		return obj;
 	}

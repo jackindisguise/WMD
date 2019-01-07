@@ -1,6 +1,6 @@
 require("../../lib/Array");
 
-var races = [];
+let races = [];
 
 class RaceManager{
 	static get races(){
@@ -13,7 +13,7 @@ class RaceManager{
 	}
 
 	static remove(race){
-		var pos = races.indexOf(race);
+		let pos = races.indexOf(race);
 		if(pos == -1) return;
 		races.splice(pos, 1);
 	}
@@ -23,7 +23,7 @@ class RaceManager{
 	 * @param {string} name 
 	 */
 	static getRaceByName(name){
-		for(var race of races){
+		for(let race of races){
 			if(race.name === name) return race;
 		}
 	}

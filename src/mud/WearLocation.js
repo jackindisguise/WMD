@@ -1,7 +1,7 @@
 /**
  * Valid wear locations for equipment.
  */
-var location = {
+const location = {
 	HEAD: "HEAD",
 	NECK: "NECK",
 	SHOULDER: "SHOULDER",
@@ -20,7 +20,7 @@ var location = {
 /**
  * Public names for wear locations.
  */
-var display = {
+const display = {
 	HEAD: "head",
 	NECK: "neck",
 	SHOULDER: "shoulder",

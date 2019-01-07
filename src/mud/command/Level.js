@@ -1,9 +1,6 @@
-var util = require("util");
-
 // local includes
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
 
 class Level extends Command{
 	exec(mob){

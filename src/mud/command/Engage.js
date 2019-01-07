@@ -1,16 +1,16 @@
 // local includes
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
+const _ = require("../../../i18n");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
 
 class Engage extends Command{
 	exec(mob, target){
 		if(mob.fighting){
-			mob.sendLine("You're already fighting.");
+			mob.sendLine(_("You're already fighting."));
 			return;
 		}
 
-		var victim = mob.loc.contents.search(target);
+		let victim = mob.loc.contents.search(target);
 		if(victim){
 			mob.engage(victim);
 			mob.combatRound();

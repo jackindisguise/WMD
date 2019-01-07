@@ -1,4 +1,4 @@
-var models = [];
+let models = [];
 
 class ModelManager{
 	static get models(){
@@ -11,13 +11,13 @@ class ModelManager{
 	}
 
 	static remove(model){
-		var pos = models.indexOf(model);
+		let pos = models.indexOf(model);
 		if(pos == -1) return;
 		models.splice(pos, 1);
 	}
 
 	static getModelByName(name){
-		for(var model of models){
+		for(let model of models){
 			if(model.name === name) return model;
 		}
 	}

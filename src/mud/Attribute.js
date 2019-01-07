@@ -1,4 +1,4 @@
-var attribute = {
+const attribute = {
 	STRENGTH: "strength",
 	ATTACK_POWER: "attackPower",
 	DEFENSE: "defense",
@@ -16,7 +16,7 @@ var attribute = {
 	MANA: "mana"
 };
 
-var display = {
+const display = {
 	STRENGTH: "strength",
 	ATTACK_POWER: "attack power",
 	DEFENSE: "defense",

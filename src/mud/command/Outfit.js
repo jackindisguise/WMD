@@ -1,24 +1,24 @@
 // local includes
 require("../../lib/Math");
-var _ = require("../../../i18n");
-var TemplateManager = require("../manager/TemplateManager");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
+const _ = require("../../../i18n");
+const TemplateManager = require("../manager/TemplateManager");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
 
 class Outfitt extends Command{
 	exec(mob){
-		var outfit = [
+		let outfit = [
 			"Weapon.excalibur",
 			"Shield.buckler",
 			"Armor.skullcap",
 			"Armor.breastplate"
 		];
 
-		var msg = _("You pray for an outfit...");
-		for(var name of outfit){
-			var template = TemplateManager.getTemplateByName(name);
+		let msg = _("You pray for an outfit...");
+		for(let name of outfit){
+			let template = TemplateManager.getTemplateByName(name);
 			if(!template) continue;
-			var obj = template.spawn();
+			let obj = template.spawn();
 			obj.loc = mob;
 			obj.level = mob.level;
 			msg += "\r\n" + _("You got %s.", obj.display);

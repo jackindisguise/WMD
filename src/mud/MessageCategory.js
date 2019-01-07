@@ -2,7 +2,7 @@
  * Enum for message categories.
  * @enum {string}
  */
-var MessageCategory = module.exports = {
+const MessageCategory = module.exports = {
     DEFAULT: "DEFAULT",
     WHISPER: "WHISPER",
     CHAT: "CHAT",

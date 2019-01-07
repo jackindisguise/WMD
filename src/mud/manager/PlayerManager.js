@@ -1,4 +1,4 @@
-var players = [];
+let players = [];
 
 class PlayerManager{
 	static get players(){
@@ -11,7 +11,7 @@ class PlayerManager{
 	}
 
 	static remove(player){
-		var pos = players.indexOf(player);
+		let pos = players.indexOf(player);
 		if(pos == -1) return;
 		players.splice(pos, 1);
 	}
@@ -21,7 +21,7 @@ class PlayerManager{
 	 * @param {string} name 
 	 */
 	static getPlayerByName(name){
-		for(var player of players){
+		for(let player of players){
 			if(!player.mob) continue;
 			if(player.mob.matchKeywords(name)) return player;
 		}

@@ -1,21 +1,21 @@
 // node includes
-var fs = require("fs");
+const fs = require("fs");
 
 // local includes
-var _ = require("../../../i18n");
-var Logger = require("../../util/Logger");
-var ObjectFactory = require("../factory/MapObjectFactory");
-var MapManager = require("../manager/MapManager");
-var Map = require("../map/Map");
+const _ = require("../../../i18n");
+const Logger = require("../../util/Logger");
+const ObjectFactory = require("../factory/MapObjectFactory");
+const MapManager = require("../manager/MapManager");
+const Map = require("../map/Map");
 
 // deep file search
 function deepSearch(directory, fileFun, callback){
 	fs.readdir(directory, function(err, files){
-		var waiting = files.length;
+		let waiting = files.length;
 		function next() { waiting--; if(waiting === 0) callback(); }
-		for(var file of files){
-			var _file = directory+"/"+file;
-			var stats = fs.lstatSync(_file);
+		for(let file of files){
+			let _file = directory+"/"+file;
+			let stats = fs.lstatSync(_file);
 			if(stats.isDirectory()) deepSearch(_file, fileFun, next);
 			else fileFun(_file, next);
 		}
@@ -26,19 +26,19 @@ function deepSearch(directory, fileFun, callback){
 module.exports = function(callback){
 	Logger.info(_("> Loading maps..."));
 	deepSearch("./data/map", function(file, next){
-		var f = file.slice("./data/map".length); // cut off relative path from root
-		var json = require("../../../data/map/"+f);
+		let f = file.slice("./data/map".length); // cut off relative path from root
+		let json = require("../../../data/map/"+f);
 		Logger.info(_(">> Loading map '%s'", json.name));
-		var map = new Map();
+		let map = new Map();
 		map.__fromJSON(json);
 	
 		// load tiles here
-		for(var z=0;z<json.proportions.levels;z++){
-			for(var y=0;y<json.proportions.height;y++){
-				for(var x=0;x<json.proportions.width;x++){
-					var char = json.tiles[z][y][x];
-					var tileJSON = json.materials[char];
-					var tile = ObjectFactory.loadFromJSON(tileJSON.tile);
+		for(let z=0;z<json.proportions.levels;z++){
+			for(let y=0;y<json.proportions.height;y++){
+				for(let x=0;x<json.proportions.width;x++){
+					let char = json.tiles[z][y][x];
+					let tileJSON = json.materials[char];
+					let tile = ObjectFactory.loadFromJSON(tileJSON.tile);
 					map.setTile(tile, x, y, z);
 				}
 			}

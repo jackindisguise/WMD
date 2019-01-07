@@ -1,9 +1,9 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var MapObject = require("./MapObject");
-var Tile = require("./Tile");
+const MapObject = require("./MapObject");
+const Tile = require("./Tile");
 
 /**
  * Base object that can move around the map.
@@ -49,7 +49,7 @@ class Movable extends MapObject{
 	}
 
 	step(dir){
-		var tile = this.getStep(dir);
+		let tile = this.getStep(dir);
 		if(!tile) return false;
 		return this.move(tile);
 	}

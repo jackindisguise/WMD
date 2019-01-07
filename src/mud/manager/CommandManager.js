@@ -1,4 +1,4 @@
-var commands = [];
+let commands = [];
 
 class CommandManager{
 	static get commands(){
@@ -10,7 +10,7 @@ class CommandManager{
 	}
 
 	static remove(command){
-		var pos = commands.indexOf(command);
+		let pos = commands.indexOf(command);
 		if(pos == -1) return;
 		commands.splice(pos, 1);
 	}
@@ -22,7 +22,7 @@ class CommandManager{
 	}
 
 	static processCommand(mob, input){
-		for(var command of commands){
+		for(let command of commands){
 			if(command.match(mob, input)) {
 				command.run(mob, input);
 				return true;

@@ -1,25 +1,24 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var _ = require("../../../i18n");
-var Logger = require("../../util/Logger");
-var CombatManager = require("../manager/CombatManager");
-var Communicate = require("../Communicate");
-var ChannelManager = require("../manager/ChannelManager");
-var Direction = require("../Direction");
-var Movable = require("./Movable");
-var Tile = require("../map/Tile");
-var RaceManager = require("../manager/RaceManager");
-var Race = require("../Race");
-var ClassManager = require("../manager/ClassManager");
-var Class = require("../Class");
-var MessageCategory = require("../MessageCategory");
-var Attribute = require("../Attribute");
-var WearLocation = require("../WearLocation");
-var WearSlot = require("../WearSlot");
-var Equipment = require("./Equipment");
-var CombatAction = require("../CombatAction");
+const _ = require("../../../i18n");
+const Logger = require("../../util/Logger");
+const CombatManager = require("../manager/CombatManager");
+const Communicate = require("../Communicate");
+const Direction = require("../Direction");
+const Movable = require("./Movable");
+const Tile = require("../map/Tile");
+const RaceManager = require("../manager/RaceManager");
+const Race = require("../Race");
+const ClassManager = require("../manager/ClassManager");
+const Class = require("../Class");
+const MessageCategory = require("../MessageCategory");
+const Attribute = require("../Attribute");
+const WearLocation = require("../WearLocation");
+const WearSlot = require("../WearSlot");
+const Equipment = require("./Equipment");
+const CombatAction = require("../CombatAction");
 
 /**
  * Represents an animate creature on the map.
@@ -55,277 +54,277 @@ class Mob extends Movable{
 	}
 
 	get rawStrength(){
-		var strength = 0;
+		let strength = 0;
 		strength += this._race.getStrengthByLevel(this.level);
 		strength += this._class.getStrengthByLevel(this.level);
 		return Math.floor(strength);
 	}
 
 	get strength(){
-		var strength = 0;
+		let strength = 0;
 		strength += this._race.getStrengthByLevel(this.level);
 		strength += this._class.getStrengthByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) strength += eq.strength;
 		}
 		return Math.floor(strength);
 	}
 
 	get rawAttackPower(){
-		var attackPower = 0;
+		let attackPower = 0;
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
 		return Math.floor(attackPower);
 	}
 
 	get attackPower(){
-		var attackPower = this.strength;
+		let attackPower = this.strength;
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) attackPower += eq.attackPower;
 		}
 		return Math.floor(attackPower);
 	}
 
 	get rawDefense(){
-		var defense = 0;
+		let defense = 0;
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
 		return Math.floor(defense);
 	}
 
 	get defense(){
-		var defense = this.strength;
+		let defense = this.strength;
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) defense += eq.defense;
 		}
 		return Math.floor(defense);
 	}
 
 	get rawVitality(){
-		var vitality = 0;
+		let vitality = 0;
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
 		return Math.floor(vitality);
 	}
 
 	get vitality(){
-		var vitality = this.strength;
+		let vitality = this.strength;
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) vitality += eq.vitality;
 		}
 		return Math.floor(vitality);
 	}
 
 	get rawMaxHealth(){
-		var health = 0;
+		let health = 0;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
 		return Math.floor(health);
 	}
 
 	get maxHealth(){
-		var health = this.vitality;
+		let health = this.vitality;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) health += eq.health;
 		}
 		return Math.floor(health);
 	}
 
 	get rawAgility(){
-		var agility = 0;
+		let agility = 0;
 		agility += this._race.getAgilityByLevel(this.level);
 		agility += this._class.getAgilityByLevel(this.level);
 		return Math.floor(agility);
 	}
 
 	get agility(){
-		var agility = 0;
+		let agility = 0;
 		agility += this._race.getAgilityByLevel(this.level);
 		agility += this._class.getAgilityByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) agility += eq.agility;
 		}
 		return Math.floor(agility);
 	}
 
 	get rawPrecision(){
-		var speed = 0;
+		let speed = 0;
 		speed += this._race.getPrecisionByLevel(this.level);
 		speed += this._class.getPrecisionByLevel(this.level);
 		return Math.floor(speed);
 	}
 
 	get precision(){
-		var speed = this.agility;
+		let speed = this.agility;
 		speed += this._race.getPrecisionByLevel(this.level);
 		speed += this._class.getPrecisionByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) speed += eq.speed;
 		}
 		return Math.floor(speed);
 	}
 
 	get rawDeflection(){
-		var evasion = 0;
+		let evasion = 0;
 		evasion += this._race.getDeflectionByLevel(this.level);
 		evasion += this._class.getDeflectionByLevel(this.level);
 		return Math.floor(evasion);
 	}
 
 	get deflection(){
-		var evasion = this.agility;
+		let evasion = this.agility;
 		evasion += this._race.getDeflectionByLevel(this.level);
 		evasion += this._class.getDeflectionByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) evasion += eq.evasion;
 		}
 		return Math.floor(evasion);
 	}
 
 	get rawStamina(){
-		var stamina = 0;
+		let stamina = 0;
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
 		return Math.floor(stamina);
 	}
 
 	get stamina(){
-		var stamina = this.agility;
+		let stamina = this.agility;
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) stamina += eq.stamina;
 		}
 		return Math.floor(stamina);
 	}
 
 	get rawMaxEnergy(){
-		var energy = 0;
+		let energy = 0;
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
 		return Math.floor(energy);
 	}
 
 	get maxEnergy(){
-		var energy = this.stamina;
+		let energy = this.stamina;
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) energy += eq.energy;
 		}
 		return Math.floor(energy);
 	}
 
 	get rawIntelligence(){
-		var intelligence = 0;
+		let intelligence = 0;
 		intelligence += this._race.getIntelligenceByLevel(this.level);
 		intelligence += this._class.getIntelligenceByLevel(this.level);
 		return Math.floor(intelligence);
 	}
 
 	get intelligence(){
-		var intelligence = 0;
+		let intelligence = 0;
 		intelligence += this._race.getIntelligenceByLevel(this.level);
 		intelligence += this._class.getIntelligenceByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) intelligence += eq.intelligence;
 		}
 		return Math.floor(intelligence);
 	}
 
 	get rawMagicPower(){
-		var magicPower = 0;
+		let magicPower = 0;
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
 		return Math.floor(magicPower);
 	}
 
 	get magicPower(){
-		var magicPower = this.intelligence;
+		let magicPower = this.intelligence;
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) magicPower += eq.magicPower;
 		}
 		return Math.floor(magicPower);
 	}
 
 	get rawResilience(){
-		var resilience = 0;
+		let resilience = 0;
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
 		return Math.floor(resilience);
 	}
 
 	get resilience(){
-		var resilience = this.intelligence;
+		let resilience = this.intelligence;
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) resilience += eq.resilience;
 		}
 		return Math.floor(resilience);
 	}
 
 	get rawWisdom(){
-		var wisdom = 0;
+		let wisdom = 0;
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
 		return Math.floor(wisdom);
 	}
 
 	get wisdom(){
-		var wisdom = this.intelligence;
+		let wisdom = this.intelligence;
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) wisdom += eq.wisdom;
 		}
 		return Math.floor(wisdom);
 	}
 
 	get rawMaxMana(){
-		var mana = 0;
+		let mana = 0;
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
 		return Math.floor(mana);
 	}
 
 	get maxMana(){
-		var mana = this.wisdom;
+		let mana = this.wisdom;
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
-		for(var slot in this.worn){
-			var eq = this.worn[slot];
+		for(let slot in this.worn){
+			let eq = this.worn[slot];
 			if(eq) mana += eq.mana;
 		}
 		return Math.floor(mana);
 	}
 
 	get toNextLevel(){
-		var tnl = 0;
+		let tnl = 0;
 		tnl += this._race.getToNextLevelByLevel(this.level);
 		tnl += this._class.getToNextLevelByLevel(this.level);
 		return Math.floor(tnl);
@@ -342,7 +341,7 @@ class Mob extends Movable{
 	set player(player){
 		if(this._player === player) return;
 
-		var oplayer;
+		let oplayer;
 		if(this._player) {
 			this.logout();
 			oplayer = this._player;
@@ -419,13 +418,13 @@ class Mob extends Movable{
 				break;
 
 			case "race":
-				var race = RaceManager.getRaceByName(value);
+				let race = RaceManager.getRaceByName(value);
 				if(!race) Logger.error(_("BAD RACE: '%s'", value));
 				this._race = race;
 				break;
 
 			case "class":
-				var cLass = ClassManager.getClassByName(value);
+				let cLass = ClassManager.getClassByName(value);
 				if(!cLass) Logger.error(_("BAD CLASS: '%s'", value));
 				this._class = cLass;
 				break;
@@ -471,19 +470,19 @@ class Mob extends Movable{
 		}
 
 		// default description
-		var desc = util.format("{C%s {D(%s){x\r\n    {c%s{x", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z), this.loc.description);
+		let desc = util.format("{C%s {D(%s){x\r\n    {c%s{x", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z), this.loc.description);
 
 		// generate exits
-		var exits = [];
-		for(var name in Direction.flag){
-			var step = this.getStep(Direction.flag[name]);
+		let exits = [];
+		for(let name in Direction.flag){
+			let step = this.getStep(Direction.flag[name]);
 			if(step && this.canMove(step)) exits.push(Direction.long[name]);
 		}
 
 		desc += "\r\n\r\n" + _("{c[{CExits: {W%s{c]{x", exits.length ? exits.join(" ") : "none");
 
 		// generate content descriptions
-		for(var obj of this.loc.contents){
+		for(let obj of this.loc.contents){
 			desc += "\r\n" + util.format("    %s", obj.name);
 		}
 
@@ -496,7 +495,7 @@ class Mob extends Movable{
 	}
 
 	levelup(quiet){
-		var oRace, oClass, oRawAttributes;
+		let oRace, oClass, oRawAttributes;
 		if(!quiet || !this.player){
 			oRace = this._race;
 			oClass = this._class;
@@ -508,7 +507,7 @@ class Mob extends Movable{
 		// changes to race/class can happen here
 
 		// create an anonymous status restoration function
-		var restore = this.getRestoreRelativeStatusFunc();
+		let restore = this.getRestoreRelativeStatusFunc();
 
 		// changes our level -- changes everything
 		this.level++;
@@ -520,19 +519,19 @@ class Mob extends Movable{
 		if(quiet || !this.player) return;
 
 		// create levelup message
-		var nRawAttributes = this.getRawAttributes();
-		var nAttributes = this.getAttributes();
-		var diffAttributes = {};
-		for(var attribute in oRawAttributes){
+		let nRawAttributes = this.getRawAttributes();
+		let nAttributes = this.getAttributes();
+		let diffAttributes = {};
+		for(let attribute in oRawAttributes){
 			if(nRawAttributes[attribute] == oRawAttributes[attribute]) continue;
 			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
 		}
 
-		var msg = _("{YYou are now level {W%d{x!", this.level);
-		for(var attribute in diffAttributes){
-			var emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
-			var gain = diffAttributes[attribute] > 0;
-			var word = gain ? "increased" : "decreased";
+		let msg = _("{YYou are now level {W%d{x!", this.level);
+		for(let attribute in diffAttributes){
+			let emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
+			let gain = diffAttributes[attribute] > 0;
+			let word = gain ? "increased" : "decreased";
 			msg += "\r\n" + _("Your %s has %s to {W%d{x ({%s%s%d{x).",
 								Attribute.display[attribute],
 								word,
@@ -547,7 +546,7 @@ class Mob extends Movable{
 	equip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
 
-		var slot = null;
+		let slot = null;
 		switch(equipment.wearLoc){
 			case WearLocation.location.FINGER:
 				if(this.worn.FINGER_A == null) {
@@ -595,7 +594,7 @@ class Mob extends Movable{
 	unequip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
 
-		var slot = null;
+		let slot = null;
 		switch(equipment.wearLoc){
 			case WearLocation.location.FINGER:
 				if(this.worn.FINGER_A == equipment) {
@@ -682,9 +681,9 @@ class Mob extends Movable{
 
 	getRestoreRelativeStatusFunc(){
 		// store our stat percentages
-		var healthP = this.health/this.maxHealth;
-		var energyP = this.energy/this.maxEnergy;
-		var manaP = this.mana/this.maxMana;
+		let healthP = this.health/this.maxHealth;
+		let energyP = this.energy/this.maxEnergy;
+		let manaP = this.mana/this.maxMana;
 
 		// returns restoration function for later usage
 		return function(){
@@ -729,12 +728,12 @@ class Mob extends Movable{
 
 	hit(target){
 		// determine hit rate
-		var hitChance = 1;
+		let hitChance = 1;
 
 		// on hit
 		if(Math.probability(hitChance)){
 			// determine damage
-			var damage = target.preDamage(this, this.attackPower, false);
+			let damage = target.preDamage(this, this.attackPower, false);
 
 			// damage message
 			Communicate.attack(this, target, CombatAction.PUNCH, damage);
@@ -761,8 +760,8 @@ class Mob extends Movable{
 	preDamage(attacker, amount, magic){
 		if(magic) amount -= this.resilience / 2;
 		else {
-			var precision = attacker.precision - this.deflection; // precision value
-			var precisionModifier = precision / 25; // 25 points of precision gives 100% bonus damage.
+			let precision = attacker.precision - this.deflection; // precision value
+			let precisionModifier = precision / 25; // 25 points of precision gives 100% bonus damage.
 			amount *= 1 + precisionModifier; // apply precision modifier
 			amount -= this.defense / 2; // reduce damage by defense
 		}
@@ -796,7 +795,7 @@ class Mob extends Movable{
 	}
 
 	killed(victim){
-		var experience = victim.level*100;
+		let experience = victim.level*100;
 		this.sendLine(_("{CYou gain {W%d{C experience.{x", experience));
 		this.gainExperience(experience);
 	}

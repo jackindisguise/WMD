@@ -1,19 +1,19 @@
-// local includes
-var _package = require("../../../package.json");
-
 // npm includes
-var express = require("express");
-var cookie = require("cookie-parser");
-var path = require("path");
-var bodyParser = require('body-parser');
-var session = require("express-session")({
+const express = require("express");
+const cookie = require("cookie-parser");
+const path = require("path");
+const bodyParser = require('body-parser');
+const session = require("express-session")({
 	secret: "kickEEwinTI",
     resave: true,
     saveUninitialized: true
 });
 
+// local includes
+const _package = require("../../../package.json");
+
 // configure the express app
-var app = express();
+let app = express();
 app.use(session);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,8 +33,8 @@ app.get("*", function(req,res){
 });
 
 // configure HTTP server to go through express app and socket.io
-var server = require("http").Server(app);
-var io = require("socket.io")(server,{
+let server = require("http").Server(app);
+let io = require("socket.io")(server,{
 	pingTimeout:5000,
 	pingInterval:5000
 });
@@ -47,7 +47,7 @@ var io = require("socket.io")(server,{
 /**
  * @namespace
  */
-var Web = {
+let Web = {
 	/**
 	 * HTTP Server configured for use with express app and socket.io.
 	 * @type {server}

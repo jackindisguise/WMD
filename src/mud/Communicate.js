@@ -1,8 +1,8 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var MessageCategory = require("./MessageCategory");
+const MessageCategory = require("./MessageCategory");
 
 // stuff
 class Communicate{
@@ -18,12 +18,12 @@ class Communicate{
      */
     static act(actor, format, targets, fields, filter, category=MessageCategory.ACTION){
         if(targets.indexOf(actor) == -1) targets.push(actor);
-        for(var target of targets){
+        for(let target of targets){
             // target filtered out
             if(filter && !filter(actor, fields, target)) continue;
 
             // process string
-            var processed;
+            let processed;
             if(target == actor) processed = Communicate.actFieldCodeReplace(format.firstPerson, actor, fields);
             else if(fields && target == fields.directObject) processed = Communicate.actFieldCodeReplace(format.secondPerson, actor, fields);
             else processed = Communicate.actFieldCodeReplace(format.thirdPerson, actor, fields);

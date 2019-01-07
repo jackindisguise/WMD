@@ -1,11 +1,7 @@
-// node includes
-var util = require("util");
-
 // local includes
 require("../../lib/Math");
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
 
 class Look extends Command{
 	exec(mob){

@@ -1,15 +1,12 @@
-// node includes
-var EventEmitter = require("events");
-
 // local includes
-var _ = require("../../../i18n");
-var Player = require("../io/Player");
-var PlayerManager = require("../manager/PlayerManager");
-var Logger = require("../../util/Logger");
-var Server = require("../io/Server");
+const _ = require("../../../i18n");
+const Player = require("../io/Player");
+const PlayerManager = require("../manager/PlayerManager");
+const Logger = require("../../util/Logger");
+const Server = require("../io/Server");
 
 // local variables
-var server = new Server();
+let server = new Server();
 
 /**
  * MUD handler.

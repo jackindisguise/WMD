@@ -1,4 +1,4 @@
-var slot = {
+const slot = {
 	HEAD: "HEAD",
 	NECK: "NECK",
 	SHOULDER: "SHOULDER",
@@ -14,7 +14,7 @@ var slot = {
 	HAND_PRIMARY: "HAND_PRIMARY"
 };
 
-var display = {
+const display = {
 	HEAD: "head",
 	NECK: "neck",
 	SHOULDER: "shoulder",

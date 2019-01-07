@@ -1,6 +1,6 @@
 // local includes
-var TemplateManager = require("../manager/TemplateManager");
-var ModelManager = require("../manager/ModelManager");
+const TemplateManager = require("../manager/TemplateManager");
+const ModelManager = require("../manager/ModelManager");
 
 /**
  * The base object that can legally inhabit a {@link Map}.
@@ -73,7 +73,7 @@ class MapObject{
 		if(this._loc == loc) return;
 
 		// preserve old loc
-		var oloc;
+		let oloc;
 		if(this._loc){
 			oloc = this._loc;
 			this._loc = null; // set to null first
@@ -111,8 +111,8 @@ class MapObject{
 				if(!value.length) return;
 
 				// convert inventory to JSON
-				var converted = [];
-				for(var object of value){
+				let converted = [];
+				for(let object of value){
 					if(object instanceof MapObject)
 						converted.push(object.__toJSON());
 				}
@@ -130,12 +130,12 @@ class MapObject{
 	__JSONRead(key, value){
 		switch(key){
 			case "template":
-				var template = TemplateManager.getTemplateByName(value);
+				let template = TemplateManager.getTemplateByName(value);
 				if(template) this.template = template;
 				break;
 
 			case "model":
-				var model = ModelManager.getModelByName(value);
+				let model = ModelManager.getModelByName(value);
 				if(model) this.model = model;
 				break;
 
@@ -204,18 +204,18 @@ class MapObject{
 	 * @param {MapObject} mapobject Object to remove.
 	 */
 	remove(mapobject){
-		var pos = this._contents.indexOf(mapobject);
+		let pos = this._contents.indexOf(mapobject);
 		if(pos == -1) return; // not in contents
 		this._contents.splice(pos, 1);
 		if(mapobject.loc == this) mapobject.loc = null; // cyclical dereference
 	}
 
 	__createClone(obj){
-		var clone = super.__createClone();
+		let clone = super.__createClone();
 
 		// clone contents
-		for(var obj of this.contents){
-			var _clone = obj.__createClone();
+		for(let obj of this.contents){
+			let _clone = obj.__createClone();
 			_clone.loc = clone;
 		}
 

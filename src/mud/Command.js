@@ -5,13 +5,13 @@ class Command{
     }
 
     run(mob, input){
-       var args = this.process(mob, input);
+       let args = this.process(mob, input);
        args.unshift(mob);
        this.exec.apply(this, args);
     }
 
     process(mob, input){
-        var result = this.rule.exec(input);
+        let result = this.rule.exec(input);
         if(result) return result.slice(1);
     }
 

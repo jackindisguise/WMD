@@ -1,4 +1,4 @@
-var channels = [];
+let channels = [];
 
 class ChannelManager{
 	static get channels(){
@@ -11,13 +11,13 @@ class ChannelManager{
 	}
 
 	static remove(channel){
-		var pos = channels.indexOf(channel);
+		let pos = channels.indexOf(channel);
 		if(pos == -1) return;
 		channels.splice(pos, 1);
 	}
 
 	static getChannelByName(name){
-		for(var channel of channels){
+		for(let channel of channels){
 			if(channel.name === name) return channel;
 		}
 	}

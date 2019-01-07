@@ -1,9 +1,9 @@
 // local includes
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
-var ChannelManager = require("../manager/ChannelManager");
-var channel = ChannelManager.getChannelByName("ooc");
+const _ = require("../../../i18n");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
+const ChannelManager = require("../manager/ChannelManager");
+const channel = ChannelManager.getChannelByName("ooc");
 
 class OOC extends Command{
 	exec(mob, message){

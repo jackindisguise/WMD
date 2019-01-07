@@ -1,6 +1,5 @@
 // local includes
-var Movable = require("./Movable");
-var WearLocation = require("../WearLocation");
+const Movable = require("./Movable");
 
 class Item extends Movable{
 }

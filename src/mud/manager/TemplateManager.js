@@ -1,4 +1,4 @@
-var templates = [];
+let templates = [];
 
 class TemplateManager{
 	static get templates(){
@@ -11,13 +11,13 @@ class TemplateManager{
 	}
 
 	static remove(template){
-		var pos = templates.indexOf(template);
+		let pos = templates.indexOf(template);
 		if(pos == -1) return;
 		templates.splice(pos, 1);
 	}
 
 	static getTemplateByName(name){
-		for(var template of templates){
+		for(let template of templates){
 			if(template.name === name) return template;
 		}
 	}

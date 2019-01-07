@@ -1,10 +1,10 @@
 // local includes
-var Equipment = require("./Equipment");
-var WearLocation = require("../WearLocation");
+const Equipment = require("./Equipment");
+const WearLocation = require("../WearLocation");
 
 class Weapon extends Equipment{
 	get attackPower(){
-		var bonus = this.attackPowerBonus;
+		let bonus = this.attackPowerBonus;
 		bonus += this.level * this.attackPowerBonusPerLevel;
 		return bonus;
 	}

@@ -1,22 +1,22 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
 require("../../lib/String");
-var _ = require("../../../i18n");
-var CommandSpecificity = require("../CommandSpecificity");
-var CommandManager = require("../manager/CommandManager");
-var Command = require("../Command");
+const _ = require("../../../i18n");
+const CommandSpecificity = require("../CommandSpecificity");
+const CommandManager = require("../manager/CommandManager");
+const Command = require("../Command");
 
 class Commands extends Command{
 	exec(mob, message){
-		var msg = util.format("- %s -", _("Commands")).padRight(80, "-");
-		var commands = CommandManager.commands;
-		var blockSize = 4;
-		var block = Math.ceil(commands.length/blockSize)*blockSize;
-		var line = "";
-		for(var i=0;i<block;i++){
-			var command = commands[i];
+		let msg = util.format("- %s -", _("Commands")).padRight(80, "-");
+		let commands = CommandManager.commands;
+		let blockSize = 4;
+		let block = Math.ceil(commands.length/blockSize)*blockSize;
+		let line = "";
+		for(let i=0;i<block;i++){
+			let command = commands[i];
 			line += util.format("%s %s %s", "|", (command ? (command.error ? "!" : "") + command.plain : "").padRight(16), (i%blockSize) == blockSize-1 ? "|" : " ");
 
 			if(((i+1)%4) == 0){

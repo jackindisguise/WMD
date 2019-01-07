@@ -1,11 +1,11 @@
 // local includes
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
-var Channel = require("../Channel");
-var ChannelManager = require("../manager/ChannelManager");
-var PlayerManager = require("../manager/PlayerManager");
-var channel = ChannelManager.getChannelByName("whisper");
+const _ = require("../../../i18n");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
+const Channel = require("../Channel");
+const ChannelManager = require("../manager/ChannelManager");
+const PlayerManager = require("../manager/PlayerManager");
+const channel = ChannelManager.getChannelByName("whisper");
 
 class Whisper extends Command{
 	exec(mob, target, message){
@@ -16,7 +16,7 @@ class Whisper extends Command{
 			return;
 		}
 
-		var victim = PlayerManager.getPlayerByName(target);
+		let victim = PlayerManager.getPlayerByName(target);
 		if(!victim){
 			mob.sendLine("There's nobody like that around.");
 			return;

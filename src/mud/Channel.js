@@ -1,9 +1,8 @@
 // node includes
-var EventEmitter = require("events");
+const EventEmitter = require("events");
 
 // local includes
-var Communicate = require("./Communicate");
-var MessageCategory = require("./MessageCategory");
+const MessageCategory = require("./MessageCategory");
 
 /**
  * Controls communication avenues.
@@ -28,13 +27,13 @@ class Channel extends EventEmitter{
     }
 
     transmit(speaker, message, target, filter){
-        var fields = {message:message, directObject:target}
-        for(var listener of this._participants){
+        let fields = {message:message, directObject:target}
+        for(let listener of this._participants){
             // participant filtered out
             if(filter && !filter(speaker, listener, fields)) continue;
 
             // process string
-            var processed;
+            let processed;
             if(listener == speaker) processed = Channel.transmitFieldCodeReplace(this.format.firstPerson, speaker, fields);
             else if(listener == fields.directObject) processed = Channel.transmitFieldCodeReplace(this.format.secondPerson, speaker, fields);
             else processed = Channel.transmitFieldCodeReplace(this.format.thirdPerson, speaker, fields);
@@ -51,7 +50,7 @@ class Channel extends EventEmitter{
     }
 
     remove(player){
-        var pos = this._participants.indexOf(player);
+        let pos = this._participants.indexOf(player);
         if(pos == -1) return; // already not participating
         this._participants.splice(pos, 1);
         player.leaveChannel(this);

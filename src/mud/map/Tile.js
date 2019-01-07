@@ -1,8 +1,8 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var MapObject = require("./MapObject");
+const MapObject = require("./MapObject");
 
 /**
  * Represents an inhabitable location on a map.

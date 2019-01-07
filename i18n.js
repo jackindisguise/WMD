@@ -1,5 +1,5 @@
 // npm includes
-var i18n = require("i18n");
+const i18n = require("i18n");
 
 // configure i18n
 i18n.configure({

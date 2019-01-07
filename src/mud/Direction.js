@@ -3,7 +3,7 @@
  * @alias Direction#flags
  * @enum {bitflag}
  */
-var flag = {
+const flag = {
 	NORTH: 0x1,
 	SOUTH: 0x2,
 	EAST: 0x4,
@@ -21,7 +21,7 @@ var flag = {
  * @alias Direction#long
  * @enum {string}
  */
-var long = {
+const long = {
 	NORTH: "north",
 	SOUTH: "south",
 	EAST: "east",
@@ -39,7 +39,7 @@ var long = {
  * @alias Direction#short
  * @enum {string}
  */
-var short = {
+const short = {
 	NORTH: "n",
 	SOUTH: "s",
 	EAST: "e",

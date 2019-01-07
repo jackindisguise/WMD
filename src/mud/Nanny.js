@@ -1,20 +1,20 @@
 // node includes
-var util = require("util");
-var fs = require("fs");
+const util = require("util");
+const fs = require("fs");
 
 // local includes
 require("../lib/String");
 require("../lib/Array");
-var _ = require("../../i18n");
-var Logger = require("../util/Logger");
-var RaceManager = require("./manager/RaceManager");
-var ClassManager = require("./manager/ClassManager");
-var MapManager = require("./manager/MapManager");
-var Mob = require("./map/Mob");
+const _ = require("../../i18n");
+const Logger = require("../util/Logger");
+const RaceManager = require("./manager/RaceManager");
+const ClassManager = require("./manager/ClassManager");
+const MapManager = require("./manager/MapManager");
+const Mob = require("./map/Mob");
 
 // text data
-var greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
-var motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
+const greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
+const motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
 
 /**
  * Used for transitioning a client into a proper playable state.
@@ -51,8 +51,8 @@ class Nanny{
     }
 
     askForRace(){
-        var msg = "{y------------------";
-        for(var race of RaceManager.races){
+        let msg = "{y------------------";
+        for(let race of RaceManager.races){
             msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.display.padLeft(14), "|", race.description);
         }
 
@@ -65,7 +65,7 @@ class Nanny{
     }
 
     processRace(input){
-        var race = RaceManager.races.search(input);
+        let race = RaceManager.races.search(input);
         if(!race) {
             this.player.sendLine(_("That isn't a valid race."));
             this.askForRace();
@@ -77,8 +77,8 @@ class Nanny{
     }
 
     askForClass(){
-        var msg = "{c------------------";
-        for(var _class of ClassManager.classes){
+        let msg = "{c------------------";
+        for(let _class of ClassManager.classes){
             msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
         }
 
@@ -91,7 +91,7 @@ class Nanny{
     }
 
     processClass(input){
-        var _class = ClassManager.classes.search(input);
+        let _class = ClassManager.classes.search(input);
         if(!_class) {
             this.player.sendLine(_("That isn't a valid class."));
             this.askForClass();
@@ -123,13 +123,13 @@ class Nanny{
 
         // move to new location
         if(this.isNew){
-            var worldmap = MapManager.getMapByName("World");
+            let worldmap = MapManager.getMapByName("World");
             this.mob.loc = worldmap.getTileByXYZ(0,0,0);
             this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob._race.display, this.mob._class.display));
 
         // load old location
         } else {
-            var tile = worldmap.map.getTileByXYZ(this.loc.x, this.loc.y, this.loc.z);
+            let tile = worldmap.map.getTileByXYZ(this.loc.x, this.loc.y, this.loc.z);
             if(tile) this.loc = tile;
             else {
                 Logger.error("BAD LOC %s ON CHARACTER LOGIN", JSON.stringify(this.loc));

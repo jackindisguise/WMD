@@ -1,16 +1,16 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
 require("../../lib/Math");
-var _ = require("../../../i18n");
-var Command = require("../Command");
-var CommandSpecificity = require("../CommandSpecificity");
+const _ = require("../../../i18n");
+const Command = require("../Command");
+const CommandSpecificity = require("../CommandSpecificity");
 
 class Score extends Command{
 	exec(mob){
-		var attributes = mob.getAttributes();
-		var msg = "".center(80, "-"); 
+		let attributes = mob.getAttributes();
+		let msg = "".center(80, "-"); 
 		msg += "\r\n" + _("%s the %s %s.", mob.name, mob.race.display, mob.class.display);
 		msg += "\r\n" + _("You're level {W%d{x, with {B%d{x experience until the next level.", mob.level, mob.tnl);
 		msg += "\r\n" + _("You have: {R%d/%d{x health, {G%d/%d{x energy, and {C%d/%d{x mana.",

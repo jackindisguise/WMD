@@ -1,6 +1,6 @@
 require("../../lib/Array");
 
-var classes = [];
+let classes = [];
 
 class ClassManager{
 	static get classes(){
@@ -13,7 +13,7 @@ class ClassManager{
 	}
 
 	static remove(_class){
-		var pos = classes.indexOf(_class);
+		let pos = classes.indexOf(_class);
 		if(pos == -1) return;
 		classes.splice(pos, 1);
 	}
@@ -23,7 +23,7 @@ class ClassManager{
 	 * @param {string} name 
 	 */
 	static getClassByName(name){
-		for(var _class of classes){
+		for(let _class of classes){
 			if(_class.name === name) return _class;
 		}
 	}

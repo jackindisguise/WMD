@@ -1,6 +1,5 @@
 // local includes
-var Tile = require("./Tile");
-var Direction = require("../Direction");
+const Direction = require("../Direction");
 
 class Map{
 	/**
@@ -96,7 +95,7 @@ class Map{
 	 * @param {MapObject} mapobject MapObject to remove.
 	 */
 	remove(mapobject){
-		var pos = this._objects.indexOf(mapobject);
+		let pos = this._objects.indexOf(mapobject);
 		if(pos == -1) return; // not in objects
 		this._objects.splice(pos, 1);
 	}
@@ -115,11 +114,11 @@ class Map{
 	 */
 	generate(fill){
 		this._grid = [];
-		for(var z=0;z<this._levels;z++){
+		for(let z=0;z<this._levels;z++){
 			this._grid[z] = [];
-			for(var y=0;y<this._height;y++){
+			for(let y=0;y<this._height;y++){
 				this._grid[z][y] = [];
-				for(var x=0;x<this._width;x++){
+				for(let x=0;x<this._width;x++){
 					if(fill) this._grid[z][y][x] = new fill({x:x,y:y,z:z});
 					else this._grid[z][y][x] = null;
 				}

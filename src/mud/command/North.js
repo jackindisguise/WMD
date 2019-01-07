@@ -1,11 +1,7 @@
-// node includes
-var util = require("util");
-
 // local includes
 require("../../lib/Math");
-var _ = require("../../../i18n");
-var Movement = require("./Movement");
-var Direction = require("../Direction");
+const Movement = require("./Movement");
+const Direction = require("../Direction");
 
 class North extends Movement{
 }

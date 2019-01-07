@@ -1,22 +1,22 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
-var Logger = require("../../util/Logger");
-var TemplateManager = require("../manager/TemplateManager");
-var ModelManager = require("../manager/ModelManager");
-var MapObject = require("../map/MapObject");
-var Movable = require("../map/Movable");
-var Mob = require("../map/Mob");
-var Item = require("../map/Item");
-var Equipment = require("../map/Equipment");
-var Weapon = require("../map/Weapon");
-var Armor = require("../map/Armor");
-var Shield = require("../map/Shield");
-var Tile = require("../map/Tile");
+const Logger = require("../../util/Logger");
+const TemplateManager = require("../manager/TemplateManager");
+const ModelManager = require("../manager/ModelManager");
+const MapObject = require("../map/MapObject");
+const Movable = require("../map/Movable");
+const Mob = require("../map/Mob");
+const Item = require("../map/Item");
+const Equipment = require("../map/Equipment");
+const Weapon = require("../map/Weapon");
+const Armor = require("../map/Armor");
+const Shield = require("../map/Shield");
+const Tile = require("../map/Tile");
 
 // constructor name table
-var constructorNames = {
+const constructorNames = {
 	"MapObject": MapObject,
 	"Movable": Movable,
 	"Mob": Mob,
@@ -43,7 +43,7 @@ class MapObjectFactory{
 	}
 
 	static loadFromJSONByConstructor(json){
-		var constructor = MapObjectFactory.getConstructorByName(json.constructor);
+		let constructor = MapObjectFactory.getConstructorByName(json.constructor);
 		if(!constructor) {
 			Logger.error(util.format("BAD MAPOBJECT CONSTRUCTOR: %s", json.constructor));
 			return;
@@ -53,29 +53,29 @@ class MapObjectFactory{
 	}
 
 	static loadFromJSONByTemplate(json){
-		var templateName = json.template;
-		var template = TemplateManager.getTemplateByName(templateName);
-		var obj = template.spawn();
+		let templateName = json.template;
+		let template = TemplateManager.getTemplateByName(templateName);
+		let obj = template.spawn();
 		obj.__fromJSON(json);
 		return obj;
 	}
 
 	static loadFromJSONByModel(json){
-		var modelName = json.model;
-		var model = ModelManager.getModelByName(modelName);
-		var obj = model.spawn();
+		let modelName = json.model;
+		let model = ModelManager.getModelByName(modelName);
+		let obj = model.spawn();
 		obj.__fromJSON(json);
 		return obj;
 	}
 
 	static construct(constructor, json){
-		var obj = new constructor();
+		let obj = new constructor();
 		obj.__fromJSON(json);
 
 		// load contents
 		if(json.contents){
-			for(var _json of json.contents){
-				var _obj = MapObjectFactory.loadFromJSON(_json);
+			for(let _json of json.contents){
+				let _obj = MapObjectFactory.loadFromJSON(_json);
 				if(_obj) _obj.loc = obj;
 			}
 		}

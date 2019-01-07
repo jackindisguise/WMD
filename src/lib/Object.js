@@ -1,9 +1,9 @@
 // node includes
-var util = require("util");
+const util = require("util");
 
 // local includes
 require("./String.js");
-var ObjectManager = require("../mud/manager/ObjectManager");
+const ObjectManager = require("../mud/manager/ObjectManager");
 
 Object.defineProperty(Object.prototype, "uuid", {
     get: function(){

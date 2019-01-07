@@ -1,10 +1,10 @@
 // node includes
-var EventEmitter = require("events");
+const EventEmitter = require("events");
 
 // local includes
-var _ = require("../../../i18n");
-var Logger = require("../../util/Logger");
-var MessageCategory = require("../MessageCategory");
+const _ = require("../../../i18n");
+const Logger = require("../../util/Logger");
+const MessageCategory = require("../MessageCategory");
 
 /**
  * Handles low level MUD client.

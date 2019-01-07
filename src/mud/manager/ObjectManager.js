@@ -1,5 +1,5 @@
-var _WM = new WeakMap();
-var nextID = 0;
+let _WM = new WeakMap();
+let nextID = 0;
 
 class ObjectManager{
 	static identify(obj){
