@@ -8,7 +8,9 @@
 			"src/mud",
 			"src/mud/command",
 			"src/mud/core",
+			"src/mud/factory",
 			"src/mud/io",
+			"src/mud/loader",
 			"src/mud/manager",
 			"src/mud/map",
 			"src/util"
