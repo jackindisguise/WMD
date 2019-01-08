@@ -19,7 +19,7 @@ class RaceManager{
 	}
 
 	/**
-	 * Get race by display name.
+	 * Get race by name.
 	 * @param {string} name 
 	 */
 	static getRaceByName(name){

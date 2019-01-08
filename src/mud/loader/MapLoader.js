@@ -32,7 +32,7 @@ module.exports = function(callback){
 		let map = new Map();
 		map.__fromJSON(json);
 	
-		// load tiles here
+		// tiles are loaded here
 		for(let z=0;z<json.proportions.levels;z++){
 			for(let y=0;y<json.proportions.height;y++){
 				for(let x=0;x<json.proportions.width;x++){

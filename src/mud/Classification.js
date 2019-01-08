@@ -68,12 +68,6 @@ class Classification{
 }
 
 /**
- * Unique ID for this classification.
- * @type {number}
- */
-Classification.prototype.id = 0;
-
-/**
  * Internal name for this classification.
  * @type {string}
  */
@@ -97,50 +91,55 @@ Classification.prototype.keywords = "unknown";
  */
 Classification.prototype.description = "Nobody knows what this is.";
 
-// progression stats
+// progression
 Classification.prototype.toNextLevelBase = 0;
 Classification.prototype.toNextLevelPerLevel = 0;
 
-// base primary attributes
+// primary and secondary attributes
 Classification.prototype.strengthBase = 0;
-Classification.prototype.intelligenceBase = 0;
-Classification.prototype.agilityBase = 0;
-
-// base secondary attributes
-Classification.prototype.attackPowerBase = 0;
-Classification.prototype.defenseBase = 0;
-Classification.prototype.vitalityBase = 0;
-Classification.prototype.magicPowerBase = 0;
-Classification.prototype.resilienceBase = 0;
-Classification.prototype.wisdomBase = 0;
-Classification.prototype.precisionBase = 0;
-Classification.prototype.deflectionBase = 0;
-Classification.prototype.staminaBase = 0;
-
-// base stats
-Classification.prototype.healthBase = 0;
-Classification.prototype.manaBase = 0;
-Classification.prototype.energyBase = 0;
-
-// primary attributes per level
 Classification.prototype.strengthPerLevel = 0;
+
+Classification.prototype.attackPowerBase = 0;
+Classification.prototype.attackPowerPerLevel = 0;
+
+Classification.prototype.defenseBase = 0;
+Classification.prototype.defensePerLevel = 0;
+
+Classification.prototype.vitalityBase = 0;
+Classification.prototype.vitalityPerLevel = 0;
+
+Classification.prototype.intelligenceBase = 0;
 Classification.prototype.intelligencePerLevel = 0;
+
+Classification.prototype.magicPowerBase = 0;
+Classification.prototype.magicPowerPerLevel = 0;
+
+Classification.prototype.resilienceBase = 0;
+Classification.prototype.resiliencePerLevel = 0;
+
+Classification.prototype.wisdomBase = 0;
+Classification.prototype.wisdomPerLevel = 0;
+
+Classification.prototype.agilityBase = 0;
 Classification.prototype.agilityPerLevel = 0;
 
-// secondary attributes per level
-Classification.prototype.attackPowerPerLevel = 0;
-Classification.prototype.defensePerLevel = 0;
-Classification.prototype.vitalityPerLevel = 0;
-Classification.prototype.magicPowerPerLevel = 0;
-Classification.prototype.resiliencePerLevel = 0;
-Classification.prototype.wisdomPerLevel = 0;
+Classification.prototype.precisionBase = 0;
 Classification.prototype.precisionPerLevel = 0;
+
+Classification.prototype.deflectionBase = 0;
 Classification.prototype.deflectionPerLevel = 0;
+
+Classification.prototype.staminaBase = 0;
 Classification.prototype.staminaPerLevel = 0;
 
-// stats per level
+// stats
+Classification.prototype.healthBase = 0;
 Classification.prototype.healthPerLevel = 0;
+
+Classification.prototype.manaBase = 0;
 Classification.prototype.manaPerLevel = 0;
+
+Classification.prototype.energyBase = 0;
 Classification.prototype.energyPerLevel = 0;
 
 module.exports = Classification;

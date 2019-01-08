@@ -19,7 +19,6 @@ class Channel extends EventEmitter{
 		this._participants = [];
 
 		if(options){
-			if(options.id != null) this.id = options.id;
 			if(options.name != null) this.name = options.name;
 		}
 	}
@@ -89,6 +88,11 @@ class Channel extends EventEmitter{
 }
 
 /**
+ * This channel's name.
+ */
+Channel.prototype.name = null;
+
+/**
  * Is this channel joined automatically?
  */
 Channel.prototype.default = false;
@@ -106,11 +110,6 @@ Channel.prototype.format = {
  * @alias Channel#participants
  */
 Channel.prototype._participants = null;
-
-/**
- * This channel's name.
- */
-Channel.prototype.name = null;
 
 module.exports = Channel;
 

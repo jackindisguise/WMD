@@ -3,10 +3,10 @@ require("../../lib/Object");
 require("../../lib/Array");
 const RaceLoader = require("../loader/RaceLoader");
 const ClassLoader = require("../loader/ClassLoader");
-const ChannelLoader = require("../loader/ChannelLoader");
-const CharacterLoader = require("../loader/CharacterLoader");
 const CommandLoader = require("../loader/CommandLoader");
 const TemplateLoader = require("../loader/TemplateLoader");
+const CharacterLoader = require("../loader/CharacterLoader");
+const ChannelLoader = require("../loader/ChannelLoader");
 const ModelLoader = require("../loader/ModelLoader");
 const MapLoader = require("../loader/MapLoader");
 

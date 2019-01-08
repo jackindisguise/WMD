@@ -1,7 +1,6 @@
 // local includes
 const Loader = require("./src/mud/loader/Loader");
 
-
 // load full database
 Loader(function(){
 	// local includes
