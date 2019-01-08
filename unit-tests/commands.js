@@ -23,7 +23,7 @@ describe("[COMMAND]", function(){
 	it("initialize test clients", function(done){
 		// load finisher
 		var c = 0;
-		function d(){ if(--c == 0) done(); }
+		function d(){ if(--c === 0) done(); }
 
 		c++;
 		player = io.connect("http://127.0.0.1:8000");
@@ -39,7 +39,7 @@ describe("[COMMAND]", function(){
 			var m=0;
 			other.on("message", function(message){ // fully connected
 				m++;
-				if(m==9){
+				if(m===9){
 					expect(message).is.equal(_("Welcome to the game, %s the %s %s!", "Second", "human", "warrior"));
 					d();
 				}
@@ -53,7 +53,7 @@ describe("[COMMAND]", function(){
 		var m=0;
 		player.on("message", function(message){ // fully connected
 			m++;
-			if(m==9){
+			if(m===9){
 				expect(message).is.equal(_("Welcome to the game, %s the %s %s!", "First", "human", "warrior"));
 				d();
 			}

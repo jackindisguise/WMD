@@ -9,6 +9,10 @@
         "ecmaVersion": 2018
     },
     "rules": {
+		"eqeqeq": [
+			"error",
+			"smart"
+		],
         "indent": [
             "error",
             "tab"

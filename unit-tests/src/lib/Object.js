@@ -11,12 +11,12 @@ A.prototype.b = 2;
 
 class B extends A{
 	__JSONWrite(key, value, json){
-		if(key == "a" && this.constructor.prototype[key] != value) json["Z"] = value*10; // when a isn't default, save it with a different key "Z" and with 10x its value
+		if(key === "a" && this.constructor.prototype[key] !== value) json["Z"] = value*10; // when a isn't default, save it with a different key "Z" and with 10x its value
 		else Object.__JSONWrite.call(this, key, value, json);
 	}
 
 	__JSONRead(key, value){
-		if(key == "Z") this.a = value/10; // read 1/10th of the value of "Z"
+		if(key === "Z") this.a = value/10; // read 1/10th of the value of "Z"
 		else Object.__JSONRead.call(this, key, value);
 	}
 }
