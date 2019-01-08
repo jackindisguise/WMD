@@ -4,15 +4,16 @@
   "description": "A simple MUD engine.",
   "main": "index.js",
   "scripts": {
-    "generate-docs": "rm -rf docs/html && jsdoc --configure .jsdoc.json --verbose --readme README.md",
     "nodemon": "nodemon ./index.js",
-    "nyc": "nyc --reporter=text --reporter=html mocha --recursive ./unit-tests",
+    "generate-docs": "rm -rf docs/html && jsdoc --configure .jsdoc.json --verbose --readme README.md",
+	"lint": "eslint \"**/*.js\"",
     "test": "mocha --recursive ./unit-tests",
+    "nyc": "nyc --reporter=text --reporter=html mocha --recursive ./unit-tests",
     "changes": "git log v%npm_package_version%..@ > changes/changes.txt",
-    "preversion": "npm run test && npm run changes",
+    "preversion": "npm run test && npm run lint && npm run changes",
     "version": "mv changes/changes.txt changes/v%npm_package_version%.txt && git add -A .",
     "postversion": "npm run generate-docs && npm run nyc && git push && git push --tags",
-    "coveralls": "nyc --reporter=lcovonly mocha --recursive ./unit-tests && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+	"coveralls": "nyc --reporter=lcovonly mocha --recursive ./unit-tests && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "author": "jackindisguise",
   "license": "MIT",
