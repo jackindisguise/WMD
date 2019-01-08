@@ -31,7 +31,7 @@ class Tile extends MapObject{
 	}
 
 	toString(){
-		return util.format("{Tile<%d,%d,%d>}", this.x, this.y, this.z)
+		return util.format("{Tile<%d,%d,%d>}", this.x, this.y, this.z);
 	}
 
 	set map(map){
@@ -111,7 +111,7 @@ Tile.prototype.keywords = "tile";
 Tile.prototype.display = "Tile";
 
 /** @default "A generic tile." */
-Tile.prototype.description = "A generic tile."
+Tile.prototype.description = "A generic tile.";
 
 module.exports = Tile;
 

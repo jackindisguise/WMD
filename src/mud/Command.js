@@ -1,22 +1,22 @@
 class Command{
-    // match to input
-    match(mob, input){
-        return this.rule.exec(input) ? true : false;
-    }
+	// match to input
+	match(mob, input){
+		return this.rule.exec(input) ? true : false;
+	}
 
-    run(mob, input){
-       let args = this.process(mob, input);
-       args.unshift(mob);
-       this.exec.apply(this, args);
-    }
+	run(mob, input){
+		let args = this.process(mob, input);
+		args.unshift(mob);
+		this.exec.apply(this, args);
+	}
 
-    process(mob, input){
-        let result = this.rule.exec(input);
-        if(result) return result.slice(1);
-    }
+	process(mob, input){
+		let result = this.rule.exec(input);
+		if(result) return result.slice(1);
+	}
 
-    exec(){
-    }
+	exec(){
+	}
 }
 
 // represents an error processor

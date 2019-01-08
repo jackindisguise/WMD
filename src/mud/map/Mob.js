@@ -377,26 +377,26 @@ class Mob extends Movable{
 
 	__JSONWrite(key, value, json){
 		switch(key){
-			case "loc":
-				if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
-				break;
+		case "loc":
+			if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
+			break;
 
-			case "race": json.race = value.name; break;
-			case "class": json.class = value.name; break;
-			case "health":
-				if(value == this.maxHealth) break;
-				json.health = value;
-				break;
-			case "energy":
-				if(value == this.maxEnergy) break;
-				json.energy = value;
-				break;
-			case "mana":
-				if(value == this.maxMana) break;
-				json.mana = value;
-				break;
-			case "wearLocation": break;
-			default: super.__JSONWrite(key, value, json); break;
+		case "race": json.race = value.name; break;
+		case "class": json.class = value.name; break;
+		case "health":
+			if(value == this.maxHealth) break;
+			json.health = value;
+			break;
+		case "energy":
+			if(value == this.maxEnergy) break;
+			json.energy = value;
+			break;
+		case "mana":
+			if(value == this.maxMana) break;
+			json.mana = value;
+			break;
+		case "wearLocation": break;
+		default: super.__JSONWrite(key, value, json); break;
 		}
 	}
 
@@ -412,25 +412,26 @@ class Mob extends Movable{
 	}
 
 	__JSONRead(key, value){
+		let race, cLass;
 		switch(key){
-			case "loc":
-				this._loc = value;
-				break;
+		case "loc":
+			this._loc = value;
+			break;
 
-			case "race":
-				let race = RaceManager.getRaceByName(value);
-				if(!race) Logger.error(_("BAD RACE: '%s'", value));
-				this._race = race;
-				break;
+		case "race":
+			race = RaceManager.getRaceByName(value);
+			if(!race) Logger.error(_("BAD RACE: '%s'", value));
+			this._race = race;
+			break;
 
-			case "class":
-				let cLass = ClassManager.getClassByName(value);
-				if(!cLass) Logger.error(_("BAD CLASS: '%s'", value));
-				this._class = cLass;
-				break;
+		case "class":
+			cLass = ClassManager.getClassByName(value);
+			if(!cLass) Logger.error(_("BAD CLASS: '%s'", value));
+			this._class = cLass;
+			break;
 
-			case "wearLocation": break;
-			default: super.__JSONRead(key, value); break;
+		case "wearLocation": break;
+		default: super.__JSONRead(key, value); break;
 		}
 	}
 
@@ -495,19 +496,21 @@ class Mob extends Movable{
 	}
 
 	levelup(quiet){
-		let oRace, oClass, oRawAttributes;
+		//let oRace, oClass, oRawAttributes;
+		let oRawAttributes;
 		if(!quiet || !this.player){
-			oRace = this._race;
-			oClass = this._class;
+			//oRace = this._race;
+			//oClass = this._class;
 			oRawAttributes = this.getRawAttributes();
 		}
 
+		// reset experience
 		this.experience = 0;
 
 		// changes to race/class can happen here
 
 		// create an anonymous status restoration function
-		let restore = this.getRestoreRelativeStatusFunc();
+		let restore = this.funRestoreRelativeStatus();
 
 		// changes our level -- changes everything
 		this.level++;
@@ -533,11 +536,11 @@ class Mob extends Movable{
 			let gain = diffAttributes[attribute] > 0;
 			let word = gain ? "increased" : "decreased";
 			msg += "\r\n" + _("Your %s has %s to {W%d{x ({%s%s%d{x).",
-								Attribute.display[attribute],
-								word,
-								nAttributes[attribute],
-								emphasis,
-								gain ? "+" : "", diffAttributes[attribute]);
+				Attribute.display[attribute],
+				word,
+				nAttributes[attribute],
+				emphasis,
+				gain ? "+" : "", diffAttributes[attribute]);
 		}
 
 		this.sendLine(msg);
@@ -548,43 +551,43 @@ class Mob extends Movable{
 
 		let slot = null;
 		switch(equipment.wearLoc){
-			case WearLocation.location.FINGER:
-				if(this.worn.FINGER_A == null) {
-					this.worn.FINGER_A = equipment;
-					slot = WearSlot.slot.FINGER_A;
-				} else if(this.worn.FINGER_B == null) {
-					this.worn.FINGER_B = equipment;
-					slot = WearSlot.slot.FINGER_B;
-				} else return false;
-				break;
+		case WearLocation.location.FINGER:
+			if(this.worn.FINGER_A == null) {
+				this.worn.FINGER_A = equipment;
+				slot = WearSlot.slot.FINGER_A;
+			} else if(this.worn.FINGER_B == null) {
+				this.worn.FINGER_B = equipment;
+				slot = WearSlot.slot.FINGER_B;
+			} else return false;
+			break;
 
-			case WearLocation.location.HOLD:
-				if(this.worn.HAND_OFF == null) {
-					this.worn.HAND_OFF = equipment;
-					slot = WearSlot.slot.HAND_OFF;
-				} else return false;
-				break;
+		case WearLocation.location.HOLD:
+			if(this.worn.HAND_OFF == null) {
+				this.worn.HAND_OFF = equipment;
+				slot = WearSlot.slot.HAND_OFF;
+			} else return false;
+			break;
 
-			case WearLocation.location.WEAPON:
-				if(this.worn.HAND_PRIMARY == null) {
-					this.worn.HAND_PRIMARY = equipment;
-					slot = WearSlot.slot.HAND_PRIMARY;
-				} else return false;
-				break;
+		case WearLocation.location.WEAPON:
+			if(this.worn.HAND_PRIMARY == null) {
+				this.worn.HAND_PRIMARY = equipment;
+				slot = WearSlot.slot.HAND_PRIMARY;
+			} else return false;
+			break;
 
-			case WearLocation.location.SHIELD:
-				if(this.worn.HAND_OFF == null){
-					this.worn.HAND_OFF = equipment;
-					slot = WearSlot.slot.HAND_OFF;
-				} else return false;
-				break;
+		case WearLocation.location.SHIELD:
+			if(this.worn.HAND_OFF == null){
+				this.worn.HAND_OFF = equipment;
+				slot = WearSlot.slot.HAND_OFF;
+			} else return false;
+			break;
 
-			default:
-				if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
-				if(this.worn[equipment.wearLoc] != null) return false;
-				this.worn[equipment.wearLoc] = equipment;
-				slot = equipment.wearLoc;
-				break;
+		default:
+			if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
+			if(this.worn[equipment.wearLoc] != null) return false;
+			this.worn[equipment.wearLoc] = equipment;
+			slot = equipment.wearLoc;
+			break;
 		}
 
 		equipment.worn = true;
@@ -596,43 +599,43 @@ class Mob extends Movable{
 
 		let slot = null;
 		switch(equipment.wearLoc){
-			case WearLocation.location.FINGER:
-				if(this.worn.FINGER_A == equipment) {
-					this.worn.FINGER_A = null;
-					slot = WearSlot.slot.FINGER_A;
-				} else if(this.worn.FINGER_B == equipment) {
-					this.worn.FINGER_B = null;
-					slot = WearSlot.slot.FINGER_B;
-				} else return false;
-				break;
+		case WearLocation.location.FINGER:
+			if(this.worn.FINGER_A == equipment) {
+				this.worn.FINGER_A = null;
+				slot = WearSlot.slot.FINGER_A;
+			} else if(this.worn.FINGER_B == equipment) {
+				this.worn.FINGER_B = null;
+				slot = WearSlot.slot.FINGER_B;
+			} else return false;
+			break;
 
-			case WearLocation.location.HOLD:
-				if(this.worn.HAND_OFF == equipment) {
-					this.worn.HAND_OFF = null;
-					slot = WearSlot.slot.HAND_OFF;
-				} else return false;
-				break;
+		case WearLocation.location.HOLD:
+			if(this.worn.HAND_OFF == equipment) {
+				this.worn.HAND_OFF = null;
+				slot = WearSlot.slot.HAND_OFF;
+			} else return false;
+			break;
 
-			case WearLocation.location.WEAPON:
-				if(this.worn.HAND_PRIMARY == equipment) {
-					this.worn.HAND_PRIMARY = null;
-					slot = WearSlot.slot.HAND_PRIMARY;
-				} else return false;
-				break;
+		case WearLocation.location.WEAPON:
+			if(this.worn.HAND_PRIMARY == equipment) {
+				this.worn.HAND_PRIMARY = null;
+				slot = WearSlot.slot.HAND_PRIMARY;
+			} else return false;
+			break;
 
-			case WearLocation.location.SHIELD:
-				if(this.worn.HAND_OFF == equipment){
-					this.worn.HAND_OFF = null;
-					slot = WearSlot.slot.HAND_OFF;
-				} else return false;
-				break;
+		case WearLocation.location.SHIELD:
+			if(this.worn.HAND_OFF == equipment){
+				this.worn.HAND_OFF = null;
+				slot = WearSlot.slot.HAND_OFF;
+			} else return false;
+			break;
 
-			default:
-				if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
-				if(this.worn[equipment.wearLoc] != equipment) return false;
-				this.worn[equipment.wearLoc] = null;
-				slot = equipment.wearLoc;
-				break;
+		default:
+			if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
+			if(this.worn[equipment.wearLoc] != equipment) return false;
+			this.worn[equipment.wearLoc] = null;
+			slot = equipment.wearLoc;
+			break;
 		}
 
 		equipment.worn = false;
@@ -679,7 +682,7 @@ class Mob extends Movable{
 		};
 	}
 
-	getRestoreRelativeStatusFunc(){
+	funRestoreRelativeStatus(){
 		// store our stat percentages
 		let healthP = this.health/this.maxHealth;
 		let energyP = this.energy/this.maxEnergy;
@@ -739,7 +742,7 @@ class Mob extends Movable{
 			Communicate.attack(this, target, CombatAction.PUNCH, damage);
 
 			// inflict damage
-			target.damage(this, damage)
+			target.damage(this, damage);
 
 		// on miss
 		} else {
@@ -779,7 +782,7 @@ class Mob extends Movable{
 		}
 	}
 
-	die(killer){
+	die(){
 		Communicate.act(
 			this,
 			{

@@ -16,7 +16,7 @@ function configureSocket(socket){
 		addMessage("Disconnected!", "debug");
 	});
 
-	socket.on('message', function (message, category, timestamp) {
+	socket.on("message", function (message, category, timestamp) {
 		addMessage(message, category, timestamp, true);
 	});
 

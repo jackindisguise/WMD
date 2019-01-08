@@ -1,7 +1,7 @@
 /**
  * Color codes for use in strings.
  */
-const ColorCode = module.exports = {
+const ColorCode = {
 	ESCAPE: "{",
 	CLEAR: "x",
 	CRIMSON: "R",
@@ -19,4 +19,6 @@ const ColorCode = module.exports = {
 	WHITE: "W",
 	SILVER: "w",
 	GREY: "D"
-}
+};
+
+module.exports = ColorCode;

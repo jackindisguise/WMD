@@ -128,18 +128,18 @@ class Map{
 
 	__JSONRead(key, value){
 		switch(key){
-			case "proportions":
-				this.setSize(value.width, value.height, value.levels);
-				this.generate();
-				break;
+		case "proportions":
+			this.setSize(value.width, value.height, value.levels);
+			this.generate();
+			break;
 
-			case "materials":
-			case "tiles":
-				break;
+		case "materials":
+		case "tiles":
+			break;
 
-			default:
-				super.__JSONRead(key, value);
-				break;
+		default:
+			super.__JSONRead(key, value);
+			break;
 		}
 	}
 }

@@ -1,6 +1,5 @@
 // local includes
 require("../../lib/Math");
-const _ = require("../../../i18n");
 const Movement = require("./Movement");
 const Direction = require("../Direction");
 

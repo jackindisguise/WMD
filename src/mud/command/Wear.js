@@ -25,19 +25,20 @@ class Wear extends Command{
 		}
 
 		let result = mob.equip(eq);
+		let slot;
 		if(!result) mob.sendLine(_("You can't wear that."));
 		else {
 			switch(result){
-				case WearSlot.slot.HAND_PRIMARY:
-				case WearSlot.slot.HAND_OFF:
-					let slot = WearSlot.display[result];
-					mob.sendLine(_("You put %s in your %s and wear it.", eq.display, slot));
-					break;
+			case WearSlot.slot.HAND_PRIMARY:
+			case WearSlot.slot.HAND_OFF:
+				slot = WearSlot.display[result];
+				mob.sendLine(_("You put %s in your %s and wear it.", eq.display, slot));
+				break;
 
-				default:
-					let slot = WearSlot.display[result];
-					mob.sendLine(_("You put %s on your %s and wear it.", eq.display, slot));
-					break;
+			default:
+				slot = WearSlot.display[result];
+				mob.sendLine(_("You put %s on your %s and wear it.", eq.display, slot));
+				break;
 			}
 		}
 	}

@@ -9,7 +9,7 @@ const CommandManager = require("../manager/CommandManager");
 const Command = require("../Command");
 
 class Commands extends Command{
-	exec(mob, message){
+	exec(mob){
 		let msg = util.format("- %s -", _("Commands")).padRight(80, "-");
 		let commands = CommandManager.commands;
 		let blockSize = 4;

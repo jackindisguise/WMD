@@ -25,27 +25,27 @@ function addMessage(message, category, timestamp, color){
 
 	// add color
 	if(color){
-		var color = 0;
+		var colors = 0;
 		message = message.replace(/{(.)/g, function(a, b){
 			switch(b){
-				case "R": color++; return "<font color='red'>";
-				case "r": color++; return "<font color='maroon'>";
-				case "G": color++; return "<font color='lime'>";
-				case "g": color++; return "<font color='green'>";
-				case "B": color++; return "<font color='blue'>";
-				case "b": color++; return "<font color='navy'>";
-				case "Y": color++; return "<font color='yellow'>";
-				case "y": color++; return "<font color='olive'>";
-				case "P": color++; return "<font color='pink'>";
-				case "p": color++; return "<font color='purple'>";
-				case "C": color++; return "<font color='cyan'>";
-				case "c": color++; return "<font color='teal'>";
-				case "W": color++; return "<font color='white'>";
-				case "w": color++; return "<font color='silver'>";
-				case "D": color++; return "<font color='grey'>";
-				case "x": var ocolor = color; color = 0; return "</font>".repeat(ocolor);
-				default:
-					return b;
+			case "R": colors++; return "<font color='red'>";
+			case "r": colors++; return "<font color='maroon'>";
+			case "G": colors++; return "<font color='lime'>";
+			case "g": colors++; return "<font color='green'>";
+			case "B": colors++; return "<font color='blue'>";
+			case "b": colors++; return "<font color='navy'>";
+			case "Y": colors++; return "<font color='yellow'>";
+			case "y": colors++; return "<font color='olive'>";
+			case "P": colors++; return "<font color='pink'>";
+			case "p": colors++; return "<font color='purple'>";
+			case "C": colors++; return "<font color='cyan'>";
+			case "c": colors++; return "<font color='teal'>";
+			case "W": colors++; return "<font color='white'>";
+			case "w": colors++; return "<font color='silver'>";
+			case "D": colors++; return "<font color='grey'>";
+			case "x": var ocolors = colors; colors = 0; return "</font>".repeat(ocolors);
+			default:
+				return b;
 			}
 		});
 	}

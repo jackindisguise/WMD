@@ -2,11 +2,11 @@
 const express = require("express");
 const cookie = require("cookie-parser");
 const path = require("path");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const session = require("express-session")({
 	secret: "kickEEwinTI",
-    resave: true,
-    saveUninitialized: true
+	resave: true,
+	saveUninitialized: true
 });
 
 // local includes
@@ -17,7 +17,7 @@ let app = express();
 app.use(session);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../../../www/public')));
+app.use(express.static(path.join(__dirname, "../../../www/public")));
 app.use(cookie());
 app.set("view engine", "pug");
 app.set("views", "./www/pug/page");
@@ -25,7 +25,7 @@ app.locals.pretty = true;
 
 // index page
 app.get("/", function(req, res) {
-	res.render('index', {_package:_package, session:req.session});
+	res.render("index", {_package:_package, session:req.session});
 });
 
 app.get("*", function(req,res){

@@ -1,6 +1,3 @@
-const util = require("util");
-const Logger = require("../../util/Logger");
-
 const delayPerRound = 3000;
 let combatants = [];
 let loopID = null;
@@ -27,7 +24,6 @@ class CombatManager{
 		loopID = null; // clear loop ID
 		let oCombatants = combatants;
 		combatants = [];
-		let done = [];
 		for(let combatant of oCombatants){
 			if(!combatant.fighting) continue; // no target
 			combatant.combatRound();
@@ -37,7 +33,7 @@ class CombatManager{
 
 	static run(){
 		let delay = CombatManager.timeTilNextRound();
-		loopID = setTimeout(CombatManager.round, delay)
+		loopID = setTimeout(CombatManager.round, delay);
 	}
 
 	static timeTilNextRound(){

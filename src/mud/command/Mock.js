@@ -3,7 +3,6 @@ const util = require("util");
 
 // local includes
 require("../../lib/Math");
-const _ = require("../../../i18n");
 const Command = require("../Command");
 const CommandSpecificity = require("../CommandSpecificity");
 

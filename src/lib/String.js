@@ -11,11 +11,11 @@ const ColorCode = require("../mud/ColorCode");
  */
 String.prototype.matchKeywords = function(match, sensitive=false){
 	if(!match) return false;
-	var words = (sensitive ? this : this.toLowerCase()).split(/\s+/);
-	var matchWords = (sensitive ? match : match.toLowerCase()).split(/\s+/);
-	for(var matchWord of matchWords){
-		var found = false;
-		for(var word of words){
+	let words = (sensitive ? this : this.toLowerCase()).split(/\s+/);
+	let matchWords = (sensitive ? match : match.toLowerCase()).split(/\s+/);
+	for(let matchWord of matchWords){
+		let found = false;
+		for(let word of words){
 			if(word.indexOf(matchWord) == 0) {
 				found = true;
 				break;
@@ -26,17 +26,17 @@ String.prototype.matchKeywords = function(match, sensitive=false){
 	}
 
 	return true;
-}
+};
 
 /**
  * Repeat a string.
  * @param {number} num
  */
 String.prototype.repeat = function(num){
-	var str = this;
-	for(var i=0;i<num-1;i++) str += this;
+	let str = this;
+	for(let i=0;i<num-1;i++) str += this;
 	return str;
-}
+};
 
 /**
  * Centers a string.
@@ -44,10 +44,10 @@ String.prototype.repeat = function(num){
  * @param {string} padder
  */
 String.prototype.center = function(size, padder=" "){
-	var pad = size - this.length + this.getColorSize();
+	let pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
 	if(pad == 1) return util.format("%s%s", this, padder);
-	var remainder = pad%2;
+	let remainder = pad%2;
 	pad -= remainder;
 	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s%s", padder.repeat(pad/2), this, padder.repeat((pad/2) + remainder));
@@ -59,7 +59,7 @@ String.prototype.center = function(size, padder=" "){
  * @param {string} padder
  */
 String.prototype.padLeft = function(size, padder=" "){
-	var pad = size - this.length + this.getColorSize();
+	let pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
 	if(pad == 1) return util.format("%s%s", padder, this);
 	pad = Math.floor(pad / padder.length);
@@ -72,7 +72,7 @@ String.prototype.padLeft = function(size, padder=" "){
  * @param {string} padder
  */
 String.prototype.padRight = function(size, padder=" "){
-	var pad = size - this.length + this.getColorSize();
+	let pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
 	if(pad == 1) return util.format("%s%s", this, padder);
 	pad = Math.floor(pad / padder.length);
@@ -80,35 +80,38 @@ String.prototype.padRight = function(size, padder=" "){
 };
 
 String.prototype.getColorSize = function(){
-	var size = 0;
-	var rule = new RegExp(`${ColorCode.ESCAPE}(.)`, "g");
-	var result;
-	while(result = rule.exec(this)){
+	let size = 0;
+	let rule = new RegExp(`${ColorCode.ESCAPE}(.)`, "g");
+	let result = rule.exec(this);
+	while(result){
 		switch(result[1]){
-			case ColorCode.CLEAR:
-			case ColorCode.CRIMSON:
-			case ColorCode.MAROON:
-			case ColorCode.LIME:
-			case ColorCode.DARK_GREEN:
-			case ColorCode.BLUE:
-			case ColorCode.NAVY:
-			case ColorCode.YELLOW:
-			case ColorCode.OLIVE:
-			case ColorCode.PINK:
-			case ColorCode.PURPLE:
-			case ColorCode.CYAN:
-			case ColorCode.TEAL:
-			case ColorCode.WHITE:
-			case ColorCode.SILVER:
-			case ColorCode.GREY:
-				size += 2;
-				break;
+		case ColorCode.CLEAR:
+		case ColorCode.CRIMSON:
+		case ColorCode.MAROON:
+		case ColorCode.LIME:
+		case ColorCode.DARK_GREEN:
+		case ColorCode.BLUE:
+		case ColorCode.NAVY:
+		case ColorCode.YELLOW:
+		case ColorCode.OLIVE:
+		case ColorCode.PINK:
+		case ColorCode.PURPLE:
+		case ColorCode.CYAN:
+		case ColorCode.TEAL:
+		case ColorCode.WHITE:
+		case ColorCode.SILVER:
+		case ColorCode.GREY:
+			size += 2;
+			break;
 
-			default:
-				size++;
-				break;
+		default:
+			size++;
+			break;
 		}
+
+		// find next result
+		result = rule.exec(this);
 	}
 
 	return size;
-}
+};

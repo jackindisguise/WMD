@@ -2,69 +2,69 @@
  * The basic classification system for races and classes.
  */
 class Classification{
-    getToNextLevelByLevel(level){
-        return this.toNextLevelBase + (this.toNextLevelPerLevel*Math.max(0,level-1));
-    }
+	getToNextLevelByLevel(level){
+		return this.toNextLevelBase + (this.toNextLevelPerLevel*Math.max(0,level-1));
+	}
 
-    getStrengthByLevel(level){
-        return this.strengthBase + (this.strengthPerLevel*Math.max(0,level-1));
-    }
+	getStrengthByLevel(level){
+		return this.strengthBase + (this.strengthPerLevel*Math.max(0,level-1));
+	}
 
-    getIntelligenceByLevel(level){
-        return this.intelligenceBase + (this.intelligencePerLevel*Math.max(0,level-1));
-    }
+	getIntelligenceByLevel(level){
+		return this.intelligenceBase + (this.intelligencePerLevel*Math.max(0,level-1));
+	}
 
-    getAgilityByLevel(level){
-        return this.agilityBase + (this.agilityPerLevel*Math.max(0,level-1));
-    }
+	getAgilityByLevel(level){
+		return this.agilityBase + (this.agilityPerLevel*Math.max(0,level-1));
+	}
 
-    getAttackPowerByLevel(level){
-        return this.attackPowerBase + (this.attackPowerPerLevel*Math.max(0,level-1));
-    }
+	getAttackPowerByLevel(level){
+		return this.attackPowerBase + (this.attackPowerPerLevel*Math.max(0,level-1));
+	}
 
-    getDefenseByLevel(level){
-        return this.defenseBase + (this.defensePerLevel*Math.max(0,level-1));
-    }
+	getDefenseByLevel(level){
+		return this.defenseBase + (this.defensePerLevel*Math.max(0,level-1));
+	}
 
-    getVitalityByLevel(level){
-        return this.vitalityBase + (this.vitalityPerLevel*Math.max(0,level-1));
-    }
+	getVitalityByLevel(level){
+		return this.vitalityBase + (this.vitalityPerLevel*Math.max(0,level-1));
+	}
 
-    getMagicPowerByLevel(level){
-        return this.magicPowerBase + (this.magicPowerPerLevel*Math.max(0,level-1));
-    }
+	getMagicPowerByLevel(level){
+		return this.magicPowerBase + (this.magicPowerPerLevel*Math.max(0,level-1));
+	}
 
-    getResilienceByLevel(level){
-        return this.resilienceBase + (this.resiliencePerLevel*Math.max(0,level-1));
-    }
+	getResilienceByLevel(level){
+		return this.resilienceBase + (this.resiliencePerLevel*Math.max(0,level-1));
+	}
 
-    getWisdomByLevel(level){
-        return this.wisdomBase + (this.wisdomPerLevel*Math.max(0,level-1));
-    }
+	getWisdomByLevel(level){
+		return this.wisdomBase + (this.wisdomPerLevel*Math.max(0,level-1));
+	}
 
-    getPrecisionByLevel(level){
-        return this.precisionBase + (this.precisionPerLevel*Math.max(0,level-1));
-    }
+	getPrecisionByLevel(level){
+		return this.precisionBase + (this.precisionPerLevel*Math.max(0,level-1));
+	}
 
-    getDeflectionByLevel(level){
-        return this.deflectionBase + (this.deflectionPerLevel*Math.max(0,level-1));
-    }
+	getDeflectionByLevel(level){
+		return this.deflectionBase + (this.deflectionPerLevel*Math.max(0,level-1));
+	}
 
-    getStaminaByLevel(level){
-        return this.staminaBase + (this.staminaPerLevel*Math.max(0,level-1));
-    }
+	getStaminaByLevel(level){
+		return this.staminaBase + (this.staminaPerLevel*Math.max(0,level-1));
+	}
 
-    getHealthByLevel(level){
-        return this.healthBase + (this.healthPerLevel*Math.max(0,level-1));
-    }
+	getHealthByLevel(level){
+		return this.healthBase + (this.healthPerLevel*Math.max(0,level-1));
+	}
 
-    getManaByLevel(level){
-        return this.manaBase + (this.manaPerLevel*Math.max(0,level-1));
-    }
+	getManaByLevel(level){
+		return this.manaBase + (this.manaPerLevel*Math.max(0,level-1));
+	}
 
-    getEnergyByLevel(level){
-        return this.energyBase + (this.energyPerLevel*Math.max(0,level-1));
-    }
+	getEnergyByLevel(level){
+		return this.energyBase + (this.energyPerLevel*Math.max(0,level-1));
+	}
 }
 
 /**

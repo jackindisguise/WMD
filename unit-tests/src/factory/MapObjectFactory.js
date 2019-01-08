@@ -4,7 +4,6 @@ var expect = require("chai").expect;
 // local includes
 var TemplateManager = require("../../../src/mud/manager/TemplateManager");
 var ModelManager = require("../../../src/mud/manager/ModelManager");
-var MapObjectFactory = require("../../../src/mud/factory/MapObjectFactory");
 
 describe("[OBJECTFACTORY]", function(){
 	it("create a MapObject from a Template", function(done){
@@ -18,6 +17,7 @@ describe("[OBJECTFACTORY]", function(){
 	it("Model test", function(done){
 		var model = ModelManager.getModelByName("Mob.RockThrower");
 		var instance = model.spawn();
+		expect(instance).is.not.equal(null);
 		done();
 	});
 });	

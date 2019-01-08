@@ -56,7 +56,7 @@ class Player extends EventEmitter {
 			omob.player = null;
 		}
 
-//		if(mob && mob instanceof Mob){
+		//		if(mob && mob instanceof Mob){
 		if(mob){
 			this._mob = mob;
 			mob.player = this;
@@ -137,7 +137,7 @@ class Player extends EventEmitter {
 
 	leaveChannel(channel){
 		let pos = this._channels.indexOf(channel);
-		if(pos == -1) return // not in channel
+		if(pos == -1) return; // not in channel
 		this._channels.splice(pos, 1);
 		channel.remove(this);
 	}
@@ -170,7 +170,7 @@ class Player extends EventEmitter {
 	 * Runs after a client is disconnected from this Player.
 	 * @param {Client} client Client disconnected from.
 	 */
-	leave(client){
+	leave(){
 	}
 
 	/**

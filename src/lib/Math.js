@@ -10,8 +10,8 @@
  * `1` being equivalent to `max`, and `0.5` being equivalent to `(min+max)/2`.
  */
 Math.lerp = function(min,max,mod){
-    return min + (max-min)*mod;
-}
+	return min + (max-min)*mod;
+};
 
 /**
  * Generate a random integer in a range.
@@ -20,8 +20,8 @@ Math.lerp = function(min,max,mod){
  * @return A random integer between `min` and `max`.
  */
 Math.rangeInt = function(min,max){
-    return Math.floor(Math.lerp(min,max+1,Math.random()));
-}
+	return Math.floor(Math.lerp(min,max+1,Math.random()));
+};
 
 /*
  * Math.probability(p) results over 1,000,000 rolls for each value of p.
@@ -42,10 +42,10 @@ Math.rangeInt = function(min,max){
  * @return {boolean} `true` on success. `false` otherwise.
  */
 Math.probability = function(p){
-    if(p===0) return false;
-    if(p===1) return true;
-    return Math.random() < p;
-}
+	if(p===0) return false;
+	if(p===1) return true;
+	return Math.random() < p;
+};
 
 /**
  * Simulates a dice roll of `die` die with `sides` sides.
@@ -55,8 +55,8 @@ Math.probability = function(p){
  * @return {?Number} A number in the range of `die` to `sides*die`.
  */
 Math.roll = function(die,sides,mod){
-    return Math.rangeInt(die,sides*die)+mod;
-}
+	return Math.rangeInt(die,sides*die)+mod;
+};
 
 /**
  * Simulates a dice roll using a dice notation.<br/>
@@ -65,7 +65,7 @@ Math.roll = function(die,sides,mod){
  * @return {?Number} The results of a dice roll using the given string.
  */
 Math.rollString = function(string){
-    var result = string.match(/(\d+)d(\d+)(?:([\-\+])(\d+))?/);
-    if(!result) return null;
-    return Math.roll(Number(result[1]),Number(result[2]),(result[3] === "-") ? 0-Number(result[4]) : Number(result[4]));
-}
+	var result = string.match(/(\d+)d(\d+)(?:([-+])(\d+))?/);
+	if(!result) return null;
+	return Math.roll(Number(result[1]),Number(result[2]),(result[3] === "-") ? 0-Number(result[4]) : Number(result[4]));
+};

@@ -4,7 +4,7 @@ const Command = require("../Command");
 const CommandSpecificity = require("../CommandSpecificity");
 
 class Whisper extends Command{
-	exec(mob, message){
+	exec(mob){
 		mob.sendLine(_("What do you want to whisper to whom?"));
 	}
 }

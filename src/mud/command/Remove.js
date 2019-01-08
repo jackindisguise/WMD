@@ -8,7 +8,8 @@ const WearSlot = require("../WearSlot");
 class Remove extends Command{
 	exec(mob, keywords){
 		let worn = [];
-		for(let slot in mob.worn) if(mob.worn[slot]) worn.push(mob.worn[slot]);
+		let slot;
+		for(slot in mob.worn) if(mob.worn[slot]) worn.push(mob.worn[slot]);
 		let obj = worn.search(keywords);
 		if(!obj){
 			mob.sendLine(_("You aren't wearing anything like that."));
@@ -19,16 +20,16 @@ class Remove extends Command{
 		if(!result) mob.sendLine(_("You can't take that off."));
 		else {
 			switch(result){
-				case WearSlot.slot.HAND_PRIMARY:
-				case WearSlot.slot.HAND_OFF:
-					let slot = WearSlot.display[result];
-					mob.sendLine(_("You take %s out of your %s and remove it.", obj.display, slot));
-					break;
+			case WearSlot.slot.HAND_PRIMARY:
+			case WearSlot.slot.HAND_OFF:
+				slot = WearSlot.display[result];
+				mob.sendLine(_("You take %s out of your %s and remove it.", obj.display, slot));
+				break;
 
-				default:
-					let slot = WearSlot.display[result];
-					mob.sendLine(_("You take %s off of your %s and remove it.", obj.display, slot));
-					break;
+			default:
+				slot = WearSlot.display[result];
+				mob.sendLine(_("You take %s off of your %s and remove it.", obj.display, slot));
+				break;
 			}
 		}
 	}

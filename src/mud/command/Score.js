@@ -1,6 +1,3 @@
-// node includes
-const util = require("util");
-
 // local includes
 require("../../lib/Math");
 const _ = require("../../../i18n");
@@ -14,9 +11,9 @@ class Score extends Command{
 		msg += "\r\n" + _("%s the %s %s.", mob.name, mob.race.display, mob.class.display);
 		msg += "\r\n" + _("You're level {W%d{x, with {B%d{x experience until the next level.", mob.level, mob.tnl);
 		msg += "\r\n" + _("You have: {R%d/%d{x health, {G%d/%d{x energy, and {C%d/%d{x mana.",
-							mob.health, attributes.HEALTH,
-							mob.energy, attributes.ENERGY,
-							mob.mana, attributes.MANA);
+			mob.health, attributes.HEALTH,
+			mob.energy, attributes.ENERGY,
+			mob.mana, attributes.MANA);
 		msg += "\r\n" + _("          {R%d{x strength, granting {R%d{x attack power, defense, and vitality.", attributes.STRENGTH, attributes.STRENGTH);
 		msg += "\r\n" + _("             {R%d{x attack power, granting {R%d{x physical damage.", attributes.ATTACK_POWER, attributes.ATTACK_POWER);
 		msg += "\r\n" + _("             {R%d{x defense, granting {R%f{x physical damage mitigation.", attributes.DEFENSE, attributes.DEFENSE*0.5);

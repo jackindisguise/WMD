@@ -26,7 +26,7 @@ const constructorNames = {
 	"Shield": Shield,
 	"Weapon": Weapon,
 	"Tile": Tile
-}
+};
 
 /**
  * Handles creation of MapObjects from JSON.

@@ -11,18 +11,18 @@ const Tile = require("./Tile");
  */
 class Movable extends MapObject{
 	get x(){
-		if(this.loc instanceof Tile)
-			return this.loc.x;
+		if(this.loc instanceof Tile) return this.loc.x;
+		return null;
 	}
 
 	get y(){
-		if(this.loc instanceof Tile)
-			return this.loc.y;
+		if(this.loc instanceof Tile) return this.loc.y;
+		return null;
 	}
 
 	get z(){
-		if(this.loc instanceof Tile)
-			return this.loc.z;
+		if(this.loc instanceof Tile) return this.loc.z;
+		return null;
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Movable extends MapObject{
 	}
 
 	toString(){
-		return util.format("{Movable<%d,%d,%d>}", this.x, this.y, this.z)
+		return util.format("{Movable<%d,%d,%d>}", this.x, this.y, this.z);
 	}
 
 	/**
