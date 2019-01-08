@@ -16,7 +16,7 @@ String.prototype.matchKeywords = function(match, sensitive=false){
 	for(let matchWord of matchWords){
 		let found = false;
 		for(let word of words){
-			if(word.indexOf(matchWord) == 0) {
+			if(word.indexOf(matchWord) === 0) {
 				found = true;
 				break;
 			}
@@ -46,7 +46,7 @@ String.prototype.repeat = function(num){
 String.prototype.center = function(size, padder=" "){
 	let pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
-	if(pad == 1) return util.format("%s%s", this, padder);
+	if(pad === 1) return util.format("%s%s", this, padder);
 	let remainder = pad%2;
 	pad -= remainder;
 	pad = Math.floor(pad / padder.length);
@@ -61,7 +61,7 @@ String.prototype.center = function(size, padder=" "){
 String.prototype.padLeft = function(size, padder=" "){
 	let pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
-	if(pad == 1) return util.format("%s%s", padder, this);
+	if(pad === 1) return util.format("%s%s", padder, this);
 	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s", padder.repeat(pad), this);
 };
@@ -74,7 +74,7 @@ String.prototype.padLeft = function(size, padder=" "){
 String.prototype.padRight = function(size, padder=" "){
 	let pad = size - this.length + this.getColorSize();
 	if(pad < 1) return this;
-	if(pad == 1) return util.format("%s%s", this, padder);
+	if(pad === 1) return util.format("%s%s", this, padder);
 	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s", this, padder.repeat(pad));
 };

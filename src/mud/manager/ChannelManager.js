@@ -6,13 +6,13 @@ class ChannelManager{
 	}
 
 	static add(channel){
-		if(channels.indexOf(channel) != -1) return;
+		if(channels.indexOf(channel) !== -1) return;
 		channels.push(channel);
 	}
 
 	static remove(channel){
 		let pos = channels.indexOf(channel);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		channels.splice(pos, 1);
 	}
 

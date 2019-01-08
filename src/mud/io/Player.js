@@ -130,14 +130,14 @@ class Player extends EventEmitter {
 	}
 
 	joinChannel(channel){
-		if(this._channels.indexOf(channel) != -1) return; // already in channel
+		if(this._channels.indexOf(channel) !== -1) return; // already in channel
 		this._channels.push(channel);
 		channel.add(this);
 	}
 
 	leaveChannel(channel){
 		let pos = this._channels.indexOf(channel);
-		if(pos == -1) return; // not in channel
+		if(pos === -1) return; // not in channel
 		this._channels.splice(pos, 1);
 		channel.remove(this);
 	}

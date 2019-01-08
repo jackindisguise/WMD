@@ -86,7 +86,7 @@ class Map{
 	 * @param {MapObject} mapobject MapObject to add.
 	 */
 	add(mapobject){
-		if(this._objects.indexOf(mapobject) != -1) return; // already in objects
+		if(this._objects.indexOf(mapobject) !== -1) return; // already in objects
 		this._objects.push(mapobject);
 	}
 
@@ -96,7 +96,7 @@ class Map{
 	 */
 	remove(mapobject){
 		let pos = this._objects.indexOf(mapobject);
-		if(pos == -1) return; // not in objects
+		if(pos === -1) return; // not in objects
 		this._objects.splice(pos, 1);
 	}
 

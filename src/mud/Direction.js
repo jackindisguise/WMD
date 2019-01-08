@@ -70,31 +70,31 @@ class Direction{
 
 	static flag2name(flag){
 		for(var name of flag){
-			if(flag[name] == flag) return name;
+			if(flag[name] === flag) return name;
 		}
 	}
 
 	static flag2long(flag){
 		for(var name of flag){
-			if(flag[name] == flag) return long[name];
+			if(flag[name] === flag) return long[name];
 		}
 	}
 
 	static flag2short(flag){
 		for(var name of flag){
-			if(flag[name] == flag) return short[name];
+			if(flag[name] === flag) return short[name];
 		}
 	}
 
 	static short2flag(short){
 		for(var name of short){
-			if(short[name] == short) return flag[name];
+			if(short[name] === short) return flag[name];
 		}
 	}
 
 	static long2flag(long){
 		for(var name of long){
-			if(long[name] == long) return flag[name];
+			if(long[name] === long) return flag[name];
 		}
 	}
 }

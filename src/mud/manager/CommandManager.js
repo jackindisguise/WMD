@@ -5,13 +5,13 @@ class CommandManager{
 		return commands;
 	}
 	static add(command){
-		if(commands.indexOf(command) != -1) return;
+		if(commands.indexOf(command) !== -1) return;
 		commands.push(command);
 	}
 
 	static remove(command){
 		let pos = commands.indexOf(command);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		commands.splice(pos, 1);
 	}
 

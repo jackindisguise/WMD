@@ -2,13 +2,13 @@ let maps = [];
 
 class MapManager{
 	static add(map){
-		if(maps.indexOf(map) != -1) return;
+		if(maps.indexOf(map) !== -1) return;
 		maps.push(map);
 	}
 
 	static remove(map){
 		let pos = maps.indexOf(map);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		maps.splice(pos, 1);
 	}
 

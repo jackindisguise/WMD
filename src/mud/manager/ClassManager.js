@@ -8,13 +8,13 @@ class ClassManager{
 	}
 
 	static add(_class){
-		if(classes.indexOf(_class) != -1) return;
+		if(classes.indexOf(_class) !== -1) return;
 		classes.push(_class);
 	}
 
 	static remove(_class){
 		let pos = classes.indexOf(_class);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		classes.splice(pos, 1);
 	}
 

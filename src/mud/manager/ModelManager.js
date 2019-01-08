@@ -6,13 +6,13 @@ class ModelManager{
 	}
 
 	static add(model){
-		if(models.indexOf(model) != -1) return;
+		if(models.indexOf(model) !== -1) return;
 		models.push(model);
 	}
 
 	static remove(model){
 		let pos = models.indexOf(model);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		models.splice(pos, 1);
 	}
 

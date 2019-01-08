@@ -8,13 +8,13 @@ class RaceManager{
 	}
 
 	static add(race){
-		if(races.indexOf(race) != -1) return;
+		if(races.indexOf(race) !== -1) return;
 		races.push(race);
 	}
 
 	static remove(race){
 		let pos = races.indexOf(race);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		races.splice(pos, 1);
 	}
 

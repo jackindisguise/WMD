@@ -17,9 +17,9 @@ class Commands extends Command{
 		let line = "";
 		for(let i=0;i<block;i++){
 			let command = commands[i];
-			line += util.format("%s %s %s", "|", (command ? (command.error ? "!" : "") + command.plain : "").padRight(16), (i%blockSize) == blockSize-1 ? "|" : " ");
+			line += util.format("%s %s %s", "|", (command ? (command.error ? "!" : "") + command.plain : "").padRight(16), (i%blockSize) === blockSize-1 ? "|" : " ");
 
-			if(((i+1)%4) == 0){
+			if(((i+1)%4) === 0){
 				msg += "\r\n"+line;
 				line = "";
 			}

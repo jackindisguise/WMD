@@ -384,15 +384,15 @@ class Mob extends Movable{
 		case "race": json.race = value.name; break;
 		case "class": json.class = value.name; break;
 		case "health":
-			if(value == this.maxHealth) break;
+			if(value === this.maxHealth) break;
 			json.health = value;
 			break;
 		case "energy":
-			if(value == this.maxEnergy) break;
+			if(value === this.maxEnergy) break;
 			json.energy = value;
 			break;
 		case "mana":
-			if(value == this.maxMana) break;
+			if(value === this.maxMana) break;
 			json.mana = value;
 			break;
 		case "wearLocation": break;
@@ -526,7 +526,7 @@ class Mob extends Movable{
 		let nAttributes = this.getAttributes();
 		let diffAttributes = {};
 		for(let attribute in oRawAttributes){
-			if(nRawAttributes[attribute] == oRawAttributes[attribute]) continue;
+			if(nRawAttributes[attribute] === oRawAttributes[attribute]) continue;
 			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
 		}
 
@@ -600,31 +600,31 @@ class Mob extends Movable{
 		let slot = null;
 		switch(equipment.wearLoc){
 		case WearLocation.location.FINGER:
-			if(this.worn.FINGER_A == equipment) {
+			if(this.worn.FINGER_A === equipment) {
 				this.worn.FINGER_A = null;
 				slot = WearSlot.slot.FINGER_A;
-			} else if(this.worn.FINGER_B == equipment) {
+			} else if(this.worn.FINGER_B === equipment) {
 				this.worn.FINGER_B = null;
 				slot = WearSlot.slot.FINGER_B;
 			} else return false;
 			break;
 
 		case WearLocation.location.HOLD:
-			if(this.worn.HAND_OFF == equipment) {
+			if(this.worn.HAND_OFF === equipment) {
 				this.worn.HAND_OFF = null;
 				slot = WearSlot.slot.HAND_OFF;
 			} else return false;
 			break;
 
 		case WearLocation.location.WEAPON:
-			if(this.worn.HAND_PRIMARY == equipment) {
+			if(this.worn.HAND_PRIMARY === equipment) {
 				this.worn.HAND_PRIMARY = null;
 				slot = WearSlot.slot.HAND_PRIMARY;
 			} else return false;
 			break;
 
 		case WearLocation.location.SHIELD:
-			if(this.worn.HAND_OFF == equipment){
+			if(this.worn.HAND_OFF === equipment){
 				this.worn.HAND_OFF = null;
 				slot = WearSlot.slot.HAND_OFF;
 			} else return false;
@@ -632,7 +632,7 @@ class Mob extends Movable{
 
 		default:
 			if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
-			if(this.worn[equipment.wearLoc] != equipment) return false;
+			if(this.worn[equipment.wearLoc] !== equipment) return false;
 			this.worn[equipment.wearLoc] = null;
 			slot = equipment.wearLoc;
 			break;
@@ -720,8 +720,8 @@ class Mob extends Movable{
 			return;
 		}
 
-		if(this.fighting.loc != this.loc) {
-			if(this.fighting.fighting == this) this.fighting.disengage();
+		if(this.fighting.loc !== this.loc) {
+			if(this.fighting.fighting === this) this.fighting.disengage();
 			this.disengage();
 			return;
 		}

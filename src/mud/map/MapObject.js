@@ -70,7 +70,7 @@ class MapObject{
 	// if mapobject A is in mapobject B's contents, mapobject A's loc must be mapobject B.
 	set loc(loc){
 		// do nothing, already here
-		if(this._loc == loc) return;
+		if(this._loc === loc) return;
 
 		// preserve old loc
 		let oloc;
@@ -196,9 +196,9 @@ class MapObject{
 	 * @param {MapObject} mapobject Object to add.
 	 */
 	add(mapobject){
-		if(this._contents.indexOf(mapobject) >= 0) return; // already in contents
+		if(this._contents.indexOf(mapobject) !== -1) return; // already in contents
 		this._contents.push(mapobject);
-		if(mapobject.loc != this) mapobject.loc = this; // cyclical reference
+		if(mapobject.loc !== this) mapobject.loc = this; // cyclical reference
 	}
 
 	/**
@@ -207,9 +207,9 @@ class MapObject{
 	 */
 	remove(mapobject){
 		let pos = this._contents.indexOf(mapobject);
-		if(pos == -1) return; // not in contents
+		if(pos === -1) return; // not in contents
 		this._contents.splice(pos, 1);
-		if(mapobject.loc == this) mapobject.loc = null; // cyclical dereference
+		if(mapobject.loc === this) mapobject.loc = null; // cyclical dereference
 	}
 
 	__createClone(){

@@ -6,13 +6,13 @@ class PlayerManager{
 	}
 
 	static add(player){
-		if(players.indexOf(player) != -1) return;
+		if(players.indexOf(player) !== -1) return;
 		players.push(player);
 	}
 
 	static remove(player){
 		let pos = players.indexOf(player);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		players.splice(pos, 1);
 	}
 

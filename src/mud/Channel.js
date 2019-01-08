@@ -36,8 +36,8 @@ class Channel extends EventEmitter{
 
 			// process string
 			let processed;
-			if(listener == speaker) processed = Channel.transmitFieldCodeReplace(this.format.firstPerson, speaker, fields);
-			else if(listener == fields.directObject) processed = Channel.transmitFieldCodeReplace(this.format.secondPerson, speaker, fields);
+			if(listener === speaker) processed = Channel.transmitFieldCodeReplace(this.format.firstPerson, speaker, fields);
+			else if(listener === fields.directObject) processed = Channel.transmitFieldCodeReplace(this.format.secondPerson, speaker, fields);
 			else processed = Channel.transmitFieldCodeReplace(this.format.thirdPerson, speaker, fields);
 
 			// send message
@@ -46,20 +46,20 @@ class Channel extends EventEmitter{
 	}
 
 	add(player){
-		if(this._participants.indexOf(player) != -1) return; // already participating
+		if(this._participants.indexOf(player) !== -1) return; // already participating
 		this._participants.push(player);
 		player.joinChannel(this);
 	}
 
 	remove(player){
 		let pos = this._participants.indexOf(player);
-		if(pos == -1) return; // already not participating
+		if(pos === -1) return; // already not participating
 		this._participants.splice(pos, 1);
 		player.leaveChannel(this);
 	}
 
 	isParticipating(player){
-		return this._participants.indexOf(player) != -1;
+		return this._participants.indexOf(player) !== -1;
 	}
 
 	/**
@@ -82,8 +82,8 @@ class Channel extends EventEmitter{
 	}
 
 	static filterSpeakerTargetOnly(speaker, listener, fields){
-		if(listener == speaker) return true;
-		if(listener == fields.directObject) return true;
+		if(listener === speaker) return true;
+		if(listener === fields.directObject) return true;
 		return false;
 	}
 }

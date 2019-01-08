@@ -19,15 +19,15 @@ class Communicate{
      * @param {MessageCategory} category
      */
 	static act(actor, format, targets, fields, filter, category=MessageCategory.ACTION){
-		if(targets.indexOf(actor) == -1) targets.push(actor);
+		if(targets.indexOf(actor) === -1) targets.push(actor);
 		for(let target of targets){
 			// target filtered out
 			if(filter && !filter(actor, fields, target)) continue;
 
 			// process string
 			let processed;
-			if(target == actor) processed = Communicate.actFieldCodeReplace(format.firstPerson, actor, fields);
-			else if(fields && target == fields.directObject) processed = Communicate.actFieldCodeReplace(format.secondPerson, actor, fields);
+			if(target === actor) processed = Communicate.actFieldCodeReplace(format.firstPerson, actor, fields);
+			else if(fields && target === fields.directObject) processed = Communicate.actFieldCodeReplace(format.secondPerson, actor, fields);
 			else processed = Communicate.actFieldCodeReplace(format.thirdPerson, actor, fields);
 
 			// send message
@@ -74,7 +74,7 @@ class Communicate{
      * @param {Object} fields
      */
 	static filterActorVictimOnly(actor, target, fields){
-		return target == actor ? true : target == fields.directObject ? true : false;
+		return target === actor ? true : target === fields.directObject ? true : false;
 	}
 }
 

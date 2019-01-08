@@ -8,7 +8,7 @@ class CombatManager{
 	}
 
 	static add(mob){
-		if(combatants.indexOf(mob) >= 0) return;
+		if(combatants.indexOf(mob) !== -1) return;
 		combatants.push(mob);
 		combatants.sort(function(a,b){ return b.agility - a.agility; });
 		if(loopID==null) CombatManager.run();
@@ -16,7 +16,7 @@ class CombatManager{
 
 	static remove(mob){
 		let pos = combatants.indexOf(mob);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		combatants.splice(pos, 1);
 	}
 

@@ -6,13 +6,13 @@ class TemplateManager{
 	}
 
 	static add(template){
-		if(templates.indexOf(template) != -1) return;
+		if(templates.indexOf(template) !== -1) return;
 		templates.push(template);
 	}
 
 	static remove(template){
 		let pos = templates.indexOf(template);
-		if(pos == -1) return;
+		if(pos === -1) return;
 		templates.splice(pos, 1);
 	}
 
