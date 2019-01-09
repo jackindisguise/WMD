@@ -1,5 +1,5 @@
 {
-  "name": "mudengine",
+  "name": "wmd-mud",
   "version": "0.4.0",
   "description": "A simple MUD engine.",
   "main": "index.js",
