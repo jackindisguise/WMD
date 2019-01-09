@@ -8,5 +8,8 @@
     "agilityBase":6,
     "agilityPerLevel": 0.5,
     "intelligenceBase":6,
-    "intelligencePerLevel": 0.25
+	"intelligencePerLevel": 0.25,
+	"abilities":[
+		{"ability":"maniac", "level":9}
+	]
 }

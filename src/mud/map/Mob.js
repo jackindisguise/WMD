@@ -760,6 +760,22 @@ class Mob extends Movable{
 		}
 
 		this.hit(this.fighting);
+
+		if(this.fighting){
+			if(this.hasAbilityByName("maniac")){
+				if(Math.probability(0.50)) {
+					Communicate.act(
+						this,
+						{
+							firstPerson: "{RYou begin screaming like a maniac and attack again.{x",
+							thirdPerson: "{R$n begins screaming like a maniac and attacks again.{x"
+						},
+						this.loc.contents
+					);
+					this.combatRound();
+				}
+			}
+		}
 	}
 
 	hit(target){
