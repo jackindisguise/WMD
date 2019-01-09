@@ -44,7 +44,7 @@ describe("[MOB]", function(){
 			expect(mob.attackPower).is.equal(5);
 			expect(mob.defense).is.equal(5);
 			expect(mob.vitality).is.equal(5);
-			expect(mob.maxHealth).is.equal(30);
+			expect(mob.maxHealth).is.equal(40);
 			done();
 		});
 
