@@ -85,6 +85,8 @@ Classification.prototype.display = "unknown";
  */
 Classification.prototype.keywords = "unknown";
 
+Classification.prototype.abilities = null;
+
 /**
  * A simple description for this classification.
  * @type {string}

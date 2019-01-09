@@ -334,6 +334,27 @@ class Mob extends Movable{
 		return this.toNextLevel;
 	}
 
+	get abilities(){
+		let abilities = [];
+		if(this.race.abilities){
+			for(let learn of this.race.abilities){
+				if(learn.level > this.level) continue;
+				if(abilities.indexOf(learn.ability) !== -1) continue;
+				abilities.push(learn.ability);
+			}
+		}
+
+		if(this.class.abilities){
+			for(let learn of this.class.abilities){
+				if(learn.level > this.level) continue;
+				if(abilities.indexOf(learn.ability) !== -1) continue;
+				abilities.push(learn.ability);
+			}
+		}
+
+		return abilities;
+	}
+
 	get player(){
 		return this._player;
 	}
@@ -497,11 +518,12 @@ class Mob extends Movable{
 
 	levelup(quiet){
 		//let oRace, oClass, oRawAttributes;
-		let oRawAttributes;
+		let oRawAttributes, oAbilities;
 		if(!quiet || !this.player){
 			//oRace = this._race;
 			//oClass = this._class;
 			oRawAttributes = this.getRawAttributes();
+			oAbilities = this.abilities;
 		}
 
 		// reset experience
@@ -524,6 +546,7 @@ class Mob extends Movable{
 		// create levelup message
 		let nRawAttributes = this.getRawAttributes();
 		let nAttributes = this.getAttributes();
+		let nAbilities = this.abilities;
 		let diffAttributes = {};
 		for(let attribute in oRawAttributes){
 			if(nRawAttributes[attribute] === oRawAttributes[attribute]) continue;
@@ -541,6 +564,16 @@ class Mob extends Movable{
 				nAttributes[attribute],
 				emphasis,
 				gain ? "+" : "", diffAttributes[attribute]);
+		}
+
+		for(let oAbility of oAbilities) {
+			if(nAbilities.indexOf(oAbility) !== -1) continue; // still know ability
+			msg += "\r\n" + _("You {Rforgot{x an ability: {R%s{x", oAbility.display);
+		}
+
+		for(let nAbility of nAbilities) {
+			if(oAbilities.indexOf(nAbility) !== -1) continue; // knew this ability before
+			msg += "\r\n" + _("You {Glearned{x a new ability: {G%s{x", nAbility.display);
 		}
 
 		this.sendLine(msg);
@@ -801,6 +834,15 @@ class Mob extends Movable{
 		let experience = victim.level*100;
 		this.sendLine(_("{CYou gain {W%d{C experience.{x", experience));
 		this.gainExperience(experience);
+	}
+
+	hasAbilityByName(name){
+		let abilities = this.abilities;
+		for(var ability of abilities){
+			if(ability.name === name) return true;
+		}
+
+		return false;
 	}
 }
 

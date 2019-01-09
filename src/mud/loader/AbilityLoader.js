@@ -4,7 +4,7 @@ const fs = require("fs");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
-const CommandManager = require("../manager/CommandManager");
+const AbilityManager = require("../manager/AbilityManager");
 
 // deep file search
 function deepSearch(directory, fileFun, callback){
@@ -20,20 +20,15 @@ function deepSearch(directory, fileFun, callback){
 	});
 }
 
-// command loader
+// ability loader
 module.exports = function(callback){
-	Logger.info(_("> Loading commands..."));
-	deepSearch("./src/mud/command", function(file, next){
-		let f = file.slice("./src/mud/command".length); // cut off relative path from root
-		let constructor = require("../../../src/mud/command/"+f);
-		let command = new constructor();
-		if(command.rule) {
-			CommandManager.add(command);
-			Logger.info(_(">> Loaded command '%s'", command.plain));
-		}
+	Logger.info(_("> Loading abilities..."));
+	deepSearch("./src/mud/ability", function(file, next){
+		let f = file.slice("./src/mud/ability".length); // cut off relative path from root
+		let constructor = require("../../../src/mud/ability/"+f);
+		let ability = new constructor();
+		AbilityManager.add(ability);
+		Logger.info(_(">> Loaded ability '%s'", ability.name));
 		next();
-	}, function(){
-		CommandManager.sortCommandsBySpecificity();
-		callback();
-	});
+	}, callback);
 };

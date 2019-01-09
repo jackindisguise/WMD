@@ -5,6 +5,7 @@ const fs = require("fs");
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
 const ClassManager = require("../manager/ClassManager");
+const AbilityManager = require("../manager/AbilityManager");
 const Class = require("../Class");
 
 // deep file search
@@ -29,6 +30,23 @@ module.exports = function(callback){
 		Logger.info(_(">> Loading class <%s> '%s'", json.name, json.display));
 		let cLass = new Class();
 		cLass.__fromJSON(json);
+
+		// process abilities
+		if(json.abilities){
+			for(let i=0;i<json.abilities.length;i++){
+				let learn = json.abilities[i];
+				let ability = AbilityManager.getAbilityByName(learn.ability);
+				if(!ability){
+					Logger.error(_("BAD ABILITY NAME FOR CLASS '%s': '%s'", cLass.name, learn.ability));
+					json.abilities.splice(i, 1);
+					i--;
+					continue;
+				}
+
+				learn.ability = ability;
+			}
+		}
+
 		ClassManager.add(cLass);
 		next();
 	}, callback);

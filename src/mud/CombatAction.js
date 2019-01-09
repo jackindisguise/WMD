@@ -7,6 +7,11 @@ const CombatActions = {
 	SLASH:{
 		firstPerson: "slash",
 		thirdPerson: "slashes"
+	},
+
+	CIRCLE:{
+		firstPerson: "circle",
+		thirdPerson: "circles"
 	}
 };
 

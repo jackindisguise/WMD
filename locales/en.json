@@ -95,5 +95,9 @@
 	"          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.": "          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.",
 	"You'll have to join the channel first.": "You'll have to join the channel first.",
 	"> Loading maps...": "> Loading maps...",
-	">> Loading map '%s'": ">> Loading map '%s'"
+	">> Loading map '%s'": ">> Loading map '%s'",
+	"> Loading abilities...": "> Loading abilities...",
+	">> Loaded ability '%s'": ">> Loaded ability '%s'",
+	"You {Glearned{x a new ability: {G%s{x": "You {Glearned{x a new ability: {G%s{x",
+	"BAD ABILITY NAME FOR CLASS '%s': '%s'": "BAD ABILITY NAME FOR CLASS '%s': '%s'"
 }

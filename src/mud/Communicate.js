@@ -48,6 +48,19 @@ class Communicate{
 		);
 	}
 
+	static ability(attacker, target, ability, damage){
+		Communicate.act(
+			attacker,
+			{
+				firstPerson: util.format("Your %s hits $N for {R%d{x damage. [{Y%d/%d{x]", ability, damage, target.health-damage, target.maxHealth),
+				secondPerson: util.format("$n's %s hits you for {R%d{x damage. [{R%d/%d{x]", ability, damage, target.health-damage, target.maxHealth),
+				thirdPerson: util.format("$n's %s hits $N for {R%d{x damage. [{P%d/%d{x]", ability, damage, target.health-damage, target.maxHealth)
+			},
+			attacker.loc.contents,
+			{directObject:target}
+		);
+	}
+
 	/**
      * Replace act field codes with field values.
      * @param {string} string
