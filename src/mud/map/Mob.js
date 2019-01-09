@@ -133,7 +133,7 @@ class Mob extends Movable{
 	}
 
 	get maxHealth(){
-		let health = this.vitality;
+		let health = this.vitality * 3;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
 		for(let slot in this.worn){
@@ -763,14 +763,17 @@ class Mob extends Movable{
 
 		if(this.fighting){
 			if(this.hasAbilityByName("maniac")){
-				if(Math.probability(0.50)) {
+				if(Math.probability(0.10)) {
 					Communicate.act(
 						this,
 						{
 							firstPerson: "{RYou begin screaming like a maniac and attack again.{x",
 							thirdPerson: "{R$n begins screaming like a maniac and attacks again.{x"
 						},
-						this.loc.contents
+						this.loc.contents,
+						null,
+						null,
+						CombatManager.category
 					);
 					this.combatRound();
 				}
@@ -781,6 +784,8 @@ class Mob extends Movable{
 	hit(target){
 		// determine hit rate
 		let hitChance = 1;
+
+		if(target.hasAbilityByName("evasion")) hitChance -= 0.1; // evasion gives a 10% evasion chance
 
 		// on hit
 		if(Math.probability(hitChance)){
@@ -804,7 +809,9 @@ class Mob extends Movable{
 					thirdPerson: "$n's hit misses $N."
 				},
 				this.loc.contents,
-				{directObject:target}
+				{directObject:target},
+				null,
+				CombatManager.category
 			);
 		}
 	}
@@ -835,8 +842,8 @@ class Mob extends Movable{
 		Communicate.act(
 			this,
 			{
-				firstPerson: "You die.",
-				thirdPerson: "$n dies."
+				firstPerson: "{RYou hit the ground, dead.{x",
+				thirdPerson: "{R$n hits the ground, dead.{x"
 			},
 			this.loc.contents
 		);

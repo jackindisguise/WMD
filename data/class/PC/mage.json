@@ -8,5 +8,8 @@
     "agilityBase":6,
     "agilityPerLevel": 0.5,
     "intelligenceBase":8,
-    "intelligencePerLevel": 1
+	"intelligencePerLevel": 1,
+	"abilities":[
+		{"ability":"acid blast", "level":1}
+	]
 }

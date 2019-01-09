@@ -99,5 +99,6 @@
 	"> Loading abilities...": "> Loading abilities...",
 	">> Loaded ability '%s'": ">> Loaded ability '%s'",
 	"You {Glearned{x a new ability: {G%s{x": "You {Glearned{x a new ability: {G%s{x",
-	"BAD ABILITY NAME FOR CLASS '%s': '%s'": "BAD ABILITY NAME FOR CLASS '%s': '%s'"
+	"BAD ABILITY NAME FOR CLASS '%s': '%s'": "BAD ABILITY NAME FOR CLASS '%s': '%s'",
+	"You're already fighting.": "You're already fighting."
 }

@@ -16,8 +16,8 @@ class Score extends Command{
 			mob.mana, attributes.MANA);
 		msg += "\r\n" + _("          {R%d{x strength, granting {R%d{x attack power, defense, and vitality.", attributes.STRENGTH, attributes.STRENGTH);
 		msg += "\r\n" + _("             {R%d{x attack power, granting {R%d{x physical damage.", attributes.ATTACK_POWER, attributes.ATTACK_POWER);
-		msg += "\r\n" + _("             {R%d{x defense, granting {R%f{x physical damage mitigation.", attributes.DEFENSE, attributes.DEFENSE*0.5);
-		msg += "\r\n" + _("             {R%d{x vitality, granting {R%d{x maximum health.", attributes.VITALITY, attributes.VITALITY);
+		msg += "\r\n" + _("             {R%d{x defense, granting {R%f{x physical damage mitigation.", attributes.DEFENSE, attributes.DEFENSE/2);
+		msg += "\r\n" + _("             {R%d{x vitality, granting {R%d{x maximum health.", attributes.VITALITY, attributes.VITALITY*3);
 		msg += "\r\n" + _("          {G%d{x agility, granting {G%d{x precision, deflection, and stamina.", attributes.AGILITY, attributes.AGILITY);
 		msg += "\r\n" + _("             {G%d{x precision, granting {G%d{x precision rating.", attributes.PRECISION, attributes.PRECISION);
 		msg += "\r\n" + _("             {G%d{x deflection, granting {G%d{x deflection rating.", attributes.DEFLECTION, attributes.DEFLECTION);

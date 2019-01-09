@@ -1,10 +1,26 @@
+// node includes
+var util = require("util");
+
+// local includes
+var MessageCategory = require("../MessageCategory");
+
+// local variables
 const delayPerRound = 3000;
 let combatants = [];
 let loopID = null;
+let RID = 0;
 
 class CombatManager{
 	static get combatants(){
 		return combatants;
+	}
+
+	static get RID(){
+		return RID;
+	}
+
+	static get category(){
+		return util.format("%s#%d", MessageCategory.COMBAT, RID);
 	}
 
 	static add(mob){
@@ -21,6 +37,7 @@ class CombatManager{
 	}
 
 	static round(){
+		RID++;
 		loopID = null; // clear loop ID
 		let oCombatants = combatants;
 		combatants = [];

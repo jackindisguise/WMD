@@ -4,15 +4,19 @@ const Communicate = require("../Communicate");
 
 class Circle extends Ability{
 	use(user, target){
-		// determine damage
-		let baseDamage = user.attackPower*1.5;
-		let damage = target.preDamage(user, baseDamage, false);
+		for(var i=0;i<2;i++){
+			if(user.fighting == null) break;
 
-		// damage message
-		Communicate.ability(user, target, "circle", damage);
+			// determine damage
+			let baseDamage = user.attackPower;
+			let damage = target.preDamage(user, baseDamage, false);
 
-		// inflict damage
-		target.damage(user, damage);
+			// damage message
+			Communicate.ability(user, target, "circle", damage);
+
+			// inflict damage
+			target.damage(user, damage);
+		}
 	}
 }
 

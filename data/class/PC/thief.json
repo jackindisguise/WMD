@@ -10,6 +10,7 @@
     "intelligenceBase":6,
 	"intelligencePerLevel": 0.25,
 	"abilities":[
+		{"ability":"evasion", "level":2},
 		{"ability":"circle", "level":5}
 	]
 }

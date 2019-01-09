@@ -5,6 +5,7 @@ const util = require("util");
 const _ = require("../../i18n");
 const Logger = require("../util/Logger");
 const MessageCategory = require("./MessageCategory");
+const CombatManager = require("./manager/CombatManager");
 
 // stuff
 class Communicate{
@@ -44,7 +45,9 @@ class Communicate{
 				thirdPerson: util.format("$n %s $N for {R%d{x damage. [{P%d/%d{x]", action.thirdPerson, damage, target.health-damage, target.maxHealth)
 			},
 			attacker.loc.contents,
-			{directObject:target}
+			{directObject:target},
+			null,
+			CombatManager.category
 		);
 	}
 
@@ -57,7 +60,9 @@ class Communicate{
 				thirdPerson: util.format("$n's %s hits $N for {R%d{x damage. [{P%d/%d{x]", ability, damage, target.health-damage, target.maxHealth)
 			},
 			attacker.loc.contents,
-			{directObject:target}
+			{directObject:target},
+			null,
+			CombatManager.category
 		);
 	}
 
