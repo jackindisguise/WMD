@@ -12,7 +12,9 @@ Quality
 -------
 ![](https://img.shields.io/travis/jackindisguise/WMD.svg?style=flat-square)
 ![](https://img.shields.io/coveralls/github/jackindisguise/WMD.svg?style=flat-square)
-![](https://img.shields.io/github/issues/jackindisguise/WMD.svg?style=flat-square)
+![](https://img.shields.io/github/issues-raw/jackindisguise/WMD.svg?style=flat-square)
+![](https://img.shields.io/github/issues-closed-raw/jackindisguise/WMD.svg?style=flat-square)
+
 
 Links
 -----
