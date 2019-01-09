@@ -9,8 +9,10 @@
 Plans
 =====
 1. Add a `ready` flag to `Mob`.
-2. Add a parameter to commands called `ready`.
+2. Add a parameter to `Command` called `ready`.
 3. Commands with `ready` set to `true` require the user's `ready` flag be `true` as well.
 4. Add a `delay` parameter to commands.
-5. After using a command with a delay, spawn a thread to execute after that delay.
+5. After using a command with a delay:
    1. Set the user's `ready` flag to `false`.
+   2. Spawn a thread to run after `delay` milliseconds.
+   3. Set the user's `ready` flag to `true`.
