@@ -1,5 +1,5 @@
 // npm includes
-var expect = require("chai").expect;
+const expect = require("chai").expect;
 
 // local includes
 require("../../../src/lib/Math");

@@ -1,5 +1,5 @@
 // local includes
-var Logger = require("../src/util/Logger");
+const Logger = require("../src/util/Logger");
 
 // disable logging
 Logger.transports[0].silent = true; // silence console transport

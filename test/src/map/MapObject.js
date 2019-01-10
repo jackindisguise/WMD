@@ -1,27 +1,27 @@
 // npm includes
-var expect = require("chai").expect;
+const expect = require("chai").expect;
 
 // local includes
 require("../../../src/lib/Object");
-var MapObject = require("../../../src/mud/map/MapObject");
+const MapObject = require("../../../src/mud/map/MapObject");
 
 // testing
 describe("[MAPOBJECT]", function(){
 	it("constructor options", function(done){
-		var object = new MapObject(); // no options
+		let object = new MapObject(); // no options
 		expect(object.loc).to.equal(null);
-		var object2 = new MapObject({}); // empty options
+		let object2 = new MapObject({}); // empty options
 		expect(object2.loc).to.equal(null);
-		var object3 = new MapObject({"loc":object2}); // valid location
+		let object3 = new MapObject({"loc":object2}); // valid location
 		expect(object3.loc).to.equal(object2);
-		var object4 = new MapObject({"loc":55}); // invalid location
+		let object4 = new MapObject({"loc":55}); // invalid location
 		expect(object4.loc).to.equal(null);
 		done();
 	});
 
 	it("loc relationship", function(done){
-		var object = new MapObject();
-		var object2 = new MapObject();
+		let object = new MapObject();
+		let object2 = new MapObject();
 
 		// hard move
 		object.loc = object2; // move onto another object
@@ -59,17 +59,17 @@ describe("[MAPOBJECT]", function(){
 	});
 
 	it("move", function(done){
-		var object = new MapObject();
-		var object2 = new MapObject();
+		let object = new MapObject();
+		let object2 = new MapObject();
 		object.move(object2);
 		expect(object.loc).to.equal(null);
 		done();
 	});
 
 	it("JSON test", function(done){
-		var object = new MapObject();
+		let object = new MapObject();
 		object.display = "not racist";
-		var json = object.__toJSON();
+		let json = object.__toJSON();
 		expect(JSON.stringify(json)).to.equal("{\"constructor\":\"MapObject\",\"display\":\"not racist\"}");
 		done();
 	});

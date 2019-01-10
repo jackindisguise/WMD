@@ -1,5 +1,5 @@
 // npm includes
-var expect = require("chai").expect;
+const expect = require("chai").expect;
 
 // local includes
 require("../../src/lib/Object");
@@ -25,19 +25,19 @@ B.prototype.d = 4;
 describe("[OBJECT]", function(){
 	describe("JSON Read/Write", function(){
 		it("toJSON", function(done){
-			var b = new B();
-			var bJSON = b.__toJSON();
+			let b = new B();
+			let bJSON = b.__toJSON();
 			expect(JSON.stringify(bJSON)).to.equal("{\"constructor\":\"B\"}");
 			done();
 		});
 
 		it("fromJSON", function(done){
-			var b = new B();
+			let b = new B();
 			b.a = 55;
-			var cJSON = b.__toJSON();
+			let cJSON = b.__toJSON();
 			expect(JSON.stringify(cJSON)).to.equal("{\"constructor\":\"B\",\"Z\":550}");
 
-			var bClone = new B();
+			let bClone = new B();
 			bClone.__fromJSON(cJSON);
 			expect(bClone.a).to.equal(55);
 			expect(bClone.b).to.equal(2);

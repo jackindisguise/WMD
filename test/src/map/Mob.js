@@ -1,34 +1,34 @@
 // npm includes
-var expect = require("chai").expect;
+const expect = require("chai").expect;
 
 // local includes
-var Race = require("../../../src/mud/Race");
-var Class = require("../../../src/mud/Class");
-var Mob = require("../../../src/mud/map/Mob");
+const Race = require("../../../src/mud/Race");
+const Class = require("../../../src/mud/Class");
+const Mob = require("../../../src/mud/map/Mob");
 
 // testing
 describe("[MOB]", function(){
 	it("constructor options", function(done){
-		var mob = new Mob(); // no options
+		let mob = new Mob(); // no options
 		expect(mob.loc).to.equal(null);
-		var mob2 = new Mob({}); // empty options
+		let mob2 = new Mob({}); // empty options
 		expect(mob2.loc).to.equal(null);
-		var mob3 = new Mob({"loc":mob2}); // valid location
+		let mob3 = new Mob({"loc":mob2}); // valid location
 		expect(mob3.loc).to.equal(mob2);
-		var mob4 = new Mob({"loc":55}); // invalid location
+		let mob4 = new Mob({"loc":55}); // invalid location
 		expect(mob4.loc).to.equal(null);
 		done();
 	});
 
 	describe("Attributes", function(){
-		var Elf = new Race();
+		let Elf = new Race();
 		Elf.healthBase = 25;
 		Elf.manaBase = 200;
 		Elf.energyBase = 75;
 		Elf.toNextLevelBase = 25;
 		Elf.toNextLevelPerLevel = 25;
         
-		var Sorcerer = new Class();
+		let Sorcerer = new Class();
 		Sorcerer.strengthBase = 5;
 		Sorcerer.intelligenceBase = 20;
 		Sorcerer.agilityBase = 5;
@@ -36,7 +36,7 @@ describe("[MOB]", function(){
 		Sorcerer.intelligencePerLevel = 4;
 		Sorcerer.agilityPerLevel = 1;
         
-		var mob = new Mob();
+		let mob = new Mob();
 		mob.race = Elf;
 		mob.class = Sorcerer;
 		it("strength + secondary attributes", function(done){

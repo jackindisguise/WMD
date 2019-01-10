@@ -867,7 +867,7 @@ class Mob extends Movable{
 
 	hasAbilityByName(name){
 		let abilities = this.abilities;
-		for(var ability of abilities){
+		for(let ability of abilities){
 			if(ability.name === name) return true;
 		}
 

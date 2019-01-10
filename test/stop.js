@@ -2,7 +2,7 @@
 require("./start");
 
 // local includes
-var MUD = require("../src/mud/core/MUD");
+const MUD = require("../src/mud/core/MUD");
 
 // testing goes here
 describe("[STOP]", function(){

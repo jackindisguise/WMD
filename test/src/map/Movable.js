@@ -1,19 +1,19 @@
 // npm includes
-var expect = require("chai").expect;
+const expect = require("chai").expect;
 
 // local includes
 require("../../../src/lib/Object");
-var Map = require("../../../src/mud/map/Map");
-var Movable = require("../../../src/mud/map/Movable");
-var Tile = require("../../../src/mud/map/Tile");
+const Map = require("../../../src/mud/map/Map");
+const Movable = require("../../../src/mud/map/Movable");
+const Tile = require("../../../src/mud/map/Tile");
 
 // testing
-var movable;
-var map = new Map({width:100, height:100, levels:1, fill:Tile});
-var tile = map.getTileByXYZ(0,0,0);
-var tile2 = map.getTileByXYZ(1,0,0);
-var tile3 = map.getTileByXYZ(2,0,0);
-var noenter = map.getTileByXYZ(3,0,0);
+let movable;
+let map = new Map({width:100, height:100, levels:1, fill:Tile});
+let tile = map.getTileByXYZ(0,0,0);
+let tile2 = map.getTileByXYZ(1,0,0);
+let tile3 = map.getTileByXYZ(2,0,0);
+let noenter = map.getTileByXYZ(3,0,0);
 noenter.canEnter = function(){ return false; };
 describe("[MOVABLE]", function(){
 	it("constructor options", function(done){

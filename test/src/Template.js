@@ -1,12 +1,12 @@
 // npm includes
-var expect = require("chai").expect;
+const expect = require("chai").expect;
 
 // local includes
-var Item = require("../../src/mud/map/Item");
-var Template = require("../../src/mud/Template");
+const Item = require("../../src/mud/map/Item");
+const Template = require("../../src/mud/Template");
 
 describe("[TEMPLATE]", function(){
-	var template;
+	let template;
 	it("create new template", function(done){
 		template = new Template();
 		template.type = Item;
@@ -18,7 +18,7 @@ describe("[TEMPLATE]", function(){
 	});
 
 	it("spawn instance", function(done){
-		var eye = template.spawn();
+		let eye = template.spawn();
 		expect(eye.level).to.equal(54);
 		expect(eye.display).to.equal("Eye of Marduk");
 		done();

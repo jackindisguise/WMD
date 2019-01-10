@@ -2,14 +2,14 @@
 require("./start");
 
 // node includes
-var util = require("util");
+const util = require("util");
 
 // npm includes
-var expect = require("chai").expect;
-var http = require("http");
+const expect = require("chai").expect;
+const http = require("http");
 
 // local includes
-var _package = require("../package.json");
+const _package = require("../package.json");
 
 // test goes here
 describe("[PUG]", function(){
@@ -17,7 +17,7 @@ describe("[PUG]", function(){
 		// create a connection
 		http.get("http://127.0.0.1:8000/", function(res){
 			res.setEncoding("utf8");
-			var raw = "";
+			let raw = "";
 			res.on("data", function(chunk){
 				raw += chunk;
 			});
@@ -33,7 +33,7 @@ describe("[PUG]", function(){
 		// create a connection
 		http.get("http://127.0.0.1:8000/ldjkgjdhgkjdhfgkshg", function(res){
 			res.setEncoding("utf8");
-			var raw = "";
+			let raw = "";
 			res.on("data", function(chunk){
 				raw += chunk;
 			});

@@ -65,7 +65,7 @@ Math.roll = function(die,sides,mod){
  * @return {?Number} The results of a dice roll using the given string.
  */
 Math.rollString = function(string){
-	var result = string.match(/(\d+)d(\d+)(?:([-+])(\d+))?/);
+	let result = string.match(/(\d+)d(\d+)(?:([-+])(\d+))?/);
 	if(!result) return null;
 	return Math.roll(Number(result[1]),Number(result[2]),(result[3] === "-") ? 0-Number(result[4]) : Number(result[4]));
 };

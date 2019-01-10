@@ -5,7 +5,7 @@ const Communicate = require("../Communicate");
 class Circle extends Ability{
 	use(user, target){
 		user.engage(target);
-		for(var i=0;i<2;i++){
+		for(let i=0;i<2;i++){
 			if(user.fighting == null) break; // avoid trying to damage someone we've already killed, basically
 
 			// determine damage

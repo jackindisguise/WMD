@@ -2,14 +2,14 @@
 require("./login");
 
 // npm includes
-var expect = require("chai").expect;
-var io = require("socket.io-client");
+const expect = require("chai").expect;
+const io = require("socket.io-client");
 
 // local includes
-var _ = require("../i18n");
+const _ = require("../i18n");
 
 describe("[COMMAND]", function(){
-	var player, other;
+	let player, other;
 	afterEach(function(){ // gets rid of any false positives
 		player.removeAllListeners("message");
 		other.removeAllListeners("message");
@@ -22,7 +22,7 @@ describe("[COMMAND]", function(){
 
 	it("initialize test clients", function(done){
 		// load finisher
-		var c = 0;
+		let c = 0;
 		function d(){ if(--c === 0) done(); }
 
 		c++;
@@ -36,7 +36,7 @@ describe("[COMMAND]", function(){
 			other.emit("command", "human");
 			other.emit("command", "warrior");
 			other.emit("command", "motd");
-			var m=0;
+			let m=0;
 			other.on("message", function(message){ // fully connected
 				m++;
 				if(m===9){
@@ -50,7 +50,7 @@ describe("[COMMAND]", function(){
 		player.emit("command", "human");
 		player.emit("command", "warrior");
 		player.emit("command", "motd");
-		var m=0;
+		let m=0;
 		player.on("message", function(message){ // fully connected
 			m++;
 			if(m===9){

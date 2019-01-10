@@ -9,16 +9,16 @@ require("./Math");
  */
 Array.prototype.search = function(keywords){
 	if(!keywords) return;
-	var count = 1;
+	let count = 1;
 	// determine count
-	var dot = /(\d+)\.(.+)/.exec(keywords);
+	let dot = /(\d+)\.(.+)/.exec(keywords);
 	if(dot){
 		count = dot[1];
 		keywords = dot[2];
 	}
 
 	// find entry
-	for(var entry of this){
+	for(let entry of this){
 		// if the array has plain strings, assume each string is a keyword
 		if(typeof entry === "string") {
 			if(entry.matchKeywords(keywords) && !(--count)) return entry; // return full string on match

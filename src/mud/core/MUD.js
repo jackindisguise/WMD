@@ -40,7 +40,7 @@ class MUD{
 	 * Connect a new MUDClient.
 	 */
 	static connect(client){
-		var player = new Player({client:client});
+		let player = new Player({client:client});
 		PlayerManager.add(player);
 
 		// start listening for disconnect event

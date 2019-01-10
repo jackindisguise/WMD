@@ -52,8 +52,8 @@ Object.defineProperty(Object.prototype, "__JSONWrite", {
  */
 Object.defineProperty(Object.prototype, "__toJSON", {
 	value: function(){
-		var json = {constructor:this.constructor.name};
-		for(var variable in this){
+		let json = {constructor:this.constructor.name};
+		for(let variable in this){
 			this.__JSONWrite(variable, this[variable], json);
 		}
 
@@ -75,7 +75,7 @@ Object.defineProperty(Object.prototype, "__JSONRead", {
  */
 Object.defineProperty(Object.prototype, "__fromJSON", {
 	value: function(json){
-		for(var variable in json){
+		for(let variable in json){
 			if(variable === "constructor") continue;
 			this.__JSONRead(variable, json[variable]);
 		}
@@ -84,9 +84,9 @@ Object.defineProperty(Object.prototype, "__fromJSON", {
 
 Object.defineProperty(Object.prototype, "__createClone", {
 	value: function(){
-		var json = this.__toJSON();
-		var constructor = this.constructor;
-		var clone = new constructor();
+		let json = this.__toJSON();
+		let constructor = this.constructor;
+		let clone = new constructor();
 		clone.__fromJSON(json);
 		return clone;
 	}

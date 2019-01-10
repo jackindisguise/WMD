@@ -69,31 +69,31 @@ class Direction{
 	}
 
 	static flag2name(flag){
-		for(var name of flag){
+		for(let name of flag){
 			if(flag[name] === flag) return name;
 		}
 	}
 
 	static flag2long(flag){
-		for(var name of flag){
+		for(let name of flag){
 			if(flag[name] === flag) return long[name];
 		}
 	}
 
 	static flag2short(flag){
-		for(var name of flag){
+		for(let name of flag){
 			if(flag[name] === flag) return short[name];
 		}
 	}
 
 	static short2flag(short){
-		for(var name of short){
+		for(let name of short){
 			if(short[name] === short) return flag[name];
 		}
 	}
 
 	static long2flag(long){
-		for(var name of long){
+		for(let name of long){
 			if(long[name] === long) return flag[name];
 		}
 	}

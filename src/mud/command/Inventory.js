@@ -9,9 +9,9 @@ const CommandSpecificity = require("../CommandSpecificity");
 
 class Inventory extends Command{
 	exec(mob){
-		var msg = _("You are carrying:");
+		let msg = _("You are carrying:");
 		if(mob.contents.length){
-			for(var obj of mob.contents){
+			for(let obj of mob.contents){
 				msg += "\r\n" + util.format("%s %s", (obj.worn ? _("{Y(worn){x") : "      "), obj.name);
 			}
 		} else {

@@ -1,8 +1,8 @@
 // node includes
-var util = require("util");
+let util = require("util");
 
 // local includes
-var MessageCategory = require("../MessageCategory");
+let MessageCategory = require("../MessageCategory");
 
 // local variables
 const delayPerRound = 3000;
