@@ -13,6 +13,8 @@ Quality
 
 Links
 -----
-[Documentation](http://https://jackindisguise.github.io/WMD/index.html) (JSDoc)
+[Documentation](https://jackindisguise.github.io/WMD/index.html) (JSDoc)
+
+[Coverage](https://jackindisguise.github.io/WMD/coverage/index.html) (Istanbul)
 
 [Github](http://github.com/jackindisguise/WMD)
