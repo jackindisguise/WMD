@@ -40,28 +40,28 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="Channel.html">Channel</a></li><li><a href="Class.html">Class</a></li><li><a href="Classification.html">Classification</a></li><li><a href="Client.html">Client</a></li><li><a href="Direction.html">Direction</a></li><li><a href="Map.html">Map</a></li><li><a href="MapObject.html">MapObject</a></li><li><a href="Mob.html">Mob</a></li><li><a href="Movable.html">Movable</a></li><li><a href="MUD.html">MUD</a></li><li><a href="Nanny.html">Nanny</a></li><li><a href="Player.html">Player</a></li><li><a href="PlayerData.html">PlayerData</a></li><li><a href="Race.html">Race</a></li><li><a href="Server.html">Server</a></li><li><a href="Tile.html">Tile</a></li>
+					<li><a href="Channel.html">Channel</a></li><li><a href="Class.html">Class</a></li><li><a href="Classification.html">Classification</a></li><li><a href="Client.html">Client</a></li><li><a href="Direction.html">Direction</a></li><li><a href="Map.html">Map</a></li><li><a href="MapObject.html">MapObject</a></li><li><a href="MapObjectFactory.html">MapObjectFactory</a></li><li><a href="Mob.html">Mob</a></li><li><a href="Movable.html">Movable</a></li><li><a href="MUD.html">MUD</a></li><li><a href="Nanny.html">Nanny</a></li><li><a href="Player.html">Player</a></li><li><a href="Race.html">Race</a></li><li><a href="Server.html">Server</a></li><li><a href="Tile.html">Tile</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="Client.html#event:command">Client#event:command</a></li><li><a href="Client.html#event:disconnect">Client#event:disconnect</a></li><li><a href="MUD.html#event:connect">MUD#event:connect</a></li><li><a href="MUD.html#event:disconnect">MUD#event:disconnect</a></li><li><a href="Player.html#event:disconnect">Player#event:disconnect</a></li><li><a href="Server.html#event:connect">Server#event:connect</a></li><li><a href="Server.html#event:disconnect">Server#event:disconnect</a></li>
+					<li><a href="Client.html#event:command">Client#event:command</a></li><li><a href="Client.html#event:disconnect">Client#event:disconnect</a></li><li><a href="Player.html#event:disconnect">Player#event:disconnect</a></li><li><a href="Server.html#event:connect">Server#event:connect</a></li><li><a href="Server.html#event:disconnect">Server#event:disconnect</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-test.html">test</a></li>
+					<li><a href="tutorial-channel.json.html">channel.json</a></li><li><a href="tutorial-class.json.html">class.json</a></li><li><a href="tutorial-classification.json.html">classification.json</a></li><li><a href="tutorial-map.json.html">map.json</a></li><li><a href="tutorial-model.json.html">model.json</a></li><li><a href="tutorial-race.json.html">race.json</a></li><li><a href="tutorial-template.json.html">template.json</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html#MessageCategory">MessageCategory</a></li>
+					<li><a href="global.html#ColorCode">ColorCode</a></li><li><a href="global.html#CommandSpecificity">CommandSpecificity</a></li><li><a href="global.html#display">display</a></li><li><a href="global.html#location">location</a></li><li><a href="global.html#MessageCategory">MessageCategory</a></li>
 				</ul>
 			</li>
 			
@@ -171,8 +171,350 @@
         <dl>
             
 <hr>
+<dt class="name" id="ColorCode">
+    <h4 id="ColorCode"><span class="type-signature">&lt;constant> </span>ColorCode<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Color codes for use in strings.</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="CommandSpecificity">
+    <h4 id="CommandSpecificity"><span class="type-signature">&lt;constant> </span>CommandSpecificity<span class="type-signature"> :string</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Enum for command specificity.<br>More specific commands should be processed first.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>FIRST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    100
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>LAST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    -100
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="display">
+    <h4 id="display"><span class="type-signature">&lt;constant> </span>display<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Public names for wear locations.</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="location">
+    <h4 id="location"><span class="type-signature">&lt;constant> </span>location<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Valid wear locations for equipment.</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
 <dt class="name" id="MessageCategory">
-    <h4 id="MessageCategory"><span class="type-signature"></span>MessageCategory<span class="type-signature"> :string</span></h4>
+    <h4 id="MessageCategory"><span class="type-signature">&lt;constant> </span>MessageCategory<span class="type-signature"> :string</span></h4>
 
     
 </dt>
@@ -367,6 +709,156 @@
                 <td class="default">
                 
                     ACTION
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>INFO</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    INFO
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ROOM</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    ROOM
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>DEATHCRY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    DEATHCRY
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>READY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    READY
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>LEVELUP</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    LEVELUP
                 
                 </td>
             
@@ -1832,7 +2324,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on 2018-12-05T01:30:32-06:00
+		on 2019-01-10T11:24:54-06:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
