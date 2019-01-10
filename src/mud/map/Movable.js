@@ -25,6 +25,11 @@ class Movable extends MapObject{
 		return null;
 	}
 
+	get map(){
+		if(this.loc instanceof Tile) return this.loc.map;
+		return null;
+	}
+
 	/**
 	 * Get the tile in the given direction.
 	 * @param {Direction.flags} dir 

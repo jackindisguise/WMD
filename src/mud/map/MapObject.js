@@ -191,6 +191,12 @@ class MapObject{
 		return true;
 	}
 
+	moveTo(x,y,z){
+		if(!this.map) return;
+		let tile = this.map.getTileByXYZ(x,y,z);
+		if(tile) this.move(tile);
+	}
+
 	/**
 	 * Add an object to our contents.
 	 * @param {MapObject} mapobject Object to add.

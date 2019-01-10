@@ -5,7 +5,7 @@ const Communicate = require("../Communicate");
 class AcidBlast extends Ability{
 	use(user, target){
 		// determine damage
-		let baseDamage = user.magicPower * 1.25;
+		let baseDamage = user.magicPower;
 		let damage = target.preDamage(user, baseDamage, true);
 
 		// damage message

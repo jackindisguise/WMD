@@ -851,7 +851,12 @@ class Mob extends Movable{
 
 		if(this.fighting) this.fighting.disengage();
 		this.disengage();
-		this.restore();
+
+		if(this.player){
+			this.restore();
+		} else {
+			this.loc = null; // delete this mob
+		}
 	}
 
 	killed(victim){
