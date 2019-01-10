@@ -7,7 +7,7 @@ class Command{
 	run(mob, input){
 		let args = this.process(mob, input);
 		args.unshift(mob);
-		this.exec.apply(this, args);
+		return this.exec.apply(this, args);
 	}
 
 	process(mob, input){
@@ -18,6 +18,8 @@ class Command{
 	exec(){
 	}
 }
+
+Command.prototype.ready = false;
 
 // represents an error processor
 Command.prototype.error = false;

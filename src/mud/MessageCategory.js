@@ -7,7 +7,12 @@ const MessageCategory = {
 	WHISPER: "WHISPER",
 	CHAT: "CHAT",
 	SAY: "SAY",
-	ACTION: "ACTION"
+	ACTION: "ACTION",
+	INFO: "INFO",
+	ROOM: "ROOM",
+	DEATHCRY: "DEATHCRY",
+	READY: "READY",
+	LEVELUP: "LEVELUP"
 };
 
 module.exports = MessageCategory;

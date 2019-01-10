@@ -19,5 +19,6 @@ AcidBlast.prototype.rule = /^(?:a|ac|aci|acid|acid b|acid bl|acid bla|acid blas|
 AcidBlast.prototype.plain = "acid blast";
 AcidBlast.prototype.specificity = CommandSpecificity.FIRST;
 AcidBlast.prototype.ability = "acid blast";
+AcidBlast.prototype.ready = true;
 
 module.exports = AcidBlast;

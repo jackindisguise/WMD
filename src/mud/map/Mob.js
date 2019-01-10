@@ -402,6 +402,7 @@ class Mob extends Movable{
 			if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
 			break;
 
+		case "ready": break;
 		case "race": json.race = value.name; break;
 		case "class": json.class = value.name; break;
 		case "health":
@@ -508,7 +509,7 @@ class Mob extends Movable{
 			desc += "\r\n" + util.format("    %s", obj.name);
 		}
 
-		this.sendLine(desc);
+		this.sendMessage(desc, MessageCategory.ROOM);
 	}
 
 	gainExperience(amount){
@@ -576,7 +577,7 @@ class Mob extends Movable{
 			msg += "\r\n" + _("You {Glearned{x a new ability: {G%s{x", nAbility.display);
 		}
 
-		this.sendLine(msg);
+		this.sendMessage(msg, MessageCategory.LEVELUP);
 	}
 
 	equip(equipment){
@@ -855,7 +856,7 @@ class Mob extends Movable{
 
 	killed(victim){
 		let experience = victim.level*100;
-		this.sendLine(_("{CYou gain {W%d{C experience.{x", experience));
+		this.sendMessage(_("{CYou gain {W%d{C experience.{x", experience), MessageCategory.INFO);
 		this.gainExperience(experience);
 	}
 
@@ -867,7 +868,17 @@ class Mob extends Movable{
 
 		return false;
 	}
+
+	unready(delay){
+		this.ready = false;
+		setTimeout(function(){
+			this.sendMessage("You are {Gready{x!", MessageCategory.READY);
+			this.ready = true;
+		}.bind(this), delay);
+	}
 }
+
+Mob.prototype.ready = true;
 
 Mob.prototype.worn = null;
 

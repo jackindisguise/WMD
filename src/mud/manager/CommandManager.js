@@ -24,6 +24,13 @@ class CommandManager{
 	static processCommand(mob, input){
 		for(let command of commands){
 			if(command.match(mob, input)) {
+				if(command.ready){
+					if(!mob.ready){
+						mob.sendLine("You aren't {Rready{x.");
+						return true; // we found the command, just can't use it right now.
+					}
+				}
+
 				command.run(mob, input);
 				return true;
 			}
