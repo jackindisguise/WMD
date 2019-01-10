@@ -1,0 +1,265 @@
+commit 1c87f8dd4aee560fb4785e720351a922f6d07283
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 10 11:05:24 2019 -0600
+
+    Removed issue20 readme.
+
+commit 1bbd4d3a99f5b97c08f0be30aa6b60d4dbd72960
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 10 11:03:20 2019 -0600
+
+    Added Movable.moveTo which accepts an XYZ location.
+    
+    Did the stuff I said I'd do.
+
+commit 68e96dadd0ae326035b9e187cf3e2f1d9747160c
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 10 10:23:43 2019 -0600
+
+    Added some message categories to make things prettier.
+    
+    I've opted to not use a setting on the Command to set the delay.
+    The command itself (or whatever action) will set the delay itself.
+    This will allow for more dynamicness in the process.
+    Less rigidity is good, maybe. I dunno.
+
+commit d5de7ea5d1f58a29be8695bae990696de74e1ade
+Merge: c082110 3edb2b0
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:54:58 2019 -0600
+
+    Merge branch 'master' into issue20
+
+commit 3edb2b048967ddbfef10640c0022241de5e2a770
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:54:24 2019 -0600
+
+    Can no longer move during combat.
+    [skip ci]
+
+commit c082110afb7f73020cc70f36f744b95961ff63fc
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:50:57 2019 -0600
+
+    More precise.
+    
+    [skip ci]
+
+commit 534785410876d5dfa9c93e7f23ac8cb9fc7fdc8c
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:48:37 2019 -0600
+
+    Added plans for solving this issue.
+    [skip ci]
+
+commit a6364d4c372df1cd1688d35538d7b0bf05192152
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:36:12 2019 -0600
+
+    Gotta make sure I remove these in final commits in future.
+    
+    [skip ci]
+
+commit 74f5d6f3c2e1ce9ac3ee12e49255d882080b08f5
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:33:52 2019 -0600
+
+    Making sure tests pass first.
+
+commit 02d30076e32aaeaf5b058f5021e80a92f5d09dbb
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 17:30:39 2019 -0600
+
+    CombatManager now keeps constant track on how many rounds have happened.
+    I'm using this to create a custom message category that will distinguish
+    combat rounds from one another. Looks much nicer, and things are more
+    readable and understandable.
+    
+    Added an ability that deals magic damage ((acid blast for mages).
+    
+    Gonna flag this issue as completed and update the version. :)
+
+commit 4c605b47e1303619f2fd07fa1b6b5c1db295c6b6
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 15:49:45 2019 -0600
+
+    Added 2 stock abilities.
+    
+    Warriors get maniac (passive).
+    
+    Thief gets circle (active).
+    
+    For testing purposes.
+
+commit 57ef962986e9895509b84b78494eedefbb14c3a2
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 15:40:45 2019 -0600
+
+    Ability system added.
+
+commit f6c5ba9a39c062b30a28b23f08ce916cd58bfca1
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 13:53:09 2019 -0600
+
+    Setting up issue12 branch.
+
+commit d2acbfa5d21e58252669abc0bcda06057ca01f09
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 13:25:47 2019 -0600
+
+    Added closed issues as well as open issues.
+    [skip ci]
+
+commit 315f9e6e7e9e0ba7e4263da3bedb36626089fcc4
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 13:21:14 2019 -0600
+
+    New README.
+    [skip ci]
+
+commit f485583469be882fa82c6736b034b34961a4e1d2
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 12:14:35 2019 -0600
+
+    [skip ci]
+
+commit 0906a17f3c79627c3936b2b3d472da79b5fea1a0
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 11:05:15 2019 -0600
+
+    Renamed NPM project to WMD
+    
+    Fixing badge for final time.
+
+commit 7429c286c2c77c71a4b1d10aed0749edaef8df92
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 9 10:56:29 2019 -0600
+
+    Why is my version number broken?
+
+commit 6572dfb2d3868385ac1b4ef5c46f905e23a8e09b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 10:38:04 2019 -0600
+
+    Removed linebreak rules from eslint settings.
+
+commit 4563d585e4d2801cb6e827d7eff70c3a428d434f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 10:33:33 2019 -0600
+
+    Added definitions for JSON formats as tutorials to the documentation.
+    
+    Rearranged some random stuff.
+
+commit c509683654a3966681482541a7556a9e335bd710
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 01:03:57 2019 -0600
+
+    Moved mocha unit tests to /test instead of /unit-tests. More standard.
+
+commit 0f102ce2999128b9aabc073391b0c8039477c6bf
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 01:00:54 2019 -0600
+
+    Added eqeqeq rule to unit tests.
+
+commit 21c5f988d29eb320928a9dc466c0fd242ccef23f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 00:57:48 2019 -0600
+
+    Added eqeqeq rule to ESLint.
+
+commit 06b788b022d5eace1bf132004b1afc36cbcfd132
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 00:45:49 2019 -0600
+
+    Added `npm run lint` command.
+
+commit ca66a1ddbf72c7032951cb90605d1fb3330da7f3
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 8 00:42:06 2019 -0600
+
+    JSHint has been removed. ESlint has been fully implemented.
+
+commit a74a1ca6ab48b73b1b068f1bb57175c47fc4d89c
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 12:22:43 2019 -0600
+
+    Garbage collection seems to be working properly for the map and map objects.
+    
+    Seems to be working for player mobs as well.
+    
+    Pretty happy about it.
+
+commit bc36724ff33449099b8d199483496e50d195cc49
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 11:23:37 2019 -0600
+
+    Haha have to generate a new coveralls token.
+
+commit 899e537a21fc216cdeaa99a8846ac3f9330313b4
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 04:16:02 2019 -0600
+
+    Added coverage badge from coveralls to README.
+
+commit d131d7b6d9d7abb3f23f17dd9f619d1c100b1a0a
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 04:11:30 2019 -0600
+
+    Added coveralls support.
+
+commit 9b4ecc2941e1fb7c6ebbed7c58bb25cdd2944d86
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 02:13:16 2019 -0600
+
+    Logout is called properly on Player object when mob is set to null.
+    
+    Player mobs are now moved to null (presumably to be garbage collected).
+    TODO: MAKE SURE THIS IS THE CASE! :)
+
+commit 9260478bf502f08d6f64b067b0dfa6d6a1fe7d83
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 01:56:10 2019 -0600
+
+    Manually renamed all `var` statements to either `const` or `let`.
+    
+    Sick.
+
+commit ef9e67d9f60b8d153f8a837d4568d2c75dea409a
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 7 01:27:16 2019 -0600
+
+    Nanny gets the worldmap at runtime instead of in the local scope.
+
+commit b4c68209d776b9560af9160a394beed8d635208b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Jan 5 21:33:15 2019 -0600
+
+    Fixed the naming of the Attributes file.
+    
+    Command rules are now case insensitive.
+    
+    `/src/io/Server` now just returns the Server class.
+    Used to return an instance of the Server class.
+    
+    Fixed attribute value of elf race.
+    
+    Added sanitizer to Nanny constructor.
+    
+    MUD now properly creates a unique local Server object for use.
+    
+    Maps now have a name to identify them at runtime. There is no longer
+    "a map." There are many maps. And each one is self contained.
+    
+    Later on, certain tiles will be considered "portals" to other maps.
+    When entering the tile, you will actually be immediately rerouted to
+    another location on another map.
+    
+    I've replaced any unnecessary inclusions in the command heirarchy.
+    
+    Commands are loaded last.
+    
+    Combatants are now sorted by agility.
+    
+    Combat rounds do not care about who is fighting who. They just happen.
