@@ -36,7 +36,7 @@ function addMessage(message, category, timestamp, color){
 			case "b": colors++; return "<font color='navy'>";
 			case "Y": colors++; return "<font color='yellow'>";
 			case "y": colors++; return "<font color='olive'>";
-			case "P": colors++; return "<font color='pink'>";
+			case "P": colors++; return "<font color='magenta'>";
 			case "p": colors++; return "<font color='purple'>";
 			case "C": colors++; return "<font color='cyan'>";
 			case "c": colors++; return "<font color='teal'>";

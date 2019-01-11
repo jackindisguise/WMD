@@ -3,6 +3,11 @@ const Ability = require("../Ability");
 const Communicate = require("../Communicate");
 
 class AcidBlast extends Ability{
+	/**
+	 * 
+	 * @param {Mob} user 
+	 * @param {Mob} target 
+	 */
 	use(user, target){
 		// determine damage
 		let baseDamage = user.magicPower;
@@ -14,8 +19,8 @@ class AcidBlast extends Ability{
 		// inflict damage
 		target.damage(user, damage);
 
-		// unready user
-		user.unready(3000);
+		// busy user
+		user.busy(3000);
 	}
 }
 

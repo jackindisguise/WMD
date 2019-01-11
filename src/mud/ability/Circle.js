@@ -3,6 +3,11 @@ const Ability = require("../Ability");
 const Communicate = require("../Communicate");
 
 class Circle extends Ability{
+	/**
+	 * 
+	 * @param {Mob} user 
+	 * @param {Mob} target 
+	 */
 	use(user, target){
 		user.engage(target);
 		for(let i=0;i<2;i++){
@@ -19,8 +24,8 @@ class Circle extends Ability{
 			target.damage(user, damage);
 		}
 
-		// unready user
-		user.unready(3000);
+		// busy user
+		user.busy(3000);
 	}
 }
 

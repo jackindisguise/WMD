@@ -2,6 +2,7 @@
 const util = require("util");
 
 // local includes
+require("../lib/Math");
 const _ = require("../../i18n");
 const Logger = require("../util/Logger");
 const MessageCategory = require("./MessageCategory");
@@ -37,12 +38,17 @@ class Communicate{
 	}
 
 	static attack(attacker, target, action, damage){
+		let targetHealthP = (target.health-damage) / target.maxHealth;
+		let range = Math.round(Math.lerp(1,4,targetHealthP));
+		let codes = ["R", "P", "Y", "G"];
+		let code = codes[range-1];
+		let display = Math.round(targetHealthP * 100);
 		Communicate.act(
 			attacker,
 			{
-				firstPerson: util.format("You %s $N for {R%d{x damage. [{Y%d/%d{x]", action.firstPerson, damage, target.health-damage, target.maxHealth),
-				secondPerson: util.format("$n %s you for {R%d{x damage. [{R%d/%d{x]", action.thirdPerson, damage, target.health-damage, target.maxHealth),
-				thirdPerson: util.format("$n %s $N for {R%d{x damage. [{P%d/%d{x]", action.thirdPerson, damage, target.health-damage, target.maxHealth)
+				firstPerson: util.format("{yYou %s $N for {R%d{y damage.{x [{%s%f%%{x]", action.firstPerson, damage, code, display),
+				secondPerson: util.format("{r$n %s you for {R%d{r damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display),
+				thirdPerson: util.format("{w$n %s $N for {R%d{w damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display)
 			},
 			attacker.loc.contents,
 			{directObject:target},
@@ -52,12 +58,17 @@ class Communicate{
 	}
 
 	static ability(attacker, target, ability, damage){
+		let targetHealthP = (target.health-damage) / target.maxHealth;
+		let range = Math.round(Math.lerp(1,4,targetHealthP));
+		let codes = ["R", "P", "Y", "G"];
+		let code = codes[range-1];
+		let display = Math.round(targetHealthP * 100);
 		Communicate.act(
 			attacker,
 			{
-				firstPerson: util.format("Your %s hits $N for {R%d{x damage. [{Y%d/%d{x]", ability, damage, target.health-damage, target.maxHealth),
-				secondPerson: util.format("$n's %s hits you for {R%d{x damage. [{R%d/%d{x]", ability, damage, target.health-damage, target.maxHealth),
-				thirdPerson: util.format("$n's %s hits $N for {R%d{x damage. [{P%d/%d{x]", ability, damage, target.health-damage, target.maxHealth)
+				firstPerson: util.format("{yYour %s hits $N for {R%d{y damage.{x [{%s%f%%{x]", ability, damage, code, display),
+				secondPerson: util.format("{r$n's %s hits you for {R%d{r damage.{x [{%s%f%%{x]", ability, damage, code, display),
+				thirdPerson: util.format("{w$n's %s hits $N for {R%d{w damage.{x [{%s%f%%{x]", ability, damage, code, display)
 			},
 			attacker.loc.contents,
 			{directObject:target},

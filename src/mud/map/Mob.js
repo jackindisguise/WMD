@@ -805,9 +805,9 @@ class Mob extends Movable{
 			Communicate.act(
 				this,
 				{
-					firstPerson: "Your hit misses $N.",
-					secondPerson: "$n's hit misses you.",
-					thirdPerson: "$n's hit misses $N."
+					firstPerson: "{yYour hit misses $N.{x",
+					secondPerson: "{r$n's hit misses you.{x",
+					thirdPerson: "{w$n's hit misses $N.{x"
 				},
 				this.loc.contents,
 				{directObject:target},
@@ -874,7 +874,7 @@ class Mob extends Movable{
 		return false;
 	}
 
-	unready(delay){
+	busy(delay){
 		this.ready = false;
 		setTimeout(function(){
 			this.sendMessage("You are {Gready{x!", MessageCategory.READY);
