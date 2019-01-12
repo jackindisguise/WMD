@@ -805,9 +805,9 @@ class Mob extends Movable{
 			Communicate.act(
 				this,
 				{
-					firstPerson: "{yYour hit misses $N.{x",
-					secondPerson: "{r$n's hit misses you.{x",
-					thirdPerson: "{w$n's hit misses $N.{x"
+					firstPerson: "{wYour hit misses $N.{x",
+					secondPerson: "{D$n's hit misses you.{x",
+					thirdPerson: "{r$n's hit misses $N.{x"
 				},
 				this.loc.contents,
 				{directObject:target},
@@ -829,11 +829,10 @@ class Mob extends Movable{
 	}
 
 	damage(attacker, amount){
-		this.health -= amount;
+		this.expend({health:amount});
 		attacker.engage(this); //
 		this.engage(attacker); // make sure we're engaged on any damage instances
-		if(this.health <= 0) {
-			this.health = 0;
+		if(this.health === 0) {
 			this.die(attacker);
 			attacker.killed(this);
 		}
@@ -880,6 +879,20 @@ class Mob extends Movable{
 			this.sendMessage("You are {Gready{x!", MessageCategory.READY);
 			this.ready = true;
 		}.bind(this), delay);
+	}
+
+	heal(options){
+		if(!options) return;
+		if(options.health) this.health = Math.min(this.health + options.health, this.maxHealth);
+		if(options.energy) this.energy = Math.min(this.energy + options.energy, this.maxEnergy);
+		if(options.mana) this.mana = Math.min(this.mana + options.mana, this.maxMana);
+	}
+
+	expend(options){
+		if(!options) return;
+		if(options.health) this.health = Math.max(this.health - options.health, 0);
+		if(options.energy) this.energy = Math.max(this.energy - options.energy, 0);
+		if(options.mana) this.mana = Math.max(this.mana - options.mana, 0);
 	}
 }
 

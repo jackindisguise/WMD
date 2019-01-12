@@ -38,7 +38,7 @@ class Communicate{
 	}
 
 	static attack(attacker, target, action, damage){
-		let targetHealthP = (target.health-damage) / target.maxHealth;
+		let targetHealthP = Math.max(target.health-damage, 0) / target.maxHealth;
 		let range = Math.round(Math.lerp(1,4,targetHealthP));
 		let codes = ["R", "P", "Y", "G"];
 		let code = codes[range-1];
@@ -46,9 +46,9 @@ class Communicate{
 		Communicate.act(
 			attacker,
 			{
-				firstPerson: util.format("{yYou %s $N for {R%d{y damage.{x [{%s%f%%{x]", action.firstPerson, damage, code, display),
-				secondPerson: util.format("{r$n %s you for {R%d{r damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display),
-				thirdPerson: util.format("{w$n %s $N for {R%d{w damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display)
+				firstPerson: util.format("{wYou %s $N for {R%d{w damage.{x [{%s%f%%{x]", action.firstPerson, damage, code, display),
+				secondPerson: util.format("{D$n %s you for {R%d{D damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display),
+				thirdPerson: util.format("{r$n %s $N for {R%d{r damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display)
 			},
 			attacker.loc.contents,
 			{directObject:target},
@@ -66,9 +66,9 @@ class Communicate{
 		Communicate.act(
 			attacker,
 			{
-				firstPerson: util.format("{yYour %s hits $N for {R%d{y damage.{x [{%s%f%%{x]", ability, damage, code, display),
-				secondPerson: util.format("{r$n's %s hits you for {R%d{r damage.{x [{%s%f%%{x]", ability, damage, code, display),
-				thirdPerson: util.format("{w$n's %s hits $N for {R%d{w damage.{x [{%s%f%%{x]", ability, damage, code, display)
+				firstPerson: util.format("{wYour %s hits $N for {R%d{w damage.{x [{%s%f%%{x]", ability, damage, code, display),
+				secondPerson: util.format("{D$n's %s hits you for {R%d{D damage.{x [{%s%f%%{x]", ability, damage, code, display),
+				thirdPerson: util.format("{r$n's %s hits $N for {R%d{r damage.{x [{%s%f%%{x]", ability, damage, code, display)
 			},
 			attacker.loc.contents,
 			{directObject:target},
