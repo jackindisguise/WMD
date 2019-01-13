@@ -18,7 +18,7 @@ const Attribute = require("../Attribute");
 const WearLocation = require("../WearLocation");
 const WearSlot = require("../WearSlot");
 const Equipment = require("./Equipment");
-const CombatAction = require("../CombatAction");
+const DamageType = require("../DamageType");
 
 /**
  * Represents an animate creature on the map.
@@ -790,11 +790,15 @@ class Mob extends Movable{
 
 		// on hit
 		if(Math.probability(hitChance)){
+			// get weapon
+			let weapon = this.worn.HAND_PRIMARY;
+			let type = weapon ? weapon.action.type : DamageType.BASH;
+
 			// determine damage
-			let damage = target.preDamage(this, this.attackPower, false);
+			let damage = target.processDamage({attacker:this, damage:this.attackPower, type:type});
 
 			// damage message
-			Communicate.attack(this, target, CombatAction.PUNCH, damage);
+			Communicate.hit({attack:true, attacker:this, weapon:weapon, target:target, damage:damage});
 
 			// inflict damage
 			target.damage(this, damage);
@@ -817,15 +821,20 @@ class Mob extends Movable{
 		}
 	}
 
-	preDamage(attacker, amount, magic){
-		if(magic) amount -= this.resilience / 2;
-		else {
-			let precision = attacker.precision - this.deflection; // precision value
+	processDamage(options){
+		let damage = options.damage;
+		if(options.attacker){ // process precision vs. deflection
+			let precision = options.attacker.precision - this.deflection; // precision value
 			let precisionModifier = precision / 25; // 25 points of precision gives 100% bonus damage.
-			amount *= 1 + precisionModifier; // apply precision modifier
-			amount -= this.defense / 2; // reduce damage by defense
+			damage *= 1 + precisionModifier; // apply precision modifier
 		}
-		return Math.max(Math.floor(amount), 0);
+
+		// reduce by flat defenses
+		if(options.type === DamageType.MAGICAL) damage -= this.resilience / 2;
+		else damage -= this.defense / 2;
+
+		// keep it above 0, keep it an integer
+		return Math.max(Math.floor(damage), 0);
 	}
 
 	damage(attacker, amount){
@@ -876,7 +885,7 @@ class Mob extends Movable{
 	busy(delay){
 		this.ready = false;
 		setTimeout(function(){
-			this.sendMessage("You are {Gready{x!", MessageCategory.READY);
+			this.sendMessage("{wYou regain your balance. {x[{G+READY{x]", MessageCategory.READY);
 			this.ready = true;
 		}.bind(this), delay);
 	}

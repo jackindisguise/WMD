@@ -1,6 +1,8 @@
 // local includes
 const Ability = require("../Ability");
 const Communicate = require("../Communicate");
+const DamageType = require("../DamageType");
+const CombatManager = require("../manager/CombatManager");
 
 class AcidBlast extends Ability{
 	/**
@@ -10,11 +12,23 @@ class AcidBlast extends Ability{
 	 */
 	use(user, target){
 		// determine damage
-		let baseDamage = user.magicPower;
-		let damage = target.preDamage(user, baseDamage, true);
+		let damage = target.processDamage({attacker:user, damage:user.magicPower, type:DamageType.MAGICAL});
+
+		// ability message
+		Communicate.act(
+			user,
+			{
+				firstPerson: "You begin to chant a spell. [{R-READY{x}]",
+				thirdPerson: "$n begins chanting a spell."
+			},
+			user.loc.contents,
+			{directObject:target},
+			null,
+			CombatManager.category
+		);
 
 		// damage message
-		Communicate.ability(user, target, "acid blast", damage);
+		Communicate.hit({attacker:user, target:target, ability:"acid blast", damage:damage});
 
 		// inflict damage
 		target.damage(user, damage);

@@ -1,6 +1,7 @@
 // local includes
 const Equipment = require("./Equipment");
 const WearLocation = require("../WearLocation");
+const CombatAction = require("../CombatAction");
 
 class Weapon extends Equipment{
 	get attackPower(){
@@ -12,6 +13,7 @@ class Weapon extends Equipment{
 
 Weapon.prototype.attackPowerBonus = 1;
 Weapon.prototype.attackPowerBonusPerLevel = 0.333;
+Weapon.prototype.action = CombatAction.SLASH;
 
 Weapon.prototype.wearLoc = WearLocation.location.WEAPON;
 

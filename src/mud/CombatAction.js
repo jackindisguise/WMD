@@ -1,17 +1,44 @@
+const DamageType = require("./DamageType");
+
 const CombatActions = {
+	BASH:{
+		type:DamageType.BASH,
+		format:{
+			firstPerson: "bash",
+			thirdPerson: "bashes"
+		}
+	},
+
 	PUNCH:{
-		firstPerson: "punch",
-		thirdPerson: "punches"
+		type:DamageType.BASH,
+		format:{
+			firstPerson: "punch",
+			thirdPerson: "punches"
+		}
 	},
 
 	SLASH:{
-		firstPerson: "slash",
-		thirdPerson: "slashes"
+		type:DamageType.SLASH,
+		format:{
+			firstPerson: "slash",
+			thirdPerson: "slashes"
+		}
 	},
 
-	CIRCLE:{
-		firstPerson: "circle",
-		thirdPerson: "circles"
+	STAB:{
+		type:DamageType.PIERCE,
+		format:{
+			firstPerson: "stab",
+			thirdPerson: "stabs"
+		}
+	},
+
+	ZAP:{
+		type:DamageType.MAGICAL,
+		format:{
+			firstPerson: "zap",
+			thirdPerson: "zaps"
+		}
 	}
 };
 

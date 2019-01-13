@@ -7,6 +7,7 @@ const _ = require("../../i18n");
 const Logger = require("../util/Logger");
 const MessageCategory = require("./MessageCategory");
 const CombatManager = require("./manager/CombatManager");
+const CombatAction = require("./CombatAction");
 
 // stuff
 class Communicate{
@@ -34,6 +35,71 @@ class Communicate{
 
 			// send message
 			target.sendMessage(processed, category);
+		}
+	}
+
+	static hit(options){
+		if(!options) return;
+		if(!options.attacker) return;
+		if(!options.target) return; // no target, not valid
+		if(options.damage === null) return; // no damage, not valid
+
+		// determine damage display and color codes
+		let targetHealthP = Math.max(options.target.health-options.damage, 0) / options.target.maxHealth;
+		let range = Math.floor(Math.lerp(1,5,targetHealthP));
+		let codes = ["r", "R", "Y", "G", "C"];
+		let code = codes[range-1];
+		let display = Math.round(targetHealthP * 100);
+
+		// normal auto attack
+		if(options.attack){
+			let weapon = options.weapon;
+			if(!weapon){
+				let action = CombatAction.PUNCH;
+				let format = action.format;
+				Communicate.act(
+					options.attacker,
+					{
+						firstPerson: util.format("{wYou %s {R$N {wfor {R%d {wdamage. {x[{%s%f%%{x]", format.firstPerson, options.damage, code, display),
+						secondPerson: util.format("{R$n {D%s you for {R%d {Ddamage. {x[{%s%f%%{x]", format.thirdPerson, options.damage, code, display),
+						thirdPerson: util.format("{c$n %s $N for {R%d {cdamage. {x[{%s%f%%{x]", format.thirdPerson, options.damage, code, display)
+					},
+					options.attacker.loc.contents,
+					{directObject:options.target},
+					null,
+					CombatManager.category
+				);
+			} else {
+				let action = weapon.action;
+				let format = action.format;
+				Communicate.act(
+					options.attacker,
+					{
+						firstPerson: util.format("{wYou %s {R$N {wwith {Y%s {wfor {R%d {wdamage. {x[{%s%f%%{x]", format.firstPerson, weapon.display, options.damage, code, display),
+						secondPerson: util.format("{R$n {D%s you with {Y%s {Dfor {R%d {Ddamage. {x[{%s%f%%{x]", format.thirdPerson, weapon.display, options.damage, code, display),
+						thirdPerson: util.format("{c$n %s $N with {Y%s {cfor {R%d {cdamage. {x[{%s%f%%{x]", format.thirdPerson, weapon.display, options.damage, code, display)
+					},
+					options.attacker.loc.contents,
+					{directObject:options.target},
+					null,
+					CombatManager.category
+				);
+			}
+
+		// ability use
+		} else if(options.ability){
+			Communicate.act(
+				options.attacker,
+				{
+					firstPerson: util.format("{wYour {Y%s {whits {R$N {cfor {R%d {wdamage. {x[{%s%f%%{x]", options.ability, options.damage, code, display),
+					secondPerson: util.format("{R$n's {Y%s {Dhits you for {R%d {Ddamage. {x[{%s%f%%{x]", options.ability, options.damage, code, display),
+					thirdPerson: util.format("{c$n's {Y%s {chits $N for {R%d {cdamage. {x[{%s%f%%{x]", options.ability, options.damage, code, display)
+				},
+				options.attacker.loc.contents,
+				{directObject:options.target},
+				null,
+				CombatManager.category
+			);
 		}
 	}
 
