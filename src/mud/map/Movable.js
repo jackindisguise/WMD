@@ -40,7 +40,7 @@ class Movable extends MapObject{
 	}
 
 	toString(){
-		return util.format("{Movable<%d,%d,%d>}", this.x, this.y, this.z);
+		return util.format("[Movable<%d,%d,%d>]", this.x, this.y, this.z);
 	}
 
 	/**

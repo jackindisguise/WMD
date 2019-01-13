@@ -50,7 +50,7 @@ class Mob extends Movable{
 
 	toString(){
 		if(this.name) return this.name;
-		return util.format("{Mob@%s}", Movable.toString.call(this));
+		return util.format("[Mob@%s]", Movable.toString.call(this));
 	}
 
 	get rawStrength(){
@@ -493,7 +493,7 @@ class Mob extends Movable{
 		}
 
 		// default description
-		let desc = util.format("{C%s {D(%s){x\r\n    {c%s{x", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z), this.loc.description);
+		let desc = util.format("%s (%s)\r\n    %s", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z), this.loc.description);
 
 		// generate exits
 		let exits = [];
@@ -502,7 +502,7 @@ class Mob extends Movable{
 			if(step && this.canMove(step)) exits.push(Direction.long[name]);
 		}
 
-		desc += "\r\n\r\n" + _("{c[{CExits: {W%s{c]{x", exits.length ? exits.join(" ") : "none");
+		desc += "\r\n\r\n" + _("[Exits: %s]", exits.length ? exits.join(" ") : "none");
 
 		// generate content descriptions
 		for(let obj of this.loc.contents){
@@ -554,27 +554,27 @@ class Mob extends Movable{
 			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
 		}
 
-		let msg = _("{YYou are now level {W%d{x!", this.level);
+		let msg = _("You are now level %d!", this.level);
 		for(let attribute in diffAttributes){
 			let emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
 			let gain = diffAttributes[attribute] > 0;
 			let word = gain ? "increased" : "decreased";
-			msg += "\r\n" + _("Your %s has %s to {W%d{x ({%s%s%d{x).",
+			msg += "\r\n" + _("Your %s has %s to %d (%s%d).",
 				Attribute.display[attribute],
 				word,
 				nAttributes[attribute],
-				emphasis,
-				gain ? "+" : "", diffAttributes[attribute]);
+				gain ? "+" : "",
+				diffAttributes[attribute]);
 		}
 
 		for(let oAbility of oAbilities) {
 			if(nAbilities.indexOf(oAbility) !== -1) continue; // still know ability
-			msg += "\r\n" + _("You {Rforgot{x an ability: {R%s{x", oAbility.display);
+			msg += "\r\n" + _("You forgot an ability: %s", oAbility.display);
 		}
 
 		for(let nAbility of nAbilities) {
 			if(oAbilities.indexOf(nAbility) !== -1) continue; // knew this ability before
-			msg += "\r\n" + _("You {Glearned{x a new ability: {G%s{x", nAbility.display);
+			msg += "\r\n" + _("You learned a new ability: %s", nAbility.display);
 		}
 
 		this.sendMessage(msg, MessageCategory.LEVELUP);
@@ -768,8 +768,8 @@ class Mob extends Movable{
 					Communicate.act(
 						this,
 						{
-							firstPerson: "{RYou begin screaming like a maniac and attack again.{x",
-							thirdPerson: "{R$n begins screaming like a maniac and attacks again.{x"
+							firstPerson: "You begin screaming like a maniac and attack again.",
+							thirdPerson: "$n begins screaming like a maniac and attacks again."
 						},
 						this.loc.contents,
 						null,
@@ -809,9 +809,9 @@ class Mob extends Movable{
 			Communicate.act(
 				this,
 				{
-					firstPerson: "{wYour hit misses $N.{x",
-					secondPerson: "{D$n's hit misses you.{x",
-					thirdPerson: "{r$n's hit misses $N.{x"
+					firstPerson: "Your hit misses $N.",
+					secondPerson: "$n's hit misses you.",
+					thirdPerson: "$n's hit misses $N."
 				},
 				this.loc.contents,
 				{directObject:target},
@@ -851,8 +851,8 @@ class Mob extends Movable{
 		Communicate.act(
 			this,
 			{
-				firstPerson: "{RYou hit the ground, dead.{x",
-				thirdPerson: "{R$n hits the ground, dead.{x"
+				firstPerson: "You hit the ground, dead.",
+				thirdPerson: "$n hits the ground, dead."
 			},
 			this.loc.contents
 		);
@@ -869,7 +869,7 @@ class Mob extends Movable{
 
 	killed(victim){
 		let experience = victim.level*100;
-		this.sendMessage(_("{CYou gain {W%d{C experience.{x", experience), MessageCategory.INFO);
+		this.sendMessage(_("You gain %d experience.", experience), MessageCategory.INFO);
 		this.gainExperience(experience);
 	}
 
@@ -885,7 +885,7 @@ class Mob extends Movable{
 	busy(delay){
 		this.ready = false;
 		setTimeout(function(){
-			this.sendMessage("{wYou regain your balance. {x[{G+READY{x]", MessageCategory.READY);
+			this.sendMessage("You regain your balance. [+READY]", MessageCategory.READY);
 			this.ready = true;
 		}.bind(this), delay);
 	}

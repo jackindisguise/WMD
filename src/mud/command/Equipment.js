@@ -13,7 +13,7 @@ class Equipment extends Command{
 		for(let slot in mob.worn){
 			let eq = mob.worn[slot];
 			let name = WearSlot.display[slot]; 
-			msg += "\r\n" + util.format("{G%s:{x %s", name.padLeft(18), eq ? eq.display : "[nothing]");
+			msg += "\r\n" + util.format("%s: %s", name.padLeft(18), eq ? eq.display : "[nothing]");
 		}
 
 		mob.sendLine(msg);

@@ -18,7 +18,7 @@ class AcidBlast extends Ability{
 		Communicate.act(
 			user,
 			{
-				firstPerson: "You begin to chant a spell. [{R-READY{x}]",
+				firstPerson: "You begin to chant a spell. [-READY}]",
 				thirdPerson: "$n begins chanting a spell."
 			},
 			user.loc.contents,

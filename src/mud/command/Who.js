@@ -12,7 +12,7 @@ class Who extends Command{
 		let msg = _("Players Connected: %d", PlayerManager.players.length);
 		for(let player of PlayerManager.players){
 			msg += "\r\n";
-			msg += util.format("%s", player.mob ? "["+player.mob.name+"]" : "{"+player.socketID+"}");
+			msg += util.format("%s", player.mob ? "["+player.mob.name+"]" : "<"+player.socketID+">");
 		}
 
 		mob.sendLine(msg);

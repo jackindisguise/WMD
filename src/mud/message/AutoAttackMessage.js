@@ -2,15 +2,15 @@ const CombatManager = require("../manager/CombatManager");
 
 const AutoAttackMessage = {
 	me:function(options){
-		let msg = AutoAttackMessage("{wYou start circling around %s.{x", options.target.display);
+		let msg = AutoAttackMessage("You start circling around %s.", options.target.display);
 		this.sendMessage(msg, CombatManager.category);
 	},
 	you:function(options){
-		let msg = AutoAttackMessage("{w%s starts circling around you.{x", options.actor.display);
+		let msg = AutoAttackMessage("%s starts circling around you.", options.actor.display);
 		this.sendMessage(msg, CombatManager.category);
 	},
 	other:function(options){
-		let msg = AutoAttackMessage("{w%s starts circling around %s.{x", options.actor.display, options.target.display);
+		let msg = AutoAttackMessage("%s starts circling around %s.", options.actor.display, options.target.display);
 		this.sendMessage(msg, CombatManager.category);
 	},
 	send:function(options){

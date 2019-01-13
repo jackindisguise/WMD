@@ -29,9 +29,9 @@ class Player extends EventEmitter {
 	}
 
 	toString(){
-		if(this.mob) return util.format("{Player@%s}", this.mob.name);
-		if(this.socketID) return util.format("{Player#%s}", this.socketID);
-		return "{Player}";
+		if(this.mob) return util.format("<Player@%s>", this.mob.name);
+		if(this.socketID) return util.format("<Player#%s>", this.socketID);
+		return "<Player>";
 	}
 
 	get socketID(){

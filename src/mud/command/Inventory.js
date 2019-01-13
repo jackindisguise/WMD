@@ -12,7 +12,7 @@ class Inventory extends Command{
 		let msg = _("You are carrying:");
 		if(mob.contents.length){
 			for(let obj of mob.contents){
-				msg += "\r\n" + util.format("%s %s", (obj.worn ? _("{Y(worn){x") : "      "), obj.name);
+				msg += "\r\n" + util.format("%s %s", (obj.worn ? _("(worn)") : "      "), obj.name);
 			}
 		} else {
 			msg += "\r\n" + "    nothing";

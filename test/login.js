@@ -38,13 +38,13 @@ describe("[LOGIN]", function(){
 				break;
 
 			case 2:
-				msg = "{y------------------";
+				msg = "------------------";
 				for(let race of RaceManager.races){
-					msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.display.padLeft(14), "|", race.description);
+					msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
 				}
             
 				msg += "\r\n";
-				msg += "------------------{x";
+				msg += "------------------";
 				expect(message).to.equal(msg);
 				break;
 
@@ -54,13 +54,13 @@ describe("[LOGIN]", function(){
 				break;
 
 			case 4:
-				msg = "{c------------------";
+				msg = "------------------";
 				for(let _class of ClassManager.classes){
-					msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
+					msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
 				}
             
 				msg += "\r\n";
-				msg += "------------------{x";
+				msg += "------------------";
 				expect(message).to.equal(msg);
 				break;
 
@@ -83,7 +83,7 @@ describe("[LOGIN]", function(){
 				break;
 
 			case 9:
-				msg = "{Ca big beautiful meadow {D(0,0,0){x\r\n    {cIt's a big beautiful meadow. What more could you ask for?{x\r\n\r\n{c[{CExits: {Wsouth east southeast{c]{x\r\n    a rock thrower\r\n    Judas";
+				msg = "a big beautiful meadow (0,0,0)\r\n    It's a big beautiful meadow. What more could you ask for?\r\n\r\n[Exits: south east southeast]\r\n    a rock thrower\r\n    Judas";
 				expect(message).to.equal(msg);
 				player.emit("command", "blah");
 				break;

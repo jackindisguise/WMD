@@ -17,9 +17,9 @@ class Circle extends Ability{
 		Communicate.act(
 			user,
 			{
-				firstPerson: "{wYou start circling around $N. {x[{R-READY{x]",
-				secondPerson: "{D$n starts circling around you.{x",
-				thirdPerson: "{c$n starts circling around $N.{x"
+				firstPerson: "You start circling around $N. [-READY]",
+				secondPerson: "$n starts circling around you.",
+				thirdPerson: "$n starts circling around $N."
 			},
 			user.loc.contents,
 			{directObject:target},

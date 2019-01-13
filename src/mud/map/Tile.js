@@ -31,7 +31,7 @@ class Tile extends MapObject{
 	}
 
 	toString(){
-		return util.format("{Tile<%d,%d,%d>}", this.x, this.y, this.z);
+		return util.format("[Tile<%d,%d,%d>]", this.x, this.y, this.z);
 	}
 
 	set map(map){

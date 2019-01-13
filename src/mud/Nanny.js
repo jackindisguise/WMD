@@ -51,13 +51,13 @@ class Nanny{
 	}
 
 	askForRace(){
-		let msg = "{y------------------";
+		let msg = "------------------";
 		for(let race of RaceManager.races){
-			msg += util.format("%s%s {Y%s {y%s {x%s{y", "\r\n", "|", race.display.padLeft(14), "|", race.description);
+			msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
 		}
 
 		msg += "\r\n";
-		msg += "------------------{x";
+		msg += "------------------";
 		this.player.sendLine(msg);
 		this.player.ask(_("Enter a race:"), function(input){
 			this.processRace(input);
@@ -77,13 +77,13 @@ class Nanny{
 	}
 
 	askForClass(){
-		let msg = "{c------------------";
+		let msg = "------------------";
 		for(let _class of ClassManager.classes){
-			msg += util.format("%s%s {C%s {c%s {x%s{c", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
+			msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
 		}
 
 		msg += "\r\n";
-		msg += "------------------{x";
+		msg += "------------------";
 		this.player.sendLine(msg);
 		this.player.ask(_("Enter a class:"), function(input){
 			this.processClass(input);

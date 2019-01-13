@@ -60,9 +60,9 @@ class Communicate{
 				Communicate.act(
 					options.attacker,
 					{
-						firstPerson: util.format("{wYou %s {R$N {wfor {R%d {wdamage. {x[{%s%f%%{x]", format.firstPerson, options.damage, code, display),
-						secondPerson: util.format("{R$n {D%s you for {R%d {Ddamage. {x[{%s%f%%{x]", format.thirdPerson, options.damage, code, display),
-						thirdPerson: util.format("{c$n %s $N for {R%d {cdamage. {x[{%s%f%%{x]", format.thirdPerson, options.damage, code, display)
+						firstPerson: util.format("You %s $N for %d damage. [%f%%]", format.firstPerson, options.damage, display),
+						secondPerson: util.format("$n %s you for %d damage. [%f%%]", format.thirdPerson, options.damage, display),
+						thirdPerson: util.format("$n %s $N for %d damage. [%f%%]", format.thirdPerson, options.damage, display)
 					},
 					options.attacker.loc.contents,
 					{directObject:options.target},
@@ -75,9 +75,9 @@ class Communicate{
 				Communicate.act(
 					options.attacker,
 					{
-						firstPerson: util.format("{wYou %s {R$N {wwith {Y%s {wfor {R%d {wdamage. {x[{%s%f%%{x]", format.firstPerson, weapon.display, options.damage, code, display),
-						secondPerson: util.format("{R$n {D%s you with {Y%s {Dfor {R%d {Ddamage. {x[{%s%f%%{x]", format.thirdPerson, weapon.display, options.damage, code, display),
-						thirdPerson: util.format("{c$n %s $N with {Y%s {cfor {R%d {cdamage. {x[{%s%f%%{x]", format.thirdPerson, weapon.display, options.damage, code, display)
+						firstPerson: util.format("You %s $N with %s for %d damage. [%f%%]", format.firstPerson, weapon.display, options.damage, display),
+						secondPerson: util.format("$n %s you with %s for %d damage. [%f%%]", format.thirdPerson, weapon.display, options.damage, display),
+						thirdPerson: util.format("$n %s $N with %s for %d damage. [%f%%]", format.thirdPerson, weapon.display, options.damage, display)
 					},
 					options.attacker.loc.contents,
 					{directObject:options.target},
@@ -91,9 +91,9 @@ class Communicate{
 			Communicate.act(
 				options.attacker,
 				{
-					firstPerson: util.format("{wYour {Y%s {whits {R$N {cfor {R%d {wdamage. {x[{%s%f%%{x]", options.ability, options.damage, code, display),
-					secondPerson: util.format("{R$n's {Y%s {Dhits you for {R%d {Ddamage. {x[{%s%f%%{x]", options.ability, options.damage, code, display),
-					thirdPerson: util.format("{c$n's {Y%s {chits $N for {R%d {cdamage. {x[{%s%f%%{x]", options.ability, options.damage, code, display)
+					firstPerson: util.format("Your %s hits $N for %d damage. [%f%%]", options.ability, options.damage, display),
+					secondPerson: util.format("$n's %s hits you for %d damage. [%f%%]", options.ability, options.damage, display),
+					thirdPerson: util.format("$n's %s hits $N for %d damage. [%f%%]", options.ability, options.damage, display)
 				},
 				options.attacker.loc.contents,
 				{directObject:options.target},
@@ -112,9 +112,9 @@ class Communicate{
 		Communicate.act(
 			attacker,
 			{
-				firstPerson: util.format("{wYou %s $N for {R%d{w damage.{x [{%s%f%%{x]", action.firstPerson, damage, code, display),
-				secondPerson: util.format("{D$n %s you for {R%d{D damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display),
-				thirdPerson: util.format("{r$n %s $N for {R%d{r damage.{x [{%s%f%%{x]", action.thirdPerson, damage, code, display)
+				firstPerson: util.format("You %s $N for %d damage. [%f%%]", action.firstPerson, damage, display),
+				secondPerson: util.format("$n %s you for %d damage. [%f%%]", action.thirdPerson, damage, display),
+				thirdPerson: util.format("$n %s $N for %d damage. [%f%%]", action.thirdPerson, damage, display)
 			},
 			attacker.loc.contents,
 			{directObject:target},
@@ -132,9 +132,9 @@ class Communicate{
 		Communicate.act(
 			attacker,
 			{
-				firstPerson: util.format("{wYour %s hits $N for {R%d{w damage.{x [{%s%f%%{x]", ability, damage, code, display),
-				secondPerson: util.format("{D$n's %s hits you for {R%d{D damage.{x [{%s%f%%{x]", ability, damage, code, display),
-				thirdPerson: util.format("{r$n's %s hits $N for {R%d{r damage.{x [{%s%f%%{x]", ability, damage, code, display)
+				firstPerson: util.format("Your %s hits $N for %d damage. [%f%%]", ability, damage, display),
+				secondPerson: util.format("$n's %s hits you for %d damage. [%f%%]", ability, damage, display),
+				thirdPerson: util.format("$n's %s hits $N for %d damage. [%f%%]", ability, damage, display)
 			},
 			attacker.loc.contents,
 			{directObject:target},
