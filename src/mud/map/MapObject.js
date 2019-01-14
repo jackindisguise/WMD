@@ -24,7 +24,7 @@ class MapObject{
 	}
 
 	get long(){
-		return `${this.article}${this.name}`;
+		return `${this.article ? this.article : ""}${this.name}`;
 	}
 
 	get article(){

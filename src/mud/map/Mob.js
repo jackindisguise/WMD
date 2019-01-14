@@ -508,7 +508,7 @@ class Mob extends Movable{
 
 		// generate content descriptions
 		for(let obj of this.loc.contents){
-			desc += "\r\n" + util.format("    %s", obj.name);
+			desc += "\r\n    " + util.format("%s", obj.long);
 		}
 
 		this.sendMessage(desc, MessageCategory.ROOM);
