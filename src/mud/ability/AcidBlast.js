@@ -3,7 +3,7 @@ const Spell = require("../Spell");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const CombatManager = require("../manager/CombatManager");
-const AttackAbilityMessage = require("../message/AttackAbilty");
+const AttackAbilityMessage = require("../message/AttackAbility");
 const AbilitySpellCastMessage = require("../message/AbilitySpellCast");
 
 class AcidBlast extends Spell{

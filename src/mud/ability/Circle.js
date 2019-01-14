@@ -3,7 +3,7 @@ const Ability = require("../Ability");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const CombatManager = require("../manager/CombatManager");
-const AttackAbilityMessage = require("../message/AttackAbilty");
+const AttackAbilityMessage = require("../message/AttackAbility");
 const AbilityCircleMessage = require("../message/AbilityCircle");
 
 class Circle extends Ability{
