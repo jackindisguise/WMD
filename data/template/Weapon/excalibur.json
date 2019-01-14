@@ -2,7 +2,7 @@
     "name": "Weapon.excalibur",
     "obj":{
         "constructor": "Weapon",
-        "keywords": "legendary sword excalibur",
-        "display": "the legendary sword Excalibur"
+        "keywords": "excalibur",
+        "display": "Excalibur"
     }
 }

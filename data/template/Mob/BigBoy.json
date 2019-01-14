@@ -3,7 +3,7 @@
     "obj":{
 		"constructor": "Mob",
         "keywords": "bigboy big boy",
-        "display": "a big boy",
+        "display": "big boy",
         "race": "PC.human",
         "class": "PC.warrior",
 		"level": 10

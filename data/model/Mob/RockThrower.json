@@ -3,7 +3,7 @@
 	"obj":{
 		"template":"Mob.BigBoy",
 		"keywords":"rock thrower rockthrower",
-		"display":"a rock thrower",
+		"display":"ignace salamander",
 		"contents":[{"template":"Item.rock"}]
 	}
 }

@@ -43,8 +43,16 @@ class Communicate{
 					else if(options.suffix.thirdPerson) processed = processed + options.suffix.thirdPerson;
 				}
 
-				// tie in options
-				recipient.sendMessage(processed.tie(options), category);
+				// tie options
+				processed = processed.tie(options);
+
+				// capitalize first letter
+				let firstLetterRule = /(?<!\{)[^{\s]/;
+				processed = processed.replace(firstLetterRule, function(char){
+					return char.toUpperCase();
+				});
+
+				recipient.sendMessage(processed, category);
 			}
 		}
 	}

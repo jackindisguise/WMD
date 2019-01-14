@@ -23,6 +23,20 @@ class MapObject{
 		return this.name || "[MapObject]";
 	}
 
+	get long(){
+		return `${this.article}${this.name}`;
+	}
+
+	get article(){
+		if(!this.name) return null;
+		let firstLetterRule = /(?<!\{)([^{\s])/;
+		let firstLetter = firstLetterRule.exec(this.name);
+		if(firstLetter[0] === firstLetter[0].toUpperCase()) return null;
+		let consonants = /[bcdfghjklmnpqrstvwxyz]/;
+		if(firstLetter[0].match(consonants)) return "a ";
+		else return "an ";
+	}
+
 	/**
 	 * Shortcut for the display name.
 	 */
