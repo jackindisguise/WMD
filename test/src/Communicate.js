@@ -32,7 +32,12 @@ describe("[COMMUNICATE]", function(){
 			d();
 		};
 
-		let message = "this is a test";
-		Communicate.act(mob, {firstPerson:"You say '$m.'", thirdPerson:"$n says '$m.'"}, [mob, mob2], {message:message});
+		let content = "this is a test";
+		Communicate.act({
+			actor: mob,
+			recipients:[mob, mob2],
+			message:{firstPerson:"You say '${content}.'", thirdPerson:"${actor} says '${content}.'"},
+			content:content
+		});
 	});
 });
