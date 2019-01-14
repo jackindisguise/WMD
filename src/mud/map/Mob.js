@@ -494,8 +494,8 @@ class Mob extends Movable{
 		}
 
 		// default description
-		let desc = util.format("%s (%s)", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z));
-		desc += "\r\n    " + util.format("%s", this.loc.description);
+		let desc = util.format("{C%s{x ({Y%s{x)", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z));
+		desc += "\r\n    " + util.format("{c%s{x", this.loc.description);
 
 		// generate exits
 		let exits = [];
