@@ -120,5 +120,9 @@
 	"          %d intelligence, granting %d magic power, resilience, and wisdom.": "          %d intelligence, granting %d magic power, resilience, and wisdom.",
 	"             %d magic power, granting %d magical damage.": "             %d magic power, granting %d magical damage.",
 	"             %d resilience, granting %d magical damage mitigation.": "             %d resilience, granting %d magical damage mitigation.",
-	"             %d wisdom, granting %d maximum mana.": "             %d wisdom, granting %d maximum mana."
+	"             %d wisdom, granting %d maximum mana.": "             %d wisdom, granting %d maximum mana.",
+	"{%sYour %s has %s to %d (%s%d).": "{%sYour %s has %s to %d (%s%d).",
+	"{GYou learned a new ability: {W%s{x": "{GYou learned a new ability: {W%s{x",
+	"{%sYour %s has %s to {W%d{x ({%s%s%d{x).": "{%sYour %s has %s to {W%d{x ({%s%s%d{x).",
+	"{BYou gain {W%d {Bexperience.{x": "{BYou gain {W%d {Bexperience.{x"
 }

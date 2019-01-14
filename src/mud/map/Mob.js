@@ -20,10 +20,10 @@ const WearLocation = require("../WearLocation");
 const WearSlot = require("../WearSlot");
 const Equipment = require("./Equipment");
 const DamageType = require("../DamageType");
-const HitAttackMessage = require("../message/HitAttack");
-const WeaponAttackMessage = require("../message/WeaponAttack");
-const MissAttackMessage = require("../message/MissAttack");
-const DeathMessage = require("../message/Death");
+const AttackHitAutoMessage = require("../message/AttackHitAuto");
+const AttackHitWeaponMessage = require("../message/AttackHitWeapon");
+const AttackMissMessage = require("../message/AttackMiss");
+const DeathCryMessage = require("../message/DeathCry");
 const AbilityManiacMessage = require("../message/AbilityManiac");
 
 /**
@@ -560,27 +560,29 @@ class Mob extends Movable{
 			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
 		}
 
-		let msg = _("You are now level %d!", this.level);
+		let msg = _("{YYou are now level {W%d{x!", this.level);
 		for(let attribute in diffAttributes){
 			let emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
 			let gain = diffAttributes[attribute] > 0;
 			let word = gain ? "increased" : "decreased";
-			msg += "\r\n" + _("Your %s has %s to %d (%s%d).",
+			msg += "\r\n" + _("{%sYour %s has %s to {W%d{x ({%s%s%d{x).",
+				emphasis,
 				Attribute.display[attribute],
 				word,
 				nAttributes[attribute],
+				emphasis,
 				gain ? "+" : "",
 				diffAttributes[attribute]);
 		}
 
 		for(let oAbility of oAbilities) {
 			if(nAbilities.indexOf(oAbility) !== -1) continue; // still know ability
-			msg += "\r\n" + _("You forgot an ability: %s", oAbility.display);
+			msg += "\r\n" + _("{RYou forgot an ability: {W%s{x", oAbility.display);
 		}
 
 		for(let nAbility of nAbilities) {
 			if(oAbilities.indexOf(nAbility) !== -1) continue; // knew this ability before
-			msg += "\r\n" + _("You learned a new ability: %s", nAbility.display);
+			msg += "\r\n" + _("{GYou learned a new ability: {W%s{x", nAbility.display);
 		}
 
 		this.sendMessage(msg, MessageCategory.LEVELUP);
@@ -774,8 +776,8 @@ class Mob extends Movable{
 					Communicate.act({
 						actor:this,
 						recipients:this.loc.contents,
+						category:CombatManager.category,
 						message:AbilityManiacMessage,
-						category:CombatManager.category
 					});
 					this.combatRound();
 				}
@@ -805,21 +807,21 @@ class Mob extends Movable{
 					actor:this,
 					directObject:target,
 					recipients:this.loc.contents,
-					message:WeaponAttackMessage,
+					category:CombatManager.category,
+					message:AttackHitWeaponMessage,
 					weapon:weapon,
 					action:action,
-					damage:damage,
-					category:CombatManager.category
+					damage:damage
 				});
 			} else {
 				Communicate.hit({
 					actor:this,
 					directObject:target,
 					recipients:this.loc.contents,
-					message:HitAttackMessage,
+					category:CombatManager.category,
+					message:AttackHitAutoMessage,
 					action:action,
-					damage:damage,
-					category:CombatManager.category
+					damage:damage
 				});
 			}
 
@@ -833,8 +835,8 @@ class Mob extends Movable{
 				actor:this,
 				directObject:target,
 				recipients:this.loc.contents,
-				message:MissAttackMessage,
-				category:CombatManager.category
+				category:CombatManager.category,
+				message:AttackMissMessage
 			});
 		}
 	}
@@ -869,7 +871,7 @@ class Mob extends Movable{
 		Communicate.act({
 			actor:this,
 			recipients:this.loc.contents,
-			message:DeathMessage
+			message:DeathCryMessage
 		});
 
 		if(this.fighting) this.fighting.disengage();
@@ -884,7 +886,7 @@ class Mob extends Movable{
 
 	killed(victim){
 		let experience = victim.level*100;
-		this.sendMessage(_("You gain %d experience.", experience), MessageCategory.INFO);
+		this.sendMessage(_("{BYou gain {W%d {Bexperience.{x", experience), MessageCategory.INFO);
 		this.gainExperience(experience);
 	}
 
@@ -900,7 +902,7 @@ class Mob extends Movable{
 	busy(delay){
 		this.ready = false;
 		setTimeout(function(){
-			this.sendMessage("You regain your balance. [+READY]", MessageCategory.READY);
+			this.sendMessage("You regain your balance. [{G+READY{x]", MessageCategory.READY);
 			this.ready = true;
 		}.bind(this), delay);
 	}

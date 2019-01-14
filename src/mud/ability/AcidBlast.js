@@ -1,12 +1,12 @@
 // local includes
-const Ability = require("../Ability");
+const Spell = require("../Spell");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const CombatManager = require("../manager/CombatManager");
-const AbilityAttackMessage = require("../message/AbilityAttack");
-const AbilityAcidBlastMessage = require("../message/AbilityAcidBlast");
+const AttackAbilityMessage = require("../message/AttackAbilty");
+const AbilitySpellCastMessage = require("../message/AbilitySpellCast");
 
-class AcidBlast extends Ability{
+class AcidBlast extends Spell{
 	/**
 	 * 
 	 * @param {Mob} user 
@@ -18,8 +18,9 @@ class AcidBlast extends Ability{
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			message:AbilityAcidBlastMessage,
-			category:CombatManager.category
+			category:CombatManager.category,
+			message:AbilitySpellCastMessage,
+			ability:this
 		});
 
 		// determine damage
@@ -30,10 +31,10 @@ class AcidBlast extends Ability{
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			message:AbilityAttackMessage,
+			category:CombatManager.category,
+			message:AttackAbilityMessage,
 			ability:this,
-			damage:damage,
-			category:CombatManager.category
+			damage:damage
 		});
 
 		// inflict damage
