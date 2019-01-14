@@ -14,10 +14,10 @@ class Equipment extends Item{
 	get rawHealth(){ return this.healthBonus; }
 	get agility(){ return this.agilityBonus; }
 	get rawAgility(){ return this.agilityBonus; }
-	get speed(){ return this.speedBonus; }
-	get rawSpeed(){ return this.speedBonus; }
-	get evasion(){ return this.evasionBonus; }
-	get rawEvasion(){ return this.evasionBonus; }
+	get precision(){ return this.precisionBonus; }
+	get rawPrecision(){ return this.precisionBonus; }
+	get deflection(){ return this.deflectionBonus; }
+	get rawDeflection(){ return this.deflectionBonus; }
 	get stamina(){ return this.staminaBonus; }
 	get rawStamina(){ return this.staminaBonus; }
 	get energy(){ return this.energyBonus; }
@@ -41,8 +41,8 @@ Equipment.prototype.defenseBonus = 0;
 Equipment.prototype.vitalityBonus = 0;
 Equipment.prototype.healthBonus = 0;
 Equipment.prototype.agilityBonus = 0;
-Equipment.prototype.speedBonus = 0;
-Equipment.prototype.evasionBonus = 0;
+Equipment.prototype.precisionBonus = 0;
+Equipment.prototype.deflectionBonus = 0;
 Equipment.prototype.staminaBonus = 0;
 Equipment.prototype.energyBonus = 0;
 Equipment.prototype.intelligenceBonus = 0;

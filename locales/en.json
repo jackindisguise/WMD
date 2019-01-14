@@ -124,5 +124,12 @@
 	"{%sYour %s has %s to %d (%s%d).": "{%sYour %s has %s to %d (%s%d).",
 	"{GYou learned a new ability: {W%s{x": "{GYou learned a new ability: {W%s{x",
 	"{%sYour %s has %s to {W%d{x ({%s%s%d{x).": "{%sYour %s has %s to {W%d{x ({%s%s%d{x).",
-	"{BYou gain {W%d {Bexperience.{x": "{BYou gain {W%d {Bexperience.{x"
+	"{BYou gain {W%d {Bexperience.{x": "{BYou gain {W%d {Bexperience.{x",
+	"Your %s has %s to {%s%d{x ({%s%s%d{x).": "Your %s has %s to {%s%d{x ({%s%s%d{x).",
+	"You learned a new ability: {R%s{x": "You learned a new ability: {R%s{x",
+	"You gain {B%d {xexperience.": "You gain {B%d {xexperience.",
+	"You learned a new ability: {G%s{x": "You learned a new ability: {G%s{x",
+	"{yYou are now level {Y%d{x!": "{yYou are now level {Y%d{x!",
+	"{cYou gain {B%d {cexperience.{x": "{cYou gain {B%d {cexperience.{x",
+	"{gYour %s has %s to {%s%d{x ({%s%s%d{x).": "{gYour %s has %s to {%s%d{x ({%s%s%d{x)."
 }

@@ -3,8 +3,7 @@ const Ability = require("../Ability");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const CombatManager = require("../manager/CombatManager");
-const AttackAbilityMessage = require("../message/AttackAbility");
-const AbilityCircleMessage = require("../message/AbilityCircle");
+const Message = require("../Message");
 
 class Circle extends Ability{
 	/**
@@ -18,33 +17,36 @@ class Circle extends Ability{
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			message:AbilityCircleMessage,
+			message:Message.AbilityCircle,
 			category:CombatManager.category
 		});
 
 		// engage
 		user.engage(target);
 
-		// start iterations
-		for(let i=0;i<2;i++){
-			if(user.fighting == null) break; // avoid trying to damage someone we've already killed, basically
+		// determine total damage
+		let hits = 6;
+		let modifier = 1.75;
+		let damage = target.processDamage({attacker:user, damage:user.attackPower*modifier, type:DamageType.PIERCE});
+		let perHitDamage = Math.round(damage / hits);
 
-			// determine damage
-			let damage = target.processDamage({attacker:user, damage:user.attackPower, type:DamageType.PIERCE});
+		// start iterations
+		for(let i=0;i<hits;i++){
+			if(user.fighting == null) break; // avoid trying to damage someone we've already killed, basically
 
 			// damage message
 			Communicate.hit({
 				actor:user,
 				directObject:target,
 				recipients:user.loc.contents,
-				message:AttackAbilityMessage,
+				message:Message.AttackAbility,
 				ability:this,
-				damage:damage,
+				damage:perHitDamage,
 				category:CombatManager.category
 			});
 
 			// inflict damage
-			target.damage(user, damage);
+			target.damage(user, perHitDamage);
 		}
 
 		// busy user

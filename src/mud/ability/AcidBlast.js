@@ -3,8 +3,7 @@ const Spell = require("../Spell");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const CombatManager = require("../manager/CombatManager");
-const AttackAbilityMessage = require("../message/AttackAbility");
-const AbilitySpellCastMessage = require("../message/AbilitySpellCast");
+const Message = require("../Message");
 
 class AcidBlast extends Spell{
 	/**
@@ -19,7 +18,7 @@ class AcidBlast extends Spell{
 			directObject:target,
 			recipients:user.loc.contents,
 			category:CombatManager.category,
-			message:AbilitySpellCastMessage,
+			message:Message.AbilitySpellCast,
 			ability:this
 		});
 
@@ -32,7 +31,7 @@ class AcidBlast extends Spell{
 			directObject:target,
 			recipients:user.loc.contents,
 			category:CombatManager.category,
-			message:AttackAbilityMessage,
+			message:Message.AttackAbility,
 			ability:this,
 			damage:damage
 		});

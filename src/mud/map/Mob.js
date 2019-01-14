@@ -20,11 +20,7 @@ const WearLocation = require("../WearLocation");
 const WearSlot = require("../WearSlot");
 const Equipment = require("./Equipment");
 const DamageType = require("../DamageType");
-const AttackHitAutoMessage = require("../message/AttackHitAuto");
-const AttackHitWeaponMessage = require("../message/AttackHitWeapon");
-const AttackMissMessage = require("../message/AttackMiss");
-const DeathCryMessage = require("../message/DeathCry");
-const AbilityManiacMessage = require("../message/AbilityManiac");
+const Message = require("../Message");
 
 /**
  * Represents an animate creature on the map.
@@ -55,8 +51,7 @@ class Mob extends Movable{
 	}
 
 	toString(){
-		if(this.name) return this.name;
-		return util.format("[Mob@%s]", Movable.toString.call(this));
+		return this.name || super.toString();
 	}
 
 	get rawStrength(){
@@ -168,10 +163,10 @@ class Mob extends Movable{
 	}
 
 	get rawPrecision(){
-		let speed = 0;
-		speed += this._race.getPrecisionByLevel(this.level);
-		speed += this._class.getPrecisionByLevel(this.level);
-		return Math.floor(speed);
+		let precision = 0;
+		precision += this._race.getPrecisionByLevel(this.level);
+		precision += this._class.getPrecisionByLevel(this.level);
+		return Math.floor(precision);
 	}
 
 	get precision(){
@@ -180,7 +175,7 @@ class Mob extends Movable{
 		speed += this._class.getPrecisionByLevel(this.level);
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
-			if(eq) speed += eq.speed;
+			if(eq) speed += eq.precision;
 		}
 		return Math.floor(speed);
 	}
@@ -499,7 +494,8 @@ class Mob extends Movable{
 		}
 
 		// default description
-		let desc = util.format("%s (%s)\r\n    %s", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z), this.loc.description);
+		let desc = util.format("%s (%s)", this.loc.name, util.format("%d,%d,%d",this.x,this.y,this.z));
+		desc += "\r\n    " + util.format("%s", this.loc.description);
 
 		// generate exits
 		let exits = [];
@@ -519,6 +515,7 @@ class Mob extends Movable{
 	}
 
 	gainExperience(amount){
+		this.sendMessage(_("{cYou gain {B%d {cexperience.{x", amount), MessageCategory.INFO);
 		this.experience += amount;
 		while(this.experience >= this.toNextLevel) this.levelup();
 	}
@@ -560,15 +557,15 @@ class Mob extends Movable{
 			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
 		}
 
-		let msg = _("{YYou are now level {W%d{x!", this.level);
+		let msg = _("{yYou are now level {Y%d{x!", this.level);
 		for(let attribute in diffAttributes){
 			let emphasis = diffAttributes[attribute] > 0 ? "G" : "R";
 			let gain = diffAttributes[attribute] > 0;
 			let word = gain ? "increased" : "decreased";
-			msg += "\r\n" + _("{%sYour %s has %s to {W%d{x ({%s%s%d{x).",
-				emphasis,
+			msg += "\r\n" + _("Your %s has %s to {%s%d{x ({%s%s%d{x).",
 				Attribute.display[attribute],
 				word,
+				emphasis,
 				nAttributes[attribute],
 				emphasis,
 				gain ? "+" : "",
@@ -577,12 +574,12 @@ class Mob extends Movable{
 
 		for(let oAbility of oAbilities) {
 			if(nAbilities.indexOf(oAbility) !== -1) continue; // still know ability
-			msg += "\r\n" + _("{RYou forgot an ability: {W%s{x", oAbility.display);
+			msg += "\r\n" + _("You forgot an ability: {R%s{x", oAbility.display);
 		}
 
 		for(let nAbility of nAbilities) {
 			if(oAbilities.indexOf(nAbility) !== -1) continue; // knew this ability before
-			msg += "\r\n" + _("{GYou learned a new ability: {W%s{x", nAbility.display);
+			msg += "\r\n" + _("You learned a new ability: {G%s{x", nAbility.display);
 		}
 
 		this.sendMessage(msg, MessageCategory.LEVELUP);
@@ -777,7 +774,7 @@ class Mob extends Movable{
 						actor:this,
 						recipients:this.loc.contents,
 						category:CombatManager.category,
-						message:AbilityManiacMessage,
+						message:Message.AbilityManiac,
 					});
 					this.combatRound();
 				}
@@ -808,7 +805,7 @@ class Mob extends Movable{
 					directObject:target,
 					recipients:this.loc.contents,
 					category:CombatManager.category,
-					message:AttackHitWeaponMessage,
+					message:Message.AttackHitWeapon,
 					weapon:weapon,
 					action:action,
 					damage:damage
@@ -819,7 +816,7 @@ class Mob extends Movable{
 					directObject:target,
 					recipients:this.loc.contents,
 					category:CombatManager.category,
-					message:AttackHitAutoMessage,
+					message:Message.AttackHitAuto,
 					action:action,
 					damage:damage
 				});
@@ -836,7 +833,7 @@ class Mob extends Movable{
 				directObject:target,
 				recipients:this.loc.contents,
 				category:CombatManager.category,
-				message:AttackMissMessage
+				message:Message.AttackMiss
 			});
 		}
 	}
@@ -871,7 +868,7 @@ class Mob extends Movable{
 		Communicate.act({
 			actor:this,
 			recipients:this.loc.contents,
-			message:DeathCryMessage
+			message:Message.DeathCry
 		});
 
 		if(this.fighting) this.fighting.disengage();
@@ -886,7 +883,6 @@ class Mob extends Movable{
 
 	killed(victim){
 		let experience = victim.level*100;
-		this.sendMessage(_("{BYou gain {W%d {Bexperience.{x", experience), MessageCategory.INFO);
 		this.gainExperience(experience);
 	}
 

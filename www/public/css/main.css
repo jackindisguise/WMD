@@ -2,7 +2,7 @@ body{
 	margin:0px;
 	padding:0px;
 	font-family:courier;
-	font-size:12px;
+	font-size:13px;
 	background: 
 		radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent),
 		radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px,
@@ -10,7 +10,7 @@ body{
 		linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0;
 		background-color: slategray;
 		background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
-	color:#080;
+	color:#C0C0C0;
 }
 
 #left{
@@ -82,7 +82,6 @@ body{
 	left:0px;
 	right:0px;
 	bottom:10px;
-	font-size:15px;
 	overflow:auto;
 }
 

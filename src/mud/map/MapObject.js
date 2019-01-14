@@ -20,7 +20,7 @@ class MapObject{
 	}
 
 	toString(){
-		return "{MapObject}";
+		return this.name || "[MapObject]";
 	}
 
 	/**
