@@ -3,6 +3,8 @@ const Ability = require("../Ability");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const CombatManager = require("../manager/CombatManager");
+const AbilityAttackMessage = require("../message/AbilityAttack");
+const AbilityAcidBlastMessage = require("../message/AbilityAcidBlast");
 
 class AcidBlast extends Ability{
 	/**
@@ -11,24 +13,28 @@ class AcidBlast extends Ability{
 	 * @param {Mob} target 
 	 */
 	use(user, target){
+		// ability message
+		Communicate.act({
+			actor:user,
+			directObject:target,
+			recipients:user.loc.contents,
+			message:AbilityAcidBlastMessage,
+			category:CombatManager.category
+		});
+
 		// determine damage
 		let damage = target.processDamage({attacker:user, damage:user.magicPower, type:DamageType.MAGICAL});
 
-		// ability message
-		Communicate.act(
-			user,
-			{
-				firstPerson: "You begin to chant a spell. [-READY}]",
-				thirdPerson: "$n begins chanting a spell."
-			},
-			user.loc.contents,
-			{directObject:target},
-			null,
-			CombatManager.category
-		);
-
 		// damage message
-		Communicate.hit({attacker:user, target:target, ability:"acid blast", damage:damage});
+		Communicate.hit({
+			actor:user,
+			directObject:target,
+			recipients:user.loc.contents,
+			message:AbilityAttackMessage,
+			ability:this,
+			damage:damage,
+			category:CombatManager.category
+		});
 
 		// inflict damage
 		target.damage(user, damage);

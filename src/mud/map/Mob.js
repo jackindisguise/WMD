@@ -4,6 +4,7 @@ const util = require("util");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
+const CombatAction = require("../CombatAction");
 const CombatManager = require("../manager/CombatManager");
 const Communicate = require("../Communicate");
 const Direction = require("../Direction");
@@ -19,6 +20,11 @@ const WearLocation = require("../WearLocation");
 const WearSlot = require("../WearSlot");
 const Equipment = require("./Equipment");
 const DamageType = require("../DamageType");
+const HitAttackMessage = require("../message/HitAttack");
+const WeaponAttackMessage = require("../message/WeaponAttack");
+const MissAttackMessage = require("../message/MissAttack");
+const DeathMessage = require("../message/Death");
+const AbilityManiacMessage = require("../message/AbilityManiac");
 
 /**
  * Represents an animate creature on the map.
@@ -180,21 +186,21 @@ class Mob extends Movable{
 	}
 
 	get rawDeflection(){
-		let evasion = 0;
-		evasion += this._race.getDeflectionByLevel(this.level);
-		evasion += this._class.getDeflectionByLevel(this.level);
-		return Math.floor(evasion);
+		let deflection = 0;
+		deflection += this._race.getDeflectionByLevel(this.level);
+		deflection += this._class.getDeflectionByLevel(this.level);
+		return Math.floor(deflection);
 	}
 
 	get deflection(){
-		let evasion = this.agility;
-		evasion += this._race.getDeflectionByLevel(this.level);
-		evasion += this._class.getDeflectionByLevel(this.level);
+		let deflection = this.agility;
+		deflection += this._race.getDeflectionByLevel(this.level);
+		deflection += this._class.getDeflectionByLevel(this.level);
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
-			if(eq) evasion += eq.evasion;
+			if(eq) deflection += eq.deflection;
 		}
-		return Math.floor(evasion);
+		return Math.floor(deflection);
 	}
 
 	get rawStamina(){
@@ -765,17 +771,12 @@ class Mob extends Movable{
 		if(this.fighting){
 			if(this.hasAbilityByName("maniac")){
 				if(Math.probability(0.10)) {
-					Communicate.act(
-						this,
-						{
-							firstPerson: "You begin screaming like a maniac and attack again.",
-							thirdPerson: "$n begins screaming like a maniac and attacks again."
-						},
-						this.loc.contents,
-						null,
-						null,
-						CombatManager.category
-					);
+					Communicate.act({
+						actor:this,
+						recipients:this.loc.contents,
+						message:AbilityManiacMessage,
+						category:CombatManager.category
+					});
 					this.combatRound();
 				}
 			}
@@ -790,15 +791,37 @@ class Mob extends Movable{
 
 		// on hit
 		if(Math.probability(hitChance)){
-			// get weapon
+			// get weapon and action/type data
 			let weapon = this.worn.HAND_PRIMARY;
-			let type = weapon ? weapon.action.type : DamageType.BASH;
+			let action = weapon ? weapon.action : CombatAction.PUNCH;
+			let type = action.type;
 
 			// determine damage
 			let damage = target.processDamage({attacker:this, damage:this.attackPower, type:type});
 
 			// damage message
-			Communicate.hit({attack:true, attacker:this, weapon:weapon, target:target, damage:damage});
+			if(weapon){
+				Communicate.hit({
+					actor:this,
+					directObject:target,
+					recipients:this.loc.contents,
+					message:WeaponAttackMessage,
+					weapon:weapon,
+					action:action,
+					damage:damage,
+					category:CombatManager.category
+				});
+			} else {
+				Communicate.hit({
+					actor:this,
+					directObject:target,
+					recipients:this.loc.contents,
+					message:HitAttackMessage,
+					action:action,
+					damage:damage,
+					category:CombatManager.category
+				});
+			}
 
 			// inflict damage
 			target.damage(this, damage);
@@ -806,18 +829,13 @@ class Mob extends Movable{
 		// on miss
 		} else {
 			// miss message
-			Communicate.act(
-				this,
-				{
-					firstPerson: "Your hit misses $N.",
-					secondPerson: "$n's hit misses you.",
-					thirdPerson: "$n's hit misses $N."
-				},
-				this.loc.contents,
-				{directObject:target},
-				null,
-				CombatManager.category
-			);
+			Communicate.act({
+				actor:this,
+				directObject:target,
+				recipients:this.loc.contents,
+				message:MissAttackMessage,
+				category:CombatManager.category
+			});
 		}
 	}
 
@@ -848,14 +866,11 @@ class Mob extends Movable{
 	}
 
 	die(){
-		Communicate.act(
-			this,
-			{
-				firstPerson: "You hit the ground, dead.",
-				thirdPerson: "$n hits the ground, dead."
-			},
-			this.loc.contents
-		);
+		Communicate.act({
+			actor:this,
+			recipients:this.loc.contents,
+			message:DeathMessage
+		});
 
 		if(this.fighting) this.fighting.disengage();
 		this.disengage();

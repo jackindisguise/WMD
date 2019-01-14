@@ -2,6 +2,7 @@
 const util = require("util");
 
 // local includes
+const Logger = require("../util/Logger");
 const ColorCode = require("../mud/ColorCode");
 
 /**
@@ -114,4 +115,38 @@ String.prototype.getColorSize = function(){
 	}
 
 	return size;
+};
+
+/**
+ * Tie values in a string to a list of options.
+ */
+String.prototype.tie = function(options){
+	return this.replace(/\$\{(.*?)\}/g, function(full, code){
+		let levels = code.split(".");
+
+		// only 1 level
+		if(levels.length === 1) {
+			if(options[levels[0]] === undefined) { // field not there
+				Logger.error(util.format("BAD STRING TIE: %s '%s'", code, this));
+				return "???";
+			}
+
+			return options[levels[0]]; // has field. return it
+		}
+
+		// multiple levels
+		let current = options;
+		for(let next of levels){
+			// doesn't have property
+			if(current[next] === undefined) { // field not there
+				Logger.error(util.format("BAD STRING TIE: %s '%s'", code, this));
+				return "???";
+			}
+
+			current = current[next];
+		}
+
+		// return final value
+		return current;
+	}.bind(this));
 };
