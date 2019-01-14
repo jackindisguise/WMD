@@ -19,6 +19,7 @@ class AcidBlast extends Spell{
 			recipients:user.loc.contents,
 			category:CombatManager.category,
 			message:Message.AbilitySpellCast,
+			suffix:Message.SuffixBusy,
 			ability:this
 		});
 
@@ -30,7 +31,6 @@ class AcidBlast extends Spell{
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			category:CombatManager.category,
 			message:Message.AttackAbility,
 			ability:this,
 			damage:damage

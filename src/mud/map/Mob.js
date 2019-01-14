@@ -786,7 +786,7 @@ class Mob extends Movable{
 		// determine hit rate
 		let hitChance = 1;
 
-		if(target.hasAbilityByName("evasion")) hitChance -= 0.1; // evasion gives a 10% evasion chance
+		if(target.hasAbilityByName("evasion")) hitChance -= 0.25; // evasion gives a 10% evasion chance
 
 		// on hit
 		if(Math.probability(hitChance)){
@@ -804,7 +804,6 @@ class Mob extends Movable{
 					actor:this,
 					directObject:target,
 					recipients:this.loc.contents,
-					category:CombatManager.category,
 					message:Message.AttackHitWeapon,
 					weapon:weapon,
 					action:action,
@@ -815,7 +814,6 @@ class Mob extends Movable{
 					actor:this,
 					directObject:target,
 					recipients:this.loc.contents,
-					category:CombatManager.category,
 					message:Message.AttackHitAuto,
 					action:action,
 					damage:damage
@@ -828,12 +826,12 @@ class Mob extends Movable{
 		// on miss
 		} else {
 			// miss message
-			Communicate.act({
+			Communicate.hit({
 				actor:this,
 				directObject:target,
 				recipients:this.loc.contents,
-				category:CombatManager.category,
-				message:Message.AttackMiss
+				message:Message.AttackMiss,
+				damage:0
 			});
 		}
 	}

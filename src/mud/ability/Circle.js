@@ -13,7 +13,7 @@ class Circle extends Ability{
 	 */
 	use(user, target){
 		// ability message
-		Communicate.act({
+		Communicate.busy({
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
@@ -25,10 +25,10 @@ class Circle extends Ability{
 		user.engage(target);
 
 		// determine total damage
-		let hits = 6;
+		let hits = 2;
 		let modifier = 1.75;
-		let damage = target.processDamage({attacker:user, damage:user.attackPower*modifier, type:DamageType.PIERCE});
-		let perHitDamage = Math.round(damage / hits);
+		let damage = target.processDamage({attacker:user, damage:user.attackPower, type:DamageType.PIERCE});
+		let perHitDamage = Math.round(damage * modifier / hits);
 
 		// start iterations
 		for(let i=0;i<hits;i++){
@@ -41,8 +41,7 @@ class Circle extends Ability{
 				recipients:user.loc.contents,
 				message:Message.AttackAbility,
 				ability:this,
-				damage:perHitDamage,
-				category:CombatManager.category
+				damage:perHitDamage
 			});
 
 			// inflict damage
