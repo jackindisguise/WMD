@@ -49,7 +49,7 @@ function addMessage(message, category, timestamp, color){
 			}
 		});
 	}
-
+/*
 	// add timestamp
 	var dTimestamp = document.createElement("div");
 	dTimestamp.className = "timestamp";
@@ -58,20 +58,20 @@ function addMessage(message, category, timestamp, color){
 	var date = new Date(now);
 	dTimestamp.innerHTML = `[${String(date.getHours())}:${String(date.getMinutes())}:${String(date.getSeconds())}]`;
 	dMessage.appendChild(dTimestamp);
-
+*/
 	// add body
 	var dBody = document.createElement("div");
 	dBody.className = "body";
-	dBody.style.float = "left";
-	dBody.style.marginLeft = "50px";
+//	dBody.style.float = "left";
+//	dBody.style.marginLeft = "50px";
 	dBody.innerHTML = message;
 	dMessage.appendChild(dBody);
-
+/*
 	// add clear
 	var dClear = document.createElement("div");
 	dClear.style.clear = "both";
 	dMessage.appendChild(dClear);
-
+*/
 	$("#output").append(dMessage);
 
 	// autoscroll
