@@ -28,6 +28,7 @@ class Communicate{
 				if(recipient === actor && message.firstPerson) processed = message.firstPerson;
 				else if(recipient === directObject && message.secondPerson) processed = message.secondPerson;
 				else if(message.thirdPerson) processed = message.thirdPerson;
+				else continue;
 
 				// get prefix
 				if(options.prefix) {
@@ -59,7 +60,17 @@ class Communicate{
 
 	static busy(options){
 		// append to options
-		options.suffix = Message.SuffixBusy;
+		options.prefix = Message.BusyPrefix;
+		options.suffix = Message.BusySuffix;
+
+		// call act
+		Communicate.act(options);
+	}
+
+	static ready(options){
+		// append to options
+		options.prefix = Message.ReadyPrefix;
+		options.suffix = Message.ReadySuffix;
 
 		// call act
 		Communicate.act(options);

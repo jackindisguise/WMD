@@ -13,6 +13,13 @@ const messages = {
 		thirdPerson: "{R${actor.long} {rs{Rt{ra{Rr{rt{Rs {rs{Rc{rr{Re{ra{Rm{ri{Rn{rg {Rl{ri{Rk{re {Ra {rm{Ra{rn{Ri{ra{Rc {ra{Rn{rd {Ra{rt{Rt{ra{Rc{rk{Rs{x."
 	},
 
+	// ability: bash
+	AbilityBash: {
+		firstPerson: "You bash the fuck out of {R${directObject.long}{x.",
+		secondPerson: "${actor.long} bashes the fuck out of {Ryou{x.",
+		thirdPerson: "${actor.long} bashes the fuck out of {R${directObject.long}{x."
+	},
+
 	/** Spell Cast */
 	AbilitySpellCast: {
 		firstPerson: "You chant a spell: {Y${ability.chant}{x.",
@@ -57,19 +64,25 @@ const messages = {
 		thirdPerson: " [{${healthCode}${healthAfter}/${directObject.maxHealth}{x]"
 	},
 
-	/**
-	 * Suffix for actions that make you busy.
-	 */
-	SuffixBusy: {
-		firstPerson: " [{R-READY{x]"
+	BusyPrefix: {
+		thirdPerson: "{R<<{x"
 	},
 
-	/**
-	 * Suffix for actions that make you ready. (which is none)
-	 */
-	SuffixReady: {
-		firstPerson: " [{G+READY{x]"
-	}
+	BusySuffix: {
+		thirdPerson: "{R>>{x"
+	},
+
+	Ready:{
+		firstPerson: "You regain your balance."
+	},
+
+	ReadyPrefix: {
+		thirdPerson: "{G<<{x"
+	},
+
+	ReadySuffix: {
+		thirdPerson: "{G>>{x"
+	},
 };
 
 module.exports = messages;

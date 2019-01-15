@@ -866,7 +866,8 @@ class Mob extends Movable{
 		Communicate.act({
 			actor:this,
 			recipients:this.loc.contents,
-			message:Message.DeathCry
+			message:Message.DeathCry,
+			category:CombatManager.category
 		});
 
 		if(this.fighting) this.fighting.disengage();
@@ -896,7 +897,13 @@ class Mob extends Movable{
 	busy(delay){
 		this.ready = false;
 		setTimeout(function(){
-			this.sendMessage("You regain your balance. [{G+READY{x]", MessageCategory.READY);
+			Communicate.ready({
+				actor:this,
+				recipients:this.loc.contents,
+				message:Message.Ready,
+				category:MessageCategory.READY
+			});
+
 			this.ready = true;
 		}.bind(this), delay);
 	}

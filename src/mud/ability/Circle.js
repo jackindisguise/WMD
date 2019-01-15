@@ -2,7 +2,6 @@
 const Ability = require("../Ability");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
-const CombatManager = require("../manager/CombatManager");
 const Message = require("../Message");
 
 class Circle extends Ability{
@@ -17,16 +16,15 @@ class Circle extends Ability{
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			message:Message.AbilityCircle,
-			category:CombatManager.category
+			message:Message.AbilityCircle
 		});
 
 		// engage
 		user.engage(target);
 
 		// determine total damage
-		let hits = 2;
-		let modifier = 1.75;
+		let hits = 3;
+		let modifier = 1.5;
 		let damage = target.processDamage({attacker:user, damage:user.attackPower, type:DamageType.PIERCE});
 		let perHitDamage = Math.round(damage * modifier / hits);
 

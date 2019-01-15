@@ -2,7 +2,6 @@
 const Spell = require("../Spell");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
-const CombatManager = require("../manager/CombatManager");
 const Message = require("../Message");
 
 class AcidBlast extends Spell{
@@ -13,13 +12,11 @@ class AcidBlast extends Spell{
 	 */
 	use(user, target){
 		// ability message
-		Communicate.act({
+		Communicate.busy({
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			category:CombatManager.category,
 			message:Message.AbilitySpellCast,
-			suffix:Message.SuffixBusy,
 			ability:this
 		});
 
