@@ -83,18 +83,65 @@ class Communicate{
 		let healthAfterP = healthAfter / target.maxHealth;
 		let range = Math.floor(Math.lerp(1,5,healthAfterP));
 		let codes = ["r", "R", "Y", "G", "C"];
-		let words = ["dying", "wounded", "not great", "great", "perfect"];
+		//let words = ["dying", "wounded", "not great", "great", "perfect"];
 		let healthCode = codes[range-1];
-		let word = words[range-1];
-		let healthAfterPRounded = Math.round(healthAfterP * 100);
+		//let word = words[range-1];
+		//let healthAfterPRounded = Math.round(healthAfterP * 100);
 
 		// append to options
 		options.healthCode = healthCode;
 		options.healthAfter = healthAfter;
-		options.healthAfterP = healthAfterPRounded;
-		options.healthAfterWord = word;
-		options.suffix = Message.SuffixTargetHealthPercentage;
+		//options.healthAfterP = healthAfterPRounded;
+		//options.healthAfterWord = word;
+		options.suffix = Message.TargetHealthPercentageSuffix;
 		options.category = options.category || CombatManager.category;
+
+		// call act
+		Communicate.act(options);
+	}
+
+	static regen(options){
+		let actor = options.actor;
+		let heal = options.heal;
+		let healthAfter = Math.min(actor.health+heal, actor.maxHealth);
+		let healthAfterP = healthAfter / actor.maxHealth;
+		let range = Math.floor(Math.lerp(1,5,healthAfterP));
+		let codes = ["r", "R", "Y", "G", "C"];
+		//let words = ["dying", "wounded", "not great", "great", "perfect"];
+		//let word = words[range-1];
+		let healthCode = codes[range-1];
+		//let healthAfterPRounded = Math.round(healthAfterP * 100);
+
+		// append to options
+		options.healthCode = healthCode;
+		options.healthAfter = healthAfter;
+		//options.healthAfterP = healthAfterPRounded;
+		//options.healthAfterWord = word;
+		options.suffix = Message.ActorHealthPercentageSuffix;
+		options.message = Message.HealRegen;
+
+		// call act
+		Communicate.act(options);
+	}
+
+	static heal(options){
+		let target = options.directObject;
+		let heal = options.heal;
+		let healthAfter = Math.max(target.health+heal, 0);
+		let healthAfterP = healthAfter / target.maxHealth;
+		let range = Math.floor(Math.lerp(1,5,healthAfterP));
+		let codes = ["r", "R", "Y", "G", "C"];
+		//let words = ["dying", "wounded", "not great", "great", "perfect"];
+		let healthCode = codes[range-1];
+		//let word = words[range-1];
+		//let healthAfterPRounded = Math.round(healthAfterP * 100);
+
+		// append to options
+		options.healthCode = healthCode;
+		options.healthAfter = healthAfter;
+		//options.healthAfterP = healthAfterPRounded;
+		//options.healthAfterWord = word;
+		options.suffix = Message.TargetHealthPercentageSuffix;
 
 		// call act
 		Communicate.act(options);

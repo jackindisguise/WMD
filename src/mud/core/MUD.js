@@ -2,6 +2,7 @@
 const _ = require("../../../i18n");
 const Player = require("../io/Player");
 const PlayerManager = require("../manager/PlayerManager");
+const TimeManager = require("../manager/TimeManager");
 const Logger = require("../../util/Logger");
 const Server = require("../io/Server");
 
@@ -20,10 +21,14 @@ class MUD{
 	static start(port, callback){
 		server.open(port, function(){
 			Logger.info(_("Server started on port %d", port));
-			// dtart listening for new client connections
+
+			// start listening for new client connections
 			server.on("connect", function(client){
 				MUD.connect(client);
 			});
+
+			// start time manager
+			TimeManager.start();
 
 			callback();
 		});
@@ -34,6 +39,7 @@ class MUD{
 	 */
 	static stop(){
 		server.close();
+		TimeManager.stop();
 	}
 
 	/**

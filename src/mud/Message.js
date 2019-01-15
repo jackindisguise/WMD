@@ -51,6 +51,24 @@ const messages = {
 		thirdPerson: "${actor.long}'s hit misses {R${directObject.long}{x."
 	},
 
+	/**
+	 * Heal message.
+	 */
+	HealRegen: {
+		firstPerson: "You regenerate {G${heal} {xhealth."
+	},
+
+	HealAbility: {
+		firstPerson: "Your {Y${ability.display} {xheals {G${directObject.long}{x for {G${heal} {xhealth.",
+		secondPerson: "${actor.long}'s {Y${ability.display} {xheals {Gyou {xfor {G${heal} {xhealth.",
+		thirdPerson: "${actor.long} {Y${ability.display} {xheals {G${directObject.long} {xfor {G${heal} {xhealth."
+	},
+
+	HealAbilitySelf: {
+		firstPerson: "Your {Y${ability.display} {xheals {Gyou{x for {G${heal} {xhealth.",
+		thirdPerson: "${actor.long} {Y${ability.display} {xheals {G${directObject.long} {xfor {G${heal} {xhealth."
+	},
+
 	/** Combat Messages */
 	DeathCry: {
 		firstPerson: "{RYou hit the ground, dead.{x",
@@ -60,8 +78,12 @@ const messages = {
 	/**
 	 * Health percentage suffix.
 	 */
-	SuffixTargetHealthPercentage: {
+	TargetHealthPercentageSuffix: {
 		thirdPerson: " [{${healthCode}${healthAfter}/${directObject.maxHealth}{x]"
+	},
+
+	ActorHealthPercentageSuffix: {
+		thirdPerson: " [{${healthCode}${healthAfter}/${actor.maxHealth}{x]"
 	},
 
 	BusyPrefix: {
