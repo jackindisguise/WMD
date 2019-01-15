@@ -1,0 +1,16 @@
+{
+    "name":"PC.cleric",
+    "display":"cleric",
+    "keywords":"cleric",
+    "description":"A prayer of prayers.",
+    "strengthBase":8,
+    "strengthPerLevel": 1,
+    "agilityBase":6,
+    "agilityPerLevel": 0.25,
+    "intelligenceBase":6,
+	"intelligencePerLevel": 0.25,
+	"magicPowerPerLevel":0.75,
+	"abilities":[
+		{"ability":"heal", "level":1}
+	]
+}

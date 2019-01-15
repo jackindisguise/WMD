@@ -26,6 +26,12 @@ const messages = {
 		thirdPerson: "${actor.long} chants a spell: {Y${ability.chant}{x."
 	},
 
+	/** Prayer */
+	AbilityPray: {
+		firstPerson: "You chant a prayer: {Y${ability.display}{x.",
+		thirdPerson: "${actor.long} chants a prayer: {Y${ability.display}{x."
+	},
+
 	/** Attacks */
 	AttackAbility: {
 		firstPerson: "Your {Y${ability.display}{x hits {R${directObject.long}{x for {R${damage}{x damage.",
