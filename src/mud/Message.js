@@ -2,9 +2,9 @@ const messages = {
 	/** Ability Usage */
 	// ability: circle
 	AbilityCircle: {
-		firstPerson: "You start circling around ${directObject.article}{R${directObject}.",
+		firstPerson: "You start circling around ${directObject.article}{R${directObject}{x.",
 		secondPerson: "${actor.article}${actor} starts circling around you.",
-		thirdPerson: "${actor.article}${actor} starts circling around ${directObject.article}{R${directObject}."
+		thirdPerson: "${actor.article}${actor} starts circling around ${directObject.article}{R${directObject}{x."
 	},
 
 	// ability: maniac
@@ -59,9 +59,8 @@ const messages = {
 
 	/** Attack damage suffix. */
 	AttackDamageSuffix: {
-		firstPerson: " {R-${damage} HP{x [{${healthCode}${healthFormatted}{x]",
-		secondPerson: " {R-${damage} HP{x [{${healthCode}${healthFormatted}{x]",
-		thirdPerson: " {R-${damage} HP{x [{${healthCode}${healthFormatted}{x]"
+		firstPerson: " {R-${damage} HP{x [Opponent: {${healthCode}${healthFormatted}{x]",
+		secondPerson: " {R-${damage} HP{x [You: {${healthCode}${healthFormatted}{x]"
 	},
 
 	/**
@@ -79,9 +78,8 @@ const messages = {
 	},
 
 	HealSuffix: {
-		firstPerson: " {G+${heal}{x [{${healthCode}${healthFormatted}{x]",
-		secondPerson: " {G+${heal}{x [{${healthCode}${healthFormatted}{x]",
-		thirdPerson: " {G+${heal}{x [{${healthCode}${healthFormatted}{x]"
+		firstPerson: " {G+${heal}{x [Them: {${healthCode}${healthFormatted}{x]",
+		secondPerson: " {G+${heal}{x [You: {${healthCode}${healthFormatted}{x]"
 	},
 
 	/** Combat Messages */
@@ -91,10 +89,22 @@ const messages = {
 	},
 
 	/**
+	 * Experience gain suffix.
+	 */
+	Kill: {
+		firstPerson: "{RYou killed {R${directObject.article}${directObject}.{x"
+	},
+
+	GainExperienceSuffix: {
+		firstPerson: " {C+${experience} EXP{x [{c${experienceFormatted}{x]"
+	},
+
+	/**
 	 * Health percentage suffix.
 	 */
 	TargetHealthPercentageSuffix: {
-		thirdPerson: " [{${healthCode}${healthFormatted}{x]"
+		firstPerson: " [Them: {${healthCode}${healthFormatted}{x]",
+		secondPerson: " [You: {${healthCode}${healthFormatted}{x]"
 	},
 
 	ActorHealthPercentageSuffix: {

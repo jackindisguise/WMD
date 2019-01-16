@@ -178,6 +178,21 @@ class Communicate{
 		// call act
 		Communicate.act(options);
 	}
+
+	static experience(options){
+		let actor = options.actor;
+		let experience = options.experience;
+		let experienceAfter = actor.experience + experience;
+		let tnl = actor.toNextLevel;
+		let experienceFormatted = `${experienceAfter}/${tnl}`;
+
+		// append to options
+		options.suffix = Message.GainExperienceSuffix;
+		options.experienceFormatted = experienceFormatted;
+
+		// call act
+		Communicate.act(options);
+	}
 }
 
 module.exports = Communicate;

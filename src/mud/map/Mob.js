@@ -515,7 +515,6 @@ class Mob extends Movable{
 	}
 
 	gainExperience(amount){
-		this.sendMessage(_("{cYou gain {B%d {cexperience.{x", amount), MessageCategory.INFO);
 		this.experience += amount;
 		while(this.experience >= this.toNextLevel) this.levelup();
 	}
@@ -531,7 +530,7 @@ class Mob extends Movable{
 		}
 
 		// reset experience
-		this.experience = 0;
+		this.experience = Math.max(this.experience - this.toNextLevel, 0);
 
 		// changes to race/class can happen here
 
@@ -865,6 +864,7 @@ class Mob extends Movable{
 	die(){
 		Communicate.act({
 			actor:this,
+			directObject:this.fighting,
 			recipients:this.loc.contents,
 			message:Message.DeathCry,
 			category:CombatManager.category
@@ -881,7 +881,15 @@ class Mob extends Movable{
 	}
 
 	killed(victim){
-		let experience = victim.level*100;
+		let experience = victim.level*300;
+		Communicate.experience({
+			actor:this,
+			directObject:victim,
+			recipients:[this],
+			message:Message.Kill,
+			experience:experience
+		});
+
 		this.gainExperience(experience);
 	}
 
