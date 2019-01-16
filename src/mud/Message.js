@@ -2,96 +2,136 @@ const messages = {
 	/** Ability Usage */
 	// ability: circle
 	AbilityCircle: {
-		firstPerson: "You start circling around ${directObject.long}.",
-		secondPerson: "${actor.long} starts circling around you.",
-		thirdPerson: "${actor.long} starts circling around ${directObject.long}."
+		firstPerson: "You start circling around ${directObject.article}{R${directObject}.",
+		secondPerson: "${actor.article}${actor} starts circling around you.",
+		thirdPerson: "${actor.article}${actor} starts circling around ${directObject.article}{R${directObject}."
 	},
 
 	// ability: maniac
 	AbilityManiac: {
-		firstPerson: "{RY{ro{Ru {rs{Rt{ra{Rr{rt {Rs{rc{Rr{re{Ra{rm{Ri{rn{Rg {rl{Ri{rk{Re {ra {Rm{ra{Rn{ri{Ra{rc {Ra{rn{Rd {ra{Rt{rt{Ra{rc{Rk{x.",
-		thirdPerson: "{R${actor.long} {rs{Rt{ra{Rr{rt{Rs {rs{Rc{rr{Re{ra{Rm{ri{Rn{rg {Rl{ri{Rk{re {Ra {rm{Ra{rn{Ri{ra{Rc {ra{Rn{rd {Ra{rt{Rt{ra{Rc{rk{Rs{x."
+		firstPerson: "{RYou flail around like a maniac.{x",
+		thirdPerson: "{R${actor.article}${actor} flails around like a maniac.{x"
 	},
 
 	// ability: bash
 	AbilityBash: {
-		firstPerson: "You bash the fuck out of {R${directObject.long}{x.",
-		secondPerson: "${actor.long} bashes the fuck out of {Ryou{x.",
-		thirdPerson: "${actor.long} bashes the fuck out of {R${directObject.long}{x."
+		firstPerson: "You bash the fuck out of ${directObject.article}{R${directObject}{x.",
+		secondPerson: "${actor.article}${actor} bashes the fuck out of {Ryou{x.",
+		thirdPerson: "${actor.article}${actor} bashes the fuck out of ${directObject.article}{R${directObject}{x."
 	},
 
 	/** Spell Cast */
 	AbilitySpellCast: {
 		firstPerson: "You chant a spell: {Y${ability.chant}{x.",
-		thirdPerson: "${actor.long} chants a spell: {Y${ability.chant}{x."
+		thirdPerson: "${actor.article}${actor} chants a spell: {Y${ability.chant}{x."
 	},
 
 	/** Prayer */
 	AbilityPray: {
 		firstPerson: "You chant a prayer: {Y${ability.display}{x.",
-		thirdPerson: "${actor.long} chants a prayer: {Y${ability.display}{x."
+		thirdPerson: "${actor.article}${actor} chants a prayer: {Y${ability.display}{x."
 	},
 
 	/** Attacks */
 	AttackAbility: {
-		firstPerson: "Your {Y${ability.display}{x hits {R${directObject.long}{x for {R${damage}{x damage.",
-		secondPerson: "${actor.long}'s {Y${ability.display}{x hits {Ryou{x for {R${damage}{x damage.",
-		thirdPerson: "${actor.long}'s {Y${ability.display}{x hits {R${directObject.long}{x for {R${damage}{x damage."
+		firstPerson: "Your {Y${ability.display}{x hits ${directObject.article}{R${directObject}{x.",
+		secondPerson: "${actor.article}${actor}'s {Y${ability.display}{x hits {Ryou{x.",
+		thirdPerson: "${actor.article}${actor}'s {Y${ability.display}{x hits ${directObject.article}{R${directObject}{x."
 	},
 
 	AttackHitAuto: {
-		firstPerson: "You ${action.format.firstPerson} {R${directObject.long}{x for {R${damage}{x damage.",
-		secondPerson: "${actor.long} ${action.format.thirdPerson} {Ryou{x for {R${damage}{x damage.",
-		thirdPerson: "${actor.long} ${action.format.thirdPerson} {R${directObject.long}{x for {R${damage}{x damage."
+		firstPerson: "You ${action.format.firstPerson} ${directObject.article}{R${directObject}{x.",
+		secondPerson: "${actor.article}${actor} ${action.format.thirdPerson} you.",
+		thirdPerson: "${actor.article}${actor} ${action.format.thirdPerson} ${directObject.article}{R${directObject}{x."
 	},
 
 	AttackHitWeapon: {
-		firstPerson: "You ${action.format.firstPerson} {R${directObject.long}{x with {Y${weapon}{x for ${damage} damage.",
-		secondPerson: "${actor.long} ${action.format.thirdPerson} {Ryou{x with {Y${weapon}{x for ${damage} damage.",
-		thirdPerson: "${actor.long} ${action.format.thirdPerson} {R${directObject.long}{x with {Y${weapon}{x for ${damage} damage."
+		firstPerson: "You ${action.format.firstPerson} ${directObject.article}{R${directObject}{x with {Y${weapon}{x.",
+		secondPerson: "${actor.article}${actor} ${action.format.thirdPerson} you with {Y${weapon}{x.",
+		thirdPerson: "${actor.article}${actor} ${action.format.thirdPerson} ${directObject.article}{R${directObject}{x with {Y${weapon}{x."
 	},
 
 	AttackMiss: {
-		firstPerson: "Your hit misses {R${directObject.long}{x.",
-		secondPerson: "${actor.long}'s hit misses {Ryou{x.",
-		thirdPerson: "${actor.long}'s hit misses {R${directObject.long}{x."
+		firstPerson: "Your hit misses ${directObject.article}{R${directObject}{x.",
+		secondPerson: "${actor.article}${actor}'s hit misses you.",
+		thirdPerson: "${actor.article}${actor}'s hit misses ${directObject.article}{R${directObject}{x."
+	},
+
+	/** Attack damage suffix. */
+	AttackDamageSuffix: {
+		firstPerson: " {R-${damage} HP{x [{${healthCode}${healthFormatted}{x]",
+		secondPerson: " {R-${damage} HP{x [{${healthCode}${healthFormatted}{x]",
+		thirdPerson: " {R-${damage} HP{x [{${healthCode}${healthFormatted}{x]"
 	},
 
 	/**
 	 * Heal message.
 	 */
-	HealRegen: {
-		firstPerson: "You regenerate {G${heal} {xhealth."
-	},
-
 	HealAbility: {
-		firstPerson: "Your {Y${ability.display} {xheals {G${directObject.long}{x for {G${heal} {xhealth.",
-		secondPerson: "${actor.long}'s {Y${ability.display} {xheals {Gyou {xfor {G${heal} {xhealth.",
-		thirdPerson: "${actor.long} {Y${ability.display} {xheals {G${directObject.long} {xfor {G${heal} {xhealth."
+		firstPerson: "Your {Y${ability.display} {xheals {G${directObject.article}{R${directObject}{x for {G${heal} {xhealth.",
+		secondPerson: "${actor.article}${actor}'s {Y${ability.display} {xheals {Gyou {xfor {G${heal} {xhealth.",
+		thirdPerson: "${actor.article}${actor} {Y${ability.display} {xheals {G${directObject.article}{R${directObject} {xfor {G${heal} {xhealth."
 	},
 
 	HealAbilitySelf: {
-		firstPerson: "Your {Y${ability.display} {xheals {Gyou{x for {G${heal} {xhealth.",
-		thirdPerson: "${actor.long} {Y${ability.display} {xheals {G${directObject.long} {xfor {G${heal} {xhealth."
+		firstPerson: "Your {Y${ability.display} {xheals {Gyou{x.",
+		thirdPerson: "${actor.article}${actor} {Y${ability.display} {xheals {G${directObject.article}{R${directObject}{x."
+	},
+
+	HealSuffix: {
+		firstPerson: " {G+${heal}{x [{${healthCode}${healthFormatted}{x]",
+		secondPerson: " {G+${heal}{x [{${healthCode}${healthFormatted}{x]",
+		thirdPerson: " {G+${heal}{x [{${healthCode}${healthFormatted}{x]"
 	},
 
 	/** Combat Messages */
 	DeathCry: {
 		firstPerson: "{RYou hit the ground, dead.{x",
-		thirdPerson: "{R${actor.long} hits the ground, dead.{x"
+		thirdPerson: "{R${actor.article}${actor} hits the ground, dead.{x"
 	},
 
 	/**
 	 * Health percentage suffix.
 	 */
 	TargetHealthPercentageSuffix: {
-		thirdPerson: " [{${healthCode}${healthAfter}/${directObject.maxHealth}{x]"
+		thirdPerson: " [{${healthCode}${healthFormatted}{x]"
 	},
 
 	ActorHealthPercentageSuffix: {
-		thirdPerson: " [{${healthCode}${healthAfter}/${actor.maxHealth}{x]"
+		thirdPerson: " [{${healthCode}${healthFormatted}{x]"
 	},
 
+	/**
+	 * Regen message.
+	 */
+	Regen: {
+		firstPerson: "You feel better."
+	},
+
+	/**
+	 * Regen health suffix.
+	 */
+	ActorRegenHealthSuffix: {
+		thirdPerson: " {G+${health} {RHP{x [{R${healthFormatted}{x]"
+	},
+
+	/**
+	 * Regen energy suffix.
+	 */
+	ActorRegenEnergySuffix: {
+		thirdPerson: " {G+${energy} {YEP{x [{Y${energyFormatted}{x]"
+	},
+
+	/**
+	 * Regen health suffix.
+	 */
+	ActorRegenManaSuffix: {
+		thirdPerson: " {G+${mana} {CMP{x [{C${manaFormatted}{x]"
+	},
+
+	/**
+	 * Too busy to act message.
+	 */
 	BusyPrefix: {
 		thirdPerson: "{R<<{x"
 	},
@@ -100,6 +140,9 @@ const messages = {
 		thirdPerson: "{R>>{x"
 	},
 
+	/**
+	 * Ready to act message.
+	 */
 	Ready:{
 		firstPerson: "You regain your balance."
 	},
@@ -120,18 +163,18 @@ const messages = {
 	},
 
 	ExpendManaSuffix: {
-		firstPerson: " [{c${manaAfter}/${actor.maxMana}{x]"
+		firstPerson: " {C-${mana} MP{x [{C${manaFormatted}{x]"
 	},
 
 	/**
 	 * Expend energy.
 	 */
-	ExpendEnergy: {
-		firstPerson: "You expend ${energy} energy."
+	ExpendEnergySuffix: {
+		firstPerson: " {Y-${energy} EP{x [{Y${energyFormatted}{x]"
 	},
 
-	ExpendEnergySuffix: {
-		firstPerson: " [{Y${energyAfter}/${actor.maxEnergy}{x]"
+	ExpendEnergy: {
+		firstPerson: "You expend ${energy} energy."
 	}
 };
 

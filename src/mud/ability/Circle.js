@@ -13,15 +13,18 @@ class Circle extends Skill{
 	use(user, target){
 		// opening routine
 		if(!this.check(user)) return;
-		this.expend(user);
 
 		// ability message
-		Communicate.busy({
+		Communicate.ability({
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
-			message:Message.AbilityCircle
+			message:Message.AbilityCircle,
+			energy:this.energy
 		});
+
+		// use resources
+		this.expend(user);
 
 		// engage
 		user.engage(target);

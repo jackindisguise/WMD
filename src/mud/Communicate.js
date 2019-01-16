@@ -32,16 +32,24 @@ class Communicate{
 
 				// get prefix
 				if(options.prefix) {
-					if(recipient === actor && options.prefix.firstPerson) processed = options.prefix.firstPerson + processed;
-					else if(recipient === directObject && options.prefix.secondPerson) processed = options.prefix.secondPerson + processed;
-					else if(options.prefix.thirdPerson) processed = options.prefix.thirdPerson + processed;
+					let prefix = options.prefix;
+					if(!Array.isArray(options.prefix)) prefix = [options.prefix];
+					for(let _prefix of prefix){
+						if(recipient === actor && _prefix.firstPerson) processed = _prefix.firstPerson + processed;
+						else if(recipient === directObject && _prefix.secondPerson) processed = _prefix.secondPerson + processed;
+						else if(_prefix.thirdPerson) processed = _prefix.thirdPerson + processed;
+					}
 				}
 
 				// get suffix
 				if(options.suffix) {
-					if(recipient === actor && options.suffix.firstPerson) processed = processed + options.suffix.firstPerson;
-					else if(recipient === directObject && options.suffix.secondPerson) processed = processed + options.suffix.secondPerson;
-					else if(options.suffix.thirdPerson) processed = processed + options.suffix.thirdPerson;
+					let suffix = options.suffix;
+					if(!Array.isArray(options.suffix)) suffix = [options.suffix];
+					for(let _suffix of suffix){
+						if(recipient === actor && _suffix.firstPerson) processed = processed + _suffix.firstPerson;
+						else if(recipient === directObject && _suffix.secondPerson) processed = processed + _suffix.secondPerson;
+						else if(_suffix.thirdPerson) processed = processed + _suffix.thirdPerson;
+					}
 				}
 
 				// tie options
@@ -62,6 +70,29 @@ class Communicate{
 		// append to options
 		options.prefix = Message.BusyPrefix;
 		options.suffix = Message.BusySuffix;
+
+		// call act
+		Communicate.act(options);
+	}
+
+	static ability(options){
+		// shortcuts
+		let actor = options.actor;
+
+		// append to options
+		options.prefix = Message.BusyPrefix;
+		options.suffix = [Message.BusySuffix];
+		if(options.energy) {
+			let maxEP = actor.maxEnergy, afterEP = Math.min(actor.energy + options.energy, maxEP);
+			options.energyFormatted = `${afterEP}/${maxEP}`;
+			options.suffix.push(Message.ExpendEnergySuffix);
+		}
+
+		if(options.mana) {
+			let maxMP = actor.maxMana, afterMP = Math.min(actor.mana + options.mana, maxMP);
+			options.manaFormatted = `${afterMP}/${maxMP}`;
+			options.suffix.push(Message.ExpendManaSuffix);
+		}
 
 		// call act
 		Communicate.act(options);
@@ -90,10 +121,10 @@ class Communicate{
 
 		// append to options
 		options.healthCode = healthCode;
-		options.healthAfter = healthAfter;
+		options.healthFormatted = `${healthAfter}/${target.maxHealth}`;
 		//options.healthAfterP = healthAfterPRounded;
 		//options.healthAfterWord = word;
-		options.suffix = Message.TargetHealthPercentageSuffix;
+		options.suffix = Message.AttackDamageSuffix;
 		options.category = options.category || CombatManager.category;
 
 		// call act
@@ -101,24 +132,25 @@ class Communicate{
 	}
 
 	static regen(options){
+		// shortcuts
 		let actor = options.actor;
-		let heal = options.heal;
-		let healthAfter = Math.min(actor.health+heal, actor.maxHealth);
-		let healthAfterP = healthAfter / actor.maxHealth;
-		let range = Math.floor(Math.lerp(1,5,healthAfterP));
-		let codes = ["r", "R", "Y", "G", "C"];
-		//let words = ["dying", "wounded", "not great", "great", "perfect"];
-		//let word = words[range-1];
-		let healthCode = codes[range-1];
-		//let healthAfterPRounded = Math.round(healthAfterP * 100);
 
 		// append to options
-		options.healthCode = healthCode;
-		options.healthAfter = healthAfter;
-		//options.healthAfterP = healthAfterPRounded;
-		//options.healthAfterWord = word;
-		options.suffix = Message.ActorHealthPercentageSuffix;
-		options.message = Message.HealRegen;
+		options.message = Message.Regen;
+		if(options.health) {
+			let maxHP = actor.maxHealth, afterHP = Math.min(actor.health + options.health, maxHP);
+			options.healthFormatted = `${afterHP}/${maxHP}`;
+		}
+
+		if(options.energy) {
+			let maxEP = actor.maxEnergy, afterEP = Math.min(actor.energy + options.energy, maxEP);
+			options.energyFormatted = `${afterEP}/${maxEP}`;
+		}
+
+		if(options.mana) {
+			let maxMP = actor.maxMana, afterMP = Math.min(actor.mana + options.mana, maxMP);
+			options.manaFormatted = `${afterMP}/${maxMP}`;
+		}
 
 		// call act
 		Communicate.act(options);
@@ -138,10 +170,10 @@ class Communicate{
 
 		// append to options
 		options.healthCode = healthCode;
-		options.healthAfter = healthAfter;
+		options.healthFormatted = `${healthAfter}/${target.maxHealth}`;
 		//options.healthAfterP = healthAfterPRounded;
 		//options.healthAfterWord = word;
-		options.suffix = Message.TargetHealthPercentageSuffix;
+		options.suffix = Message.HealSuffix;
 
 		// call act
 		Communicate.act(options);

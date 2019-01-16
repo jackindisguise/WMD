@@ -12,16 +12,19 @@ class Heal extends Spell{
 	use(user, target){
 		// opening routine
 		if(!this.check(user)) return;
-		this.expend(user);
 
 		// ability message
-		Communicate.busy({
+		Communicate.ability({
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
 			message:Message.AbilityPray,
-			ability:this
+			ability:this,
+			mana:this.mana
 		});
+
+		// use resources
+		this.expend(user);
 
 		// determine total heal power
 		let heal = Math.floor(user.magicPower / 2);

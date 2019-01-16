@@ -1,6 +1,4 @@
 const Ability = require("./Ability");
-const Communicate = require("./Communicate");
-const Message = require("./Message");
 
 class ActiveAbility extends Ability{
 	check(user){
@@ -18,33 +16,8 @@ class ActiveAbility extends Ability{
 	}
 
 	expend(user){
-		if(this.mana){
-			let manaAfter = user.mana - this.mana;
-			Communicate.act({
-				actor:user,
-				recipients:[user],
-				message:Message.ExpendMana,
-				suffix:Message.ExpendManaSuffix,
-				mana:this.mana,
-				manaAfter:manaAfter
-			});
-
-			user.expend({mana:this.mana});
-		}
-
-		if(this.energy){
-			let energyAfter = user.energy - this.energy;
-			Communicate.act({
-				actor:user,
-				recipients:[user],
-				message:Message.ExpendEnergy,
-				suffix:Message.ExpendEnergySuffix,
-				energy:this.energy,
-				energyAfter:energyAfter
-			});
-
-			user.expend({energy:this.energy});
-		}
+		if(this.mana) user.expend({mana:this.mana});
+		if(this.energy) user.expend({energy:this.energy});
 	}
 
 	busy(user){

@@ -24,14 +24,14 @@ class MapObject{
 	}
 
 	get long(){
-		return `${this.article ? this.article : ""}${this.name}`;
+		return `${this.article}${this.name}`;
 	}
 
 	get article(){
-		if(!this.name) return null;
+		if(!this.name) return "";
 		let firstLetterRule = /(?<!\{)([^{\s])/;
 		let firstLetter = firstLetterRule.exec(this.name);
-		if(firstLetter[0] === firstLetter[0].toUpperCase()) return null;
+		if(firstLetter[0] === firstLetter[0].toUpperCase()) return "";
 		let consonants = /[bcdfghjklmnpqrstvwxyz]/;
 		if(firstLetter[0].match(consonants)) return "a ";
 		else return "an ";

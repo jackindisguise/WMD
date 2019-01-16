@@ -13,16 +13,19 @@ class AcidBlast extends Spell{
 	use(user, target){
 		// opening routine
 		if(!this.check(user)) return;
-		this.expend(user);
 
 		// ability message
-		Communicate.busy({
+		Communicate.ability({
 			actor:user,
 			directObject:target,
 			recipients:user.loc.contents,
 			message:Message.AbilitySpellCast,
-			ability:this
+			ability:this,
+			mana:this.mana
 		});
+
+		// use resources
+		this.expend(user);
 
 		// determine damage
 		let damage = target.processDamage({attacker:user, damage:user.magicPower, type:DamageType.MAGICAL});
