@@ -1,5 +1,5 @@
 // local includes
-const PassiveAbility = require("../mud/PassiveAbility");
+const PassiveAbility = require("../mud/ability/PassiveAbility");
 
 class Maniac extends PassiveAbility{
 }

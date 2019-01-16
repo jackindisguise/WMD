@@ -1,5 +1,5 @@
 // local includes
-const Spell = require("../mud/Spell");
+const Spell = require("../mud/ability/Spell");
 const Communicate = require("../mud/Communicate");
 const Message = require("../etc/Message");
 

@@ -1,5 +1,5 @@
 // local includes
-const Skill = require("../mud/Skill");
+const Skill = require("../mud/ability/Skill");
 const Communicate = require("../mud/Communicate");
 const DamageType = require("../etc/DamageType");
 const Message = require("../etc/Message");
