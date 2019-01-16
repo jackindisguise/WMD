@@ -6,13 +6,16 @@
 		"include": [
 			"src/lib",
 			"src/mud",
-			"src/mud/command",
+			"src/mud/ability",
 			"src/mud/core",
 			"src/mud/factory",
 			"src/mud/io",
 			"src/mud/loader",
 			"src/mud/manager",
 			"src/mud/map",
+			"src/stock/command",
+			"src/stock/command/ability",
+			"src/stock/ability",
 			"src/util"
 		]
 	},
