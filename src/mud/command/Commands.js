@@ -4,7 +4,7 @@ const util = require("util");
 // local includes
 require("../../lib/String");
 const _ = require("../../../i18n");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 const CommandManager = require("../manager/CommandManager");
 const Command = require("../Command");
 

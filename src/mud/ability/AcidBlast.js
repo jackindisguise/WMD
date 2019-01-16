@@ -1,8 +1,8 @@
 // local includes
 const Spell = require("../Spell");
 const Communicate = require("../Communicate");
-const DamageType = require("../DamageType");
-const Message = require("../Message");
+const DamageType = require("../etc/DamageType");
+const Message = require("../etc/Message");
 
 class AcidBlast extends Spell{
 	/**

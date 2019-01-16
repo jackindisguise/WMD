@@ -1,7 +1,7 @@
 // local includes
 require("../../lib/Math");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 
 class Look extends Command{
 	exec(mob){

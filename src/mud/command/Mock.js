@@ -4,7 +4,7 @@ const util = require("util");
 // local includes
 require("../../lib/Math");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 
 class Mock extends Command{
 	exec(mob, target){

@@ -1,7 +1,7 @@
 // local includes
 require("../../lib/String");
 const _ = require("../../../i18n");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 const Command = require("../Command");
 
 class Abilities extends Command{

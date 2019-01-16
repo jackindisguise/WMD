@@ -5,10 +5,10 @@ const util = require("util");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
+const MessageCategory = require("../etc/MessageCategory");
 const CommandHandler = require("../manager/CommandManager");
-const Nanny = require("../Nanny");
 const ChannelManager = require("../manager/ChannelManager");
-const MessageCategory = require("../MessageCategory");
+const Nanny = require("../Nanny");
 
 /**
  * Higher level abstraction between the client and the game.

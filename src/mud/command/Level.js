@@ -1,6 +1,6 @@
 // local includes
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 
 class Level extends Command{
 	exec(mob){

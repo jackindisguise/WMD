@@ -1,6 +1,6 @@
 // local includes
 const AbilityCommand = require("../../AbilityCommand");
-const CommandSpecificity = require("../../CommandSpecificity");
+const CommandSpecificity = require("../../etc/CommandSpecificity");
 const AbilityManager = require("../../manager/AbilityManager");
 const heal = AbilityManager.getAbilityByName("heal");
 

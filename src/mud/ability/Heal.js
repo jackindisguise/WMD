@@ -1,7 +1,7 @@
 // local includes
 const Spell = require("../Spell");
 const Communicate = require("../Communicate");
-const Message = require("../Message");
+const Message = require("../etc/Message");
 
 class Heal extends Spell{
 	/**

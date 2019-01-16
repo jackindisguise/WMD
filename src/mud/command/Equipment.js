@@ -4,8 +4,8 @@ const util = require("util");
 // local includes
 const _ = require("../../../i18n");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
-const WearSlot = require("../WearSlot");
+const CommandSpecificity = require("../etc/CommandSpecificity");
+const WearSlot = require("../etc/WearSlot");
 
 class Equipment extends Command{
 	exec(mob){

@@ -1,8 +1,8 @@
 // local includes
 const Skill = require("../Skill");
 const Communicate = require("../Communicate");
-const DamageType = require("../DamageType");
-const Message = require("../Message");
+const DamageType = require("../etc/DamageType");
+const Message = require("../etc/Message");
 
 class Circle extends Skill{
 	/**

@@ -3,7 +3,7 @@ const util = require("util");
 
 // local includes
 const Logger = require("../util/Logger");
-const ColorCode = require("../mud/ColorCode");
+const ColorCode = require("../mud/etc/ColorCode");
 
 /**
  * Check for matches to this string's keywords.

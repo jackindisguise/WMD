@@ -3,7 +3,7 @@ require("../../lib/Math");
 const _ = require("../../../i18n");
 const TemplateManager = require("../manager/TemplateManager");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 
 class Outfitt extends Command{
 	exec(mob){

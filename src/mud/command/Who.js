@@ -5,7 +5,7 @@ const util = require("util");
 const _ = require("../../../i18n");
 const PlayerManager = require("../manager/PlayerManager");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 
 class Who extends Command{
 	exec(mob){

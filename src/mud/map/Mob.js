@@ -4,23 +4,23 @@ const util = require("util");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
-const CombatAction = require("../CombatAction");
+const DamageType = require("../etc/DamageType");
+const Message = require("../etc/Message");
+const CombatAction = require("../etc/CombatAction");
+const Direction = require("../etc/Direction");
+const MessageCategory = require("../etc/MessageCategory");
+const Attribute = require("../etc/Attribute");
+const WearLocation = require("../etc/WearLocation");
+const WearSlot = require("../etc/WearSlot");
 const CombatManager = require("../manager/CombatManager");
 const Communicate = require("../Communicate");
-const Direction = require("../Direction");
 const Movable = require("./Movable");
 const Tile = require("../map/Tile");
 const RaceManager = require("../manager/RaceManager");
 const Race = require("../Race");
 const ClassManager = require("../manager/ClassManager");
 const Class = require("../Class");
-const MessageCategory = require("../MessageCategory");
-const Attribute = require("../Attribute");
-const WearLocation = require("../WearLocation");
-const WearSlot = require("../WearSlot");
 const Equipment = require("./Equipment");
-const DamageType = require("../DamageType");
-const Message = require("../Message");
 
 /**
  * Represents an animate creature on the map.

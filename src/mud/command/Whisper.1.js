@@ -1,7 +1,7 @@
 // local includes
 const _ = require("../../../i18n");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 const Channel = require("../Channel");
 const ChannelManager = require("../manager/ChannelManager");
 const PlayerManager = require("../manager/PlayerManager");

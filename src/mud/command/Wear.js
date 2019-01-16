@@ -2,8 +2,8 @@
 require("../../lib/Math");
 const _ = require("../../../i18n");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
-const WearSlot = require("../WearSlot");
+const CommandSpecificity = require("../etc/CommandSpecificity");
+const WearSlot = require("../etc/WearSlot");
 const Equipment = require("../map/Equipment");
 
 class Wear extends Command{

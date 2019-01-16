@@ -1,6 +1,6 @@
 // local includes
 const Movement = require("./Movement");
-const Direction = require("../Direction");
+const Direction = require("../etc/Direction");
 
 class West extends Movement{
 }

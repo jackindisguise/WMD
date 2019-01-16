@@ -1,6 +1,6 @@
 // local includes
 let Armor = require("./Armor");
-let WearLocation = require("../WearLocation");
+let WearLocation = require("../etc/WearLocation");
 
 class Shield extends Armor{
 }

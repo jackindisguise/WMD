@@ -5,7 +5,7 @@ const util = require("util");
 require("../../lib/Math");
 const _ = require("../../../i18n");
 const Command = require("../Command");
-const CommandSpecificity = require("../CommandSpecificity");
+const CommandSpecificity = require("../etc/CommandSpecificity");
 
 class Inventory extends Command{
 	exec(mob){

@@ -4,7 +4,7 @@ const EventEmitter = require("events");
 // local includes
 const _ = require("../../i18n");
 const Logger = require("../util/Logger");
-const MessageCategory = require("./MessageCategory");
+const MessageCategory = require("./etc/MessageCategory");
 
 /**
  * Controls communication avenues.
