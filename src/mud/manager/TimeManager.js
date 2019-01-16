@@ -21,12 +21,12 @@ class TimeManager{
 			let currentHP = player.mob.health, maxHP = player.mob.maxHealth;
 			if(currentHP < maxHP){
 				let heal = Math.floor(maxHP / 5);
-				heal = Math.min(heal, maxHP - currentHP);
 				Communicate.regen({
 					actor:player.mob,
 					heal:heal,
 					recipients:[player.mob]
 				});
+
 				player.mob.heal({health:heal});
 			}
 		}

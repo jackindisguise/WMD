@@ -11,6 +11,10 @@ class AcidBlast extends Spell{
 	 * @param {Mob} target 
 	 */
 	use(user, target){
+		// opening routine
+		if(!this.check(user)) return;
+		this.expend(user);
+
 		// ability message
 		Communicate.busy({
 			actor:user,
@@ -36,13 +40,15 @@ class AcidBlast extends Spell{
 		// inflict damage
 		target.damage(user, damage);
 
-		// busy user
-		user.busy(3000);
+		// closing routine
+		this.busy(user);
 	}
 }
 
 AcidBlast.prototype.name = "acid blast";
 AcidBlast.prototype.display = "acid blast";
-AcidBlast.prototype.keywords = "acid blast";
+AcidBlast.prototype.keywords = "acid blast acidblast";
+AcidBlast.prototype.mana = 5;
+AcidBlast.prototype.delay = 3000;
 
 module.exports = AcidBlast;

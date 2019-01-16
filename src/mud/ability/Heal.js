@@ -10,6 +10,10 @@ class Heal extends Spell{
 	 * @param {Mob} target 
 	 */
 	use(user, target){
+		// opening routine
+		if(!this.check(user)) return;
+		this.expend(user);
+
 		// ability message
 		Communicate.busy({
 			actor:user,
@@ -20,7 +24,7 @@ class Heal extends Spell{
 		});
 
 		// determine total heal power
-		let heal = user.magicPower / 2;
+		let heal = Math.floor(user.magicPower / 2);
 
 		// heal message
 		Communicate.heal({
@@ -34,14 +38,16 @@ class Heal extends Spell{
 
 		// inflict regeneration
 		target.heal({health:heal});
-
-		// busy user
-		user.busy(6000);
+	
+		// closing routine
+		this.busy(user);
 	}
 }
 
 Heal.prototype.name = "heal";
 Heal.prototype.display = "heal";
 Heal.prototype.keywords = "heal";
+Heal.prototype.mana = 5;
+Heal.prototype.delay = 6000;
 
 module.exports = Heal;

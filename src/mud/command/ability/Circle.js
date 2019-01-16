@@ -19,7 +19,7 @@ class Circle extends AbilityCommand{
 Circle.prototype.rule = /^(?:c|ci|cir|circ|circl|circle) (.+)/i;
 Circle.prototype.plain = "circle";
 Circle.prototype.specificity = CommandSpecificity.FIRST;
-Circle.prototype.ability = "circle";
+Circle.prototype.ability = circle;
 Circle.prototype.ready = true;
 
 module.exports = Circle;

@@ -3,5 +3,5 @@
     "display":"halfling",
     "keywords":"halfling",
     "description":"Tiny little boys.",
-    "agilityPerLevel": 0.125
+	"agilityPerLevel": 0.125
 }

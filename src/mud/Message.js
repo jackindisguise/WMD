@@ -111,6 +111,28 @@ const messages = {
 	ReadySuffix: {
 		thirdPerson: "{G>>{x"
 	},
+
+	/**
+	 * Expend mana.
+	 */
+	ExpendMana: {
+		firstPerson: "You expend ${mana} mana."
+	},
+
+	ExpendManaSuffix: {
+		firstPerson: " [{c${manaAfter}/${actor.maxMana}{x]"
+	},
+
+	/**
+	 * Expend energy.
+	 */
+	ExpendEnergy: {
+		firstPerson: "You expend ${energy} energy."
+	},
+
+	ExpendEnergySuffix: {
+		firstPerson: " [{Y${energyAfter}/${actor.maxEnergy}{x]"
+	}
 };
 
 module.exports = messages;

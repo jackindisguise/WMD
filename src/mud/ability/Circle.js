@@ -1,16 +1,20 @@
 // local includes
-const Ability = require("../Ability");
+const Skill = require("../Skill");
 const Communicate = require("../Communicate");
 const DamageType = require("../DamageType");
 const Message = require("../Message");
 
-class Circle extends Ability{
+class Circle extends Skill{
 	/**
 	 * 
 	 * @param {Mob} user 
 	 * @param {Mob} target 
 	 */
 	use(user, target){
+		// opening routine
+		if(!this.check(user)) return;
+		this.expend(user);
+
 		// ability message
 		Communicate.busy({
 			actor:user,
@@ -46,13 +50,15 @@ class Circle extends Ability{
 			target.damage(user, perHitDamage);
 		}
 
-		// busy user
-		user.busy(3000);
+		// closing routine
+		this.busy(user);
 	}
 }
 
 Circle.prototype.name = "circle";
 Circle.prototype.display = "circle";
 Circle.prototype.keywords = "circle";
+Circle.prototype.energy = 5;
+Circle.prototype.delay = 3000;
 
 module.exports = Circle;

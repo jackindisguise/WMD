@@ -24,7 +24,7 @@ class Heal extends AbilityCommand{
 Heal.prototype.rule = /^(?:h|he|hea|heal) (.+)/i;
 Heal.prototype.plain = "heal";
 Heal.prototype.specificity = CommandSpecificity.FIRST;
-Heal.prototype.ability = "heal";
+Heal.prototype.ability = heal;
 Heal.prototype.ready = true;
 
 module.exports = Heal;

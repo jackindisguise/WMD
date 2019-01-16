@@ -10,5 +10,12 @@
     "intelligenceBase":6,
     "intelligencePerLevel": 0.25,
     "precisionPerLevel": 0.75,
-    "deflectionPerLevel": 0.75
+	"deflectionPerLevel": 0.75,
+	"abilities":[
+		{"ability":"evasion", "level":2},
+		{"ability":"circle", "level":3},
+		{"ability":"maniac", "level":4},
+		{"ability":"acid blast", "level":5},
+		{"ability":"heal", "level":6}
+	]
 }

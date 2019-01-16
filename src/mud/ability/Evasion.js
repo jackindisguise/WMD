@@ -1,7 +1,7 @@
 // local includes
-const Ability = require("../Ability");
+const PassiveAbility = require("../PassiveAbility");
 
-class Evasion extends Ability{
+class Evasion extends PassiveAbility{
 }
 
 Evasion.prototype.name = "evasion";

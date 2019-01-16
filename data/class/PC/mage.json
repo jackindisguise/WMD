@@ -10,6 +10,6 @@
     "intelligenceBase":8,
 	"intelligencePerLevel": 1,
 	"abilities":[
-		{"ability":"acid blast", "level":1}
+		{"ability":"acid blast", "level":3}
 	]
 }

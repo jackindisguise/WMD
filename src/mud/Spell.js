@@ -1,6 +1,6 @@
-const Ability = require("./Ability");
+const ActiveAbility = require("./ActiveAbility");
 
-class Spell extends Ability{
+class Spell extends ActiveAbility{
 	get chant(){
 		let invocation = "";
 		for(let i=0;i<this.display.length;i++) invocation += String.fromCharCode(this.display[i].charCodeAt()+1);

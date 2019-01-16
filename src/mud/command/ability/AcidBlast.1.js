@@ -18,7 +18,7 @@ class AcidBlast extends AbilityCommand{
 AcidBlast.prototype.rule = /^(?:a|ac|aci|acid|acid b|acid bl|acid bla|acid blas|acid blast|b|bl|bla|blas|blast)$/i;
 AcidBlast.prototype.plain = "acid blast";
 AcidBlast.prototype.specificity = CommandSpecificity.FIRST;
-AcidBlast.prototype.ability = "acid blast";
+AcidBlast.prototype.ability = acidblast;
 AcidBlast.prototype.ready = true;
 
 module.exports = AcidBlast;

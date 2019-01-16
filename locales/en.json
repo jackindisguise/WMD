@@ -131,5 +131,11 @@
 	"You learned a new ability: {G%s{x": "You learned a new ability: {G%s{x",
 	"{yYou are now level {Y%d{x!": "{yYou are now level {Y%d{x!",
 	"{cYou gain {B%d {cexperience.{x": "{cYou gain {B%d {cexperience.{x",
-	"{gYour %s has %s to {%s%d{x ({%s%s%d{x).": "{gYour %s has %s to {%s%d{x ({%s%s%d{x)."
+	"{gYour %s has %s to {%s%d{x ({%s%s%d{x).": "{gYour %s has %s to {%s%d{x ({%s%s%d{x).",
+	" Abilities ": " Abilities ",
+	"Level %d:": "Level %d:",
+	"Abilities:": "Abilities:",
+	"- Abilities -": "- Abilities -",
+	"Level %s:": "Level %s:",
+	"Level %s: ": "Level %s: "
 }
