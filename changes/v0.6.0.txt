@@ -1,0 +1,206 @@
+commit 03ec142447465e1673de6a5dfb478cf93ba9292f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 16:16:41 2019 -0600
+
+    Fixed indentation.
+
+commit 8021afe13948754322a4d28974973ec311f515da
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 16:09:27 2019 -0600
+
+    Moved "stock objects" to their own folder: /src/stock
+
+commit 4de7b2695f9384904b7958b25bb4e3d180f2cf46
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 13:41:38 2019 -0600
+
+    Moved Ability types to separate file.
+
+commit 9ffe3367b9f9703950b200d0bb4fe2564faf8db3
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 13:35:10 2019 -0600
+
+    Moved generic command and ability definitions to /src/command and /src/ability.
+
+commit 91f6d4a570cf12f4b1d53c01629601815d916d98
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 13:16:57 2019 -0600
+
+    Moved enums and namespaces to /src/mud/etc.
+    
+    The directory structure has 1 super polluted directory (/src/mud).
+
+commit 220748c870a0cabe4691e9f51ff0a3fc4837fade
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 12:50:00 2019 -0600
+
+    Added an experience message for killing mobs.
+
+commit aa7f8d1902e312301f263fc5d3f74d6725033297
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 11:46:31 2019 -0600
+
+    Fixed a bug with MapObject.article. Now it just returns an empty
+    string and not null. Easier to use.
+    
+    Working on making it easier to use messages.
+    
+    Can now provide multiple suffixes and prefixes to act.
+
+commit 309d32f6aa767ebb2657f6249cabc16372aea847
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 01:08:14 2019 -0600
+
+    Fixed some of the ability stuff I added.
+    I prefer everything to be handled in the Ability itself.
+    Might change my mind later, but I dunno.
+
+commit f8adaebac295623571d79fd6227ebbded9f14c61
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 15 12:25:47 2019 -0600
+
+    Removed timestamps.
+
+commit c84809f38135d34e00e7548856d82e193af7a587
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 15 12:01:25 2019 -0600
+
+    Added cleric class, heal ability, and a "prayer" message for abilities.
+
+commit 66ef116d02253e0b2db1950befd07a4fa6988260
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 15 11:32:27 2019 -0600
+
+    Added ticks (every 30 seconds) via TimeManager.
+    
+    Currently it just allows for player mobs to heal 1/5th of their health.
+
+commit cad7098a0dae49f4ad71342f7184f9fac1831f0f
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 15 01:51:32 2019 -0600
+
+    Messing with message stuff again.
+
+commit 8675aa336d83d4f996cb6906e23cc36b9cef4ad8
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 14:33:05 2019 -0600
+
+    Fixed unit test.
+
+commit aeed5f99d779bc95097afde9ce1d99c68d1e41c3
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 14:28:35 2019 -0600
+
+    Added some basic stuff for adding articles to object names when necessary.
+    
+    Capitalized names don't get articles, uncapitalized names get articles.
+    
+    Will mess with it later.
+
+commit 8eb10613d07f954e8521d763fb62f0657d85ccd2
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 13:52:14 2019 -0600
+
+    Made rooms more appealing.
+
+commit c07ed16b11bbfc2565237500fa8799337c273570
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 13:44:59 2019 -0600
+
+    Added suffix and prefix concept to Communicate.act messages.
+    
+    Communicate.hit automatically injects CombatManager category if not set.
+    
+    Communicate.busy automatically injects SuffixBusy suffix.
+    
+    Some other stuff.
+
+commit 88bd6d3a2732a21e609237ae24acef964b780a00
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 12:05:03 2019 -0600
+
+    Moved messages to a central file.
+
+commit baa1e01a95538ee3e7cf2730f6ab6b17e38af8c6
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 10:47:14 2019 -0600
+
+    Added more.
+
+commit 118285950ec53c2635f82b4f2ecfde5104b1daa1
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 10:45:02 2019 -0600
+
+    Added some emphasis
+
+commit 0d27c6484e7b2cd2f347af7104fbebf4103079ee
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 10:31:59 2019 -0600
+
+    Fixed act unit test.
+
+commit 8f3b89c59ae97115471bb49296858a07fe41d1ea
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 10:28:56 2019 -0600
+
+    Converting everything to new act forma.
+    
+    Fixed some messages.
+
+commit edb4dffe247ccb245a71854fea85dad494b12424
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Mon Jan 14 01:54:52 2019 -0600
+
+    Replaced the previous act system with something more manageable.
+    
+    Not sure if I love it, but I'm using it for now.
+
+commit ed954c53bdcced5d2f682586e978f3ebeb7bca54
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Jan 13 16:18:00 2019 -0600
+
+    This should not be on the master branch for fuck's sake.
+
+commit bb0f17748a8f8661a05b42847c901106d81f3c1c
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sun Jan 13 15:46:52 2019 -0600
+
+    Working on stuff.
+
+commit 244d3b0ffbd03987a21d94138b34f123c35a6cf7
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Jan 11 18:19:29 2019 -0600
+
+    Working on acceptable color coding for combat.
+
+commit fcca2f53e9a16bf412249c97a8e1a463f02f0e3e
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Jan 11 17:31:39 2019 -0600
+
+    Renamed unready to busy.
+    
+    TODO: Create a way to send a message for every action that results
+    in an unready state. It needs to be suffixed with [-READY].
+
+commit 58d0de6adb3cadc11a90868378b383d0cc829ef0
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 10 11:40:22 2019 -0600
+
+    Added coverage link to README.
+    
+    Fixed documentation link.
+    
+    [skip ci]
+
+commit 66cacac86b1ecc8283b81226ad42990bd5cce61b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 10 11:30:17 2019 -0600
+
+    README more friendly with JSDoc page.
+    [skip ci]
+
+commit 4f9e9819c2838dbaf5bfd2ae7de319674524f1bf
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 10 11:13:31 2019 -0600
+
+    Added no-var rule to ESlint.
