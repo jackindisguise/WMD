@@ -1,7 +1,7 @@
 // local includes
 const Equipment = require("./Equipment");
-const WearLocation = require("../etc/WearLocation");
-const CombatAction = require("../etc/CombatAction");
+const WearLocation = require("../../etc/WearLocation");
+const CombatAction = require("../../etc/CombatAction");
 
 class Weapon extends Equipment{
 	get attackPower(){

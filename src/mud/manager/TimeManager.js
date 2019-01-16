@@ -1,7 +1,7 @@
 // local includes
 const PlayerManager = require("./PlayerManager");
 const Communicate = require("../Communicate");
-const Message = require("../etc/Message");
+const Message = require("../../etc/Message");
 
 // local variables
 let intID = null;

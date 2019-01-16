@@ -23,9 +23,9 @@ function deepSearch(directory, fileFun, callback){
 // ability loader
 module.exports = function(callback){
 	Logger.info(_("> Loading abilities..."));
-	deepSearch("./src/mud/ability", function(file, next){
-		let f = file.slice("./src/mud/ability".length); // cut off relative path from root
-		let constructor = require("../../../src/mud/ability/"+f);
+	deepSearch("./src/ability", function(file, next){
+		let f = file.slice("./src/ability".length); // cut off relative path from root
+		let constructor = require("../../../src/ability/"+f);
 		let ability = new constructor();
 		AbilityManager.add(ability);
 		Logger.info(_(">> Loaded ability '%s'", ability.name));

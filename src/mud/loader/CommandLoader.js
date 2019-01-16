@@ -23,9 +23,9 @@ function deepSearch(directory, fileFun, callback){
 // command loader
 module.exports = function(callback){
 	Logger.info(_("> Loading commands..."));
-	deepSearch("./src/mud/command", function(file, next){
-		let f = file.slice("./src/mud/command".length); // cut off relative path from root
-		let constructor = require("../../../src/mud/command/"+f);
+	deepSearch("./src/command", function(file, next){
+		let f = file.slice("./src/command".length); // cut off relative path from root
+		let constructor = require("../../../src/command/"+f);
 		let command = new constructor();
 		if(command.rule) {
 			CommandManager.add(command);

@@ -5,7 +5,7 @@ const util = require("util");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
-const MessageCategory = require("../etc/MessageCategory");
+const MessageCategory = require("../../etc/MessageCategory");
 const CommandHandler = require("../manager/CommandManager");
 const ChannelManager = require("../manager/ChannelManager");
 const Nanny = require("../Nanny");

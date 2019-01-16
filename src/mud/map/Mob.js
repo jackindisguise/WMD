@@ -4,14 +4,14 @@ const util = require("util");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
-const DamageType = require("../etc/DamageType");
-const Message = require("../etc/Message");
-const CombatAction = require("../etc/CombatAction");
-const Direction = require("../etc/Direction");
-const MessageCategory = require("../etc/MessageCategory");
-const Attribute = require("../etc/Attribute");
-const WearLocation = require("../etc/WearLocation");
-const WearSlot = require("../etc/WearSlot");
+const DamageType = require("../../etc/DamageType");
+const Message = require("../../etc/Message");
+const CombatAction = require("../../etc/CombatAction");
+const Direction = require("../../etc/Direction");
+const MessageCategory = require("../../etc/MessageCategory");
+const Attribute = require("../../etc/Attribute");
+const WearLocation = require("../../etc/WearLocation");
+const WearSlot = require("../../etc/WearSlot");
 const CombatManager = require("../manager/CombatManager");
 const Communicate = require("../Communicate");
 const Movable = require("./Movable");
@@ -905,7 +905,7 @@ class Mob extends Movable{
 	busy(delay){
 		this.ready = false;
 		setTimeout(function(){
-			Communicate.ready({
+			if(this.loc) Communicate.ready({
 				actor:this,
 				recipients:this.loc.contents,
 				message:Message.Ready,

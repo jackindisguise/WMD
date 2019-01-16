@@ -1,9 +1,9 @@
 // local includes
 require("../lib/Math");
 require("../lib/String");
-const MessageCategory = require("./etc/MessageCategory");
+const Message = require("../etc/Message");
+const MessageCategory = require("../etc/MessageCategory");
 const CombatManager = require("./manager/CombatManager");
-const Message = require("./etc/Message");
 
 // stuff
 class Communicate{

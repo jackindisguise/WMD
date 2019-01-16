@@ -1,5 +1,5 @@
 // local includes
-const Direction = require("../etc/Direction");
+const Direction = require("../../etc/Direction");
 
 class Map{
 	/**

@@ -2,7 +2,7 @@
 let util = require("util");
 
 // local includes
-let MessageCategory = require("../etc/MessageCategory");
+let MessageCategory = require("../../etc/MessageCategory");
 
 // local variables
 const delayPerRound = 3000;
