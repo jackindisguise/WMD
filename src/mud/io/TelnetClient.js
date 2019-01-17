@@ -74,7 +74,6 @@ class TelnetClient extends EventEmitter {
 
 	processTelnet(line){
 		let pos = line.indexOf(String.fromCharCode(TelnetCommand.IAC)); // start of command
-		let protocol;
 		let end; // end of command
 		let sub; // subnegotiation body
 		while(pos !== -1){
