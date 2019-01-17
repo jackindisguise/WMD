@@ -3,7 +3,6 @@ require("./PUG");
 
 // node includes
 const util = require("util");
-const fs = require("fs");
 
 // npm includes
 const expect = require("chai").expect;
@@ -14,15 +13,18 @@ const _ = require("../i18n");
 const RaceManager = require("../src/mud/manager/RaceManager");
 const ClassManager = require("../src/mud/manager/ClassManager");
 const PlayerManager = require("../src/mud/manager/PlayerManager");
-
-// text data
-const greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
-const motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
+const HelpfileManager = require("../src/mud/manager/HelpfileManager");
 
 describe("[LOGIN]", function(){
+	// local variables
 	let player;
 	let sPlayer;
 	it("connect player", function(done){
+		// text data
+		let greeting = HelpfileManager.getHelpfileByKeywords("greeting").content;
+		let motd = HelpfileManager.getHelpfileByKeywords("motd").content;
+
+		// local variables
 		let c = 0;
 		let msg;
 		function sequence(message){

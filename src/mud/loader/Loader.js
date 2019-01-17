@@ -14,7 +14,6 @@ const MapLoader = require("../loader/MapLoader");
 
 // full database loader
 module.exports = function(callback){
-
 	// specify loaders in the order they should be run
 	let loaders = [HelpfileLoader, AbilityLoader, RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, MapLoader, CharacterLoader, CommandLoader];
 

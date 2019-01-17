@@ -12,10 +12,6 @@ const ClassManager = require("./manager/ClassManager");
 const MapManager = require("./manager/MapManager");
 const Mob = require("./map/Mob");
 
-// text data
-const greeting = HelpfileManager.getHelpfileByKeywords("greeting").content;
-const motd = HelpfileManager.getHelpfileByKeywords("motd").content;
-
 /**
  * Used for transitioning a client into a proper playable state.
  */
@@ -35,6 +31,8 @@ class Nanny{
 	}
 
 	greet(){
+		// text data
+		let greeting = HelpfileManager.getHelpfileByKeywords("greeting").content;
 		this.player.sendLine(greeting);
 		this.askForName();
 	}
@@ -113,6 +111,7 @@ class Nanny{
 	}
 
 	motd(){
+		let motd = HelpfileManager.getHelpfileByKeywords("motd").content;
 		this.player.sendLine(motd);
 		this.player.ask(_("Press enter to continue..."), this.finish.bind(this));
 	}
