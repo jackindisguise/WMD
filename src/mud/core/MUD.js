@@ -4,7 +4,7 @@ const Player = require("../io/Player");
 const PlayerManager = require("../manager/PlayerManager");
 const TimeManager = require("../manager/TimeManager");
 const Logger = require("../../util/Logger");
-const Server = require("../io/Server");
+const Server = require("../io/TelnetServer");
 
 // local variables
 let server = new Server();

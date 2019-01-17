@@ -857,7 +857,7 @@ class Mob extends Movable{
 		this.engage(attacker); // make sure we're engaged on any damage instances
 		if(this.health === 0) {
 			this.die(attacker);
-			attacker.killed(this);
+			attacker.kill(this);
 		}
 	}
 

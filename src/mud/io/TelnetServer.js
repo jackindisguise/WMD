@@ -1,9 +1,9 @@
 // node includes
 const EventEmitter = require("events");
+const net = require("net");
 
 // local includes
-const Web = require("./Web");
-const Client = require("./Client");
+const TelnetClient = require("./TelnetClient");
 
 /**
  * Handles low level MUD server.
@@ -11,6 +11,7 @@ const Client = require("./Client");
 class Server extends EventEmitter {
 	constructor(){
 		super();
+		this._netserver = null;
 		this._clients = [];
 	}
 
@@ -21,21 +22,18 @@ class Server extends EventEmitter {
 	 */
 	open(port, callback){
 		// start server
-		Web.server.listen(port, function(){
-			if(callback) callback(Web, this);
-
-			// start listening for new sockets
-			Web.io.on("connection", function(socket){
-				this.connect(socket);
-			}.bind(this));
+		this._netServer = net.createServer(function(socket){
+			this.connect(socket);
 		}.bind(this));
+
+		this._netServer.listen(port, callback);
 	}
 
 	/**
 	 * Close the server.
 	 */
 	close(){
-		Web.server.close();
+		this._netServer.close();
 	}
 
 	/**
@@ -43,7 +41,7 @@ class Server extends EventEmitter {
 	 * @param {Object} socket A socket stream.
 	 */
 	connect(socket){
-		let mudclient = new Client({socket:socket});
+		let mudclient = new TelnetClient({socket:socket});
 		this._clients.push(mudclient);
 		/**
 		 * @event Server#connect
