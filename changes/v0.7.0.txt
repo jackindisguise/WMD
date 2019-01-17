@@ -1,0 +1,27 @@
+commit bc23f0ee62277fe4e7d5f2eda9b52ae40c979f25
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 17 12:33:57 2019 -0600
+
+    Problems with access to HelpfileManager in Nanny and unit tests.
+    
+    Put a small bandaid on it. I'll work on it later.
+
+commit a64583350906c285da80f638d9f6f8a2a6258317
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 17 12:16:23 2019 -0600
+
+    Because helpfiles should be human readable and editable, they need linebreaks.
+    Unfortunately, JSON doesn't support linebreaks. That leaves me with 2 options:
+    1. use a custom plaintext format.
+    2. use a markup language of some sort that's easy to include.
+    
+    I've chosen option 2. I'm using YAML files for helpfiles.
+    Also, helpfiles have no significant function other than the data
+    they contain, so I didn't create an Helpfile object to manage
+    any kind of complex object interactions.
+
+commit 1e9cf8552183793958ddbefc94c94fa65104053a
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 16 16:23:50 2019 -0600
+
+    JSDoc looks in the proper directory.
