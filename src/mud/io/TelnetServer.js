@@ -8,7 +8,7 @@ const TelnetClient = require("./TelnetClient");
 /**
  * Handles low level MUD server.
  */
-class Server extends EventEmitter {
+class TelnetServer extends EventEmitter {
 	constructor(){
 		super();
 		this._netserver = null;
@@ -71,4 +71,4 @@ class Server extends EventEmitter {
 	}
 }
 
-module.exports = Server;
+module.exports = TelnetServer;
