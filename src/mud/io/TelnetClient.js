@@ -2,9 +2,13 @@
 const EventEmitter = require("events");
 
 // local includes
+require("../../lib/String");
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
 const MessageCategory = require("../../etc/MessageCategory");
+const TelnetCommand = require("../../etc/TelnetCommand");
+const TelnetProtocol = require("../../etc/TelnetProtocol");
+const TelnetEnvironment = require("../../etc/TelnetEnvironment");
 
 /**
  * Handles low level MUD client.
@@ -34,12 +38,26 @@ class TelnetClient extends EventEmitter {
 	 * @param {string} input Input from the socket.
 	 */
 	process(input){
+		// split input lines
 		let lines = input.split("\r\n");
-		if(lines[lines.length-1] === "") lines.pop();
-		if(lines.length === 0) return;
+		let processed = [];
+
+		// process IAC messages here
+		for(let i=0;i<lines.length;i++) {
+			let line = lines[i];
+			line = this.processTelnet(line);
+			processed.push(line);
+		}
+
+		// pop non-command
+		if(processed[processed.length-1] === "") lines.pop(); // funnel this to _incomplete later
+
+		// if there was no linebreak
+		if(processed.length === 0) return;
 	
 		// client echoes manually
-		if(true) this._messageCategory = null;
+		let mEcho = true; // client manually echoes
+		if(mEcho) this._messageCategory = null; // if manual echo, don't print linebreak
 
 		/**
 		 * @event Client#command
@@ -48,41 +66,88 @@ class TelnetClient extends EventEmitter {
 		for(let line of lines) this.emit("command", line);
 	}
 
+	telnet(){
+		let commands = [];
+		for(let i=0;i<arguments.length;i++) commands.push(String.fromCharCode(arguments[i]));
+		this._socket.write(commands.join(""), "binary");
+	}
+
+	processTelnet(line){
+		let pos = line.indexOf(String.fromCharCode(TelnetCommand.IAC)); // start of command
+		let protocol;
+		let end; // end of command
+		let sub; // subnegotiation body
+		while(pos !== -1){
+			let command = line.charCodeAt(pos+1);
+			switch(command){
+			case TelnetCommand.WILL: this.telnetOnWILL(line.charCodeAt(pos+2)); end = pos+3; break;
+			case TelnetCommand.WONT: this.telnetOnWONT(line.charCodeAt(pos+2)); end = pos+3; break;
+			case TelnetCommand.DO: this.telnetOnDO(line.charCodeAt(pos+2)); end = pos+3; break;
+			case TelnetCommand.DONT: this.telnetOnDONT(line.charCodeAt(pos+2)); end = pos+3; break;
+			case TelnetCommand.SB:
+				end = line.indexOf(String.fromCharCode(TelnetCommand.IAC, TelnetCommand.SE), pos);
+				if(end === -1) {
+					// bad telnet subnegotiation command.
+					end = pos+1;
+					break;
+				}
+
+				sub = line.slice(pos+2, end);
+				// do subnegotiation here
+				this.telnetOnSB(sub);
+				end += 3; // move past IAC SE
+			}
+
+			line = line.slice(0,pos) + line.slice(end);
+			pos = line.indexOf(String.fromCharCode(TelnetCommand.IAC));
+		}
+
+		return line;
+	}
+
+	telnetOnWILL(protocol){
+		switch(protocol){
+		case TelnetProtocol.TTYPE:
+			this.telnet(TelnetCommand.IAC, TelnetCommand.SB, TelnetProtocol.TTYPE, TelnetEnvironment.SEND, TelnetCommand.IAC, TelnetCommand.SE);
+			break;
+		}
+	}
+
+	telnetOnWONT(protocol){
+
+	}
+
+	telnetOnDO(protocol){
+
+	}
+
+	telnetOnDONT(protocol){
+
+	}
+
+	telnetOnSB(negotiation){
+		let protocol = negotiation.charCodeAt(0);
+		let command = negotiation.charCodeAt(1);
+		if(protocol === TelnetProtocol.TTYPE && command === TelnetEnvironment.IS){
+//			let ttype = negotiation.slice(2);
+		}
+	}
+
 	/**
 	 * Sends a categorized message.
 	 * @param {string} message
 	 */
 	sendMessage(message, category){
-		//if(this._socket) this._socket.emit("message", message, category, Date.now());
 		if(category) {
 			if(this._messageCategory != null && this._messageCategory !== category) this._socket.write("\r\n");
 			this._messageCategory = category;
 		}
 
-		let TelnetColor = require("../../etc/TelnetColor");
-		let colorized = message.replace(/\{(.)/g, function(full, char){
-			switch(char){
-			case "R": return TelnetColor.C_B_RED;
-			case "r": return TelnetColor.C_RED;
-			case "G": return TelnetColor.C_B_GREEN;
-			case "g": return TelnetColor.C_GREEN;
-			case "B": return TelnetColor.C_B_BLUE;
-			case "b": return TelnetColor.C_BLUE;
-			case "Y": return TelnetColor.C_B_YELLOW;
-			case "y": return TelnetColor.C_YELLOW;
-			case "P": return TelnetColor.C_B_MAGENTA;
-			case "p": return TelnetColor.C_MAGENTA;
-			case "C": return TelnetColor.C_B_CYAN;
-			case "c": return TelnetColor.C_CYAN;
-			case "W": return TelnetColor.C_B_WHITE;
-			case "w": return TelnetColor.C_WHITE;
-			case "D": return TelnetColor.C_D_GREY;
-			case "x":
-			default: return TelnetColor.CLEAR;
-			}
-		});
+		// colorize for telnet
+		message = message.colorize("telnet");
 
-		this._socket.write(colorized+"\r\n");
+		// write to socket
+		this._socket.write(message+"\r\n");
 	}
 
 	/**
@@ -100,7 +165,7 @@ class TelnetClient extends EventEmitter {
 	connect(socket){
 		Logger.debug(_("connected client"));
 		this._socket = socket;
-		socket.setEncoding("ascii");
+		socket.setEncoding("binary");
 
 		// start listening for commands
 		socket.on("data", function(input){
@@ -108,9 +173,12 @@ class TelnetClient extends EventEmitter {
 		}.bind(this));
 
 		// start listening for disconnects
-		socket.once("disconnect", function(){
+		socket.once("close", function(){
 			this.disconnect();
 		}.bind(this));
+
+		// test
+		this.telnet(TelnetCommand.IAC, TelnetCommand.DO, TelnetProtocol.TTYPE);
 	}
 
 	/**
@@ -127,7 +195,7 @@ class TelnetClient extends EventEmitter {
 	}
 
 	quit(){
-		this._socket.end();
+		this._socket.destroy();
 	}
 }
 

@@ -4,6 +4,7 @@ const util = require("util");
 // local includes
 const Logger = require("../util/Logger");
 const ColorCode = require("../etc/ColorCode");
+const TelnetColor = require("../etc/TelnetColor");
 
 /**
  * Check for matches to this string's keywords.
@@ -78,6 +79,59 @@ String.prototype.padRight = function(size, padder=" "){
 	if(pad === 1) return util.format("%s%s", this, padder);
 	pad = Math.floor(pad / padder.length);
 	return util.format("%s%s", this, padder.repeat(pad));
+};
+
+
+String.prototype.colorize = function(client){
+	if(client==="telnet") return this.replace(/\{(.)/g, function(full, char){
+		switch(char){
+		case "{": return "{";
+		case "R": return TelnetColor.C_B_RED;
+		case "r": return TelnetColor.C_RED;
+		case "G": return TelnetColor.C_B_GREEN;
+		case "g": return TelnetColor.C_GREEN;
+		case "B": return TelnetColor.C_B_BLUE;
+		case "b": return TelnetColor.C_BLUE;
+		case "Y": return TelnetColor.C_B_YELLOW;
+		case "y": return TelnetColor.C_YELLOW;
+		case "P": return TelnetColor.C_B_MAGENTA;
+		case "p": return TelnetColor.C_MAGENTA;
+		case "C": return TelnetColor.C_B_CYAN;
+		case "c": return TelnetColor.C_CYAN;
+		case "W": return TelnetColor.C_B_WHITE;
+		case "w": return TelnetColor.C_WHITE;
+		case "D": return TelnetColor.C_D_GREY;
+		case "x":
+		default: return TelnetColor.CLEAR;
+		}
+	});
+
+	if(client==="web") {
+		let colors = 0;
+		let clear;
+		return this.replace(/\{(.)/g, function(full, char){
+			switch(char){
+			case "R": colors++; return "<font color='red'>";
+			case "r": colors++; return "<font color='maroon'>";
+			case "G": colors++; return "<font color='lime'>";
+			case "g": colors++; return "<font color='green'>";
+			case "B": colors++; return "<font color='blue'>";
+			case "b": colors++; return "<font color='navy'>";
+			case "Y": colors++; return "<font color='yellow'>";
+			case "y": colors++; return "<font color='olive'>";
+			case "P": colors++; return "<font color='magenta'>";
+			case "p": colors++; return "<font color='purple'>";
+			case "C": colors++; return "<font color='cyan'>";
+			case "c": colors++; return "<font color='teal'>";
+			case "W": colors++; return "<font color='white'>";
+			case "w": colors++; return "<font color='silver'>";
+			case "D": colors++; return "<font color='grey'>";
+			case "x": clear = "</font>".repeat(colors); colors = 0; return clear;
+			default:
+				return char;
+			}
+		});
+	}
 };
 
 String.prototype.getColorSize = function(){
