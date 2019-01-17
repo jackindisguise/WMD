@@ -734,10 +734,12 @@ class Mob extends Movable{
 		}.bind(this);
 	}
 
-	restore(){
-		this.health = this.maxHealth;
-		this.energy = this.maxEnergy;
-		this.mana = this.maxMana;
+	restore(mod=1){
+		this.heal({
+			health:this.maxHealth * mod,
+			energy:this.maxEnergy * mod,
+			mana:this.maxMana * mod
+		});
 	}
 
 	engage(victim){
@@ -857,7 +859,7 @@ class Mob extends Movable{
 		this.engage(attacker); // make sure we're engaged on any damage instances
 		if(this.health === 0) {
 			this.die(attacker);
-			attacker.killed(this);
+			attacker.kill(this);
 		}
 	}
 
@@ -874,14 +876,14 @@ class Mob extends Movable{
 		this.disengage();
 
 		if(this.player){
-			this.restore();
+			this.heal({health:this.maxHealth * 0.2}); // restore 20% of HP
 		} else {
 			this.loc = null; // delete this mob
 		}
 	}
 
 	kill(victim){
-		let experience = (victim.level - this.level + 1) * 100;
+		let experience = 200 + (victim.level - this.level) * 50;
 		Communicate.experience({
 			actor:this,
 			directObject:victim,
@@ -918,16 +920,16 @@ class Mob extends Movable{
 
 	heal(options){
 		if(!options) return;
-		if(options.health) this.health = Math.min(this.health + options.health, this.maxHealth);
-		if(options.energy) this.energy = Math.min(this.energy + options.energy, this.maxEnergy);
-		if(options.mana) this.mana = Math.min(this.mana + options.mana, this.maxMana);
+		if(options.health) this.health = Math.min(this.health + Math.floor(options.health), this.maxHealth);
+		if(options.energy) this.energy = Math.min(this.energy + Math.floor(options.energy), this.maxEnergy);
+		if(options.mana) this.mana = Math.min(this.mana + Math.floor(options.mana), this.maxMana);
 	}
 
 	expend(options){
 		if(!options) return;
-		if(options.health) this.health = Math.max(this.health - options.health, 0);
-		if(options.energy) this.energy = Math.max(this.energy - options.energy, 0);
-		if(options.mana) this.mana = Math.max(this.mana - options.mana, 0);
+		if(options.health) this.health = Math.max(this.health - Math.floor(options.health), 0);
+		if(options.energy) this.energy = Math.max(this.energy - Math.floor(options.energy), 0);
+		if(options.mana) this.mana = Math.max(this.mana - Math.floor(options.mana), 0);
 	}
 }
 

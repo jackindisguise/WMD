@@ -51,7 +51,7 @@ class AcidBlast extends Spell{
 AcidBlast.prototype.name = "acid blast";
 AcidBlast.prototype.display = "acid blast";
 AcidBlast.prototype.keywords = "acid blast acidblast";
-AcidBlast.prototype.mana = 5;
+AcidBlast.prototype.mana = 3;
 AcidBlast.prototype.delay = 3000;
 
 module.exports = AcidBlast;

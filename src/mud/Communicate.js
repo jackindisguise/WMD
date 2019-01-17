@@ -83,13 +83,13 @@ class Communicate{
 		options.prefix = Message.BusyPrefix;
 		options.suffix = [Message.BusySuffix];
 		if(options.energy) {
-			let maxEP = actor.maxEnergy, afterEP = Math.min(actor.energy + options.energy, maxEP);
+			let maxEP = actor.maxEnergy, afterEP = Math.min(actor.energy - options.energy, maxEP);
 			options.energyFormatted = `${afterEP}/${maxEP}`;
 			options.suffix.push(Message.ExpendEnergySuffix);
 		}
 
 		if(options.mana) {
-			let maxMP = actor.maxMana, afterMP = Math.min(actor.mana + options.mana, maxMP);
+			let maxMP = actor.maxMana, afterMP = Math.min(actor.mana - options.mana, maxMP);
 			options.manaFormatted = `${afterMP}/${maxMP}`;
 			options.suffix.push(Message.ExpendManaSuffix);
 		}

@@ -50,7 +50,7 @@ class Heal extends Spell{
 Heal.prototype.name = "heal";
 Heal.prototype.display = "heal";
 Heal.prototype.keywords = "heal";
-Heal.prototype.mana = 5;
+Heal.prototype.mana = 3;
 Heal.prototype.delay = 6000;
 
 module.exports = Heal;

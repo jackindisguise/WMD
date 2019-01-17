@@ -1,20 +1,20 @@
 // node includes
 const util = require("util");
-const fs = require("fs");
 
 // local includes
 require("../lib/String");
 require("../lib/Array");
 const _ = require("../../i18n");
 const Logger = require("../util/Logger");
+const HelpfileManager = require("./manager/HelpfileManager");
 const RaceManager = require("./manager/RaceManager");
 const ClassManager = require("./manager/ClassManager");
 const MapManager = require("./manager/MapManager");
 const Mob = require("./map/Mob");
 
 // text data
-const greeting = fs.readFileSync("./data/reference/greeting.txt", "utf8");
-const motd = fs.readFileSync("./data/reference/motd.txt", "utf8");
+const greeting = HelpfileManager.getHelpfileByKeywords("greeting").content;
+const motd = HelpfileManager.getHelpfileByKeywords("motd").content;
 
 /**
  * Used for transitioning a client into a proper playable state.

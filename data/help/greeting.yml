@@ -1,0 +1,21 @@
+name: greeting
+keywords: greeting login
+description: This is the greeting message.
+content: |1
+                          ,--.   ,--.,--.   ,--.,------.
+                          |  |   |  ||   `.'   ||  .-.  \
+                          |  |.'.|  ||  |'.'|  ||  |  \  :
+                          |   ,'.   ||  |   |  ||  '--'  /
+                          '--'   '--'`--'   `--'`-------'
+                      ----------------------------------------
+                                    WMD (v0.0a)
+                              A web-based MUD engine.
+
+                                     Created by
+                                   jackindisguise
+
+                                   Developed with
+                                       Nodejs
+                                      Express
+                                     Socket.IO
+                      ----------------------------------------

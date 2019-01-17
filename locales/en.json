@@ -137,5 +137,7 @@
 	"Abilities:": "Abilities:",
 	"- Abilities -": "- Abilities -",
 	"Level %s:": "Level %s:",
-	"Level %s: ": "Level %s: "
+	"Level %s: ": "Level %s: ",
+	"> Loading helpfile...": "> Loading helpfile...",
+	">> Loading helpfile '%s'": ">> Loading helpfile '%s'"
 }

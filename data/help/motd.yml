@@ -1,0 +1,13 @@
+name: motd
+keywords: motd
+description: This is the message of the day.
+content: |1
+                      ,--.   ,--. ,-----. ,--------.,------.   
+                      |   `.'   |'  .-.  ''--.  .--'|  .-.  \  
+                      |  |'.'|  ||  | |  |   |  |   |  |  \  : 
+                      |  |   |  |'  '-'  '   |  |   |  '--'  / 
+                      `--'   `--' `-----'    `--'   `-------'  
+                   ----------------------------------------------
+                          This is the Message of the Day.
+                    I guess I'd put announcements and shit here.
+                   ----------------------------------------------

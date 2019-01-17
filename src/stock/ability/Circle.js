@@ -61,7 +61,7 @@ class Circle extends Skill{
 Circle.prototype.name = "circle";
 Circle.prototype.display = "circle";
 Circle.prototype.keywords = "circle";
-Circle.prototype.energy = 5;
+Circle.prototype.energy = 3;
 Circle.prototype.delay = 3000;
 
 module.exports = Circle;
