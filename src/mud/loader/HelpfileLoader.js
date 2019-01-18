@@ -12,7 +12,7 @@ const HelpfileManager = require("../manager/HelpfileManager");
 // load channels
 module.exports = function(callback){
 	let count = 0;
-	function c() {
+	function done() {
 		count--;
 		if(count === 0) callback();
 	}
@@ -25,7 +25,7 @@ module.exports = function(callback){
 				let yml = yaml.load(data);
 				Logger.info(_(">> Loading helpfile '%s'", yml.name));
 				HelpfileManager.add(yml);
-				c();
+				done();
 			});
 		}
 	});
