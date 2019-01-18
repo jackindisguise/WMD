@@ -1,7 +1,7 @@
 name: greeting
 keywords: greeting login
 description: This is the greeting message.
-content: |1
+content: |2
                           ,--.   ,--.,--.   ,--.,------.
                           |  |   |  ||   `.'   ||  .-.  \
                           |  |.'.|  ||  |'.'|  ||  |  \  :

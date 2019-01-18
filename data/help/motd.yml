@@ -1,7 +1,7 @@
 name: motd
 keywords: motd
 description: This is the message of the day.
-content: |1
+content: |2
                       ,--.   ,--. ,-----. ,--------.,------.   
                       |   `.'   |'  .-.  ''--.  .--'|  .-.  \  
                       |  |'.'|  ||  | |  |   |  |   |  |  \  : 
