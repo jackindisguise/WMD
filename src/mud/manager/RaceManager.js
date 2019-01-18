@@ -1,10 +1,25 @@
 require("../../lib/Array");
 
+/**
+ * @type {Race[]}
+ */
 let races = [];
 
 class RaceManager{
+	/**
+	 * @returns {Race[]}
+	 */
 	static get races(){
 		return races;
+	}
+
+	/**
+	 * @returns {Race[]}
+	 */
+	static get selectable(){
+		let selectable = [];
+		for(let race of races) if(race.selectable) selectable.push(race);
+		return selectable;
 	}
 
 	static add(race){

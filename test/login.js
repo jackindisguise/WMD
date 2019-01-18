@@ -41,7 +41,7 @@ describe("[LOGIN]", function(){
 
 			case 2:
 				msg = "------------------";
-				for(let race of RaceManager.races){
+				for(let race of RaceManager.selectable){
 					msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
 				}
             
@@ -57,7 +57,7 @@ describe("[LOGIN]", function(){
 
 			case 4:
 				msg = "------------------";
-				for(let _class of ClassManager.classes){
+				for(let _class of ClassManager.selectable){
 					msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
 				}
             

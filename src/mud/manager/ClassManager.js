@@ -3,8 +3,20 @@ require("../../lib/Array");
 let classes = [];
 
 class ClassManager{
+	/**
+	 * @returns {Class[]}
+	 */
 	static get classes(){
 		return classes;
+	}
+
+	/**
+	 * @returns {Class[]}
+	 */
+	static get selectable(){
+		let selectable = [];
+		for(let cLass of classes) if(cLass.selectable) selectable.push(cLass);
+		return selectable;
 	}
 
 	static add(_class){

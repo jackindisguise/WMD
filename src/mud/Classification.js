@@ -93,6 +93,12 @@ Classification.prototype.abilities = null;
  */
 Classification.prototype.description = "Nobody knows what this is.";
 
+/**
+ * Is this classification selectable at character creation?
+ * @type {boolean}
+ */
+Classification.prototype.selectable = true;
+
 // progression
 Classification.prototype.toNextLevelBase = 0;
 Classification.prototype.toNextLevelPerLevel = 0;

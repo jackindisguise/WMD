@@ -50,8 +50,8 @@ class Nanny{
 
 	askForRace(){
 		let msg = "------------------";
-		for(let race of RaceManager.races){
-			msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
+		for(let race of RaceManager.selectable){
+			msg += "\r\n" + util.format("%s %s %s %s", "|", race.display.padLeft(14), "|", race.description);
 		}
 
 		msg += "\r\n";
@@ -63,7 +63,7 @@ class Nanny{
 	}
 
 	processRace(input){
-		let race = RaceManager.races.search(input);
+		let race = RaceManager.selectable.search(input);
 		if(!race) {
 			this.player.sendLine(_("That isn't a valid race."));
 			this.askForRace();
@@ -76,8 +76,8 @@ class Nanny{
 
 	askForClass(){
 		let msg = "------------------";
-		for(let _class of ClassManager.classes){
-			msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
+		for(let _class of ClassManager.selectable){
+			msg += "\r\n" + util.format("%s %s %s %s", "|", _class.display.padLeft(14), "|", _class.description);
 		}
 
 		msg += "\r\n";
@@ -89,7 +89,7 @@ class Nanny{
 	}
 
 	processClass(input){
-		let _class = ClassManager.classes.search(input);
+		let _class = ClassManager.selectable.search(input);
 		if(!_class) {
 			this.player.sendLine(_("That isn't a valid class."));
 			this.askForClass();
