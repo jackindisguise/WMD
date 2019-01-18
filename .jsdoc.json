@@ -4,6 +4,7 @@
 	},
 	"source":{
 		"include": [
+			"src/etc",
 			"src/lib",
 			"src/mud",
 			"src/mud/ability",
