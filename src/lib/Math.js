@@ -69,3 +69,13 @@ Math.rollString = function(string){
 	if(!result) return null;
 	return Math.roll(Number(result[1]),Number(result[2]),(result[3] === "-") ? 0-Number(result[4]) : Number(result[4]));
 };
+
+const MS_SECOND = 1000;
+const MS_MINUTE = MS_SECOND * 60;
+const MS_HOUR = MS_MINUTE * 60;
+Math.msToTime = function(ms){
+	let hours = Math.floor(ms/MS_HOUR);
+	let minutes = Math.floor(ms%MS_HOUR/MS_MINUTE);
+	let seconds = Math.floor(ms%MS_MINUTE/MS_SECOND);
+	return {hour:hours, minute:minutes, second:seconds};
+};

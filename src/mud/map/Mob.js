@@ -9,7 +9,7 @@ const Message = require("../../etc/Message");
 const CombatAction = require("../../etc/CombatAction");
 const Direction = require("../../etc/Direction");
 const MessageCategory = require("../../etc/MessageCategory");
-const Attribute = require("../../etc/Attribute");
+const AttributeName = require("../../etc/AttributeName");
 const WearLocation = require("../../etc/WearLocation");
 const WearSlot = require("../../etc/WearSlot");
 const CombatManager = require("../manager/CombatManager");
@@ -33,6 +33,9 @@ class Mob extends Movable{
 	 */
 	constructor(options){
 		super(options);
+		this.effects = []; // effects on us
+
+		// wear locations
 		this.worn = {
 			HEAD: null,
 			NECK: null,
@@ -65,10 +68,12 @@ class Mob extends Movable{
 		let strength = 0;
 		strength += this._race.getStrengthByLevel(this.level);
 		strength += this._class.getStrengthByLevel(this.level);
+		for(let effect of this.effects) strength += effect.strength;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) strength += eq.strength;
 		}
+
 		return Math.floor(strength);
 	}
 
@@ -83,6 +88,7 @@ class Mob extends Movable{
 		let attackPower = this.strength;
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
+		for(let effect of this.effects) attackPower += effect.attackPower;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) attackPower += eq.attackPower;
@@ -101,6 +107,7 @@ class Mob extends Movable{
 		let defense = this.strength;
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
+		for(let effect of this.effects) defense += effect.defense;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) defense += eq.defense;
@@ -119,6 +126,7 @@ class Mob extends Movable{
 		let vitality = this.strength;
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
+		for(let effect of this.effects) vitality += effect.vitality;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) vitality += eq.vitality;
@@ -137,6 +145,7 @@ class Mob extends Movable{
 		let health = this.vitality * 3;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
+		for(let effect of this.effects) health += effect.health;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) health += eq.health;
@@ -155,6 +164,7 @@ class Mob extends Movable{
 		let agility = 0;
 		agility += this._race.getAgilityByLevel(this.level);
 		agility += this._class.getAgilityByLevel(this.level);
+		for(let effect of this.effects) agility += effect.agility;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) agility += eq.agility;
@@ -170,14 +180,15 @@ class Mob extends Movable{
 	}
 
 	get precision(){
-		let speed = this.agility;
-		speed += this._race.getPrecisionByLevel(this.level);
-		speed += this._class.getPrecisionByLevel(this.level);
+		let precision = this.agility;
+		precision += this._race.getPrecisionByLevel(this.level);
+		precision += this._class.getPrecisionByLevel(this.level);
+		for(let effect of this.effects) precision += effect.precision;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
-			if(eq) speed += eq.precision;
+			if(eq) precision += eq.precision;
 		}
-		return Math.floor(speed);
+		return Math.floor(precision);
 	}
 
 	get rawDeflection(){
@@ -191,6 +202,7 @@ class Mob extends Movable{
 		let deflection = this.agility;
 		deflection += this._race.getDeflectionByLevel(this.level);
 		deflection += this._class.getDeflectionByLevel(this.level);
+		for(let effect of this.effects) deflection += effect.deflection;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) deflection += eq.deflection;
@@ -209,6 +221,7 @@ class Mob extends Movable{
 		let stamina = this.agility;
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
+		for(let effect of this.effects) stamina += effect.stamina;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) stamina += eq.stamina;
@@ -227,6 +240,7 @@ class Mob extends Movable{
 		let energy = this.stamina;
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
+		for(let effect of this.effects) energy += effect.energy;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) energy += eq.energy;
@@ -245,6 +259,7 @@ class Mob extends Movable{
 		let intelligence = 0;
 		intelligence += this._race.getIntelligenceByLevel(this.level);
 		intelligence += this._class.getIntelligenceByLevel(this.level);
+		for(let effect of this.effects) intelligence += effect.intelligence;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) intelligence += eq.intelligence;
@@ -263,6 +278,7 @@ class Mob extends Movable{
 		let magicPower = this.intelligence;
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
+		for(let effect of this.effects) magicPower += effect.magicPower;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) magicPower += eq.magicPower;
@@ -281,6 +297,7 @@ class Mob extends Movable{
 		let resilience = this.intelligence;
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
+		for(let effect of this.effects) resilience += effect.resilience;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) resilience += eq.resilience;
@@ -299,6 +316,7 @@ class Mob extends Movable{
 		let wisdom = this.intelligence;
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
+		for(let effect of this.effects) wisdom += effect.wisdom;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) wisdom += eq.wisdom;
@@ -317,6 +335,7 @@ class Mob extends Movable{
 		let mana = this.wisdom;
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
+		for(let effect of this.effects) mana += effect.mana;
 		for(let slot in this.worn){
 			let eq = this.worn[slot];
 			if(eq) mana += eq.mana;
@@ -562,7 +581,7 @@ class Mob extends Movable{
 			let gain = diffAttributes[attribute] > 0;
 			let word = gain ? "increased" : "decreased";
 			msg += "\r\n" + _("Your %s has %s to {%s%d{x ({%s%s%d{x).",
-				Attribute.display[attribute],
+				attribute,
 				word,
 				emphasis,
 				nAttributes[attribute],
@@ -680,44 +699,64 @@ class Mob extends Movable{
 		return slot;
 	}
 
+	getAttributeByName(name){
+		switch(name){
+		case AttributeName.STRENGTH: return this.strength;
+		case AttributeName.ATTACK_POWER: return this.attackPower;
+		case AttributeName.DEFENSE: return this.defense;
+		case AttributeName.VITALITY: return this.vitality;
+		case AttributeName.MAX_HEALTH: return this.maxHealth;
+		case AttributeName.INTELLIGENCE: return this.intelligence;
+		case AttributeName.MAGIC_POWER: return this.magicPower;
+		case AttributeName.RESILIENCE: return this.resilience;
+		case AttributeName.WISDOM: return this.wisdom;
+		case AttributeName.MAX_MANA: return this.maxMana;
+		case AttributeName.AGILITY: return this.agility;
+		case AttributeName.PRECISION: return this.precision;
+		case AttributeName.DEFLECTION: return this.deflection;
+		case AttributeName.STAMINA: return this.stamina;
+		case AttributeName.MAX_ENERGY: return this.maxEnergy;
+		}
+	}
+
+	getRawAttributeByName(name){
+		switch(name){
+		case AttributeName.STRENGTH: return this.rawStrength;
+		case AttributeName.ATTACK_POWER: return this.rawAttackPower;
+		case AttributeName.DEFENSE: return this.rawDefense;
+		case AttributeName.VITALITY: return this.rawVitality;
+		case AttributeName.MAX_HEALTH: return this.rawMaxHealth;
+		case AttributeName.INTELLIGENCE: return this.rawIntelligence;
+		case AttributeName.MAGIC_POWER: return this.rawMagicPower;
+		case AttributeName.RESILIENCE: return this.rawResilience;
+		case AttributeName.WISDOM: return this.rawWisdom;
+		case AttributeName.MAX_MANA: return this.rawMaxMana;
+		case AttributeName.AGILITY: return this.rawAgility;
+		case AttributeName.PRECISION: return this.rawPrecision;
+		case AttributeName.DEFLECTION: return this.rawDeflection;
+		case AttributeName.STAMINA: return this.rawStamina;
+		case AttributeName.MAX_ENERGY: return this.rawMaxEnergy;
+		}
+	}
+
 	getAttributes(){
-		return {
-			STRENGTH: this.strength,
-			ATTACK_POWER: this.attackPower,
-			DEFENSE: this.defense,
-			VITALITY: this.vitality,
-			HEALTH: this.maxHealth,
-			AGILITY: this.agility,
-			PRECISION: this.precision,
-			DEFLECTION: this.deflection,
-			STAMINA: this.stamina,
-			ENERGY: this.maxEnergy,
-			INTELLIGENCE: this.intelligence,
-			MAGIC_POWER: this.magicPower,
-			RESILIENCE: this.resilience,
-			WISDOM: this.wisdom,
-			MANA: this.maxMana
-		};
+		let attributes = {};
+		for(let entry in AttributeName){
+			let name = AttributeName[entry];
+			attributes[name] = this.getAttributeByName(name);
+		}
+
+		return attributes;
 	}
 
 	getRawAttributes(){
-		return {
-			STRENGTH: this.rawStrength,
-			ATTACK_POWER: this.rawAttackPower,
-			DEFENSE: this.rawDefense,
-			VITALITY: this.rawVitality,
-			HEALTH: this.rawMaxHealth,
-			AGILITY: this.rawAgility,
-			PRECISION: this.rawPrecision,
-			DEFLECTION: this.rawDeflection,
-			STAMINA: this.rawStamina,
-			ENERGY: this.rawMaxEnergy,
-			INTELLIGENCE: this.rawIntelligence,
-			MAGIC_POWER: this.rawMagicPower,
-			RESILIENCE: this.rawResilience,
-			WISDOM: this.rawWisdom,
-			MANA: this.rawMaxMana
-		};
+		let attributes = {};
+		for(let entry in AttributeName){
+			let name = AttributeName[entry];
+			attributes[name] = this.getRawAttributeByName(name);
+		}
+
+		return attributes;
 	}
 
 	funRestoreRelativeStatus(){
@@ -931,6 +970,20 @@ class Mob extends Movable{
 		if(options.energy) this.energy = Math.max(this.energy - Math.floor(options.energy), 0);
 		if(options.mana) this.mana = Math.max(this.mana - Math.floor(options.mana), 0);
 	}
+
+	addEffect(effect){
+		let pos = this.effects.indexOf(effect);
+		if(pos !== -1) return; // already effects
+		this.effects.push(effect);
+		if(effect.affectee !== this) effect.affectee = this;
+	}
+
+	removeEffect(effect){
+		let pos = this.effects.indexOf(effect);
+		if(pos === -1) return; // not effected by this
+		this.effects.splice(pos, 1);
+		if(effect.affectee === this) effect.affectee = null;
+	}
 }
 
 Mob.prototype.ready = true;
@@ -979,6 +1032,8 @@ Mob.prototype.experience = 0;
 Mob.prototype.health = 0;
 Mob.prototype.energy = 0;
 Mob.prototype.mana = 0;
+
+Mob.prototype.effects = null;
 
 Mob.prototype.worn = null;
 

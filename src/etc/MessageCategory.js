@@ -12,7 +12,8 @@ const MessageCategory = {
 	ROOM: "ROOM",
 	DEATHCRY: "DEATHCRY",
 	READY: "READY",
-	LEVELUP: "LEVELUP"
+	LEVELUP: "LEVELUP",
+	EFFECT: "EFFECT"
 };
 
 module.exports = MessageCategory;

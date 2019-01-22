@@ -139,5 +139,14 @@
 	"Level %s:": "Level %s:",
 	"Level %s: ": "Level %s: ",
 	"> Loading helpfile...": "> Loading helpfile...",
-	">> Loading helpfile '%s'": ">> Loading helpfile '%s'"
+	">> Loading helpfile '%s'": ">> Loading helpfile '%s'",
+	"> Loading effects...": "> Loading effects...",
+	">> Loaded effect '%s'": ">> Loaded effect '%s'",
+	"- Effects -": "- Effects -",
+	"You are affected by {W%s{x.": "You are affected by {W%s{x.",
+	"%s to %s": "%s to %s",
+	"%s to {C%s{x.": "%s to {C%s{x.",
+	"You aren't affected by anything.": "You aren't affected by anything.",
+	"You are affected by {W%s{x. (%d seconds)": "You are affected by {W%s{x. (%d seconds)",
+	"You are affected by {W%s{x. (%s)": "You are affected by {W%s{x. (%s)"
 }

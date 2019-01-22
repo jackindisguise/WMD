@@ -3,6 +3,7 @@ require("../../lib/Object");
 require("../../lib/Array");
 const RaceLoader = require("../loader/RaceLoader");
 const ClassLoader = require("../loader/ClassLoader");
+const EffectLoader = require("../loader/EffectLoader");
 const AbilityLoader = require("../loader/AbilityLoader");
 const CommandLoader = require("../loader/CommandLoader");
 const TemplateLoader = require("../loader/TemplateLoader");
@@ -15,7 +16,7 @@ const MapLoader = require("../loader/MapLoader");
 // full database loader
 module.exports = function(callback){
 	// specify loaders in the order they should be run
-	let loaders = [HelpfileLoader, AbilityLoader, RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, MapLoader, CharacterLoader, CommandLoader];
+	let loaders = [HelpfileLoader, EffectLoader, AbilityLoader, RaceLoader, ClassLoader, TemplateLoader, ModelLoader, ChannelLoader, MapLoader, CharacterLoader, CommandLoader];
 
 	// create a "loader iterator" that propagates callbacks
 	function loadNext(){

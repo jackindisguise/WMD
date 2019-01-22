@@ -4,7 +4,7 @@ const fs = require("fs");
 // local includes
 const _ = require("../../../i18n");
 const Logger = require("../../util/Logger");
-const CommandManager = require("../manager/CommandManager");
+const EffectManager = require("../manager/EffectManager");
 
 // deep file search
 function deepSearch(directory, fileFun, callback){
@@ -22,19 +22,13 @@ function deepSearch(directory, fileFun, callback){
 
 // command loader
 module.exports = function(callback){
-	Logger.info(_("> Loading commands..."));
-	deepSearch("./src/stock/command", function(file, next){
-		let f = file.slice("./src/stock/command".length); // cut off relative path from root
-		let constructor = require("../../../src/stock/command/"+f);
-		let command = new constructor();
-		if(command.rule) {
-			CommandManager.add(command);
-			Logger.info(_(">> Loaded command '%s'", command.plain));
-		}
-
+	Logger.info(_("> Loading effects..."));
+	deepSearch("./src/stock/effect", function(file, next){
+		let f = file.slice("./src/stock/effect".length); // cut off relative path from root
+		let constructor = require("../../../src/stock/effect/"+f);
+		let effect = new constructor();
+		EffectManager.add(effect);
+		Logger.info(_(">> Loaded effect '%s'", effect.name));
 		next();
-	}, function(){
-		CommandManager.sortCommandsBySpecificity();
-		callback();
-	});
+	}, callback);
 };
