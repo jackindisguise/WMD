@@ -1,3 +1,4 @@
+const EffectName = require("../../etc/EffectName");
 const Effect = require("../../mud/Effect");
 const Message = require("../../etc/Message");
 
@@ -7,7 +8,7 @@ class Armor extends Effect{
 	}
 }
 
-Armor.prototype.name = "armor";
+Armor.prototype.name = EffectName.ARMOR;
 Armor.prototype.applyMessage = Message.EffectApplyArmor;
 Armor.prototype.expireMessage = Message.EffectExpireArmor;
 

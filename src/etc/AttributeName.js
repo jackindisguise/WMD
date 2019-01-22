@@ -1,8 +1,8 @@
 /**
- * Exposes values for assisting with accessing attributes.
- * @namespace
+ * Attribute names for lookup.
+ * @enum {string}
  */
-const Attribute = {
+const AttributeName = {
 	STRENGTH: "strength",
 	ATTACK_POWER: "attack power",
 	DEFENSE: "defense",
@@ -20,4 +20,4 @@ const Attribute = {
 	MAX_MANA: "mana"
 };
 
-module.exports = Attribute;
+module.exports = AttributeName;

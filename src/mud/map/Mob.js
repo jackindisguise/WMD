@@ -984,6 +984,14 @@ class Mob extends Movable{
 		this.effects.splice(pos, 1);
 		if(effect.affectee === this) effect.affectee = null;
 	}
+
+	hasEffectByName(name){
+		for(let effect of this.effects){
+			if(effect.name === name){
+				return effect;
+			}
+		}
+	}
 }
 
 Mob.prototype.ready = true;
