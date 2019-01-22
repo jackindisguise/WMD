@@ -148,5 +148,20 @@
 	"%s to {C%s{x.": "%s to {C%s{x.",
 	"You aren't affected by anything.": "You aren't affected by anything.",
 	"You are affected by {W%s{x. (%d seconds)": "You are affected by {W%s{x. (%d seconds)",
-	"You are affected by {W%s{x. (%s)": "You are affected by {W%s{x. (%s)"
+	"You are affected by {W%s{x. (%s)": "You are affected by {W%s{x. (%s)",
+	"{W%s{x {y({Y%s{y){x": "{W%s{x {y({Y%s{y){x",
+	"> {W%s{x {y({Y%s{y){x": "> {W%s{x {y({Y%s{y){x",
+	"You're affected by...": "You're affected by...",
+	"  {W%s{x {y({Y%s{y){x": "  {W%s{x {y({Y%s{y){x",
+	"          %d strength.": "          %d strength.",
+	"          %d agility.": "          %d agility.",
+	"          %d intelligence.": "          %d intelligence.",
+	"          {R%d strength.": "          {R%d strength.",
+	"          {Y%d agility.": "          {Y%d agility.",
+	"          {C%d intelligence.": "          {C%d intelligence.",
+	"             %d wisdom, granting %d maximum mana.{x": "             %d wisdom, granting %d maximum mana.{x",
+	"You have: {R%d/%d health{x, {Y%d/%d energy{x, and {C%d/%d mana{x.": "You have: {R%d/%d health{x, {Y%d/%d energy{x, and {C%d/%d mana{x.",
+	"             %d stamina, granting %d maximum energy.{x": "             %d stamina, granting %d maximum energy.{x",
+	"You're level {W%d{x, with {C%d {cexperience{x until the next level.": "You're level {W%d{x, with {C%d {cexperience{x until the next level.",
+	"You are... %s the %s %s.": "You are... %s the %s %s."
 }
