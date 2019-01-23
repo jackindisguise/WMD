@@ -154,7 +154,7 @@ class Player extends EventEmitter {
 	 */
 	logout(){
 		this.leaveChannels();
-		if(this.mob) this.mob.loc = null;
+		if(this.mob) this.mob.garbage();
 	}
 
 	/**

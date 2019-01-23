@@ -88,12 +88,12 @@ class Effect{
 
 	start(){
 		this._startTime = Date.now();
-		this._id = setTimeout(this.expire.bind(this), this.duration);
+		this._expireID = setTimeout(this.expire.bind(this), this.duration);
 	}
 
 	stop(){
 		this.duration -= Date.now() - this._startTime;
-		clearTimeout(this._id);
+		clearTimeout(this._expireID);
 		this.clear();
 	}
 
@@ -111,7 +111,7 @@ class Effect{
 	}
 
 	clear(){
-		delete this._id;
+		delete this._expireID;
 		delete this._startTime;
 	}
 
@@ -121,8 +121,6 @@ class Effect{
 			json.name = value;
 			break;
 
-		case "_startTime":
-		case "_id":
 		case "affectee":
 			break;
 

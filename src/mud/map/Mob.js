@@ -21,6 +21,7 @@ const Race = require("../Race");
 const ClassManager = require("../manager/ClassManager");
 const Class = require("../Class");
 const Equipment = require("./Equipment");
+const Time = require("../Time");
 
 /**
  * Represents an animate creature on the map.
@@ -51,6 +52,67 @@ class Mob extends Movable{
 			HAND_OFF: null,
 			HAND_PRIMARY: null
 		};
+	}
+
+	__JSONWrite(key, value, json){
+		switch(key){
+		case "loc":
+			if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
+			break;
+
+		case "ready": break;
+		case "race": json.race = value.name; break;
+		case "class": json.class = value.name; break;
+		case "health":
+			if(value === this.maxHealth) break;
+			json.health = value;
+			break;
+		case "energy":
+			if(value === this.maxEnergy) break;
+			json.energy = value;
+			break;
+		case "mana":
+			if(value === this.maxMana) break;
+			json.mana = value;
+			break;
+		case "wearLocation": break;
+		default: super.__JSONWrite(key, value, json); break;
+		}
+	}
+
+	__fromJSON(json){
+		super.__fromJSON(json);
+
+		// equip things and apply status effects here
+
+		// if stat hasn't been loaded, just make it full
+		if(!json.health) this.health = this.maxHealth;
+		if(!json.energy) this.energy = this.maxEnergy;
+		if(!json.mana) this.mana = this.maxMana;
+	}
+
+	__JSONRead(key, value){
+		let race, cLass;
+		switch(key){
+		case "loc":
+			this._loc = value;
+			break;
+
+		case "race":
+			race = RaceManager.getRaceByName(value);
+			if(!race) Logger.error(_("BAD RACE: '%s'", value));
+			this._race = race;
+			break;
+
+		case "class":
+			cLass = ClassManager.getClassByName(value);
+			if(!cLass) Logger.error(_("BAD CLASS: '%s'", value));
+			this._class = cLass;
+			break;
+
+		case "wearLocation": break;
+		default: super.__JSONRead(key, value); break;
+		}
 	}
 
 	toString(){
@@ -395,7 +457,7 @@ class Mob extends Movable{
 
 		if(player){
 			this._player = player;
-			player.mob = this;
+			this.player.mob = this;
 			this.login();
 		}
 	}
@@ -414,67 +476,6 @@ class Mob extends Movable{
 
 	get class(){
 		return this._class;
-	}
-
-	__JSONWrite(key, value, json){
-		switch(key){
-		case "loc":
-			if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
-			break;
-
-		case "ready": break;
-		case "race": json.race = value.name; break;
-		case "class": json.class = value.name; break;
-		case "health":
-			if(value === this.maxHealth) break;
-			json.health = value;
-			break;
-		case "energy":
-			if(value === this.maxEnergy) break;
-			json.energy = value;
-			break;
-		case "mana":
-			if(value === this.maxMana) break;
-			json.mana = value;
-			break;
-		case "wearLocation": break;
-		default: super.__JSONWrite(key, value, json); break;
-		}
-	}
-
-	__fromJSON(json){
-		super.__fromJSON(json);
-
-		// equip things and apply status effects here
-
-		// if stat hasn't been loaded, just make it full
-		if(!json.health) this.health = this.maxHealth;
-		if(!json.energy) this.energy = this.maxEnergy;
-		if(!json.mana) this.mana = this.maxMana;
-	}
-
-	__JSONRead(key, value){
-		let race, cLass;
-		switch(key){
-		case "loc":
-			this._loc = value;
-			break;
-
-		case "race":
-			race = RaceManager.getRaceByName(value);
-			if(!race) Logger.error(_("BAD RACE: '%s'", value));
-			this._race = race;
-			break;
-
-		case "class":
-			cLass = ClassManager.getClassByName(value);
-			if(!cLass) Logger.error(_("BAD CLASS: '%s'", value));
-			this._class = cLass;
-			break;
-
-		case "wearLocation": break;
-		default: super.__JSONRead(key, value); break;
-		}
 	}
 
 	/**
@@ -789,7 +790,30 @@ class Mob extends Movable{
 		if(this.fighting) return;
 		this.fighting = victim;
 		victim.engage(this);
-		CombatManager.add(this);
+		this.combat();
+	}
+
+	combat(){
+		if(this._combatID != null) return;
+
+		// faster units take their turn ever so slightly earlier
+		let delay = Time.getIntervalDelay(3000);
+
+		// start combat!
+		this._combatID = setTimeout(function(){
+			// remove combatID member
+			delete this._combatID;
+
+			// do nothing if we're not fighting :)
+			if(this.fighting === null) return;
+
+			// do a round of combat
+			this.combatRound();
+
+			// propagate
+			this.combat();
+		}.bind(this),
+		delay);
 	}
 
 	disengage(){
@@ -921,7 +945,7 @@ class Mob extends Movable{
 		if(this.player){
 			this.heal({health:this.maxHealth * 0.2}); // restore 20% of HP
 		} else {
-			this.loc = null; // delete this mob
+			this.garbage();
 		}
 	}
 
@@ -950,14 +974,19 @@ class Mob extends Movable{
 
 	busy(delay){
 		this.ready = false;
-		setTimeout(function(){
-			if(this.loc) Communicate.ready({
+		this._busyID = setTimeout(function(){
+			// delete busyID member
+			delete this._busyID;
+	
+			// let us know
+			Communicate.ready({
 				actor:this,
 				recipients:this.loc.contents,
 				message:Message.Ready,
 				category:MessageCategory.READY
 			});
 
+			// ready up
 			this.ready = true;
 		}.bind(this), delay);
 	}
@@ -971,9 +1000,73 @@ class Mob extends Movable{
 
 	expend(options){
 		if(!options) return;
-		if(options.health) this.health = Math.max(this.health - Math.floor(options.health), 0);
-		if(options.energy) this.energy = Math.max(this.energy - Math.floor(options.energy), 0);
-		if(options.mana) this.mana = Math.max(this.mana - Math.floor(options.mana), 0);
+		if(options.health) {
+			this.health = Math.max(this.health - Math.floor(options.health), 0);
+			if(this.health < this.maxHealth) this.regenerate();
+		}
+
+		if(options.energy) {
+			this.energy = Math.max(this.energy - Math.floor(options.energy), 0);
+			if(this.energy < this.maxEnergy) this.regenerate();
+		}
+
+		if(options.mana) {
+			this.mana = Math.max(this.mana - Math.floor(options.mana), 0);
+			if(this.mana < this.maxMana) this.regenerate();
+		}
+	}
+
+	regenerate(){
+		if(this._regenID != null) return;
+		let delay = Time.getIntervalDelay(30000);
+		this._regenID = setTimeout(function(){
+			delete this._regenID; // delete regenID member
+
+			// current stat values
+			let currentHP = this.health, maxHP = this.maxHealth;
+			let currentMP = this.mana, maxMP = this.maxMana;
+			let currentEP = this.energy, maxEP = this.maxEnergy;
+			if(currentHP === maxHP && currentMP === maxMP && currentEP === maxEP) return; // already maxed out
+
+			// regen options
+			let health = 0,
+				mana = 0,
+				energy = 0,
+				suffixes = [],
+				commOptions = {actor:this, recipients:[this], suffix:suffixes},
+				regOptions = {};
+
+			if(currentHP < maxHP) {
+				health = Math.floor(maxHP / 5);
+				regOptions.health = health;
+				commOptions.health = health;
+				suffixes.push(Message.ActorRegenHealthSuffix);
+			}
+
+			if(currentMP < maxMP) {
+				mana = Math.floor(maxMP / 5);
+				regOptions.mana = mana;
+				commOptions.mana = mana;
+				suffixes.push(Message.ActorRegenManaSuffix);
+			}
+
+			if(currentEP < maxEP) {
+				energy = Math.floor(maxEP / 5);
+				regOptions.energy = energy;
+				commOptions.energy = energy;
+				suffixes.push(Message.ActorRegenEnergySuffix);
+			}
+
+			// send message
+			if(health || mana || energy) {
+				Communicate.regen(commOptions);
+				this.heal(regOptions);
+			}
+
+			// propagate
+			this.regenerate();
+		}.bind(this),
+		delay);
 	}
 
 	addEffect(effect){
@@ -999,6 +1092,32 @@ class Mob extends Movable{
 			if(effect.name === name){
 				return effect;
 			}
+		}
+	}
+
+	// get rid of anything tying us to the game
+	garbage(){
+		super.garbage();
+		this.disengage();
+		if(this._regenID) { // stop regenerating
+			clearTimeout(this._regenID);
+			delete this._regenID;
+		}
+
+		if(this._busyID) { // don't worry about being busy
+			clearTimeout(this._busyID);
+			delete this._busyID;
+		}
+
+		if(this._combatID){ // stop combat
+			this.disengage();
+			clearTimeout(this._combatID);
+			delete this._combatID;
+		}
+
+		// stop any effect timers
+		if(this.effects){
+			for(let effect of this.effects) effect.stop();
 		}
 	}
 }

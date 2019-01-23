@@ -38,6 +38,7 @@ class JSONBadProperty extends Error{
  */
 Object.defineProperty(Object.prototype, "__JSONWrite", {
 	value: function(key, value, json){
+		if(key[0] === "_") return; // ignore "private" members
 		if(this.__proto__[key] === undefined) throw new JSONBadProperty(key, this.constructor, json); // don't have variable
 		if(this.__proto__[key] === value) return; // don't save default values
 		if(typeof value === "function") return; // don't save functions

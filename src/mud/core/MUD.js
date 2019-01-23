@@ -2,7 +2,6 @@
 const _ = require("../../../i18n");
 const Player = require("../io/Player");
 const PlayerManager = require("../manager/PlayerManager");
-const TimeManager = require("../manager/TimeManager");
 const Logger = require("../../util/Logger");
 const Server = require("../io/Server");
 
@@ -27,9 +26,6 @@ class MUD{
 				MUD.connect(client);
 			});
 
-			// start time manager
-			TimeManager.start();
-
 			callback();
 		});
 	}
@@ -39,7 +35,6 @@ class MUD{
 	 */
 	static stop(){
 		server.close();
-		TimeManager.stop();
 	}
 
 	/**

@@ -19,6 +19,68 @@ class MapObject{
 		}
 	}
 
+	__JSONWrite(key, value, json){
+		let converted;
+		switch(key){
+		// save template name
+		case "_template":
+			if(value === null) break;
+			json.template = value.name;
+			break;
+
+		// save mode name
+		case "_model":
+			if(value === null) break;
+			json.model = value.name;
+			break;
+
+		// convert contents list to JSON
+		case "_contents":
+			if(!value.length) return;
+
+			// convert inventory to JSON
+			converted = [];
+			for(let object of value){
+				if(object instanceof MapObject)
+					converted.push(object.__toJSON());
+			}
+		
+			if(converted.length) json.contents = converted;
+			break;
+
+		// write value generically
+		default:
+			super.__JSONWrite(key, value, json);
+			break;
+		}
+	}
+
+	__JSONRead(key, value){
+		let template, model;
+		switch(key){
+		case "template":
+			template = TemplateManager.getTemplateByName(value);
+			if(template) this.template = template;
+			break;
+
+		case "model":
+			model = ModelManager.getModelByName(value);
+			if(model) this.model = model;
+			break;
+
+		// load contents elsewhere
+		// since this requires the context of other
+		// descendent map objects, there's no way
+		// to accomplish it here without cyclical
+		// includes. which i'm trying to avoid. :)
+		case "contents":
+			break;
+
+		// read value generically
+		default: super.__JSONRead(key, value); break;
+		}
+	}
+
 	toString(){
 		return this.name || "[MapObject]";
 	}
@@ -103,71 +165,6 @@ class MapObject{
 		}
 	}
 
-	__JSONWrite(key, value, json){
-		let converted;
-		switch(key){
-		// no loc
-		case "_loc": break;
-
-			// save template name
-		case "_template":
-			if(value === null) break;
-			json.template = value.name;
-			break;
-
-			// save mode name
-		case "_model":
-			if(value === null) break;
-			json.model = value.name;
-			break;
-
-			// convert contents list to JSON
-		case "_contents":
-			if(!value.length) return;
-
-			// convert inventory to JSON
-			converted = [];
-			for(let object of value){
-				if(object instanceof MapObject)
-					converted.push(object.__toJSON());
-			}
-		
-			if(converted.length) json.contents = converted;
-			break;
-
-			// write value generically
-		default:
-			super.__JSONWrite(key, value, json);
-			break;
-		}
-	}
-
-	__JSONRead(key, value){
-		let template, model;
-		switch(key){
-		case "template":
-			template = TemplateManager.getTemplateByName(value);
-			if(template) this.template = template;
-			break;
-
-		case "model":
-			model = ModelManager.getModelByName(value);
-			if(model) this.model = model;
-			break;
-
-			// load contents elsewhere
-			// since this requires the context of other
-			// descendent map objects, there's no way
-			// to accomplish it here without cyclical
-			// includes. which i'm trying to avoid. :)
-		case "contents":
-			break;
-
-			// read value generically
-		default: super.__JSONRead(key, value); break;
-		}
-	}
-
 	/**
 	 * Check if an object can enter our contents.
 	 * @param {MapObject} enterer Object entering our contents.
@@ -242,6 +239,10 @@ class MapObject{
 		}
 
 		return clone;
+	}
+
+	garbage(){
+		this.loc = null;
 	}
 }
 
