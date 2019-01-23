@@ -606,6 +606,7 @@ class Mob extends Movable{
 	equip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
 
+		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
 		let slot = null;
 		switch(equipment.wearLoc){
 		case WearLocation.location.FINGER:
@@ -648,12 +649,14 @@ class Mob extends Movable{
 		}
 
 		equipment.worn = true;
+		restore();
 		return slot;
 	}
 
 	unequip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
 
+		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
 		let slot = null;
 		switch(equipment.wearLoc){
 		case WearLocation.location.FINGER:
@@ -696,6 +699,7 @@ class Mob extends Movable{
 		}
 
 		equipment.worn = false;
+		restore();
 		return slot;
 	}
 
@@ -928,7 +932,8 @@ class Mob extends Movable{
 			directObject:victim,
 			recipients:[this],
 			message:Message.Kill,
-			experience:experience
+			experience:experience,
+			category:CombatManager.category
 		});
 
 		this.gainExperience(experience);
@@ -974,15 +979,19 @@ class Mob extends Movable{
 	addEffect(effect){
 		let pos = this.effects.indexOf(effect);
 		if(pos !== -1) return; // already effects
+		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
 		this.effects.push(effect);
 		if(effect.affectee !== this) effect.affectee = this;
+		restore(); // restore status based on previous %
 	}
 
 	removeEffect(effect){
 		let pos = this.effects.indexOf(effect);
 		if(pos === -1) return; // not effected by this
+		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
 		this.effects.splice(pos, 1);
 		if(effect.affectee === this) effect.affectee = null;
+		restore(); // restore status based on previous %
 	}
 
 	hasEffectByName(name){

@@ -2,22 +2,22 @@ const messages = {
 	/** Ability Usage */
 	// ability: circle
 	AbilityCircle: {
-		firstPerson: "You start circling around ${directObject.article}{R${directObject}{x.",
-		secondPerson: "${actor.long} starts circling around you.",
-		thirdPerson: "${actor.long} starts circling around ${directObject.article}{R${directObject}{x."
+		firstPerson: "You start circling around ${directObject.article}{y${directObject}{x.",
+		secondPerson: "${actor.long} starts circling around {yyou{x.",
+		thirdPerson: "${actor.long} starts circling around ${directObject.article}{y${directObject}{x."
 	},
 
 	// ability: maniac
 	AbilityManiac: {
-		firstPerson: "{RYou flail around like a maniac.{x",
-		thirdPerson: "{R${actor.article}${actor} flails around like a maniac.{x"
+		firstPerson: "{YYou flail around like a maniac.{x",
+		thirdPerson: "{Y${actor.article}${actor} flails around like a maniac.{x"
 	},
 
 	// ability: bash
 	AbilityBash: {
-		firstPerson: "You bash the fuck out of ${directObject.article}{R${directObject}{x.",
-		secondPerson: "${actor.long} bashes the fuck out of {Ryou{x.",
-		thirdPerson: "${actor.long} bashes the fuck out of ${directObject.article}{R${directObject}{x."
+		firstPerson: "You bash the fuck out of ${directObject.article}{y${directObject}{x.",
+		secondPerson: "${actor.long} bashes the fuck out of {yyou{x.",
+		thirdPerson: "${actor.long} bashes the fuck out of ${directObject.article}{y${directObject}{x."
 	},
 
 	/** Spell Cast */
@@ -34,27 +34,27 @@ const messages = {
 
 	/** Attacks */
 	AttackAbility: {
-		firstPerson: "Your {Y${ability.display}{x hits ${directObject.article}{R${directObject}{x.",
-		secondPerson: "${actor.long}'s {Y${ability.display}{x hits {Ryou{x.",
-		thirdPerson: "${actor.long}'s {Y${ability.display}{x hits ${directObject.article}{R${directObject}{x."
+		firstPerson: "Your {Y${ability.display}{x hits ${directObject.article}{y${directObject}{x.",
+		secondPerson: "${actor.long}'s {Y${ability.display}{x hits {yyou{x.",
+		thirdPerson: "${actor.long}'s {Y${ability.display}{x hits ${directObject.article}{y${directObject}{x."
 	},
 
 	AttackHitAuto: {
-		firstPerson: "You ${action.format.firstPerson} ${directObject.article}{R${directObject}{x.",
-		secondPerson: "${actor.long} ${action.format.thirdPerson} you.",
-		thirdPerson: "${actor.long} ${action.format.thirdPerson} ${directObject.article}{R${directObject}{x."
+		firstPerson: "You ${action.format.firstPerson} ${directObject.article}{y${directObject}{x.",
+		secondPerson: "${actor.long} ${action.format.thirdPerson} {yyou{x.",
+		thirdPerson: "${actor.long} ${action.format.thirdPerson} ${directObject.article}{y${directObject}{x."
 	},
 
 	AttackHitWeapon: {
-		firstPerson: "You ${action.format.firstPerson} ${directObject.article}{R${directObject}{x with {Y${weapon}{x.",
-		secondPerson: "${actor.long} ${action.format.thirdPerson} you with {Y${weapon}{x.",
-		thirdPerson: "${actor.long} ${action.format.thirdPerson} ${directObject.article}{R${directObject}{x with {Y${weapon}{x."
+		firstPerson: "You ${action.format.firstPerson} ${directObject.article}{y${directObject}{x with {Y${weapon}{x.",
+		secondPerson: "${actor.long} ${action.format.thirdPerson} {yyou{x with {Y${weapon}{x.",
+		thirdPerson: "${actor.long} ${action.format.thirdPerson} ${directObject.article}{y${directObject}{x with {Y${weapon}{x."
 	},
 
 	AttackMiss: {
-		firstPerson: "Your hit misses ${directObject.article}{R${directObject}{x.",
-		secondPerson: "${actor.long}'s hit misses you.",
-		thirdPerson: "${actor.long}'s hit misses ${directObject.article}{R${directObject}{x."
+		firstPerson: "Your hit misses ${directObject.article}{y${directObject}{x.",
+		secondPerson: "${actor.long}'s hit misses {yyou{x.",
+		thirdPerson: "${actor.long}'s hit misses ${directObject.article}{y${directObject}{x."
 	},
 
 	/** Attack damage suffix. */
@@ -67,14 +67,14 @@ const messages = {
 	 * Heal message.
 	 */
 	HealAbility: {
-		firstPerson: "Your {Y${ability.display} {xheals {G${directObject.article}{R${directObject}{x for {G${heal} {xhealth.",
-		secondPerson: "${actor.long}'s {Y${ability.display} {xheals {Gyou {xfor {G${heal} {xhealth.",
-		thirdPerson: "${actor.long} {Y${ability.display} {xheals {G${directObject.article}{R${directObject} {xfor {G${heal} {xhealth."
+		firstPerson: "Your {Y${ability.display} {xheals ${directObject.article}{y${directObject} {xfor {G${heal} {xhealth.",
+		secondPerson: "${actor.long}'s {Y${ability.display} {xheals {yyou {xfor {G${heal} {xhealth.",
+		thirdPerson: "${actor.long} {Y${ability.display} {xheals ${directObject.article}{y${directObject} {xfor {G${heal} {xhealth."
 	},
 
 	HealAbilitySelf: {
-		firstPerson: "Your {Y${ability.display} {xheals {Gyou{x.",
-		thirdPerson: "${actor.long} {Y${ability.display} {xheals {G${directObject.article}{R${directObject}{x."
+		firstPerson: "Your {Y${ability.display} {xheals {yyou{x.",
+		thirdPerson: "${actor.long} {Y${ability.display} {xheals ${directObject.article}{y${directObject}{x."
 	},
 
 	HealSuffix: {
