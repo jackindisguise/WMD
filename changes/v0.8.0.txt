@@ -1,0 +1,62 @@
+commit 11321db06ba97809a2337636c350a5ded03fff22
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 23 00:08:43 2019 -0600
+
+    Changed some file names.
+
+commit a77fe5e7d30a9542959f988328f1c7bf982de6dc
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 23 00:00:24 2019 -0600
+
+    Added first "effect."
+
+commit f47a1b05e433e16db51101185aa13c6eb0ca4104
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 22 06:06:27 2019 -0600
+
+    Formatted effects and scoreboard.
+
+commit 3aad65cace4163039caabf4b512a301a10cb38e2
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 22 02:25:37 2019 -0600
+
+    Added some stuff for accessing effects a little easierly.
+
+commit 6087216387d05cd603cd273123b0562c85a7b7a3
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 22 02:16:49 2019 -0600
+
+    Did some Attribute stuff.
+    
+    Did some Effect stuff.
+
+commit ca2f56af93dcd5b0409bc11031d47553c4755683
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Jan 18 06:52:55 2019 -0600
+
+    Fixed JSDoc not accounting for /src/etc.
+    
+    PS: I need to standardize how I want to expose static data like enums.
+    As it stands, I think I have a few files where I use namespaces and others
+    where I use classes.
+    
+    Annoying.
+
+commit cb33f2860f8dc5858139e10d600d79c52223700b
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Fri Jan 18 06:40:57 2019 -0600
+
+    Character creation now discriminates against non-selectable (NPC)
+    races and classes.
+
+commit fc931160813c47785ead006dfbdbddc3fca9c8d8
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 17 19:16:17 2019 -0600
+
+    hehe
+
+commit e2def18105463ad55db74c9531a6e6687eef5990
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 17 18:51:50 2019 -0600
+
+    Added help command.
