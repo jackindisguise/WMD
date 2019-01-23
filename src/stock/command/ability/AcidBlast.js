@@ -16,7 +16,7 @@ class AcidBlast extends AbilityCommand{
 	}
 }
 
-AcidBlast.prototype.rule = /^(?:a|ac|aci|acid|acid b|acid bl|acid bla|acid blas|acid blast|b|bl|bla|blas|blast) (.+)/i;
+AcidBlast.prototype.rule = /^(?:a|ac|aci|acid|b|bl|bla|blas|blast|acid blast) (.+)/i;
 AcidBlast.prototype.plain = "acid blast";
 AcidBlast.prototype.specificity = CommandSpecificity.FIRST;
 AcidBlast.prototype.ability = acidblast;

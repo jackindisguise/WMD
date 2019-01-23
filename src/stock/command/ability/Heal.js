@@ -5,17 +5,23 @@ const AbilityManager = require("../../../mud/manager/AbilityManager");
 const heal = AbilityManager.getAbilityByName("heal");
 
 class Heal extends AbilityCommand{
-	exec(mob){
-		if(mob.health === mob.maxHealth) {
-			mob.sendLine("You're already fully healed.");
+	exec(mob, target){
+		let victim = mob.loc.contents.search(target);
+		if(victim){
+			if(victim.health === victim.maxHealth) {
+				mob.sendLine("They're already fully healed.");
+				return;
+			}
+
+			heal.use(mob, victim);
 			return;
 		}
 
-		heal.use(mob, mob);
+		mob.sendLine("They aren't here.");
 	}
 }
 
-Heal.prototype.rule = /^(?:h|he|hea|heal)$/i;
+Heal.prototype.rule = /^(?:h|he|hea|heal) (.+)/i;
 Heal.prototype.plain = "heal";
 Heal.prototype.specificity = CommandSpecificity.FIRST;
 Heal.prototype.ability = heal;

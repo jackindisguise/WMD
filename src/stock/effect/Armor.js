@@ -4,11 +4,7 @@ const Message = require("../../etc/Message");
 
 class Armor extends Effect{
 	get defense(){
-		return 1 + Math.floor(this.level / 2);
-	}
-
-	get vitality(){
-		return 1 + Math.floor(this.level / 2);
+		return 1 + this.level;
 	}
 }
 
