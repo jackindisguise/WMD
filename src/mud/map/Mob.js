@@ -1028,6 +1028,12 @@ class Mob extends Movable{
 			let currentEP = this.energy, maxEP = this.maxEnergy;
 			if(currentHP === maxHP && currentMP === maxMP && currentEP === maxEP) return; // already maxed out
 
+			// wait for them to stop fighting
+			if(this.fighting) {
+				this.regenerate();
+				return;
+			}
+
 			// regen options
 			let health = 0,
 				mana = 0,

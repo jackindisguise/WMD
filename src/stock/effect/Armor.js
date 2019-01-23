@@ -4,7 +4,7 @@ const Message = require("../../etc/Message");
 
 class Armor extends Effect{
 	get defense(){
-		return 1 + this.level;
+		return 1 + Math.floor(this.level/2);
 	}
 }
 
