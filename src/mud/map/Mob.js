@@ -13,15 +13,15 @@ const AttributeName = require("../../etc/AttributeName");
 const WearLocation = require("../../etc/WearLocation");
 const WearSlot = require("../../etc/WearSlot");
 const CombatManager = require("../manager/CombatManager");
-const Communicate = require("../Communicate");
-const Movable = require("./Movable");
-const Tile = require("../map/Tile");
 const RaceManager = require("../manager/RaceManager");
-const Race = require("../Race");
 const ClassManager = require("../manager/ClassManager");
+const Communicate = require("../Communicate");
+const Tile = require("../map/Tile");
+const Race = require("../Race");
 const Class = require("../Class");
-const Equipment = require("./Equipment");
 const Time = require("../Time");
+const Movable = require("./Movable");
+const Equipment = require("./Equipment");
 
 /**
  * Represents an animate creature on the map.
