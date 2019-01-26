@@ -18,7 +18,7 @@ class Tile extends MapObject{
 
 		if(options){
 			if(options.map){
-				this._map = options.map;
+				this.map = options.map;
 			}
 
 			// xyz can only be set when being created
@@ -35,6 +35,7 @@ class Tile extends MapObject{
 	}
 
 	set map(map){
+		this._map = map;
 	}
 
 	get map(){
@@ -93,8 +94,7 @@ class Tile extends MapObject{
 	 * @param {Direction.flags} dir 
 	 */
 	getStep(dir){
-		if(this.map)
-			return this.map.getStep(this.x, this.y, this.z, dir);
+		if(this.map) return this.map.getStep(this.x, this.y, this.z, dir);
 	}
 }
 

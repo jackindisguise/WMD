@@ -53,7 +53,7 @@ Object.defineProperty(Object.prototype, "__JSONWrite", {
  */
 Object.defineProperty(Object.prototype, "__toJSON", {
 	value: function(){
-		let json = {constructor:this.constructor.name};
+		let json = {};
 		for(let variable in this){
 			this.__JSONWrite(variable, this[variable], json);
 		}
@@ -82,6 +82,12 @@ Object.defineProperty(Object.prototype, "__fromJSON", {
 		}
 	}
 });
+
+Object.defineProperty(Object.prototype, "__finalize", {
+	value: function(){
+		// nothing
+	}
+})
 
 Object.defineProperty(Object.prototype, "__createClone", {
 	value: function(){

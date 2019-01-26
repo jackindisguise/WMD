@@ -19,6 +19,12 @@ class MapObject{
 		}
 	}
 
+	__toJSON(){
+		let json = {constructor:this.constructor.name}; // add constructor to default json result
+		for(let variable in this) this.__JSONWrite(variable, this[variable], json);
+		return json;
+	}
+
 	__JSONWrite(key, value, json){
 		let converted;
 		switch(key){
@@ -156,7 +162,7 @@ class MapObject{
 		}
 
 		// remove us from oloc's contents
-		if(oloc) oloc.remove(this); // cyclical dereference
+		if(oloc instanceof MapObject) oloc.remove(this); // cyclical dereference
 
 		// set to new loc
 		if(loc && loc instanceof MapObject){

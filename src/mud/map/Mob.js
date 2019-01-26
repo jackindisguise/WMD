@@ -15,6 +15,7 @@ const WearSlot = require("../../etc/WearSlot");
 const CombatManager = require("../manager/CombatManager");
 const RaceManager = require("../manager/RaceManager");
 const ClassManager = require("../manager/ClassManager");
+const EffectManager = require("../manager/EffectManager");
 const Communicate = require("../Communicate");
 const Tile = require("../map/Tile");
 const Race = require("../Race");
@@ -34,10 +35,10 @@ class Mob extends Movable{
 	 */
 	constructor(options){
 		super(options);
-		this.effects = []; // effects on us
+		this._effects = []; // effects on us
 
 		// wear locations
-		this.worn = {
+		this._worn = {
 			HEAD: null,
 			NECK: null,
 			SHOULDER: null,
@@ -55,14 +56,21 @@ class Mob extends Movable{
 	}
 
 	__JSONWrite(key, value, json){
+		let effects;
 		switch(key){
-		case "loc":
-			if(value instanceof Tile) json.loc = {x:value.x, y:value.y, z:value.z};
+		case "_loc":
+			if(value instanceof Tile && value.map) json.loc = {map:this.map.name, x:value.x, y:value.y, z:value.z};
 			break;
 
-		case "ready": break;
-		case "race": json.race = value.name; break;
-		case "class": json.class = value.name; break;
+		case "_effects":
+			if(!this._effects.length) break;
+			effects = [];
+			for(let effect of this._effects) effects.push(effect.__toJSON());
+			json.effects = effects;
+			break;
+
+		case "_race": json.race = value.name; break;
+		case "_class": json.class = value.name; break;
 		case "health":
 			if(value === this.maxHealth) break;
 			json.health = value;
@@ -75,27 +83,15 @@ class Mob extends Movable{
 			if(value === this.maxMana) break;
 			json.mana = value;
 			break;
-		case "wearLocation": break;
 		default: super.__JSONWrite(key, value, json); break;
 		}
-	}
-
-	__fromJSON(json){
-		super.__fromJSON(json);
-
-		// equip things and apply status effects here
-
-		// if stat hasn't been loaded, just make it full
-		if(!json.health) this.health = this.maxHealth;
-		if(!json.energy) this.energy = this.maxEnergy;
-		if(!json.mana) this.mana = this.maxMana;
 	}
 
 	__JSONRead(key, value){
 		let race, cLass;
 		switch(key){
 		case "loc":
-			this._loc = value;
+			this._tmploc = value;
 			break;
 
 		case "race":
@@ -110,9 +106,37 @@ class Mob extends Movable{
 			this._class = cLass;
 			break;
 
-		case "wearLocation": break;
+		case "effects":
+			for(let json of value){
+				let effectMaster = EffectManager.getEffectByName(json.name);
+				if(!effectMaster){
+					Logger.error(_("BAD EFFECT NAME: '%s'", json.name));
+					continue;
+				}
+
+				let constructor = effectMaster.constructor;
+				let effect = new constructor(json); // load values directly into constructor
+				effect.apply(this, true); // apply to mob
+				// TO DO: add silent option for apply
+			}
+
+			break;
+
 		default: super.__JSONRead(key, value); break;
 		}
+	}
+
+	__finalize(json){
+		// equip things and apply status effects here
+		for(let equipment of this._contents){
+			if(!(equipment instanceof Equipment)) continue;
+			if(equipment.worn) this.equip(equipment);
+		}
+
+		// if stat hasn't been loaded, just make it full
+		if(!json.health) this.health = this.maxHealth;
+		if(!json.energy) this.energy = this.maxEnergy;
+		if(!json.mana) this.mana = this.maxMana;
 	}
 
 	toString(){
@@ -130,17 +154,14 @@ class Mob extends Movable{
 		let strength = 0;
 		strength += this._race.getStrengthByLevel(this.level);
 		strength += this._class.getStrengthByLevel(this.level);
-		for(let effect of this.effects) strength += effect.strength;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) strength += eq.strength;
-		}
+		for(let effect of this._effects) strength += effect.strength;
+		for(let slot in this._worn) if(this._worn[slot]) strength += this._worn[slot].strength;
 
 		return Math.floor(strength);
 	}
 
 	get rawAttackPower(){
-		let attackPower = 0;
+		let attackPower = this.rawStrength;
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
 		return Math.floor(attackPower);
@@ -150,16 +171,13 @@ class Mob extends Movable{
 		let attackPower = this.strength;
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
-		for(let effect of this.effects) attackPower += effect.attackPower;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) attackPower += eq.attackPower;
-		}
+		for(let effect of this._effects) attackPower += effect.attackPower;
+		for(let slot in this._worn) if(this._worn[slot]) attackPower += this._worn[slot].attackPower;
 		return Math.floor(attackPower);
 	}
 
 	get rawDefense(){
-		let defense = 0;
+		let defense = this.rawStrength;
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
 		return Math.floor(defense);
@@ -169,16 +187,13 @@ class Mob extends Movable{
 		let defense = this.strength;
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
-		for(let effect of this.effects) defense += effect.defense;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) defense += eq.defense;
-		}
+		for(let effect of this._effects) defense += effect.defense;
+		for(let slot in this._worn) if(this._worn[slot]) defense += this._worn[slot].defense;
 		return Math.floor(defense);
 	}
 
 	get rawVitality(){
-		let vitality = 0;
+		let vitality = this.rawStrength;
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
 		return Math.floor(vitality);
@@ -188,16 +203,13 @@ class Mob extends Movable{
 		let vitality = this.strength;
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
-		for(let effect of this.effects) vitality += effect.vitality;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) vitality += eq.vitality;
-		}
+		for(let effect of this._effects) vitality += effect.vitality;
+		for(let slot in this._worn) if(this._worn[slot]) vitality += this._worn[slot].vitality;
 		return Math.floor(vitality);
 	}
 
 	get rawMaxHealth(){
-		let health = 0;
+		let health = this.rawVitality * 3;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
 		return Math.floor(health);
@@ -207,11 +219,8 @@ class Mob extends Movable{
 		let health = this.vitality * 3;
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
-		for(let effect of this.effects) health += effect.health;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) health += eq.health;
-		}
+		for(let effect of this._effects) health += effect.health;
+		for(let slot in this._worn) if(this._worn[slot]) health += this._worn[slot].health;
 		return Math.floor(health);
 	}
 
@@ -226,16 +235,13 @@ class Mob extends Movable{
 		let agility = 0;
 		agility += this._race.getAgilityByLevel(this.level);
 		agility += this._class.getAgilityByLevel(this.level);
-		for(let effect of this.effects) agility += effect.agility;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) agility += eq.agility;
-		}
+		for(let effect of this._effects) agility += effect.agility;
+		for(let slot in this._worn) if(this._worn[slot]) agility += this._worn[slot].agility;
 		return Math.floor(agility);
 	}
 
 	get rawPrecision(){
-		let precision = 0;
+		let precision = this.rawAgility;
 		precision += this._race.getPrecisionByLevel(this.level);
 		precision += this._class.getPrecisionByLevel(this.level);
 		return Math.floor(precision);
@@ -245,16 +251,13 @@ class Mob extends Movable{
 		let precision = this.agility;
 		precision += this._race.getPrecisionByLevel(this.level);
 		precision += this._class.getPrecisionByLevel(this.level);
-		for(let effect of this.effects) precision += effect.precision;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) precision += eq.precision;
-		}
+		for(let effect of this._effects) precision += effect.precision;
+		for(let slot in this._worn) if(this._worn[slot]) precision += this._worn[slot].precision;
 		return Math.floor(precision);
 	}
 
 	get rawDeflection(){
-		let deflection = 0;
+		let deflection = this.rawAgility;
 		deflection += this._race.getDeflectionByLevel(this.level);
 		deflection += this._class.getDeflectionByLevel(this.level);
 		return Math.floor(deflection);
@@ -264,16 +267,13 @@ class Mob extends Movable{
 		let deflection = this.agility;
 		deflection += this._race.getDeflectionByLevel(this.level);
 		deflection += this._class.getDeflectionByLevel(this.level);
-		for(let effect of this.effects) deflection += effect.deflection;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) deflection += eq.deflection;
-		}
+		for(let effect of this._effects) deflection += effect.deflection;
+		for(let slot in this._worn) if(this._worn[slot]) deflection += this._worn[slot].deflection;
 		return Math.floor(deflection);
 	}
 
 	get rawStamina(){
-		let stamina = 0;
+		let stamina = this.rawAgility;
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
 		return Math.floor(stamina);
@@ -283,16 +283,13 @@ class Mob extends Movable{
 		let stamina = this.agility;
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
-		for(let effect of this.effects) stamina += effect.stamina;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) stamina += eq.stamina;
-		}
+		for(let effect of this._effects) stamina += effect.stamina;
+		for(let slot in this._worn) if(this._worn[slot]) stamina += this._worn[slot].stamina;
 		return Math.floor(stamina);
 	}
 
 	get rawMaxEnergy(){
-		let energy = 0;
+		let energy = this.rawStamina;
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
 		return Math.floor(energy);
@@ -302,11 +299,8 @@ class Mob extends Movable{
 		let energy = this.stamina;
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
-		for(let effect of this.effects) energy += effect.energy;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) energy += eq.energy;
-		}
+		for(let effect of this._effects) energy += effect.energy;
+		for(let slot in this._worn) if(this._worn[slot]) energy += this._worn[slot].energy;
 		return Math.floor(energy);
 	}
 
@@ -321,16 +315,13 @@ class Mob extends Movable{
 		let intelligence = 0;
 		intelligence += this._race.getIntelligenceByLevel(this.level);
 		intelligence += this._class.getIntelligenceByLevel(this.level);
-		for(let effect of this.effects) intelligence += effect.intelligence;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) intelligence += eq.intelligence;
-		}
+		for(let effect of this._effects) intelligence += effect.intelligence;
+		for(let slot in this._worn) if(this._worn[slot]) intelligence += this._worn[slot].intelligence;
 		return Math.floor(intelligence);
 	}
 
 	get rawMagicPower(){
-		let magicPower = 0;
+		let magicPower = this.rawIntelligence;
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
 		return Math.floor(magicPower);
@@ -340,16 +331,13 @@ class Mob extends Movable{
 		let magicPower = this.intelligence;
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
-		for(let effect of this.effects) magicPower += effect.magicPower;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) magicPower += eq.magicPower;
-		}
+		for(let effect of this._effects) magicPower += effect.magicPower;
+		for(let slot in this._worn) if(this._worn[slot]) magicPower += this._worn[slot].magicPower;
 		return Math.floor(magicPower);
 	}
 
 	get rawResilience(){
-		let resilience = 0;
+		let resilience = this.rawIntelligence;
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
 		return Math.floor(resilience);
@@ -359,16 +347,13 @@ class Mob extends Movable{
 		let resilience = this.intelligence;
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
-		for(let effect of this.effects) resilience += effect.resilience;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) resilience += eq.resilience;
-		}
+		for(let effect of this._effects) resilience += effect.resilience;
+		for(let slot in this._worn) if(this._worn[slot]) resilience += this._worn[slot].resilience;
 		return Math.floor(resilience);
 	}
 
 	get rawWisdom(){
-		let wisdom = 0;
+		let wisdom = this.rawIntelligence;
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
 		return Math.floor(wisdom);
@@ -378,16 +363,13 @@ class Mob extends Movable{
 		let wisdom = this.intelligence;
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
-		for(let effect of this.effects) wisdom += effect.wisdom;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) wisdom += eq.wisdom;
-		}
+		for(let effect of this._effects) wisdom += effect.wisdom;
+		for(let slot in this._worn) if(this._worn[slot]) wisdom += this._worn[slot].wisdom;
 		return Math.floor(wisdom);
 	}
 
 	get rawMaxMana(){
-		let mana = 0;
+		let mana = this.rawWisdom;
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
 		return Math.floor(mana);
@@ -397,11 +379,8 @@ class Mob extends Movable{
 		let mana = this.wisdom;
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
-		for(let effect of this.effects) mana += effect.mana;
-		for(let slot in this.worn){
-			let eq = this.worn[slot];
-			if(eq) mana += eq.mana;
-		}
+		for(let effect of this._effects) mana += effect.mana;
+		for(let slot in this._worn) if(this._worn[slot]) mana += this._worn[slot].mana;
 		return Math.floor(mana);
 	}
 
@@ -611,40 +590,40 @@ class Mob extends Movable{
 		let slot = null;
 		switch(equipment.wearLoc){
 		case WearLocation.location.FINGER:
-			if(this.worn.FINGER_A == null) {
-				this.worn.FINGER_A = equipment;
+			if(this._worn.FINGER_A == null) {
+				this._worn.FINGER_A = equipment;
 				slot = WearSlot.slot.FINGER_A;
-			} else if(this.worn.FINGER_B == null) {
-				this.worn.FINGER_B = equipment;
+			} else if(this._worn.FINGER_B == null) {
+				this._worn.FINGER_B = equipment;
 				slot = WearSlot.slot.FINGER_B;
 			} else return false;
 			break;
 
 		case WearLocation.location.HOLD:
-			if(this.worn.HAND_OFF == null) {
-				this.worn.HAND_OFF = equipment;
+			if(this._worn.HAND_OFF == null) {
+				this._worn.HAND_OFF = equipment;
 				slot = WearSlot.slot.HAND_OFF;
 			} else return false;
 			break;
 
 		case WearLocation.location.WEAPON:
-			if(this.worn.HAND_PRIMARY == null) {
-				this.worn.HAND_PRIMARY = equipment;
+			if(this._worn.HAND_PRIMARY == null) {
+				this._worn.HAND_PRIMARY = equipment;
 				slot = WearSlot.slot.HAND_PRIMARY;
 			} else return false;
 			break;
 
 		case WearLocation.location.SHIELD:
-			if(this.worn.HAND_OFF == null){
-				this.worn.HAND_OFF = equipment;
+			if(this._worn.HAND_OFF == null){
+				this._worn.HAND_OFF = equipment;
 				slot = WearSlot.slot.HAND_OFF;
 			} else return false;
 			break;
 
 		default:
-			if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
-			if(this.worn[equipment.wearLoc] != null) return false;
-			this.worn[equipment.wearLoc] = equipment;
+			if(!this._worn.hasOwnProperty(equipment.wearLoc)) return false;
+			if(this._worn[equipment.wearLoc] != null) return false;
+			this._worn[equipment.wearLoc] = equipment;
 			slot = equipment.wearLoc;
 			break;
 		}
@@ -661,40 +640,40 @@ class Mob extends Movable{
 		let slot = null;
 		switch(equipment.wearLoc){
 		case WearLocation.location.FINGER:
-			if(this.worn.FINGER_A === equipment) {
-				this.worn.FINGER_A = null;
+			if(this._worn.FINGER_A === equipment) {
+				this._worn.FINGER_A = null;
 				slot = WearSlot.slot.FINGER_A;
-			} else if(this.worn.FINGER_B === equipment) {
-				this.worn.FINGER_B = null;
+			} else if(this._worn.FINGER_B === equipment) {
+				this._worn.FINGER_B = null;
 				slot = WearSlot.slot.FINGER_B;
 			} else return false;
 			break;
 
 		case WearLocation.location.HOLD:
-			if(this.worn.HAND_OFF === equipment) {
-				this.worn.HAND_OFF = null;
+			if(this._worn.HAND_OFF === equipment) {
+				this._worn.HAND_OFF = null;
 				slot = WearSlot.slot.HAND_OFF;
 			} else return false;
 			break;
 
 		case WearLocation.location.WEAPON:
-			if(this.worn.HAND_PRIMARY === equipment) {
-				this.worn.HAND_PRIMARY = null;
+			if(this._worn.HAND_PRIMARY === equipment) {
+				this._worn.HAND_PRIMARY = null;
 				slot = WearSlot.slot.HAND_PRIMARY;
 			} else return false;
 			break;
 
 		case WearLocation.location.SHIELD:
-			if(this.worn.HAND_OFF === equipment){
-				this.worn.HAND_OFF = null;
+			if(this._worn.HAND_OFF === equipment){
+				this._worn.HAND_OFF = null;
 				slot = WearSlot.slot.HAND_OFF;
 			} else return false;
 			break;
 
 		default:
-			if(!this.worn.hasOwnProperty(equipment.wearLoc)) return false;
-			if(this.worn[equipment.wearLoc] !== equipment) return false;
-			this.worn[equipment.wearLoc] = null;
+			if(!this._worn.hasOwnProperty(equipment.wearLoc)) return false;
+			if(this._worn[equipment.wearLoc] !== equipment) return false;
+			this._worn[equipment.wearLoc] = null;
 			slot = equipment.wearLoc;
 			break;
 		}
@@ -793,10 +772,11 @@ class Mob extends Movable{
 		this.combat();
 	}
 
+	// start fighting
 	combat(){
 		if(this._combatID != null) return;
 
-		// faster units take their turn ever so slightly earlier
+		// time until next interval
 		let delay = Time.getIntervalDelay(3000);
 
 		// start combat!
@@ -854,12 +834,12 @@ class Mob extends Movable{
 		// determine hit rate
 		let hitChance = 1;
 
-		if(target.hasAbilityByName("evasion")) hitChance -= 0.25; // evasion gives a 10% evasion chance
+		if(target.hasAbilityByName("evasion")) hitChance -= 0.1; // evasion gives a 10% evasion chance
 
 		// on hit
 		if(Math.probability(hitChance)){
 			// get weapon and action/type data
-			let weapon = this.worn.HAND_PRIMARY;
+			let weapon = this._worn.HAND_PRIMARY;
 			let action = weapon ? weapon.action : CombatAction.PUNCH;
 			let type = action.type;
 
@@ -950,7 +930,7 @@ class Mob extends Movable{
 	}
 
 	kill(victim){
-		let experience = 200 + (victim.level - this.level) * 50;
+		let experience = Math.max(200 + (victim.level - this.level) * 50, 1);
 		Communicate.experience({
 			actor:this,
 			directObject:victim,
@@ -972,8 +952,9 @@ class Mob extends Movable{
 		return false;
 	}
 
+	// get busy
 	busy(delay){
-		this.ready = false;
+		this._ready = false;
 		this._busyID = setTimeout(function(){
 			// delete busyID member
 			delete this._busyID;
@@ -987,7 +968,7 @@ class Mob extends Movable{
 			});
 
 			// ready up
-			this.ready = true;
+			this._ready = true;
 		}.bind(this), delay);
 	}
 
@@ -1016,6 +997,7 @@ class Mob extends Movable{
 		}
 	}
 
+	// start regenerating
 	regenerate(){
 		if(this._regenID != null) return;
 		let delay = Time.getIntervalDelay(30000);
@@ -1076,25 +1058,25 @@ class Mob extends Movable{
 	}
 
 	addEffect(effect){
-		let pos = this.effects.indexOf(effect);
+		let pos = this._effects.indexOf(effect);
 		if(pos !== -1) return; // already effects
 		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
-		this.effects.push(effect);
+		this._effects.push(effect);
 		if(effect.affectee !== this) effect.affectee = this;
 		restore(); // restore status based on previous %
 	}
 
 	removeEffect(effect){
-		let pos = this.effects.indexOf(effect);
+		let pos = this._effects.indexOf(effect);
 		if(pos === -1) return; // not effected by this
 		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
-		this.effects.splice(pos, 1);
+		this._effects.splice(pos, 1);
 		if(effect.affectee === this) effect.affectee = null;
 		restore(); // restore status based on previous %
 	}
 
 	hasEffectByName(name){
-		for(let effect of this.effects){
+		for(let effect of this._effects){
 			if(effect.name === name){
 				return effect;
 			}
@@ -1122,15 +1104,15 @@ class Mob extends Movable{
 		}
 
 		// stop any effect timers
-		if(this.effects){
-			for(let effect of this.effects) effect.stop();
+		if(this._effects){
+			for(let effect of this._effects) effect.stop();
 		}
 	}
 }
 
-Mob.prototype.ready = true;
+Mob.prototype._ready = true;
 
-Mob.prototype.worn = null;
+Mob.prototype._worn = null;
 
 Mob.prototype.fighting = null;
 
@@ -1175,9 +1157,7 @@ Mob.prototype.health = 0;
 Mob.prototype.energy = 0;
 Mob.prototype.mana = 0;
 
-Mob.prototype.effects = null;
-
-Mob.prototype.worn = null;
+Mob.prototype._effects = null;
 
 module.exports = Mob;
 

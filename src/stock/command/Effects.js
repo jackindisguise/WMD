@@ -7,14 +7,14 @@ const Command = require("../../mud/Command");
 
 class Effects extends Command{
 	exec(mob){
-		if(mob.effects.length === 0){
+		if(mob._effects.length === 0){
 			mob.sendLine(_("You aren't affected by anything."));
 			return;
 		}
 
 		let msg = _("You're affected by...");
-		for(let i=0;i<mob.effects.length;i++){
-			let effect = mob.effects[i];
+		for(let i=0;i<mob._effects.length;i++){
+			let effect = mob._effects[i];
 
 			// generate duration code
 			let time = Math.msToTime((effect._startTime + effect.duration) - Date.now());

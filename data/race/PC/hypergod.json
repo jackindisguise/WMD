@@ -1,0 +1,10 @@
+{
+    "name":"PC.hypergod",
+    "display":"hypergod",
+    "keywords":"hypergod",
+	"description":"Hyper Gods.",
+	"selectable":false,
+	"strengthPerLevel": 5.5,
+	"agilityPerLevel": 3.3,
+	"intelligencePerLevel": 2.2
+}

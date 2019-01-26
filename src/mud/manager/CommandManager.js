@@ -25,7 +25,7 @@ class CommandManager{
 		for(let command of commands){
 			if(command.match(mob, input)) {
 				if(command.ready){
-					if(!mob.ready){
+					if(!mob._ready){
 						mob.sendLine("You aren't ready.");
 						return true; // we found the command, just can't use it right now.
 					}

@@ -28,21 +28,21 @@ class Effect{
 		return this._affectee;
 	}
 
-	get strength(){ return this.strengthBonus; }
-	get attackPower(){ return this.attackPowerBonus; }
-	get defense(){ return this.defenseBonus; }
-	get vitality(){ return this.vitalityBonus; }
-	get health(){ return this.healthBonus; }
-	get intelligence(){ return this.intelligenceBonus; }
-	get magicPower(){ return this.magicPowerBonus; }
-	get resilience(){ return this.resilienceBonus; }
-	get wisdom(){ return this.wisdomBonus; }
-	get mana(){ return this.manaBonus; }
-	get agility(){ return this.agilityBonus; }
-	get precision(){ return this.precisionBonus; }
-	get deflection(){ return this.deflectionBonus; }
-	get stamina(){ return this.staminaBonus; }
-	get energy(){ return this.energyBonus; }
+	get strength(){ return 0; }
+	get attackPower(){ return 0; }
+	get defense(){ return 0; }
+	get vitality(){ return 0; }
+	get health(){ return 0; }
+	get intelligence(){ return 0; }
+	get magicPower(){ return 0; }
+	get resilience(){ return 0; }
+	get wisdom(){ return 0; }
+	get mana(){ return 0; }
+	get agility(){ return 0; }
+	get precision(){ return 0; }
+	get deflection(){ return 0; }
+	get stamina(){ return 0; }
+	get energy(){ return 0; }
 
 	getAttributeByName(name){
 		switch(name){
@@ -74,9 +74,9 @@ class Effect{
 		return attributes;
 	}
 
-	apply(affectee){
+	apply(affectee, silent){
 		this.affectee = affectee;
-		if(this.applyMessage) Communicate.act({
+		if(this.applyMessage && !silent) Communicate.act({
 			actor:this.affectee,
 			recipients:this.affectee.loc.contents,
 			message:this.applyMessage,
@@ -97,8 +97,8 @@ class Effect{
 		this.clear();
 	}
 
-	expire(){
-		if(this.expireMessage) Communicate.act({
+	expire(silent){
+		if(this.expireMessage && !silent) Communicate.act({
 			actor:this.affectee,
 			recipients:this.affectee.loc.contents,
 			message:this.expireMessage,
@@ -121,7 +121,8 @@ class Effect{
 			json.name = value;
 			break;
 
-		case "affectee":
+		case "duration":
+			json.duration = this._expireID ? this.duration - (Date.now() - this._startTime) : this.duration;
 			break;
 
 		default:
@@ -132,38 +133,21 @@ class Effect{
 }
 
 /**
- * Effect level.
- */
-Effect.prototype.level = 1;
-
-/**
  * Name for identifying this effect.
  */
 Effect.prototype.name = null;
 
 Effect.prototype._affectee = null;
 
+/**
+ * Effect level.
+ */
+Effect.prototype.level = 1;
+
 Effect.prototype.duration = null;
 
 Effect.prototype.applyMessage = null;
 
 Effect.prototype.expireMessage = null;
-
-// attribute modifiers
-Effect.prototype.strengthBonus = 0;
-Effect.prototype.attackPowerBonus = 0;
-Effect.prototype.defenseBonus = 0;
-Effect.prototype.vitalityBonus = 0;
-Effect.prototype.healthBonus = 0;
-Effect.prototype.agilityBonus = 0;
-Effect.prototype.precisionBonus = 0;
-Effect.prototype.deflectionBonus = 0;
-Effect.prototype.staminaBonus = 0;
-Effect.prototype.energyBonus = 0;
-Effect.prototype.intelligenceBonus = 0;
-Effect.prototype.magicPowerBonus = 0;
-Effect.prototype.resilienceBonus = 0;
-Effect.prototype.wisdomBonus = 0;
-Effect.prototype.manaBonus = 0;
 
 module.exports = Effect;

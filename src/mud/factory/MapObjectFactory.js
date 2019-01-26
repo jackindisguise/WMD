@@ -57,6 +57,7 @@ class MapObjectFactory{
 		let template = TemplateManager.getTemplateByName(templateName);
 		let obj = template.spawn();
 		obj.__fromJSON(json);
+		obj.__finalize(json);
 		return obj;
 	}
 
@@ -65,6 +66,7 @@ class MapObjectFactory{
 		let model = ModelManager.getModelByName(modelName);
 		let obj = model.spawn();
 		obj.__fromJSON(json);
+		obj.__finalize(json);
 		return obj;
 	}
 
@@ -80,6 +82,7 @@ class MapObjectFactory{
 			}
 		}
 
+		obj.__finalize(json);
 		return obj;
 	}
 }
