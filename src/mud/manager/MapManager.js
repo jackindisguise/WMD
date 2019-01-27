@@ -19,7 +19,7 @@ class MapManager{
 	}
 
 	static getLocation(options){
-		if(options) return;
+		if(!options) return;
 		let map = MapManager.getMapByName(options.map);
 		if(!map) return;
 		let tile = map.getTileByXYZ(options.x, options.y, options.z);

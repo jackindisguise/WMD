@@ -10,6 +10,8 @@ const HelpfileManager = require("./manager/HelpfileManager");
 const RaceManager = require("./manager/RaceManager");
 const ClassManager = require("./manager/ClassManager");
 const MapManager = require("./manager/MapManager");
+const CharacterManager = require("./manager/CharacterManager");
+const MapObjectFactory = require("./factory/MapObjectFactory");
 const Mob = require("./map/Mob");
 
 /**
@@ -44,7 +46,43 @@ class Nanny{
 	}
 
 	processName(input){
+		let exists = CharacterManager.getCharacterByName(input);
+		if(exists) {
+			this.oCharacter = exists;
+			this.player.sendLine(_("Welcome back!"));
+			this.askForExistingPassword();
+			return;
+		}
+
 		this.name = input;
+		this.askForPassword();
+	}
+
+	askForExistingPassword(){
+		this.player.ask(_("Enter your password:"), function(input){
+			this.processExistingPassword(input);
+		}.bind(this));
+	}
+
+	processExistingPassword(input){
+		if(this.oCharacter.password !== input){
+			this.oCharacter = null;
+			this.player.sendLine("WRONG!");
+			this.askForName();
+			return;
+		}
+
+		this.motd();
+	}
+
+	askForPassword(){
+		this.player.ask(_("Enter a password:"), function(input){
+			this.processPassword(input);
+		}.bind(this));
+	}
+
+	processPassword(input){
+		this.password = input;
 		this.askForRace();
 	}
 
@@ -101,7 +139,6 @@ class Nanny{
 	}
 
 	createCharacter(){
-		this.isNew = true;
 		this.mob = new Mob();
 		this.mob.name = this.name;
 		this.mob.race = this.race;
@@ -117,24 +154,25 @@ class Nanny{
 	}
 
 	finish(){
-		// assign our mob
-		this.player.mob = this.mob;
-
-		// move to new location
 		let worldmap = MapManager.getMapByName("World");
-		if(this.isNew){
-			let worldmap = MapManager.getMapByName("World");
-			this.mob.loc = worldmap.getTileByXYZ(0,0,0);
-			this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob._race.display, this.mob._class.display));
-
-			// load old location
-		} else {
-			let tile = worldmap.map.getTileByXYZ(this.loc.x, this.loc.y, this.loc.z);
-			if(tile) this.loc = tile;
-			else {
-				Logger.error("BAD LOC %s ON CHARACTER LOGIN", JSON.stringify(this.loc));
-				this.loc = worldmap.map.getTileByXYZ(0,0,0);
+		if(this.oCharacter){ // load old character
+			this.mob = MapObjectFactory.loadFromJSON(this.oCharacter.mob); // load old mob
+			this.player.mob = this.mob;
+			let tile = MapManager.getLocation(this.mob._tmploc);
+			if(tile) { // valid location
+				this.mob.loc = tile; // move to tile
+				delete this.mob._tmploc; // delete tmp member
+			} else { // invalid location
+				Logger.error("BAD LOC %s ON CHARACTER LOGIN", JSON.stringify(this.loc)); // move to generic tile
+				this.loc = worldmap.getTileByXYZ(0,0,0);
 			}
+		} else {
+			// assign our mob
+			let tile = worldmap.getTileByXYZ(0,0,0);
+			this.player.mob = this.mob;
+			this.mob.loc = tile;
+			CharacterManager.createCharacter(this.mob, this.password);
+			this.player.sendLine(_("Welcome to the game, %s the %s %s!", this.mob.name, this.mob._race.display, this.mob._class.display));
 		}
 
 		// show room
@@ -144,10 +182,11 @@ class Nanny{
 
 Nanny.prototype.player = null;
 Nanny.prototype.name = null;
-Nanny.prototype.mob = null;
+Nanny.prototype.password = null;
 Nanny.prototype.race = null;
 Nanny.prototype.class = null;
-Nanny.prototype.isNew = false;
+Nanny.prototype.mob = null;
+Nanny.prototype.oCharacter = null;
 
 module.exports = Nanny;
 

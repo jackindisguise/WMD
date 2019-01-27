@@ -1,16 +1,12 @@
 // local includes
-const _ = require("../../../i18n");
-const TemplateManager = require("../../mud/manager/TemplateManager");
+const CharacterManager = require("../../mud/manager/CharacterManager");
 const Command = require("../../mud/Command");
 const CommandSpecificity = require("../../etc/CommandSpecificity");
-const MapObjectFactory = require("../../mud/factory/MapObjectFactory");
 
 class Save extends Command{
 	exec(mob){
-		let json = mob.__toJSON();
-		console.log(json);
-		let copy = MapObjectFactory.loadFromJSON(json);
-		console.log(copy);
+		CharacterManager.saveMobAsCharacter(mob);
+		mob.sendLine("You're saved. :)");
 	}
 }
 

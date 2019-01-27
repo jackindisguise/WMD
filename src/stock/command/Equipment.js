@@ -10,8 +10,8 @@ const WearSlot = require("../../etc/WearSlot");
 class Equipment extends Command{
 	exec(mob){
 		let msg = _("You are wearing...");
-		for(let slot in mob.worn){
-			let eq = mob.worn[slot];
+		for(let slot in mob._worn){
+			let eq = mob._worn[slot];
 			let name = WearSlot.display[slot]; 
 			msg += "\r\n" + util.format("%s: %s", name.padLeft(18), eq ? eq.display : "[nothing]");
 		}

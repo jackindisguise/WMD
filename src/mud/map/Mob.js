@@ -59,11 +59,15 @@ class Mob extends Movable{
 		let effects;
 		switch(key){
 		case "_loc":
-			if(value instanceof Tile && value.map) json.loc = {map:this.map.name, x:value.x, y:value.y, z:value.z};
+			if(!(value instanceof Tile)) break; // not on a map tile
+			if(!value.map) break; // on a map tile, but it's a template or something
+			json.loc = {map:this.map.name, x:value.x, y:value.y, z:value.z};
 			break;
 
 		case "_effects":
-			if(!this._effects.length) break;
+			if(!this._effects.length) break; // no active effects
+
+			// generate effects array
 			effects = [];
 			for(let effect of this._effects) effects.push(effect.__toJSON());
 			json.effects = effects;
@@ -72,17 +76,18 @@ class Mob extends Movable{
 		case "_race": json.race = value.name; break;
 		case "_class": json.class = value.name; break;
 		case "health":
-			if(value === this.maxHealth) break;
+			if(value === this.maxHealth) break; // already max
 			json.health = value;
 			break;
 		case "energy":
-			if(value === this.maxEnergy) break;
+			if(value === this.maxEnergy) break; // already max
 			json.energy = value;
 			break;
 		case "mana":
-			if(value === this.maxMana) break;
+			if(value === this.maxMana) break; // already max
 			json.mana = value;
 			break;
+
 		default: super.__JSONWrite(key, value, json); break;
 		}
 	}

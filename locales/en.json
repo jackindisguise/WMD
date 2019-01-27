@@ -165,5 +165,10 @@
 	"You're level {W%d{x, with {C%d {cexperience{x until the next level.": "You're level {W%d{x, with {C%d {cexperience{x until the next level.",
 	"You are... %s the %s %s.": "You are... %s the %s %s.",
 	"             %d (%s%d) attack power, granting %d physical damage.": "             %d (%s%d) attack power, granting %d physical damage.",
-	"             %d (%s%d) defense, granting %f physical damage mitigation.": "             %d (%s%d) defense, granting %f physical damage mitigation."
+	"             %d (%s%d) defense, granting %f physical damage mitigation.": "             %d (%s%d) defense, granting %f physical damage mitigation.",
+	"Enter a password:": "Enter a password:",
+	"Welcome back!": "Welcome back!",
+	"Enter your password:": "Enter your password:",
+	"> Loading characters...": "> Loading characters...",
+	">> Loading character '%s'": ">> Loading character '%s'"
 }
