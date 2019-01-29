@@ -14,6 +14,7 @@ const RaceManager = require("../src/mud/manager/RaceManager");
 const ClassManager = require("../src/mud/manager/ClassManager");
 const PlayerManager = require("../src/mud/manager/PlayerManager");
 const HelpfileManager = require("../src/mud/manager/HelpfileManager");
+const CharacterManager = require("../src/mud/manager/CharacterManager");
 
 describe("[LOGIN]", function(){
 	// local variables
@@ -40,6 +41,11 @@ describe("[LOGIN]", function(){
 				break;
 
 			case 2:
+				expect(message).to.equal(_("Enter a password:"));
+				player.emit("command", "password");
+				break;
+
+			case 3:
 				msg = "------------------";
 				for(let race of RaceManager.selectable){
 					msg += util.format("%s%s %s %s %s", "\r\n", "|", race.display.padLeft(14), "|", race.description);
@@ -50,12 +56,12 @@ describe("[LOGIN]", function(){
 				expect(message).to.equal(msg);
 				break;
 
-			case 3:
+			case 4:
 				expect(message).to.equal(_("Enter a race:"));
 				player.emit("command", "human");
 				break;
 
-			case 4:
+			case 5:
 				msg = "------------------";
 				for(let _class of ClassManager.selectable){
 					msg += util.format("%s%s %s %s %s", "\r\n", "|", _class.display.padLeft(14), "|", _class.description);
@@ -66,31 +72,31 @@ describe("[LOGIN]", function(){
 				expect(message).to.equal(msg);
 				break;
 
-			case 5:
+			case 6:
 				expect(message).to.equal(_("Enter a class:"));
 				player.emit("command", "warrior");
 				break;
 
-			case 6:
+			case 7:
 				expect(message).to.equal(motd);
 				break;
 
-			case 7:
+			case 8:
 				expect(message).to.equal(_("Press enter to continue..."));
 				player.emit("command", "");
 				break;
 
-			case 8:
+			case 9:
 				expect(message).to.equal(_("Welcome to the game, %s the %s %s!", sPlayer.mob.name, sPlayer.mob.race.display, sPlayer.mob.class.display));
 				break;
 
-			case 9:
+			case 10:
 				msg = "{Ca big beautiful meadow{x ({Y0,0,0{x)\r\n    {cIt's a big beautiful meadow. What more could you ask for?{x\r\n\r\n[Exits: south east southeast]\r\n    a rock thrower\r\n    Judas";
 				expect(message).to.equal(msg);
 				player.emit("command", "blah");
 				break;
 
-			case 10:
+			case 11:
 				expect(message).to.equal(_("Do what, now?"));
 				done();
 				break;
@@ -104,6 +110,11 @@ describe("[LOGIN]", function(){
 	it("disconnect player", function(done){
 		player.close();
 		expect(player.disconnected).to.equal(true);
+		done();
+	});
+
+	it("delete character", function(done){
+		CharacterManager.deleteCharacterByName("Judas");
 		done();
 	});
 });

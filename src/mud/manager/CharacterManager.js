@@ -32,10 +32,22 @@ class CharacterManager{
 		return character;
 	}
 
-	static saveMobAsCharacter(mob){
+	static saveCharacterAsMob(mob){
 		let character = CharacterManager.getCharacterByName(mob.name);
 		if(!character) return false;
 		character.mob = mob; // update character
+		return character;
+	}
+
+	static deleteCharacterAsMob(mob){
+		return CharacterManager.deleteCharacterByName(mob.name);
+	}
+
+	static deleteCharacterByName(name){
+		let character = CharacterManager.getCharacterByName(name);
+		if(!character) return false;
+		character.deleteFile();
+		this.remove(character);
 		return character;
 	}
 }

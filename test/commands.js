@@ -33,13 +33,14 @@ describe("[COMMAND]", function(){
 			c++;
 			other = io.connect("http://127.0.0.1:8000");
 			other.emit("command", "Second");
+			other.emit("command", "password");
 			other.emit("command", "human");
 			other.emit("command", "warrior");
 			other.emit("command", "motd");
 			let m=0;
 			other.on("message", function(message){ // fully connected
 				m++;
-				if(m===9){
+				if(m===10){
 					expect(message).is.equal(_("Welcome to the game, %s the %s %s!", "Second", "human", "warrior"));
 					d();
 				}
@@ -47,13 +48,14 @@ describe("[COMMAND]", function(){
 		});
 
 		player.emit("command", "First");
+		player.emit("command", "password");
 		player.emit("command", "human");
 		player.emit("command", "warrior");
 		player.emit("command", "motd");
 		let m=0;
 		player.on("message", function(message){ // fully connected
 			m++;
-			if(m===9){
+			if(m===10){
 				expect(message).is.equal(_("Welcome to the game, %s the %s %s!", "First", "human", "warrior"));
 				d();
 			}
@@ -69,12 +71,24 @@ describe("[COMMAND]", function(){
 		player.emit("command", "who");
 	});
 
-	it("'quit'", function(done){
+	it("'delete'", function(done){
+		let d = 2;
+		function c(){
+			d--;
+			if(d === 0) done();
+		}
+
 		player.once("message", function(message){
-			expect(message).is.equal(_("Later, skater."));
-			done();
+			expect(message).same.equal(_("You turn into a lion noise."));
+			c();
 		});
 
-		player.emit("command", "quit");
+		other.once("message", function(message){
+			expect(message).same.equal(_("You turn into a lion noise."));
+			c();
+		});
+
+		player.emit("command", "delete password");
+		other.emit("command", "delete password");
 	});
 });

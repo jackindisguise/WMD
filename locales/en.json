@@ -170,5 +170,6 @@
 	"Welcome back!": "Welcome back!",
 	"Enter your password:": "Enter your password:",
 	"> Loading characters...": "> Loading characters...",
-	">> Loading character '%s'": ">> Loading character '%s'"
+	">> Loading character '%s'": ">> Loading character '%s'",
+	"You turn into a lion noise.": "You turn into a lion noise."
 }

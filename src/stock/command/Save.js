@@ -5,7 +5,7 @@ const CommandSpecificity = require("../../etc/CommandSpecificity");
 
 class Save extends Command{
 	exec(mob){
-		CharacterManager.saveMobAsCharacter(mob);
+		CharacterManager.saveCharacterAsMob(mob);
 		mob.sendLine("You're saved. :)");
 	}
 }

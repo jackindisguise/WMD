@@ -35,6 +35,17 @@ class Character{
 		});
 	}
 
+	deleteFile(){
+		let file = "./data/character/" + this.name + ".json";
+		fs.stat(file, function(err){
+			if(err) return;
+			fs.unlink(file, function(err){
+				if(err) return;
+				// done
+			});
+		});
+	}
+
 	set mob(mob){
 		let nJSON = mob.__toJSON();
 		let oString = JSON.stringify(this._mob);
