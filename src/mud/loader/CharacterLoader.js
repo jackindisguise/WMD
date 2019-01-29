@@ -13,6 +13,7 @@ const Character = require("../Character");
 module.exports = function(callback){
 	Logger.info(_("> Loading characters..."));
 	fs.readdir("./data/character", function(err, files){
+		if(err) return;
 		for(let file of files){
 			let json = require("../../../data/character/"+file);
 			Logger.info(_(">> Loading character '%s'", json.name));

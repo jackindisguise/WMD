@@ -11,6 +11,7 @@ const Class = require("../Class");
 // deep file search
 function deepSearch(directory, fileFun, callback){
 	fs.readdir(directory, function(err, files){
+		if(err) return;
 		let waiting = files.length;
 		function next() { waiting--; if(waiting === 0) callback(); }
 		for(let file of files){

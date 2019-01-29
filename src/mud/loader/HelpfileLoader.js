@@ -19,6 +19,7 @@ module.exports = function(callback){
 
 	Logger.info(_("> Loading helpfile..."));
 	fs.readdir("./data/help", function(err, files){
+		if(err) return;
 		for(let file of files){
 			count++;
 			fs.readFile("./data/help/"+file, "utf8", function(err, data){

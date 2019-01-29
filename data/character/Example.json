@@ -1,0 +1,17 @@
+{
+	"name": "Example",
+	"password": "password",
+	"mob": {
+		"constructor": "Mob",
+		"display": "Example",
+		"keywords": "Example",
+		"race": "PC.human",
+		"class": "PC.thief",
+		"loc": {
+			"map": "World",
+			"x": 0,
+			"y": 0,
+			"z": 0
+		}
+	}
+}
