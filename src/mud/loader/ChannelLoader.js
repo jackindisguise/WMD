@@ -13,6 +13,7 @@ const Channel = require("../Channel");
 module.exports = function(callback){
 	Logger.info(_("> Loading channels..."));
 	fs.readdir("./data/channel", function(err, files){
+		if(err) return;
 		for(let file of files){
 			let json = require("../../../data/channel/"+file);
 			Logger.info(_(">> Loading channel '%s'", json.name));

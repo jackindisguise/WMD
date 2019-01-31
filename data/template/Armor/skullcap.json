@@ -4,6 +4,6 @@
         "constructor": "Armor",
         "keywords": "skullcap",
         "display": "a skullcap",
-        "wearLoc": "HEAD"
+        "slotType": "head"
     }
 }

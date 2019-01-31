@@ -1,13 +1,13 @@
 // local includes
 let Armor = require("./Armor");
-let WearLocation = require("../../etc/WearLocation");
+let WearSlotType = require("../../etc/WearSlotType");
 
 class Shield extends Armor{
 }
 
 Shield.prototype.defenseBonus = 2;
 Shield.prototype.defenseBonusPerLevel = 1;
-Shield.prototype.wearLoc = WearLocation.location.SHIELD;
+Shield.prototype.slotType = WearSlotType.OFFHAND;
 
 /** @default "shield" */
 Shield.prototype.keywords = "shield";

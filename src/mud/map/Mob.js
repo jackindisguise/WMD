@@ -10,8 +10,9 @@ const CombatAction = require("../../etc/CombatAction");
 const Direction = require("../../etc/Direction");
 const MessageCategory = require("../../etc/MessageCategory");
 const AttributeName = require("../../etc/AttributeName");
-const WearLocation = require("../../etc/WearLocation");
-const WearSlot = require("../../etc/WearSlot");
+const WearSlotType = require("../../etc/WearSlotType");
+const WearSlotName = require("../../etc/WearSlotName");
+const WearSlot = require("../WearSlot");
 const CombatManager = require("../manager/CombatManager");
 const RaceManager = require("../manager/RaceManager");
 const ClassManager = require("../manager/ClassManager");
@@ -35,24 +36,26 @@ class Mob extends Movable{
 	 */
 	constructor(options){
 		super(options);
+
+		// active effects
 		this._effects = []; // effects on us
 
-		// wear locations
-		this._worn = {
-			HEAD: null,
-			NECK: null,
-			SHOULDER: null,
-			ARMS: null,
-			HANDS: null,
-			FINGER_A: null,
-			FINGER_B: null,
-			TORSO: null,
-			WAIST: null,
-			LEGS: null,
-			FEET: null,
-			HAND_OFF: null,
-			HAND_PRIMARY: null
-		};
+		// wear slots
+		let slots = [];
+		slots.push(new WearSlot({type:WearSlotType.HEAD, name:WearSlotName.HEAD}));
+		slots.push(new WearSlot({type:WearSlotType.NECK, name:WearSlotName.NECK}));
+		slots.push(new WearSlot({type:WearSlotType.SHOULDER, name:WearSlotName.SHOULDER}));
+		slots.push(new WearSlot({type:WearSlotType.ARMS, name:WearSlotName.ARMS}));
+		slots.push(new WearSlot({type:WearSlotType.HANDS, name:WearSlotName.HANDS}));
+		slots.push(new WearSlot({type:WearSlotType.FINGER, name:WearSlotName.FINGER_A}));
+		slots.push(new WearSlot({type:WearSlotType.FINGER, name:WearSlotName.FINGER_B}));
+		slots.push(new WearSlot({type:WearSlotType.TORSO, name:WearSlotName.TORSO}));
+		slots.push(new WearSlot({type:WearSlotType.WAIST, name:WearSlotName.WAIST}));
+		slots.push(new WearSlot({type:WearSlotType.LEGS, name:WearSlotName.LEGS}));
+		slots.push(new WearSlot({type:WearSlotType.FEET, name:WearSlotName.FEET}));
+		slots.push(new WearSlot({type:WearSlotType.WEAPON, name:WearSlotName.HAND_PRIMARY}));
+		slots.push(new WearSlot({type:WearSlotType.OFFHAND, name:WearSlotName.HAND_OFF}));
+		this._slots = slots;
 	}
 
 	__JSONWrite(key, value, json){
@@ -135,7 +138,13 @@ class Mob extends Movable{
 		// equip things and apply status effects here
 		for(let equipment of this._contents){
 			if(!(equipment instanceof Equipment)) continue;
-			if(equipment.worn) this.equip(equipment);
+			if(!equipment.worn) continue;
+			let name = equipment.worn;
+			let slot = this.getSlotByName(name);
+			if(slot) { // manual equip. add options to equip later.
+				slot.worn = equipment;
+				equipment.worn = slot;
+			}
 		}
 
 		// if stat hasn't been loaded, just make it full
@@ -160,8 +169,7 @@ class Mob extends Movable{
 		strength += this._race.getStrengthByLevel(this.level);
 		strength += this._class.getStrengthByLevel(this.level);
 		for(let effect of this._effects) strength += effect.strength;
-		for(let slot in this._worn) if(this._worn[slot]) strength += this._worn[slot].strength;
-
+		for(let worn of this.worn) strength += worn.strength;
 		return Math.floor(strength);
 	}
 
@@ -177,7 +185,7 @@ class Mob extends Movable{
 		attackPower += this._race.getAttackPowerByLevel(this.level);
 		attackPower += this._class.getAttackPowerByLevel(this.level);
 		for(let effect of this._effects) attackPower += effect.attackPower;
-		for(let slot in this._worn) if(this._worn[slot]) attackPower += this._worn[slot].attackPower;
+		for(let worn of this.worn) attackPower += worn.attackPower;
 		return Math.floor(attackPower);
 	}
 
@@ -193,7 +201,7 @@ class Mob extends Movable{
 		defense += this._race.getDefenseByLevel(this.level);
 		defense += this._class.getDefenseByLevel(this.level);
 		for(let effect of this._effects) defense += effect.defense;
-		for(let slot in this._worn) if(this._worn[slot]) defense += this._worn[slot].defense;
+		for(let worn of this.worn) defense += worn.defense;
 		return Math.floor(defense);
 	}
 
@@ -209,7 +217,7 @@ class Mob extends Movable{
 		vitality += this._race.getVitalityByLevel(this.level);
 		vitality += this._class.getVitalityByLevel(this.level);
 		for(let effect of this._effects) vitality += effect.vitality;
-		for(let slot in this._worn) if(this._worn[slot]) vitality += this._worn[slot].vitality;
+		for(let worn of this.worn) vitality += worn.vitality;
 		return Math.floor(vitality);
 	}
 
@@ -225,7 +233,7 @@ class Mob extends Movable{
 		health += this._race.getHealthByLevel(this.level);
 		health += this._class.getHealthByLevel(this.level);
 		for(let effect of this._effects) health += effect.health;
-		for(let slot in this._worn) if(this._worn[slot]) health += this._worn[slot].health;
+		for(let worn of this.worn) health += worn.health;
 		return Math.floor(health);
 	}
 
@@ -241,7 +249,7 @@ class Mob extends Movable{
 		agility += this._race.getAgilityByLevel(this.level);
 		agility += this._class.getAgilityByLevel(this.level);
 		for(let effect of this._effects) agility += effect.agility;
-		for(let slot in this._worn) if(this._worn[slot]) agility += this._worn[slot].agility;
+		for(let worn of this.worn) agility += worn.agility;
 		return Math.floor(agility);
 	}
 
@@ -257,7 +265,7 @@ class Mob extends Movable{
 		precision += this._race.getPrecisionByLevel(this.level);
 		precision += this._class.getPrecisionByLevel(this.level);
 		for(let effect of this._effects) precision += effect.precision;
-		for(let slot in this._worn) if(this._worn[slot]) precision += this._worn[slot].precision;
+		for(let worn of this.worn) precision += worn.precision;
 		return Math.floor(precision);
 	}
 
@@ -273,7 +281,7 @@ class Mob extends Movable{
 		deflection += this._race.getDeflectionByLevel(this.level);
 		deflection += this._class.getDeflectionByLevel(this.level);
 		for(let effect of this._effects) deflection += effect.deflection;
-		for(let slot in this._worn) if(this._worn[slot]) deflection += this._worn[slot].deflection;
+		for(let worn of this.worn) deflection += worn.deflection;
 		return Math.floor(deflection);
 	}
 
@@ -289,7 +297,7 @@ class Mob extends Movable{
 		stamina += this._race.getStaminaByLevel(this.level);
 		stamina += this._class.getStaminaByLevel(this.level);
 		for(let effect of this._effects) stamina += effect.stamina;
-		for(let slot in this._worn) if(this._worn[slot]) stamina += this._worn[slot].stamina;
+		for(let worn of this.worn) stamina += worn.stamina;
 		return Math.floor(stamina);
 	}
 
@@ -305,7 +313,7 @@ class Mob extends Movable{
 		energy += this._race.getEnergyByLevel(this.level);
 		energy += this._class.getEnergyByLevel(this.level);
 		for(let effect of this._effects) energy += effect.energy;
-		for(let slot in this._worn) if(this._worn[slot]) energy += this._worn[slot].energy;
+		for(let worn of this.worn) energy += worn.energy;
 		return Math.floor(energy);
 	}
 
@@ -321,7 +329,7 @@ class Mob extends Movable{
 		intelligence += this._race.getIntelligenceByLevel(this.level);
 		intelligence += this._class.getIntelligenceByLevel(this.level);
 		for(let effect of this._effects) intelligence += effect.intelligence;
-		for(let slot in this._worn) if(this._worn[slot]) intelligence += this._worn[slot].intelligence;
+		for(let worn of this.worn) intelligence += worn.intelligence;
 		return Math.floor(intelligence);
 	}
 
@@ -337,7 +345,7 @@ class Mob extends Movable{
 		magicPower += this._race.getMagicPowerByLevel(this.level);
 		magicPower += this._class.getMagicPowerByLevel(this.level);
 		for(let effect of this._effects) magicPower += effect.magicPower;
-		for(let slot in this._worn) if(this._worn[slot]) magicPower += this._worn[slot].magicPower;
+		for(let worn of this.worn) magicPower += worn.magicPower;
 		return Math.floor(magicPower);
 	}
 
@@ -353,7 +361,7 @@ class Mob extends Movable{
 		resilience += this._race.getResilienceByLevel(this.level);
 		resilience += this._class.getResilienceByLevel(this.level);
 		for(let effect of this._effects) resilience += effect.resilience;
-		for(let slot in this._worn) if(this._worn[slot]) resilience += this._worn[slot].resilience;
+		for(let worn of this.worn) resilience += worn.resilience;
 		return Math.floor(resilience);
 	}
 
@@ -369,7 +377,7 @@ class Mob extends Movable{
 		wisdom += this._race.getWisdomByLevel(this.level);
 		wisdom += this._class.getWisdomByLevel(this.level);
 		for(let effect of this._effects) wisdom += effect.wisdom;
-		for(let slot in this._worn) if(this._worn[slot]) wisdom += this._worn[slot].wisdom;
+		for(let worn of this.worn) wisdom += worn.wisdom;
 		return Math.floor(wisdom);
 	}
 
@@ -385,7 +393,7 @@ class Mob extends Movable{
 		mana += this._race.getManaByLevel(this.level);
 		mana += this._class.getManaByLevel(this.level);
 		for(let effect of this._effects) mana += effect.mana;
-		for(let slot in this._worn) if(this._worn[slot]) mana += this._worn[slot].mana;
+		for(let worn of this.worn) mana += worn.mana;
 		return Math.floor(mana);
 	}
 
@@ -419,6 +427,16 @@ class Mob extends Movable{
 		}
 
 		return abilities;
+	}
+
+	get worn(){
+		let worn = [];
+		for(let slot of this._slots){
+			if(!slot.worn) continue;
+			worn.push(slot.worn);
+		}
+
+		return worn;
 	}
 
 	get player(){
@@ -588,104 +606,48 @@ class Mob extends Movable{
 		this.sendMessage(msg, MessageCategory.LEVELUP);
 	}
 
+	getSlotByName(name){
+		for(let slot of this._slots){
+			if(slot.name === name) return slot;
+		}
+	}
+
+	getSlotByType(type){
+		for(let slot of this._slots){
+			if(slot.type === type) return slot;
+		}
+	}
+
+	getEmptySlotByType(type){
+		for(let slot of this._slots){
+			if(slot.type !== type) continue;
+			if(slot.worn) continue;
+			return slot;
+		}
+	}
+
 	equip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
 
 		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
-		let slot = null;
-		switch(equipment.wearLoc){
-		case WearLocation.location.FINGER:
-			if(this._worn.FINGER_A == null) {
-				this._worn.FINGER_A = equipment;
-				slot = WearSlot.slot.FINGER_A;
-			} else if(this._worn.FINGER_B == null) {
-				this._worn.FINGER_B = equipment;
-				slot = WearSlot.slot.FINGER_B;
-			} else return false;
-			break;
-
-		case WearLocation.location.HOLD:
-			if(this._worn.HAND_OFF == null) {
-				this._worn.HAND_OFF = equipment;
-				slot = WearSlot.slot.HAND_OFF;
-			} else return false;
-			break;
-
-		case WearLocation.location.WEAPON:
-			if(this._worn.HAND_PRIMARY == null) {
-				this._worn.HAND_PRIMARY = equipment;
-				slot = WearSlot.slot.HAND_PRIMARY;
-			} else return false;
-			break;
-
-		case WearLocation.location.SHIELD:
-			if(this._worn.HAND_OFF == null){
-				this._worn.HAND_OFF = equipment;
-				slot = WearSlot.slot.HAND_OFF;
-			} else return false;
-			break;
-
-		default:
-			if(!this._worn.hasOwnProperty(equipment.wearLoc)) return false;
-			if(this._worn[equipment.wearLoc] != null) return false;
-			this._worn[equipment.wearLoc] = equipment;
-			slot = equipment.wearLoc;
-			break;
-		}
-
-		equipment.worn = true;
+		let slot = this.getEmptySlotByType(equipment.slotType);
+		if(!slot) return false;
+		equipment.worn = slot;
+		slot.worn = equipment;
 		restore();
-		return slot;
+		return true;
 	}
 
 	unequip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
 
 		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
-		let slot = null;
-		switch(equipment.wearLoc){
-		case WearLocation.location.FINGER:
-			if(this._worn.FINGER_A === equipment) {
-				this._worn.FINGER_A = null;
-				slot = WearSlot.slot.FINGER_A;
-			} else if(this._worn.FINGER_B === equipment) {
-				this._worn.FINGER_B = null;
-				slot = WearSlot.slot.FINGER_B;
-			} else return false;
-			break;
-
-		case WearLocation.location.HOLD:
-			if(this._worn.HAND_OFF === equipment) {
-				this._worn.HAND_OFF = null;
-				slot = WearSlot.slot.HAND_OFF;
-			} else return false;
-			break;
-
-		case WearLocation.location.WEAPON:
-			if(this._worn.HAND_PRIMARY === equipment) {
-				this._worn.HAND_PRIMARY = null;
-				slot = WearSlot.slot.HAND_PRIMARY;
-			} else return false;
-			break;
-
-		case WearLocation.location.SHIELD:
-			if(this._worn.HAND_OFF === equipment){
-				this._worn.HAND_OFF = null;
-				slot = WearSlot.slot.HAND_OFF;
-			} else return false;
-			break;
-
-		default:
-			if(!this._worn.hasOwnProperty(equipment.wearLoc)) return false;
-			if(this._worn[equipment.wearLoc] !== equipment) return false;
-			this._worn[equipment.wearLoc] = null;
-			slot = equipment.wearLoc;
-			break;
-		}
-
-		equipment.worn = false;
+		let slot = equipment.worn;
+		if(this._slots.indexOf(slot) === -1) return; // we're not wearing this... somehow
+		equipment.worn = null;
+		slot.worn = null;
 		restore();
-		return slot;
+		return true;
 	}
 
 	getAttributeByName(name){
@@ -844,7 +806,7 @@ class Mob extends Movable{
 		// on hit
 		if(Math.probability(hitChance)){
 			// get weapon and action/type data
-			let weapon = this._worn.HAND_PRIMARY;
+			let weapon = this._slots.HAND_PRIMARY;
 			let action = weapon ? weapon.action : CombatAction.PUNCH;
 			let type = action.type;
 
@@ -1117,7 +1079,7 @@ class Mob extends Movable{
 
 Mob.prototype._ready = true;
 
-Mob.prototype._worn = null;
+Mob.prototype._slots = null;
 
 Mob.prototype.fighting = null;
 

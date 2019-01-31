@@ -1,3 +1,6 @@
+# Characters
+data/character/
+
 # Coveralls Token
 .coveralls.yml
 

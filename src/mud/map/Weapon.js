@@ -1,6 +1,6 @@
 // local includes
 const Equipment = require("./Equipment");
-const WearLocation = require("../../etc/WearLocation");
+const WearSlotType = require("../../etc/WearSlotType");
 const CombatAction = require("../../etc/CombatAction");
 
 class Weapon extends Equipment{
@@ -15,7 +15,7 @@ Weapon.prototype.attackPowerBonus = 1;
 Weapon.prototype.attackPowerBonusPerLevel = 0.333;
 Weapon.prototype.action = CombatAction.SLASH;
 
-Weapon.prototype.wearLoc = WearLocation.location.WEAPON;
+Weapon.prototype.slotType = WearSlotType.WEAPON;
 
 /** @default "weapon" */
 Weapon.prototype.keywords = "weapon";

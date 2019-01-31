@@ -32,6 +32,19 @@ class Equipment extends Item{
 	get rawWisdom(){ return this.wisdomBonus; }
 	get mana(){ return this.manaBonus; }
 	get rawMana(){ return this.manaBonus; }
+
+	__JSONWrite(key, value, json){
+		switch(key){
+		case "worn":
+			if(!value) break;
+			json.worn = value.name; // save just the name of the slot
+			break;
+
+		default:
+			super.__JSONWrite(key, value, json);
+			break;
+		}
+	}
 }
 
 Equipment.prototype.level = 1;
@@ -50,9 +63,8 @@ Equipment.prototype.magicPowerBonus = 0;
 Equipment.prototype.resilienceBonus = 0;
 Equipment.prototype.wisdomBonus = 0;
 Equipment.prototype.manaBonus = 0;
-
-Equipment.prototype.wearLoc = null;
-Equipment.prototype.worn = false;
+Equipment.prototype.slotType = null;
+Equipment.prototype.worn = null;
 
 /** @default "equipment" */
 Equipment.prototype.keywords = "equipment";

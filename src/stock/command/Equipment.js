@@ -5,15 +5,12 @@ const util = require("util");
 const _ = require("../../../i18n");
 const Command = require("../../mud/Command");
 const CommandSpecificity = require("../../etc/CommandSpecificity");
-const WearSlot = require("../../etc/WearSlot");
 
 class Equipment extends Command{
 	exec(mob){
 		let msg = _("You are wearing...");
-		for(let slot in mob._worn){
-			let eq = mob._worn[slot];
-			let name = WearSlot.display[slot]; 
-			msg += "\r\n" + util.format("%s: %s", name.padLeft(18), eq ? eq.display : "[nothing]");
+		for(let slot of mob._slots){
+			msg += "\r\n" + util.format("%s: %s", slot.name.padLeft(18), slot.worn ? slot.worn.display : "[nothing]");
 		}
 
 		mob.sendLine(msg);

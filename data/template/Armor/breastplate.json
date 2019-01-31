@@ -4,6 +4,6 @@
         "constructor": "Armor",
         "keywords": "breastplate",
         "display": "a breastplate",
-        "wearLoc": "TORSO"
+        "slotType": "torso"
     }
 }

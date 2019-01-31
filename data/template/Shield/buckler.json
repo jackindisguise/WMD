@@ -4,6 +4,6 @@
         "constructor": "Shield",
         "keywords": "buckler",
         "display": "a buckler",
-        "wearLoc": "SHIELD"
+        "slotType": "SHIELD"
     }
 }
