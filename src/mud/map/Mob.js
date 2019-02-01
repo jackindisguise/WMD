@@ -141,7 +141,8 @@ class Mob extends Movable{
 			if(!equipment.worn) continue;
 			let name = equipment.worn;
 			let slot = this.getSlotByName(name);
-			if(slot) { // manual equip. add options to equip later.
+			if(!slot) equipment.worn = null; // not a valid slot. ignore.
+			else { // manual equip. add options to equip later.
 				slot.worn = equipment;
 				equipment.worn = slot;
 			}
@@ -628,7 +629,6 @@ class Mob extends Movable{
 
 	equip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
-
 		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
 		let slot = this.getEmptySlotByType(equipment.slotType);
 		if(!slot) return false;
@@ -640,7 +640,6 @@ class Mob extends Movable{
 
 	unequip(equipment){
 		if(!(equipment instanceof Equipment)) return false;
-
 		let restore = this.funRestoreRelativeStatus(); // anonymous status restoration function
 		let slot = equipment.worn;
 		if(this._slots.indexOf(slot) === -1) return; // we're not wearing this... somehow
