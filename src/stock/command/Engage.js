@@ -14,7 +14,10 @@ class Engage extends Command{
 		if(victim){
 			mob.engage(victim);
 			mob.combatRound();
+			return;
 		}
+
+		mob.sendLine(_("There's nobody here like that."));
 	}
 }
 

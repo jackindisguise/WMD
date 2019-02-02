@@ -1,4 +1,5 @@
 // local includes
+const _ = require("../../../i18n");
 const AbilityCommand = require("../../../mud/AbilityCommand");
 const CommandSpecificity = require("../../../etc/CommandSpecificity");
 const AbilityManager = require("../../../mud/manager/AbilityManager");
@@ -9,7 +10,7 @@ class Heal extends AbilityCommand{
 		let victim = mob.loc.contents.search(target);
 		if(victim){
 			if(victim.health === victim.maxHealth) {
-				mob.sendLine("They're already fully healed.");
+				mob.sendLine(_("They're already fully healed."));
 				return;
 			}
 
@@ -17,7 +18,7 @@ class Heal extends AbilityCommand{
 			return;
 		}
 
-		mob.sendLine("They aren't here.");
+		mob.sendLine(_("There's nobody here like that."));
 	}
 }
 

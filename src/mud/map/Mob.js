@@ -40,22 +40,26 @@ class Mob extends Movable{
 		// active effects
 		this._effects = []; // effects on us
 
-		// wear slots
-		let slots = [];
-		slots.push(new WearSlot({type:WearSlotType.HEAD, name:WearSlotName.HEAD}));
-		slots.push(new WearSlot({type:WearSlotType.NECK, name:WearSlotName.NECK}));
-		slots.push(new WearSlot({type:WearSlotType.SHOULDER, name:WearSlotName.SHOULDER}));
-		slots.push(new WearSlot({type:WearSlotType.ARMS, name:WearSlotName.ARMS}));
-		slots.push(new WearSlot({type:WearSlotType.HANDS, name:WearSlotName.HANDS}));
-		slots.push(new WearSlot({type:WearSlotType.FINGER, name:WearSlotName.FINGER_A}));
-		slots.push(new WearSlot({type:WearSlotType.FINGER, name:WearSlotName.FINGER_B}));
-		slots.push(new WearSlot({type:WearSlotType.TORSO, name:WearSlotName.TORSO}));
-		slots.push(new WearSlot({type:WearSlotType.WAIST, name:WearSlotName.WAIST}));
-		slots.push(new WearSlot({type:WearSlotType.LEGS, name:WearSlotName.LEGS}));
-		slots.push(new WearSlot({type:WearSlotType.FEET, name:WearSlotName.FEET}));
-		slots.push(new WearSlot({type:WearSlotType.WEAPON, name:WearSlotName.HAND_PRIMARY}));
-		slots.push(new WearSlot({type:WearSlotType.OFFHAND, name:WearSlotName.HAND_OFF}));
-		this._slots = slots;
+		// generate wear slots
+		this.createWearSlot({type:WearSlotType.HEAD, name:WearSlotName.HEAD});
+		this.createWearSlot({type:WearSlotType.NECK, name:WearSlotName.NECK});
+		this.createWearSlot({type:WearSlotType.SHOULDER, name:WearSlotName.SHOULDER});
+		this.createWearSlot({type:WearSlotType.ARMS, name:WearSlotName.ARMS});
+		this.createWearSlot({type:WearSlotType.HANDS, name:WearSlotName.HANDS});
+		this.createWearSlot({type:WearSlotType.FINGER, name:WearSlotName.FINGER_A});
+		this.createWearSlot({type:WearSlotType.FINGER, name:WearSlotName.FINGER_B});
+		this.createWearSlot({type:WearSlotType.TORSO, name:WearSlotName.TORSO});
+		this.createWearSlot({type:WearSlotType.WAIST, name:WearSlotName.WAIST});
+		this.createWearSlot({type:WearSlotType.LEGS, name:WearSlotName.LEGS});
+		this.createWearSlot({type:WearSlotType.FEET, name:WearSlotName.FEET});
+		this.createWearSlot({type:WearSlotType.WEAPON, name:WearSlotName.HAND_PRIMARY});
+		this.createWearSlot({type:WearSlotType.OFFHAND, name:WearSlotName.HAND_OFF});
+	}
+
+	createWearSlot(options){
+		if(!this._slots) this._slots = []; // initialize slots
+		let slot = new WearSlot(options); // create new slot
+		this._slots.push(slot); // add to slots
 	}
 
 	__JSONWrite(key, value, json){
@@ -547,11 +551,11 @@ class Mob extends Movable{
 
 	levelup(quiet){
 		//let oRace, oClass, oRawAttributes;
-		let oRawAttributes, oAbilities;
+		let oAttributeBonuses, oAbilities;
 		if(!quiet || !this.player){
 			//oRace = this._race;
 			//oClass = this._class;
-			oRawAttributes = this.getRawAttributes();
+			oAttributeBonuses = this.getAttributeBonuses();
 			oAbilities = this.abilities;
 		}
 
@@ -570,13 +574,14 @@ class Mob extends Movable{
 		if(quiet || !this.player) return;
 
 		// create levelup message
-		let nRawAttributes = this.getRawAttributes();
+		let nAttributeBonuses = this.getAttributeBonuses();
 		let nAttributes = this.getAttributes();
 		let nAbilities = this.abilities;
 		let diffAttributes = {};
-		for(let attribute in oRawAttributes){
-			if(nRawAttributes[attribute] === oRawAttributes[attribute]) continue;
-			diffAttributes[attribute] = nRawAttributes[attribute] - oRawAttributes[attribute];
+
+		for(let attribute in oAttributeBonuses){
+			if(nAttributeBonuses[attribute] === oAttributeBonuses[attribute]) continue;
+			diffAttributes[attribute] = nAttributeBonuses[attribute] - oAttributeBonuses[attribute];
 		}
 
 		let msg = _("{yYou are now level {Y%d{x!", this.level);
@@ -706,6 +711,27 @@ class Mob extends Movable{
 			attributes[name] = this.getRawAttributeByName(name);
 		}
 
+		return attributes;
+	}
+
+	getAttributeBonuses(){
+		let attributes = this.getRawAttributes();
+
+		// use derivatives for stats first
+		attributes[AttributeName.MAX_HEALTH] -= attributes[AttributeName.VITALITY] * 3;
+		attributes[AttributeName.MAX_MANA] -= attributes[AttributeName.WISDOM];
+		attributes[AttributeName.MAX_ENERGY] -= attributes[AttributeName.STAMINA];
+
+		// now secondary attributes
+		attributes[AttributeName.ATTACK_POWER] -= attributes[AttributeName.STRENGTH];
+		attributes[AttributeName.DEFENSE] -= attributes[AttributeName.STRENGTH];
+		attributes[AttributeName.VITALITY] -= attributes[AttributeName.STRENGTH];
+		attributes[AttributeName.MAGIC_POWER] -= attributes[AttributeName.INTELLIGENCE];
+		attributes[AttributeName.RESILIENCE] -= attributes[AttributeName.INTELLIGENCE];
+		attributes[AttributeName.WISDOM] -= attributes[AttributeName.INTELLIGENCE];
+		attributes[AttributeName.PRECISION] -= attributes[AttributeName.AGILITY];
+		attributes[AttributeName.DEFLECTION] -= attributes[AttributeName.AGILITY];
+		attributes[AttributeName.STAMINA] -= attributes[AttributeName.AGILITY];
 		return attributes;
 	}
 
@@ -1070,9 +1096,7 @@ class Mob extends Movable{
 		}
 
 		// stop any effect timers
-		if(this._effects){
-			for(let effect of this._effects) effect.stop();
-		}
+		if(this._effects) for(let effect of this._effects) effect.stop();
 	}
 }
 

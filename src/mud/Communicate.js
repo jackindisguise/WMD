@@ -158,16 +158,11 @@ class Communicate{
 		let healthAfterP = healthAfter / target.maxHealth;
 		let range = Math.floor(Math.lerp(1,5,healthAfterP));
 		let codes = ["r", "R", "Y", "G", "C"];
-		//let words = ["dying", "wounded", "not great", "great", "perfect"];
 		let healthCode = codes[range-1];
-		//let word = words[range-1];
-		//let healthAfterPRounded = Math.round(healthAfterP * 100);
 
 		// append to options
 		options.healthCode = healthCode;
 		options.healthFormatted = `${healthAfter}/${target.maxHealth}`;
-		//options.healthAfterP = healthAfterPRounded;
-		//options.healthAfterWord = word;
 		options.suffix = Message.HealSuffix;
 
 		// call act

@@ -1,4 +1,5 @@
 // local includes
+const _ = require("../../../i18n");
 const AbilityCommand = require("../../../mud/AbilityCommand");
 const CommandSpecificity = require("../../../etc/CommandSpecificity");
 const AbilityManager = require("../../../mud/manager/AbilityManager");
@@ -7,7 +8,7 @@ const heal = AbilityManager.getAbilityByName("heal");
 class Heal extends AbilityCommand{
 	exec(mob){
 		if(mob.health === mob.maxHealth) {
-			mob.sendLine("You're already fully healed.");
+			mob.sendLine(_("You're already fully healed."));
 			return;
 		}
 

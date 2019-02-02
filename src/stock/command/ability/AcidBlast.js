@@ -1,4 +1,5 @@
 // local includes
+const _ = require("../../../i18n");
 const AbilityCommand = require("../../../mud/AbilityCommand");
 const CommandSpecificity = require("../../../etc/CommandSpecificity");
 const AbilityManager = require("../../../mud/manager/AbilityManager");
@@ -12,7 +13,7 @@ class AcidBlast extends AbilityCommand{
 			return;
 		}
 
-		mob.sendMessage("Who do you wanna blast acid at?");
+		mob.sendLine(_("There's nobody here like that."));
 	}
 }
 

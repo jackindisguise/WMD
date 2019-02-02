@@ -1,4 +1,5 @@
 // local includes
+const _ = require("../../../i18n");
 const AbilityCommand = require("../../../mud/AbilityCommand");
 const CommandSpecificity = require("../../../etc/CommandSpecificity");
 const AbilityManager = require("../../../mud/manager/AbilityManager");
@@ -7,7 +8,7 @@ const armor = AbilityManager.getAbilityByName("armor");
 class Armor extends AbilityCommand{
 	exec(mob){
 		if(mob.hasEffectByName("armor")) {
-			mob.sendLine("You're already armored.");
+			mob.sendLine(_("You're already armored."));
 			return;
 		}
 

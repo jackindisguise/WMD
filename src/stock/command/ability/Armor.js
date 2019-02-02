@@ -1,4 +1,5 @@
 // local includes
+const _ = require("../../../i18n");
 const AbilityCommand = require("../../../mud/AbilityCommand");
 const CommandSpecificity = require("../../../etc/CommandSpecificity");
 const AbilityManager = require("../../../mud/manager/AbilityManager");
@@ -9,7 +10,7 @@ class Armor extends AbilityCommand{
 		let victim = mob.loc.contents.search(target);
 		if(victim){
 			if(victim.hasEffectByName("armor")) {
-				mob.sendLine("They're already armored.");
+				mob.sendLine(_("They're already armored."));
 				return;
 			}
 
@@ -17,7 +18,7 @@ class Armor extends AbilityCommand{
 			return;
 		}
 
-		mob.sendLine("They aren't here.");
+		mob.sendLine(_("They aren't here."));
 	}
 }
 

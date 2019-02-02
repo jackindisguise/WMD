@@ -1,4 +1,5 @@
 // local includes
+const _ = require("../../../i18n");
 const AbilityCommand = require("../../../mud/AbilityCommand");
 const CommandSpecificity = require("../../../etc/CommandSpecificity");
 const AbilityManager = require("../../../mud/manager/AbilityManager");
@@ -7,7 +8,7 @@ const circle = AbilityManager.getAbilityByName("circle");
 class Circle extends AbilityCommand{
 	exec(mob){
 		if(!mob.fighting){
-			mob.sendLine("You're not fighting anyone.");
+			mob.sendLine(_("You're not fighting anyone."));
 			return;
 		}
 
