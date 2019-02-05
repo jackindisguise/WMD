@@ -2,7 +2,7 @@
     "name":"whisper",
     "default":true,
     "format":{
-        "firstPerson":"You whisper to $N: $m",
-        "secondPerson":"$n whispers to you: $m"
+        "firstPerson":"You whisper to ${directObject.mob}: ${msg}",
+        "secondPerson":"${actor.mob} whispers to you: ${msg}"
     }
 }

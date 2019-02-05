@@ -172,5 +172,6 @@
 	"> Loading characters...": "> Loading characters...",
 	">> Loading character '%s'": ">> Loading character '%s'",
 	"You turn into a lion noise.": "You turn into a lion noise.",
-	"          {R%d (%s%d) strength.": "          {R%d (%s%d) strength."
+	"          {R%d (%s%d) strength.": "          {R%d (%s%d) strength.",
+	"What do you want to say?": "What do you want to say?"
 }

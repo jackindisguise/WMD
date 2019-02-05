@@ -18,7 +18,7 @@ class Communicate{
 			message = options.message,
 			category = options.category || MessageCategory.ACTION;
 
-		// process recipientss
+		// process recipients
 		if(recipients){
 			// send messages
 			for(let recipient of recipients){

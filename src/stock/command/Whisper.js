@@ -27,11 +27,11 @@ class Whisper extends Command{
 			return;
 		}
 
-		channel.transmit(mob.player, message, victim, Channel.filterSpeakerTargetOnly);
+		channel.transmit({speaker:mob.player, target:victim, message:message});
 	}
 }
 
-Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (.*?) (.+)/i;
+Whisper.prototype.rule = /^(?:w|wh|whi|whis|whisp|whispe|whisper|t|te|tel|tell) (?:to )?(.*?) (.+)/i;
 Whisper.prototype.plain = "whisper|tell";
 Whisper.prototype.specificity = CommandSpecificity.FIRST;
 

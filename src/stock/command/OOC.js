@@ -14,7 +14,7 @@ class OOC extends Command{
 			return;
 		}
 
-		channel.transmit(mob.player, message);
+		channel.transmit({speaker:mob.player, message:message});
 	}
 }
 

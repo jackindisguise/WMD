@@ -1,0 +1,8 @@
+{
+    "name":"say",
+    "default":true,
+    "format":{
+        "firstPerson":"You say: ${msg}",
+        "thirdPerson":"${actor.mob} says: ${msg}"
+    }
+}

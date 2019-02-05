@@ -2,7 +2,7 @@
     "name":"ooc",
     "default":true,
     "format":{
-        "firstPerson":"You OOC: $m",
-        "thirdPerson":"$n OOC: $m"
+        "firstPerson":"You OOC: ${msg}",
+        "thirdPerson":"${actor.mob} OOC: ${msg}"
     }
 }

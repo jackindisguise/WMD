@@ -5,7 +5,7 @@ const CommandSpecificity = require("../../etc/CommandSpecificity");
 
 class OOC extends Command{
 	exec(mob){
-		mob.sendLine(_("What do you want to say?"));
+		mob.sendLine(_("What do you want to OOC?"));
 	}
 }
 
