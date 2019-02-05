@@ -2,7 +2,6 @@
 const _ = require("../../../i18n");
 const Command = require("../../mud/Command");
 const CommandSpecificity = require("../../etc/CommandSpecificity");
-const Channel = require("../../mud/Channel");
 const ChannelManager = require("../../mud/manager/ChannelManager");
 const PlayerManager = require("../../mud/manager/PlayerManager");
 const channel = ChannelManager.getChannelByName("whisper");

@@ -87,7 +87,7 @@ Object.defineProperty(Object.prototype, "__finalize", {
 	value: function(){
 		// nothing
 	}
-})
+});
 
 Object.defineProperty(Object.prototype, "__createClone", {
 	value: function(){

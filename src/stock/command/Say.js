@@ -7,8 +7,8 @@ const channel = ChannelManager.getChannelByName("say");
 
 // message filter
 function ChannelFilterSameRoom(recipient, options){
-    if(recipient.mob.loc === options.speaker.mob.loc) return true;
-    return false;
+	if(recipient.mob.loc === options.speaker.mob.loc) return true;
+	return false;
 }
 
 class Say extends Command{

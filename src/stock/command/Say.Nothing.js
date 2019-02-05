@@ -2,8 +2,6 @@
 const _ = require("../../../i18n");
 const Command = require("../../mud/Command");
 const CommandSpecificity = require("../../etc/CommandSpecificity");
-const ChannelManager = require("../../mud/manager/ChannelManager");
-const channel = ChannelManager.getChannelByName("say");
 
 class Say extends Command{
 	exec(mob){
