@@ -1,0 +1,136 @@
+commit 4af6b77467ed7a7d193010fac8b394c4b7ccae69
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Feb 5 00:44:17 2019 -0600
+
+    Fixed lint errors.
+
+commit 9a82aaa83b6736655fee642255b5ff04337f9b40
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Feb 5 00:31:00 2019 -0600
+
+    Channels make a little bit more sense. They use players instead of
+    mobs. The usage of the Player is just a runtime thing, since only
+    Players can communicate. It makes sense to have Players be the ones
+    participating in channels, not mobs.
+    
+    What I'll likely do is have an options list on a "character data"
+    object that's associated with a mob, and it'll have the channels
+    you have enabled. Using those commands will just also add your Player
+    to the list of channel participants.
+
+commit efa3ba11071374e7d64b6e29611eb5b36be2b1a6
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Feb 2 02:39:55 2019 -0600
+
+    Woops.
+    
+    [skip ci]
+
+commit df4db7e8db606aab99ef9db1ca9e33afbe6f3b21
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Feb 2 02:35:57 2019 -0600
+
+    Added Mob.getAttributeBonuses() which returns an object representing
+    the mob's current bonus attributes, which ignores derivative attribute
+    values. Specifically, it ignores inherited attribute values, like from
+    strength > attack power, defense, vitality, max health. So if you have
+    10 strength, and 10 attack power (which would be from strength), it will
+    report 0 attack power and 10 strength.
+    
+    Also made error messages more standard. Put a proper error message for kill
+    with no argument, or a bad target.
+
+commit c8353b10a72ffbeb57bcd36b05e0e1670696b785
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 31 18:31:29 2019 -0600
+
+    Stuff.
+    [skip-ci]
+
+commit cc33513ee8a4df63e1e64e3189cfd7f12a6aae26
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Thu Jan 31 16:34:52 2019 -0600
+
+    Equipment slots are now objects. Each slot will have a "type" that
+    dictates what can be worn. Basically, if the equipment's type doesn't
+    match the slot's type, it's not for that slot. Simple.
+    
+    Much easier to use now.
+
+commit 602e2edbc3054ca3ab275ab310718526a3325806
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 29 01:59:45 2019 -0600
+
+    Loaders now properly respond to errors by doing nothing.
+
+commit 632c8711bc35e51d28a37391fc0b7914b888af22
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Tue Jan 29 01:53:23 2019 -0600
+
+    Added character deletion.
+    
+    Kinda stupid but whatever.
+
+commit 7b224e3365f2b48b603d8355a3a545de9ca46658
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Jan 26 22:25:26 2019 -0600
+
+    Saving and loading has been implemented for the most part.
+    
+    There is some sloppy stuff. In particular...
+    - Template and Model both have a spawn() function that implement Object.__createClone()
+      This pollutes the saving/loading operations since they both just create a clone by
+      saving the object's JSON and then loading another one based on its JSON immediately.
+    
+    - Loading things within an object is not consistent.
+      Equipment is loaded in MapObject.__finalize instead of in __fromJSON or __JSONRead.
+      Effects are loaded entirely in MapObject.__JSONRead (I think).
+      I added __finalize so I could have a place that would consistently be called *after*
+      things were loaded onto the mob. That way I would know the state of any object once
+      it needed to be fully instantiated (loading the equipment, in particular).
+    
+    - In general I'm just not happy with it.
+    
+    Works for now. Will try to refine in future.
+
+commit 096a76e2f210eb9d839456c4b59f2c12104b1720
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Sat Jan 26 06:16:44 2019 -0600
+
+    Working on saving and loading stuff.
+    
+    Effects and equipment work at the moment.
+
+commit 80e477a4985c2dcdd1549332d03755ccaeed0a92
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 23 12:12:52 2019 -0600
+
+    I need to make my includes less numerour and ugly, somehow.
+
+commit d68467e0580a8be895c4e0103e834998c0c9d9d3
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 23 12:01:31 2019 -0600
+
+    Armor spell was too buff.
+    
+    Mob regeneration now waits for combat to end.
+
+commit ef4e7f52e75d00588553a9ab6b80ad836f4b630e
+Author: jackindisguise <incognitus.me@gmail.com>
+Date:   Wed Jan 23 11:51:08 2019 -0600
+
+    Added MapObject.garbage() function that removes all things that should
+    be references the MapObject. In particular, it removes it from the map
+    and removes all local timeouts currently acting on it. For mobs, it also
+    disables all timeouts on effects. Should probably also disable timeouts
+    on Equipment effects in the future.
+    
+    Removed CombatManager's manager functionality. It currently just provides
+    access to CombatManager.category, which I'll replace later with something
+    more sensible.
+    
+    Added Time object, which lets us manipulate time stuff a little easier.
+    For now, it just lets us normalize intervals based on a timestamp of 0.
+    
+    Members that start with an underscore (_) are now ignored by Object.__JSONWrite.
+    This'll save me some time.
